@@ -10,7 +10,7 @@ Editor='leafpad'
 
 # Git
 GitHub="$HOME/GitHub/ides3rt/git"
-Gist="$HOME/GitHub/ides3rt/gist"
+GistHub="$HOME/GitHub/ides3rt/gist"
 
 #------------------------------------------------Colorful commands
 
@@ -51,8 +51,7 @@ alias cplc="$Auth cryptsetup luksClose"
 
 # Git
 alias ghcd="cd $GitHub"
-alias gshcd="cd $Gist"
-alias ghdf="git --git-dir=$GitHub/dotfiles/ --work-tree=$HOME"
+alias gshcd="cd $GistHub"
 alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code"
 alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
 
@@ -66,4 +65,4 @@ alias pcc='yay -Rnsc $(yay -Qtdq) && sync'
 
 #------------------------------------------------Unset
 
-unset GitHub Gist Editor Auth
+unset GitHub GistHub Editor Auth
