@@ -38,8 +38,8 @@ alias doas='doas --'
 alias ..='cd ..'
 alias lc='clear'
 alias yay='mkdir -p /tmp/yay/abs; yay'
-alias gph="cd /media/$USER/"
-alias gsu="cd /share/$USER/"
+alias gphcd="cd /media/$USER/"
+alias gtscd="cd /share/$USER/"
 alias :q='exit'
 
 # LUKS
@@ -47,9 +47,11 @@ alias cplo="$Auth cryptsetup luksOpen"
 alias cplc="$Auth cryptsetup luksClose"
 
 # Git
-alias ghd="cd $GitHub"
-alias gsd="cd $Gist"
-alias dots="git --git-dir=$GitHub/dotfiles/ --work-tree=$HOME"
+alias ghcd="cd $GitHub"
+alias gshcd="cd $Gist"
+alias ghdf="git --git-dir=$GitHub/dotfiles/ --work-tree=$HOME"
+alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code"
+alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
 
 #------------------------------------------------Cleaner
 
