@@ -23,6 +23,8 @@ bind 'set bell-style none' 'set completion-ignore-case On' \
 # Make `vi` better
 bind -m vi "^":beginning-of-line
 bind -m vi-insert "\C-l":clear-display
+bind -m vi-insert "\C-a":beginning-of-line
+bind -m vi-insert "\C-e":end-of-line
 
 # Remove h
 bind -m vi -r "h"
