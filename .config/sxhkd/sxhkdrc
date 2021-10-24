@@ -32,11 +32,11 @@ Print
 
 # Advance screenshot options
 shift + Print
-	$HOME/.scripts/rofi/scrot
+	$HOME/Code/rofi/scrot
 
 # Open my dictionary script
 mod1 + d
-	$HOME/.scripts/rofi/dictionary
+	$HOME/Code/rofi/dictionary
 
 # Increase volume
 mod1 + equal
@@ -48,7 +48,7 @@ mod1 + minus
 
 # Change keyboard layouts
 mod1 + Tab
-	$HOME/.scripts/sxhkd/loadkey
+	$HOME/Code/sxhkd/loadkey
 
 #
 # BSPWM hotkeys
