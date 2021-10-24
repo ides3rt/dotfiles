@@ -43,7 +43,7 @@ alias gtscd="cd /share/$USER/"
 alias :q='exit'
 alias uptime="uptime -p | sed 's/up[[:space:]]*//'"
 alias neofetch=''
-alias hi-reddit='neofetch'
+alias hi-reddit='\neofetch'
 
 # LUKS
 alias cplo="$Auth cryptsetup luksOpen"
