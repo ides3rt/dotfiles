@@ -1,0 +1,7 @@
+#!/bin/sh
+
+efibootmgr --disk /dev/nvme0n1 --part 1 --create \
+	--label "Arch Linux" \
+	--loader /vmlinuz-linux-hardened \
+	--unicode 'root=UUID=5e6726e5-d538-4b1e-b5a9-a505d5984470 rw initrd=\amd-ucode.img initrd=\initramfs-linux-hardened.img quiet nosplash nowatchdog kernel.yama.ptrace_scope=3 lsm=landlock,lockdown,yama,apparmor,bpf apparmor=1 security=apparmor audit=1 l1tf=full,force mds=full.nosmt mitigations=auto,nosmt nosmt=force nvidia-drm.modeset=1' \
+	--verbose

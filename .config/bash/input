@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+#-------------------------------------Essential Tweaks
+
+set -o interactive-comments -o vi -o braceexpand \
+	-o hashall -o histexpand +o monitor
+
+shopt -s autocd cdspell checkwinsize cmdhist \
+	dirspell expand_aliases extglob extquote \
+	force_fignore histappend hostcomplete \
+	interactive_comments lithist nocasematch progcomp \
+	progcomp_alias promptvars xpg_echo
+
+bind 'set bell-style none' 'set completion-ignore-case On' \
+	'set colored-stats On' 'set echo-control-characters Off' \
+	'set editing-mode vi' 'set keymap vi' 'set mark-symlinked-directories On' \
+	'set page-completions Off' 'set print-completions-horizontally On' \
+	'set show-all-if-ambiguous On' 'set show-all-if-unmodified On' \
+	'set skip-completed-text On' 'set visible-stats On'
+
+#-------------------------------------`vi`
+
+# Make `vi` better
+bind -m vi "^":beginning-of-line
+bind -m vi-insert "\C-l":clear-display
+
+# Remove h
+bind -m vi -r "h"
+
+# Use j k l ;
+bind -m vi "j":backward-char
+bind -m vi "k":next-history
+bind -m vi "l":previous-history
+bind -m vi ";":forward-char

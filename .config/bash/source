@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+[[ $- != *i* ]] && return
+
+CONFIG_DIR="$HOME/.config/bash"
+
+[ -f "$CONFIG_DIR/prompts" ] && . $CONFIG_DIR/prompts
+
+[ -f "$CONFIG_DIR/input" ] && . $CONFIG_DIR/input
+
+[ -f "$CONFIG_DIR/functions" ] && . $CONFIG_DIR/functions
+
+[ -f "$CONFIG_DIR/aliases" ] && . $CONFIG_DIR/aliases
+
+[ -f "$CONFIG_DIR/autostart" ] && . $CONFIG_DIR/autostart
+
+unset CONFIG_DIR

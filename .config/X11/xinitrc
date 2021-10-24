@@ -1,0 +1,25 @@
+#!/bin/sh
+
+CONFIG_DIR="$HOME/.config/X11"
+
+[ -f "$CONFIG_DIR/Xresources" ] && xrdb -merge $CONFIG_DIR/Xresources
+
+[ -f "$CONFIG_DIR/Xmodmap" ] && xmodmap $CONFIG_DIR/Xmodmap
+
+if [ -d $CONFIG_DIR/xinitrc.d ]; then
+  for File in $CONFIG_DIR/xinitrc.d/?*.sh; do
+    [ -x "$File" ] && . $File
+  done
+  unset File
+fi
+
+unset CONFIG_DIR
+
+lxsession &
+xsetroot -cursor_name left_ptr
+pipewire &
+pipewire-pulse &
+pipewire-media-session &
+picom --experimental-backends &
+feh --bg-fill --randomize $HOME/Pictures/cWallpapers/ &
+exec bspwm

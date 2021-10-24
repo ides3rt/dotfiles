@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+
+up() {
+  if [ -n $1 ]; then
+    local Number=$1
+    while [ $Number -gt 0 ]; do
+      cd .. && let Number--
+    done
+  else
+    cd ..
+  fi
+}
+
+lq() {
+  links -http.do-not-track 1 \
+	-http.referer 0 \
+	-save-url-history 0 \
+	-save-cookies 0 https://lite.duckduckgo.com/lite/
+}
+
+lspkg() {
+  case $1 in
+
+    -h|--help)
+      while read; do
+        printf '%s\n' "$REPLY"
+      done <<-EOF
+	Usage: lspkg [OPTION] [PKG/FILE]
+
+	By default \`lspkg\` will list everything in /var/cache/pacman/pkg
+	  -h, --help		- Display this help information.
+	  -l, --local		- Search local/installed packages.
+	  -s, --search		- Search package in Repositories.
+	  -i, --info		- Get info about package.
+	  -f, --file		- Get file install by package.
+	  -b, --belong		- Find which package belong to FILE.
+	  -u, --upgradable	- Search for upgradable packages. (require password)
+	  -o, --orphans		- Search orphan packages.
+	  -e, --installed	- Search package that explicitly installed.
+	  -d, --dependency	- Search package that install as dependency.
+
+	EOF
+    ;;
+
+    -i|--info)
+      pacman -Qii $2 2>/dev/null
+      [ $? = 1 ] && pacman -Si $2 ;;
+
+    -l|--local)
+      pacman -Qs $2 ;;
+
+    -s|--search)
+      pacman -Ss $2 ;;
+
+    -f|--file)
+      pacman -Ql $2 ;;
+
+    -b|--belong)
+      pacman -Qo $2 ;;
+
+    -u|--upgradable)
+      if [ -z "$Auth" ]; then
+        if [ -f /usr/bin/doas ]; then
+          local Auth='doas --'
+        elif [ -f /usr/bin/sudo ]; then
+          local Auth='sudo'
+        else
+          local Auth='su -c'
+        fi
+      fi
+      $Auth pacman -Sy >/dev/null && pacman -Qu ;;
+
+    -o|--orphans)
+      if [ -z $(pacman -Qtdq) ]; then
+        printf '%s\n' 'lspkg: No orphan was found.'
+      else
+        pacman -Qtdq
+      fi ;;
+
+    -e|--installed)
+      pacman -Qet $2 ;;
+
+    -d|--dependency)
+      pacman -Qd $2 ;;
+
+    -*)
+      printf '%s\n' 'lspkg: Use --help for more information...' ;;
+
+    *)
+      if [ -z "$1" ]; then
+        ls /var/cache/pacman/pkg/ | sed '/.sig$/d'
+      else
+        ls /var/cache/pacman/pkg/ | sed '/.sig$/d' | grep -Ei "$1"
+      fi ;;
+
+  esac
+}

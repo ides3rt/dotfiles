@@ -1,0 +1,145 @@
+#
+# Applications hotkeys
+#
+
+# Terminal
+mod1 + Return
+	alacritty
+
+# Programs launcher
+mod1 + p
+	rofi -show drun -show-icons
+
+# Spawn `firefox`
+mod1 + b
+	firejail firefox
+
+# Spawn `pcmanfm`
+mod1 + f
+	pcmanfm
+
+#
+# System hotkeys
+#
+
+# Restart `sxhkd`
+mod1 + shift + d
+	pkill -USR1 -x sxhkd
+
+# Take a screenshot
+Print
+	scrot -q 100 '%Y-%m-%d_%H:%M:%S.png' -e 'mv $f ~/Pictures/'
+
+# Advance screenshot options
+shift + Print
+	$HOME/.scripts/rofi/scrot
+
+# Open my dictionary script
+mod1 + d
+	$HOME/.scripts/rofi/dictionary
+
+# Increase volume
+mod1 + equal
+	pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# Decrease volume
+mod1 + minus
+	pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Change keyboard layouts
+mod1 + Tab
+	$HOME/.scripts/sxhkd/loadkey
+
+#
+# BSPWM hotkeys
+#
+
+# Quit/Restart BSPWM
+mod1 + shift + {q,r}
+	bspc {quit,wm -r}
+
+# Close focused window
+mod1 + q
+	bspc node -c
+
+# Kill focused window
+# mod1 + q
+#	bspc node -k
+
+# Change between tiled/monocle layout
+mod1 + m
+	bspc desktop -l next
+
+# Send the newest marked node to the newest preselected node
+# mod1 + y
+#	bspc node newest.marked.local -n newest.!automatic.local
+
+# Make focused window biggest
+# mod1 + shift + Return
+# 	bspc node -s biggest.window
+
+# Change focused window's state
+mod1 + shift + {t,c,f,v}
+	bspc node -t {~tiled,~pseudo_tiled,~fullscreen,~floating}
+
+# Change focused window's node
+# mod1 + {m,x,y,z}
+#	bspc node -g {marked,locked,sticky,private}
+
+# Focus the node in the given direction
+mod1 + {_,shift + }{j,k,l,semicolon}
+	bspc node -{f,s} {west,south,north,east}
+
+# Focus the node for the given path jump
+# mod1 + {p,b,comma,period}
+#	bspc node -f @{parent,brother,first,second}
+
+# Focus the next/previous window in the current desktop
+# mod1 + backspace
+#	bspc node -f {next,prev}.local.!hidden.window
+
+# Focus the next/previous desktop in the current monitor
+# mod1 + bracket{left,right}
+#	bspc desktop -f {prev,next}.local
+
+# Focus the last node/desktop
+# mod1 + {grave,Tab}
+# 	bspc {node,desktop} -f last
+
+# Focus the older or newer node in the focus history
+# mod1 + {o,i}
+#	bspc wm -h off; \
+#	bspc node {older,newer} -f; \
+#	bspc wm -h on
+
+# Focus or send to the given desktop
+mod1 + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# Preselect the direction
+mod1 + ctrl + {j,k,l,semicolon}
+	bspc node -p {west,south,north,east}
+
+# Preselect the ratio
+mod1 + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# Cancel the preselection for the focused node
+mod1 + ctrl + e
+	bspc node -p cancel
+
+# Cancel the preselection for the focused desktop
+# mod1 + ctrl + shift + e
+# 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+# Expand a window by moving one of its side outward
+mod4 + {j,k,l,semicolon}
+	bspc node -z {left -100 0,bottom 0 100,top 0 -100,right 100 0}
+
+# Contract a window by moving one of its side inward
+mod4 + shift + {j,k,l,semicolon}
+	bspc node -z {right -100 0,top 0 100,bottom 0 -100,left 100 0}
+
+# Move a floating window
+mod4 + ctrl + {j,k,l,semicolon}
+	bspc node -v {-100 0,0 100,0 -100,100 0}

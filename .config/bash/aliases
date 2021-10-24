@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+#------------------------------------------------Set variables
+
+# Prefered tool to exec as root
+Auth='doas'
+
+# Use `egt` to edit files
+Editor='leafpad'
+
+# Git
+GitHub="$HOME/GitHub/ides3rt/git"
+Gist="$HOME/GitHub/ides3rt/gist"
+
+#------------------------------------------------Colorful commands
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+alias diff='diff --color=auto'
+
+alias ls='ls -hvAF --color=auto --group-directories-first'
+alias ll='ls -lhvAF --color=auto --group-directories-first'
+alias li='ls -lihvAF --color=auto --group-directories-first'
+
+#------------------------------------------------Warn before you mess something up
+
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
+#------------------------------------------------Lazy commands
+
+# Common commands
+alias egt="$Editor"
+alias doas='doas --'
+alias ..='cd ..'
+alias lc='clear'
+alias yay='mkdir -p /tmp/yay/abs; yay'
+alias gph="cd /media/$USER/"
+alias gsu="cd /share/$USER/"
+alias :q='exit'
+
+# LUKS
+alias cplo="$Auth cryptsetup luksOpen"
+alias cplc="$Auth cryptsetup luksClose"
+
+# Git
+alias ghd="cd $GitHub"
+alias gsd="cd $Gist"
+alias dots="git --git-dir=$GitHub/dotfiles/ --work-tree=$HOME"
+
+#------------------------------------------------Cleaner
+
+# Remove cache
+alias ec='rm -rf $HOME/.cache/* $HOME/.mozilla/firefox/{Crash\ Reports,Pending\ Pings} $HOME/.viminfo $HOME/.vim/.netrwhist >/dev/null && sync'
+
+# Arch
+alias pcc='yay -Rnsc $(yay -Qtdq) && sync'
+
+#------------------------------------------------Unset
+
+unset GitHub Gist Editor Auth
