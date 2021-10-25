@@ -5,9 +5,6 @@
 # Prefered tool to exec as root
 Auth='doas'
 
-# Use `egt` to edit files
-Editor='leafpad'
-
 # Git
 GitHub="$HOME/GitHub/ides3rt/git"
 GistHub="$HOME/GitHub/ides3rt/gist"
@@ -31,7 +28,7 @@ alias rm='rm -i'
 #------------------------------------------------Lazy commands
 
 # Common commands
-alias egt="$Editor"
+alias egt='leafpad'
 alias doas='doas --'
 alias ..='cd ..'
 alias lc='clear'
@@ -60,4 +57,4 @@ alias pcc='yay -Rnsc $(yay -Qtdq) && sync'
 
 #------------------------------------------------Unset
 
-unset GitHub GistHub Editor Auth
+unset GitHub GistHub Auth

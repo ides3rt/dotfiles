@@ -44,7 +44,7 @@ lspkg() {
 
 		-i|--info)
 			pacman -Qii $2 2>/dev/null
-			[ $? = 1 ] && pacman -Si $2 ;;
+			[ $? != 0 ] && pacman -Si $2 ;;
 
 		-l|--local)
 			pacman -Qs $2 ;;

@@ -9,68 +9,55 @@
 # \u = username
 # \$ = show '#' if root otherwise '$'
 
+
+SetUp() {
+
 #-------------------------------------------------`tput`
 
-T_Black='\[$(tput setaf 16)\]'; T_Red='\[$(tput setaf 196)\]'
-T_Green='\[$(tput setaf 46)\]'; T_Yellow='\[$(tput setaf 226)\]'
-T_Blue='\[$(tput setaf 21)\]'; T_Magenta='\[$(tput setaf 201)\]'
-T_Cyan='\[$(tput setaf 51)\]'; T_White='\[$(tput setaf 231)\]'
-T_Reset='\[$(tput sgr0)\]'
+local T_Black='\[$(tput setaf 16)\]'; local T_Red='\[$(tput setaf 196)\]'
+local T_Green='\[$(tput setaf 46)\]'; local T_Yellow='\[$(tput setaf 226)\]'
+local T_Blue='\[$(tput setaf 21)\]'; local T_Magenta='\[$(tput setaf 201)\]'
+local T_Cyan='\[$(tput setaf 51)\]'; local T_White='\[$(tput setaf 231)\]'
+local T_Reset='\[$(tput sgr0)\]'
 
 #-------------------------------------------------`ANSI escape code`
 
 # Reset
-A_Reset='\[\e[0m\]'
+local A_Reset='\[\e[0m\]'
 
 # Normal
-A_Black='\[\e[30m\]'; A_Red='\[\e[31m\]'
-A_Green='\[\e[32m\]'; A_Yellow='\[\e[33m\]'
-A_Blue='\[\e[34m\]'; A_Magenta='\[\e[35m\]'
-A_Cyan='\[\e[36m\]'; A_White='\[\e[37m\]'
+local A_Black='\[\e[30m\]'; local A_Red='\[\e[31m\]'
+local A_Green='\[\e[32m\]'; local A_Yellow='\[\e[33m\]'
+local A_Blue='\[\e[34m\]'; local A_Magenta='\[\e[35m\]'
+local A_Cyan='\[\e[36m\]'; local A_White='\[\e[37m\]'
 
 # Bold Normal
-BA_Black='\[\e[1;30m\]'; BA_Red='\[\e[1;31m\]'
-BA_Green='\[\e[1;32m\]'; BA_Yellow='\[\e[1;33m\]'
-BA_Blue='\[\e[1;34m\]'; BA_Magenta='\[\e[1;35m\]'
-BA_Cyan='\[\e[1;36m\]'; BA_White='\[\e[1;37m\]'
+local BA_Black='\[\e[1;30m\]'; local BA_Red='\[\e[1;31m\]'
+local BA_Green='\[\e[1;32m\]'; local BA_Yellow='\[\e[1;33m\]'
+local BA_Blue='\[\e[1;34m\]'; local BA_Magenta='\[\e[1;35m\]'
+local BA_Cyan='\[\e[1;36m\]'; local BA_White='\[\e[1;37m\]'
 
 # Bright
-AB_Black='\[\e[90m\]'; AB_Red='\[\e[91m\]'
-AB_Green='\[\e[92m\]'; AB_Yellow='\[\e[93m\]'
-AB_Blue='\[\e[94m\]'; AB_Magenta='\[\e[95m\]'
-AB_Cyan='\[\e[96m\]'; AB_White='\[\e[97m\]'
+local AB_Black='\[\e[90m\]'; local AB_Red='\[\e[91m\]'
+local AB_Green='\[\e[92m\]'; local AB_Yellow='\[\e[93m\]'
+local AB_Blue='\[\e[94m\]'; local AB_Magenta='\[\e[95m\]'
+local AB_Cyan='\[\e[96m\]'; local AB_White='\[\e[97m\]'
 
 # Bold Bright
-BAB_Black='\[\e[1;90m\]'; BAB_Red='\[\e[1;91m\]'
-BAB_Green='\[\e[1;92m\]'; BAB_Yellow='\[\e[1;93m\]'
-BAB_Blue='\[\e[1;94m\]'; BAB_Magenta='\[\e[1;95m\]'
-BAB_Cyan='\[\e[1;96m\]'; BAB_White='\[\e[1;97m\]'
+local BAB_Black='\[\e[1;90m\]'; local BAB_Red='\[\e[1;91m\]'
+local BAB_Green='\[\e[1;92m\]'; local BAB_Yellow='\[\e[1;93m\]'
+local BAB_Blue='\[\e[1;94m\]'; local BAB_Magenta='\[\e[1;95m\]'
+local BAB_Cyan='\[\e[1;96m\]'; local BAB_White='\[\e[1;97m\]'
 
 #-------------------------------------------------Prompts
 
+# PS1
 PS1="${T_White}->"
 PS1+="${T_Reset} "
 
+# PS2
 PS2='   '
 
-#-------------------------------------------------Unset
+}
 
-# `tput`
-unset T_Black T_Red T_Green \
-	T_Yellow T_Blue T_Magenta \
-	T_Cyan T_White T_Reset
-
-# `ANSI escape code`
-unset A_Reset \
-	A_Black A_Red A_Green \
-	A_Yellow A_Blue A_Magenta \
-	A_Cyan A_White \
-	BA_Black BA_Red BA_Green \
-	BA_Yellow BA_Blue BA_Magenta \
-	BA_Cyan BA_White \
-	AB_Black AB_Red AB_Green \
-	AB_Yellow AB_Blue AB_Magenta \
-	AB_Cyan AB_White \
-	BAB_Black BAB_Red BAB_Green \
-	BAB_Yellow BAB_Blue BAB_Magenta \
-	BAB_Cyan BAB_White
+SetUp && unset SetUp
