@@ -3,12 +3,18 @@
 # Set default permissions to 'drwx------' and '-rw-------'.
 umask 077
 
-# Source 'Environment variables'.
-[ -f "$HOME/.env" -a -r "$HOME/.env" ] && . $HOME/.env
+# Check If file exist and readable or not.
+Check() {
+	[ -f "$1" -a -r "$1" ] && . $1
+}
 
-SetUp(){
+# Source Environment Variables.
+Check $HOME/.env
+
+# Source files
+SetUp() {
 	for File in $HOME/.config/$1/?*; do
-		[ -f "$File" -a -r "$File" ] && . $File
+		Check $File
 	done
 }
 
@@ -20,7 +26,7 @@ case `readlink /proc/$$/exe` in
 		SetUp zsh ;;
 esac
 
-unset File SetUp
+unset File SetUp Check
 
 # My GitHub SSH.
 if [ -z "$SSH_AGENT_PID" ]; then
