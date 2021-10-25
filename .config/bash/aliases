@@ -55,9 +55,6 @@ alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
 
 #------------------------------------------------Cleaner
 
-# Remove cache
-alias ec='rm -rf $HOME/.cache/* $HOME/.mozilla/firefox/{Crash\ Reports,Pending\ Pings} $HOME/.viminfo $HOME/.vim/.netrwhist >/dev/null && sync'
-
 # Arch
 alias pcc='yay -Rnsc $(yay -Qtdq) && sync'
 
