@@ -6,8 +6,8 @@
 Auth='doas'
 
 # Git
-GitHub="$HOME/GitHub/ides3rt/git"
-GistHub="$HOME/GitHub/ides3rt/gist"
+GitHub="$HOME/GitHub/ides3rt/projects"
+GistHub="$HOME/GitHub/ides3rt/gists"
 
 #------------------------------------------------Colorful commands
 
@@ -28,16 +28,15 @@ alias rm='rm -i'
 #------------------------------------------------Lazy commands
 
 # Common commands
-alias egt='leafpad'
-alias doas='doas --'
+alias lfp='leafpad'
 alias ..='cd ..'
-alias lc='clear'
 alias yay='mkdir -p /tmp/yay/abs; yay'
-alias gphcd="cd /media/$USER/"
-alias gtscd="cd /share/$USER/"
+alias media="cd /media/$USER/"
+alias share="cd /share/$USER/"
 alias :q='exit'
-alias uptime="uptime -p | sed 's/up[[:space:]]*//'"
-alias neofetch=''
+
+# `neofetch`
+alias neofetch='echo lol'
 alias hi-reddit='\neofetch'
 
 # LUKS
@@ -45,8 +44,8 @@ alias cplo="$Auth cryptsetup luksOpen"
 alias cplc="$Auth cryptsetup luksClose"
 
 # Git
-alias ghcd="cd $GitHub"
-alias gshcd="cd $GistHub"
+alias ghpcd="cd $GitHub"
+alias ghscd="cd $GistHub"
 alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code"
 alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
 
