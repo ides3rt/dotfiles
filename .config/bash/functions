@@ -1,19 +1,50 @@
 #!/usr/bin/env bash
 
 up() {
-	if [ -n $1 ]; then
-		local Number=$1
+
+	# Only do `cd ..` if nothing provide.
+	if [ -n "$1" ]; then
+
+		# For memes. (Useless)
+		if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+			printf '%s\n' "$1 is not a NUMBER, LOL"
+			return 69
+		elif [ $1 -gt 999 ]; then
+			printf '%s\n' "cd $1 times? You're moron, LOL."
+			return 69
+		elif [ -n "$2" ]; then
+			printf '%s\n' "You don't need $2, lol."
+			return 69
+		fi
+
+		local Number="$1"
 		while [ $Number -gt 0 ]; do
 			cd .. && let Number--
 		done
+
 	else
 		cd ..
 	fi
 }
 
 lq() {
+
+	# Currently you can't do search query though URLs with `duckduckgo-lite`
 	links -http.do-not-track 1 \
 		-http.referer 0 \
 		-save-url-history 0 \
 		-save-cookies 0 https://lite.duckduckgo.com/lite/
+}
+
+# Thanks TFL/LL for this name.
+lspkg() {
+
+	# Only `ls /var/cache/pacman/pkg` if nothing provide
+	if [ -z "$1" ]; then
+		ls /var/cache/pacman/pkg/ | sed '/.sig$/d'
+
+	else
+		ls /var/cache/pacman/pkg/ | sed '/.sig$/d' | grep -Ei "$1"
+
+	fi
 }
