@@ -8,9 +8,6 @@ Check() {
 	[ -f "$1" -a -r "$1" ] && . $1
 }
 
-# Source Environment Variables.
-Check $HOME/.env
-
 # Source files
 SetUp() {
 	for File in $HOME/.config/$1/?*; do
@@ -18,10 +15,15 @@ SetUp() {
 	done
 }
 
+# Source Environment Variables.
+Check $HOME/.env
+
 # Source config depend on shell.
 case `readlink /proc/$$/exe` in
 	*/bash)
-		SetUp bash ;;
+		SetUp bash
+		Check /usr/share/bash-completion/bash_completion
+		Check /etc/bash.command-not-found ;;
 	*/zsh)
 		SetUp zsh ;;
 esac
