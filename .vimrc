@@ -127,9 +127,6 @@ noremap <silent> <leader>nn :set relativenumber!<CR>
 "Toggle wrap
 noremap <silent> <leader>ww :set wrap!<CR>
 
-"Use :W to sudo/doas save the file
-command! W execute 'w !doas tee % > /dev/null' <Bar> edit!
-
 "Timing
 set notimeout
 set ttimeout
