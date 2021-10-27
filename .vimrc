@@ -1,23 +1,17 @@
 "Plugins
 set noloadplugins
 
-"Disable arrow keys
-nnoremap <up> <Nop>
-nnoremap <down> <Nop>
-nnoremap <left> <Nop>
-nnoremap <right> <Nop>
-vnoremap <up> <Nop>
-vnoremap <down> <Nop>
-vnoremap <left> <Nop>
-vnoremap <right> <Nop>
+"Disable arrow keys in normal mode
+noremap <up> <Nop>
+noremap <down> <Nop>
+noremap <left> <Nop>
+noremap <right> <Nop>
 
-"Disable <space>
-nnoremap <space> <Nop>
-vnoremap <space> <Nop>
+"Disable <space> in visual and normal mode
+noremap <space> <Nop>
 
-"Disable h
-nnoremap h <Nop>
-vnoremap h <Nop>
+"Disable h in visual and normal mode
+noremap h <Nop>
 
 "Use <space> as my <leader>
 let mapleader=" "
@@ -105,24 +99,18 @@ set scrolljump=1
 set noshiftround
 
 "Use {j,k,l,;} instead of {h,j,k,l}
-nnoremap <silent> j h
-nnoremap <silent> k gj
-nnoremap <silent> l gk
-nnoremap <silent> ; l
-vnoremap <silent> j h
-vnoremap <silent> k gj
-vnoremap <silent> l gk
-vnoremap <silent> ; l
+noremap <silent> j h
+noremap <silent> k gj
+noremap <silent> l gk
+noremap <silent> ; l
+
+"EOL and SOL
+noremap <silent> $ g$
+noremap <silent> 0 g0
 
 "Use {K,L} instead of 10{j,k}
-nnoremap <silent> K 10gj
-nnoremap <silent> L 10gk
-vnoremap <silent> K 10gj
-vnoremap <silent> L 10gk
-
-"Use ^ to go to `sol`
-nnoremap <silent> ^ 0
-vnoremap <silent> ^ 0
+noremap <silent> K 10gj
+noremap <silent> L 10gk
 
 "Disable automatic commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -131,10 +119,13 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufWritePre * :%s/\s\+$//e
 
 "Use <leader><space> to clear highlighting
-nnoremap <silent> <leader><space> :noh<CR>
+noremap <silent> <leader><space> :noh<CR>
 
-"Enable/Disable number
-nnoremap <silent> <leader>rn :set relativenumber!<CR>
+"Toogle relativenumber
+noremap <silent> <leader>nn :set relativenumber!<CR>
+
+"Toggle wrap
+noremap <silent> <leader>ww :set wrap!<CR>
 
 "Use :W to sudo/doas save the file
 command! W execute 'w !doas tee % > /dev/null' <Bar> edit!
