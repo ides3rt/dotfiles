@@ -45,6 +45,7 @@ alias media="cd /media/$USER/" # `cd` to /media
 alias looks="cd /share/$USER/" # `cd` to share directory
 alias mnt='cd /mnt' # `cd` to /mnt
 alias doas='doas ' # Require if you want aliases to work with doas
+alias htop="htop -t -u $USER" # It's so much cleaner
 
 unset GitHub GistHub Auth
 
