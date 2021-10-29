@@ -3,7 +3,7 @@
 #------------------------------------------------Aliases
 
 ## Prefered tool to exec as root
-Auth='doas'
+[ $UID = 0 ] || Auth='doas'
 
 ## My GitHub directories
 GitHub="$HOME/GitHub/ides3rt/projects"
@@ -18,30 +18,13 @@ alias rmdir='rmdir -v'
 alias mkdir='mkdir -v'
 alias chown='chown -v'
 alias chmod='chmod -v'
-
-## SYNC
-alias shutdown='sync && shutdown'
-alias halt='sync && halt'
-alias reboot='sync && reboot'
-alias poweroff='sync && poweroff'
-alias umount='sync && umount'
+alias mount='mount -v'
+alias umount='umount -v'
+alias fstrim='fstrim -v'
 
 ## LUKS
 alias cplo="$Auth cryptsetup luksOpen"
 alias cplc="$Auth cryptsetup luksClose"
-
-## Git
-alias add='git add'
-alias checkout='git checkout'
-alias pull='git pull'
-alias commit='git commit'
-alias merge='git merge'
-alias branch='git branch'
-alias push='git push'
-alias diff='git diff' # Use `\diff` for coreutils' diff command
-alias log='git log'
-alias status='git status'
-alias clone='git clone'
 
 ## GitHub
 alias ghpcd="cd $GitHub"
@@ -52,12 +35,16 @@ alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
 ## Independent commands
 alias yay='\mkdir -p /tmp/yay/abs; yay' # Require when set build-dir to /tmp
 alias lfp='leafpad' # Type `leafpad` is too hard for me
-alias ls='ls -hvF --color=auto --group-directories-first' # Minimal `ls`
+alias ls='ls -hvFN --color=auto --group-directories-first --time-style=long-iso' # Minimal `ls`
 alias pcc="$Auth pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
+alias fgrep='grep -F' # `grep -F` is a replacement for `fgrep`
+alias egrep='grep -E' # `grep -E` is a replacement for `egrep`
+alias diff='diff --color=auto' # `diff` with colors is alots easier to read
 alias media="cd /media/$USER/" # `cd` to /media
-alias looks="cd /share/" # `cd` to share directory
+alias looks="cd /share/$USER/" # `cd` to share directory
 alias mnt='cd /mnt' # `cd` to /mnt
+alias doas='doas ' # Require if you want aliases to work with doas
 
 unset GitHub GistHub Auth
 
@@ -77,9 +64,10 @@ shopt -s autocd cdspell checkwinsize cmdhist \
 bind 'set bell-style none' 'set completion-ignore-case On' \
 	'set colored-stats On' 'set echo-control-characters Off' \
 	'set editing-mode vi' 'set keymap vi' 'set mark-symlinked-directories On' \
-	'set page-completions Off' 'set print-completions-horizontally On' \
-	'set show-all-if-ambiguous On' 'set show-all-if-unmodified On' \
-	'set skip-completed-text On' 'set visible-stats On'
+	'set match-hidden-files Off' 'set page-completions Off' \
+	'set print-completions-horizontally On' 'set show-all-if-ambiguous On' \
+	'set show-all-if-unmodified On' 'set skip-completed-text On' \
+	'set visible-stats On'
 
 ## Make `vi` better
 bind -m vi-insert "\C-l":clear-display # Use `clear-screen` instead for non-recursive clear
@@ -100,7 +88,7 @@ up(){
 	[ -z "$1" ] && cd .. && return 0
 
 	# Only `cd ..` if alphabet provide
-	! [[ "$1" =~ ^[0-9]+$ ]] && cd .. && return 0 # Will get errors if you port other shells
+	! [[ "$1" =~ ^[0-9]+$ ]] && cd .. && return 0 # Will get errors if you port other shells (BASHISM)
 
 	# Remove start 0 to prevent errors
 	local Number="${1#*0}"
@@ -113,39 +101,47 @@ up(){
 }
 
 share(){
+	# Exit if nothing provide
 	[ -z "$1" ] && return 1
 
+	# If match those options(see my notes for info) then exit
 	[ ! -e "$1" -o -h "$1" -o -c "$1" -o -b "$1" -o -S "$1" -o ! -O "$1" ] && return 1
 
+	# Gets realpath
 	local FullPath="$(realpath $1)"
-	local File="${FullPath#$HOME/}"; local File="/share/$USER/$File"
 
-	if [ -d "$FullPath" ]; then
-		[ -d "$File" ] || mkdir -p ${File%/*} >/dev/null
+	# Only allow `share` in $HOME dir
+	[[ "$FullPath" =~ "$HOME" ]] || return 1 # This line is BASHISM
 
-	else
-		[ -d "${File%/*}" ] || mkdir -p ${File%/*} >/dev/null
-	fi
+	local File="${FullPath#$HOME/}" # Remove starting /home/$USER/
+	local File="/share/$USER/$File" # Gets path for share-dir
 
+	# Use \COMMAND to prevent problems with alias
+	[ -d "${File%/*}" ] || \mkdir -p ${File%/*} # Make dir if doesn't exist to simulate $HOME
 	\ln -sv $FullPath $File
 }
 
 unshare(){
+	# Exit if nothing provide
 	[ -z "$1" ] && return 1
 
+	# Only allows `unshare` when you are OWNER
 	[ -O "$1" ] || return 1
 
-	local File="$(realpath $1)"; local File="${File#$HOME/}"
-	local File="${File#/share/$USER/}"; local File="/share/$USER/$File"
+	# Gets realpath
+	local File="$(realpath $1)"
 
-	\unlink $File || return 1
+	# Only allow `unshare` in share-dir
+	[[ "$File" =~ "/share/$USER" ]] || return 1 # This line is BASHISM
 
-	while [ "$File" != /share/$USER ]; do
-		if [ -d "$File" ]; then
-			\rmdir $File 2>/dev/null || return 0
-		else
-			\rmdir ${File%/*} 2>/dev/null || return 0
-		fi
+	local File="${File#$HOME/}" # Remove starting /home/$USER/
+	local File="/share/$USER/$File" # Gets path for share-dir
+
+	\unlink $File || return 1 # If `unlink` fails then exit
+
+	# Remove directories that `share` create
+	while [ "$File" != /share/$USER ]; do # Remove dir until nothing left
+		\rmdir ${File%/*} 2>/dev/null || return 0 # If unwritable/has file(s) in that directory then exit
 		local File="${File%/*}"
 	done
 }
@@ -158,7 +154,7 @@ lq(){
 		-save-cookies 0 https://lite.duckduckgo.com/lite/
 }
 
-lspkg(){
+lspkg(){ # Inspired by TFL/LL
 	# Only `ls /var/cache/pacman/pkg` if nothing provide
 	if [ -z "$1" ]; then
 		ls /var/cache/pacman/pkg/ | sed '/.sig$/d'
@@ -212,8 +208,13 @@ local BAB_Blue='\[\e[1;94m\]';	local BAB_Magenta='\[\e[1;95m\]'
 local BAB_Cyan='\[\e[1;96m\]';	local BAB_White='\[\e[1;97m\]'
 
 ### PS1
-PS1="${T_White}->"
-PS1+="${T_Reset} "
+if [ $UID = 0 ]; then
+	PS1="${BAB_Red}->"
+	PS1+="${T_Reset} "
+else
+	PS1="${T_White}->"
+	PS1+="${T_Reset} "
+fi
 
 ### PS2
 PS2='   '

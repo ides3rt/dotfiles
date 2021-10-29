@@ -1,25 +1,36 @@
 #!/bin/sh
 
-CONFIG_DIR="$HOME/.config/X11"
+# Source autostart scripts
+if [ -d $HOME/.config/X11/xinitrc.d ]; then
 
-[ -f "$CONFIG_DIR/Xresources" ] && xrdb -merge $CONFIG_DIR/Xresources
+	# Your script is need to end with .sh
+	for File in $HOME/.config/X11/xinitrc.d/?*.sh; do
 
-[ -f "$CONFIG_DIR/Xmodmap" ] && xmodmap $CONFIG_DIR/Xmodmap
-
-if [ -d $CONFIG_DIR/xinitrc.d ]; then
-  for File in $CONFIG_DIR/xinitrc.d/?*.sh; do
-    [ -x "$File" ] && . $File
-  done
-  unset File
+		[ -x "$File" -a -r "$File" ] && . $File
+	done
+	unset File
 fi
 
-unset CONFIG_DIR
+# My PP
+setxkbmap -option caps:backspace # Change Caps-Lock to Backspace (who use Caps-Lock anyways, lol)
+xmodmap -e "clear Lock" # Apparently you need this for key repeat to works
 
-lxsession &
-xsetroot -cursor_name left_ptr
+lxsession & # Session-Manager is unrequire if your GUI-PROGRAM doesn't need root access
+
+xsetroot -cursor_name left_ptr # BSPWM doesn't set cursor by default
+
+# Unlike PULSEAUDIO you need to start pipewire manually
 pipewire &
 pipewire-pulse &
 pipewire-media-session &
-picom --experimental-backends &
-feh --bg-fill --randomize $HOME/Pictures/cWallpapers/ &
-exec bspwm
+
+# Eventhough I don't have Screen-tearing issues I still love to have transpent
+if [ "$(cat /sys/class/dmi/id/product_name)" = 'VirtualBox' ]; then
+	picom --experimental-backends --no-vsync & # VSYNC in VM is unsupported
+else
+	picom --experimental-backends &
+fi
+
+feh --bg-fill --randomize $HOME/Pictures/cWallpapers/ & # FEH is more minimal than NITROGEN
+
+exec bspwm # Your favorite WM/DE here!
