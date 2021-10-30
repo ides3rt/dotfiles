@@ -89,10 +89,10 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Terminus
+    family: mononoki
 
     # The `style` can be specified to pick a specific face.
-    style: Bold
+    style: Regular
 
   # Bold font face
   bold:
@@ -100,7 +100,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Terminus
+    family: mononoki
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -111,10 +111,10 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Terminus
+    family: mononoki
 
     # The `style` can be specified to pick a specific face.
-    style: Bold Italic
+    style: Italic
 
   # Bold italic font face
   bold_italic:
@@ -122,7 +122,7 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: Terminus
+    family: mononoki
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
@@ -152,7 +152,7 @@ colors:
   # Default colors
   primary:
     background: '#0f0f0f'
-    foreground: '#bbbbbb'
+    foreground: '#eeeeee'
 
   # Normal colors
   normal:
@@ -160,9 +160,9 @@ colors:
     red:     '#cc241d'
     green:   '#689d6a'
     yellow:  '#d7d700'
-    blue:    '#458588'
+    blue:    '#0073e5'
     magenta: '#b16286'
-    cyan:    '#87afaf'
+    cyan:    '#5cc9ff'
     white:   '#bbbbbb'
 
   # Bright colors
@@ -171,7 +171,7 @@ colors:
     red:     '#fb4934'
     green:   '#8ec07c'
     yellow:  '#d7d787'
-    blue:    '#83a598'
+    blue:    '#3584e4'
     magenta: '#d3869b'
     cyan:    '#87d7ff'
     white:   '#ffffff'
