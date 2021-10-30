@@ -724,8 +724,8 @@ key_bindings:
   #- { key: Key5,   mods: Shift,         mode: Vi|~Search, action: Bracket                 }
   #- { key: Slash,                       mode: Vi|~Search, action: SearchForward           }
   #- { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
-  #- { key: N,                           mode: Vi|~Search, action: SearchNext              }
-  #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
+  - { key: L,                           mode: Vi|~Search, action: SearchNext              }
+  - { key: L,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
 
   # Search Mode
   #- { key: Return,                mode: Search|Vi,  action: SearchConfirm         }

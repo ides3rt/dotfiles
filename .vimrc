@@ -106,6 +106,8 @@ noremap <silent> h h
 noremap <silent> t gj
 noremap <silent> n gk
 noremap <silent> s l
+noremap <silent> l n
+noremap <silent> L N
 
 " EOL and SOL
 noremap <silent> $ g$
