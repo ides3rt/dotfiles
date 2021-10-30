@@ -34,8 +34,7 @@ alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
 
 ## Independent commands
 alias yay='\mkdir -p /tmp/yay/abs; yay' # Require when set build-dir to /tmp
-alias lfp='leafpad' # Type `leafpad` is too hard for me
-alias ls='ls -hvFN --color=auto --group-directories-first --time-style=long-iso' # Minimal `ls`
+alias ls='ls -hvFN --color=auto --group-directories-first' # Minimal `ls`
 alias pcc="$Auth pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
 alias fgrep='grep -F' # `grep -F` is a replacement for `fgrep`
@@ -177,44 +176,37 @@ lspkg(){ # Inspired by TFL/LL
 
 SetUp() {
 
-### `tput`
-local T_Black='\[$(tput setaf 16)\]';	local T_Red='\[$(tput setaf 196)\]'
-local T_Green='\[$(tput setaf 46)\]';	local T_Yellow='\[$(tput setaf 226)\]'
-local T_Blue='\[$(tput setaf 21)\]';	local T_Magenta='\[$(tput setaf 201)\]'
-local T_Cyan='\[$(tput setaf 51)\]';	local T_White='\[$(tput setaf 231)\]'
-local T_Reset='\[$(tput sgr0)\]'
-
 ### `ANSI escape code`
 # Reset
-local A_Reset='\[\e[0m\]'
+local Reset='\[\e[0m\]'
 # Normal
-local A_Black='\[\e[30m\]';	local A_Red='\[\e[31m\]'
-local A_Green='\[\e[32m\]';	local A_Yellow='\[\e[33m\]'
-local A_Blue='\[\e[34m\]';	local A_Magenta='\[\e[35m\]'
-local A_Cyan='\[\e[36m\]';	local A_White='\[\e[37m\]'
+local Black='\[\e[30m\]';	local Red='\[\e[31m\]'
+local Green='\[\e[32m\]';	local Yellow='\[\e[33m\]'
+local Blue='\[\e[34m\]';	local Magenta='\[\e[35m\]'
+local Cyan='\[\e[36m\]';	local White='\[\e[37m\]'
 # Bold Normal
-local BA_Black='\[\e[1;30m\]';	local BA_Red='\[\e[1;31m\]'
-local BA_Green='\[\e[1;32m\]';	local BA_Yellow='\[\e[1;33m\]'
-local BA_Blue='\[\e[1;34m\]';	local BA_Magenta='\[\e[1;35m\]'
-local BA_Cyan='\[\e[1;36m\]';	local BA_White='\[\e[1;37m\]'
-# Bright
-local AB_Black='\[\e[90m\]';	local AB_Red='\[\e[91m\]'
-local AB_Green='\[\e[92m\]';	local AB_Yellow='\[\e[93m\]'
-local AB_Blue='\[\e[94m\]';		local AB_Magenta='\[\e[95m\]'
-local AB_Cyan='\[\e[96m\]';		local AB_White='\[\e[97m\]'
-# Bold Bright
-local BAB_Black='\[\e[1;90m\]';	local BAB_Red='\[\e[1;91m\]'
-local BAB_Green='\[\e[1;92m\]';	local BAB_Yellow='\[\e[1;93m\]'
-local BAB_Blue='\[\e[1;94m\]';	local BAB_Magenta='\[\e[1;95m\]'
-local BAB_Cyan='\[\e[1;96m\]';	local BAB_White='\[\e[1;97m\]'
+local B_Black='\[\e[1;30m\]';	local B_Red='\[\e[1;31m\]'
+local B_Green='\[\e[1;32m\]';	local B_Yellow='\[\e[1;33m\]'
+local B_Blue='\[\e[1;34m\]';	local B_Magenta='\[\e[1;35m\]'
+local B_Cyan='\[\e[1;36m\]';	local B_White='\[\e[1;37m\]'
+# Light
+local L_Black='\[\e[90m\]';	local L_Red='\[\e[91m\]'
+local L_Green='\[\e[92m\]';	local L_Yellow='\[\e[93m\]'
+local L_Blue='\[\e[94m\]';		local L_Magenta='\[\e[95m\]'
+local L_Cyan='\[\e[96m\]';		local L_White='\[\e[97m\]'
+# Bold Light
+local BL_Black='\[\e[1;90m\]';	local BL_Red='\[\e[1;91m\]'
+local BL_Green='\[\e[1;92m\]';	local BL_Yellow='\[\e[1;93m\]'
+local BL_Blue='\[\e[1;94m\]';	local BL_Magenta='\[\e[1;95m\]'
+local BL_Cyan='\[\e[1;96m\]';	local BL_White='\[\e[1;97m\]'
 
 ### PS1
 if [ $UID = 0 ]; then
-	PS1="${BAB_Red}->"
-	PS1+="${T_Reset} "
+	PS1="${BL_Red}->"
+	PS1+="${Reset} "
 else
-	PS1="${T_White}->"
-	PS1+="${T_Reset} "
+	PS1="${BL_White}->"
+	PS1+="${Reset} "
 fi
 
 ### PS2
