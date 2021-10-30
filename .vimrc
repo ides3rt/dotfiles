@@ -10,8 +10,11 @@ noremap <right> <Nop>
 "Disable <space> in visual and normal mode
 noremap <space> <Nop>
 
-"Disable h in visual and normal mode
+"I use `dvorak` so this is usoless
 noremap h <Nop>
+noremap j <Nop>
+noremap k <Nop>
+noremap l <Nop>
 
 "Use <space> as my <leader>
 let mapleader=" "
@@ -98,19 +101,21 @@ set noscrollbind
 set scrolljump=1
 set noshiftround
 
-"Use {j,k,l,;} instead of {h,j,k,l}
-noremap <silent> j h
-noremap <silent> k gj
-noremap <silent> l gk
-noremap <silent> ; l
+" `dvorak` style movement
+noremap <silent> h h
+noremap <silent> t gj
+noremap <silent> n gk
+noremap <silent> s l
 
-"EOL and SOL
+" EOL and SOL
 noremap <silent> $ g$
 noremap <silent> 0 g0
 
-"Use {K,L} instead of 10{j,k}
-noremap <silent> K 10gj
-noremap <silent> L 10gk
+"I move so much quicker
+noremap <silent> H 10h
+noremap <silent> T 10gj
+noremap <silent> N 10gk
+noremap <silent> S 10l
 
 "Disable automatic commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -126,6 +131,8 @@ noremap <silent> <leader>nn :set relativenumber!<CR>
 
 "Toggle wrap
 noremap <silent> <leader>ww :set wrap!<CR>
+
+noremap <silent> <leader>sc :source $HOME/.vimrc<CR>
 
 "Timing
 set notimeout

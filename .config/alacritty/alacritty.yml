@@ -701,10 +701,10 @@ key_bindings:
   #- { key: V,      mods: Control,       mode: Vi|~Search, action: ToggleBlockSelection    }
   #- { key: V,      mods: Alt,           mode: Vi|~Search, action: ToggleSemanticSelection }
   #- { key: Return,                      mode: Vi|~Search, action: Open                    }
-  - { key: J,                           mode: Vi|~Search, action: Left                    }
-  - { key: K,                           mode: Vi|~Search, action: Down                    }
-  - { key: L,                           mode: Vi|~Search, action: Up                      }
-  - { key: Semicolon,                   mode: Vi|~Search, action: Right                   }
+  - { key: H,                           mode: Vi|~Search, action: Left                    }
+  - { key: T,                           mode: Vi|~Search, action: Down                    }
+  - { key: N,                           mode: Vi|~Search, action: Up                      }
+  - { key: S,                           mode: Vi|~Search, action: Right                   }
   #- { key: Up,                          mode: Vi|~Search, action: Up                      }
   #- { key: Down,                        mode: Vi|~Search, action: Down                    }
   #- { key: Left,                        mode: Vi|~Search, action: Left                    }

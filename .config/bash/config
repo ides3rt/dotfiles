@@ -72,14 +72,21 @@ bind 'set bell-style none' 'set completion-ignore-case On' \
 ## Make `vi` better
 bind -m vi-insert "\C-l":clear-display # Use `clear-screen` instead for non-recursive clear
 
-## Use {j,k,l,;}
-bind -m vi "j":backward-char
-bind -m vi "k":next-history
-bind -m vi "l":previous-history
-bind -m vi ";":forward-char
-
 ## Remove h
 bind -m vi -r "h"
+bind -m vi -r "j"
+bind -m vi -r "k"
+bind -m vi -r "l"
+
+## `dvorak` vi
+bind -m vi "h":backward-char
+bind -m vi "t":next-history
+bind -m vi "n":previous-history
+bind -m vi "s":forward-char
+
+## Move fast
+bind -m vi "H":vi-backward-word
+bind -m vi "S":vi-forward-word
 
 #------------------------------------------------Functions
 
