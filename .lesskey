@@ -1,4 +1,4 @@
-t         forw-line
-n         back-line
+e         forw-line
+i         back-line
 l         repeat-search
 L         reverse-search

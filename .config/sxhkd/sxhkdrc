@@ -55,7 +55,7 @@ mod1 + shift + {q,r}
 	bspc {quit,wm -r}
 
 # Close focused window
-mod1 + c
+mod1 + q
 	bspc node -c
 
 # Change between tiled/monocle layout
@@ -67,7 +67,7 @@ mod1 + shift + Return
 	bspc node -s biggest.window
 
 # Change focused window's state
-mod1 + shift + {g,f,v}
+mod1 + shift + {t,f,v}
 	bspc node -t {~tiled,~fullscreen,~floating}
 
 # Change focused window's node
@@ -75,7 +75,7 @@ mod1 + shift + {g,f,v}
 #	bspc node -g {marked,locked,sticky,private}
 
 # Focus the node in the given direction
-mod1 + {_,shift + }{h,t,n,s}
+mod1 + {_,shift + }{n,e,i,o}
 	bspc node -{f,s} {west,south,north,east}
 
 # Focus or send to the given desktop
@@ -83,7 +83,7 @@ mod1 + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 # Preselect the direction
-mod1 + ctrl + {h,t,n,s}
+mod1 + ctrl + {n,e,i,o}
 	bspc node -p {west,south,north,east}
 
 # Preselect the ratio
@@ -91,17 +91,17 @@ mod1 + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # Cancel the preselection for the focused node
-mod1 + ctrl + e
+mod1 + ctrl + x
 	bspc node -p cancel
 
 # Expand a window by moving one of its side outward
-mod4 + {h,t,n,s}
+mod4 + {n,e,i,o}
 	bspc node -z {left -100 0,bottom 0 100,top 0 -100,right 100 0}
 
 # Contract a window by moving one of its side inward
-mod4 + shift + {h,t,n,s}
+mod4 + shift + {n,e,i,o}
 	bspc node -z {right -100 0,top 0 100,bottom 0 -100,left 100 0}
 
 # Move a floating window
-mod4 + ctrl + {h,t,n,s}
+mod4 + ctrl + {n,e,i,o}
 	bspc node -v {-100 0,0 100,0 -100,100 0}

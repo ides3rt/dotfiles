@@ -10,11 +10,8 @@ noremap <right> <Nop>
 "Disable <space> in visual and normal mode
 noremap <space> <Nop>
 
-"I use `dvorak` so this is usoless
-noremap h <Nop>
+"I use `dvorak` so this is useless
 noremap j <Nop>
-noremap k <Nop>
-noremap l <Nop>
 
 "Use <space> as my <leader>
 let mapleader=" "
@@ -101,23 +98,29 @@ set noscrollbind
 set scrolljump=1
 set noshiftround
 
-" `dvorak` style movement
-noremap <silent> h h
-noremap <silent> t gj
-noremap <silent> n gk
-noremap <silent> s l
+" `colemak` style movement
+noremap <silent> n h
+noremap <silent> e gj
+noremap <silent> i gk
+noremap <silent> o l
+
+"Important keys get overwrite by `colemak` so let's change them
+noremap <silent> h i
 noremap <silent> l n
+noremap <silent> k o
+noremap <silent> H I
 noremap <silent> L N
+noremap <silent> K O
 
 " EOL and SOL
 noremap <silent> $ g$
 noremap <silent> 0 g0
 
 "I move so much quicker
-noremap <silent> H 10h
-noremap <silent> T 10gj
-noremap <silent> N 10gk
-noremap <silent> S 10l
+noremap <silent> N 10h
+noremap <silent> E 10gj
+noremap <silent> I 10gk
+noremap <silent> O 10l
 
 "Disable automatic commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o

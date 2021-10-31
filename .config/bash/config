@@ -72,21 +72,24 @@ bind 'set bell-style none' 'set completion-ignore-case On' \
 ## Make `vi` better
 bind -m vi-insert "\C-l":clear-display # Use `clear-screen` instead for non-recursive clear
 
-## Remove h
+## Remove OG vi's keymaps
 bind -m vi -r "h"
 bind -m vi -r "j"
 bind -m vi -r "k"
 bind -m vi -r "l"
 
-## `dvorak` vi
-bind -m vi "h":backward-char
-bind -m vi "t":next-history
-bind -m vi "n":previous-history
-bind -m vi "s":forward-char
+## `colemak` vi
+bind -m vi "n":backward-char
+bind -m vi "e":next-history
+bind -m vi "i":previous-history
+bind -m vi "o":forward-char
+
+## Use `h` for insert mode
+bind -m vi "h":vi-insertion-mode
 
 ## Move fast
-bind -m vi "H":vi-backward-word
-bind -m vi "S":vi-forward-word
+bind -m vi "N":vi-backward-word
+bind -m vi "O":vi-forward-word
 
 #------------------------------------------------Functions
 
