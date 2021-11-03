@@ -36,7 +36,6 @@ alias fgrep='grep -F' # `grep -F` is a replacement for `fgrep`
 alias egrep='grep -E' # `grep -E` is a replacement for `egrep`
 alias diff='diff --color=auto' # `diff` with colors is alots easier to read
 alias media="cd /media/$USER/" # `cd` to /media
-alias looks="cd /share/$USER/" # `cd` to share directory
 alias mnt='cd /mnt' # `cd` to /mnt
 alias doas='doas ' # Require if you want aliases to work with doas
 alias htop="htop -t -u $USER" # It's so much cleaner
@@ -196,8 +195,8 @@ local B_Green='\[\e[1;32m\]';	local B_Yellow='\[\e[1;33m\]'
 local B_Blue='\[\e[1;34m\]';	local B_Magenta='\[\e[1;35m\]'
 local B_Cyan='\[\e[1;36m\]';	local B_White='\[\e[1;37m\]'
 # Light
-local L_Black='\[\e[90m\]';	local L_Red='\[\e[91m\]'
-local L_Green='\[\e[92m\]';	local L_Yellow='\[\e[93m\]'
+local L_Black='\[\e[90m\]';		local L_Red='\[\e[91m\]'
+local L_Green='\[\e[92m\]';		local L_Yellow='\[\e[93m\]'
 local L_Blue='\[\e[94m\]';		local L_Magenta='\[\e[95m\]'
 local L_Cyan='\[\e[96m\]';		local L_White='\[\e[97m\]'
 # Bold Light
