@@ -10,7 +10,7 @@ noremap <right> <Nop>
 "Disable <space> in visual and normal mode
 noremap <space> <Nop>
 
-"I use `dvorak` so this is useless
+"I use `colemak` so this is useless
 noremap j <Nop>
 
 "Use <space> as my <leader>
@@ -32,6 +32,7 @@ set hlsearch
 set magic
 
 "Make vim not annoying
+set viminfo='0,:0,<0,@0,f0
 set noerrorbells
 set novisualbell
 set noconfirm
@@ -137,6 +138,7 @@ noremap <silent> <leader>nn :set relativenumber!<CR>
 "Toggle wrap
 noremap <silent> <leader>ww :set wrap!<CR>
 
+"Source .vimrc
 noremap <silent> <leader>sc :source $HOME/.vimrc<CR>
 
 "Timing
