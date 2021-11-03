@@ -16,8 +16,6 @@ setxkbmap us -variant colemak # I use `colemak` LOL
 setxkbmap -option caps:backspace # Change Caps-Lock to Backspace (who use Caps-Lock anyways, lol)
 xmodmap -e "clear Lock" # Apparently you need this for key repeat to works
 
-lxsession & # Session-Manager is unrequire if your GUI-PROGRAM doesn't need root access
-
 xsetroot -cursor_name left_ptr # BSPWM doesn't set cursor by default
 
 # Unlike PULSEAUDIO you need to start PIPEWIRE manually
