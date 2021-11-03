@@ -10,16 +10,11 @@ GitHub="$HOME/GitHub/ides3rt/projects"
 GistHub="$HOME/GitHub/ides3rt/gists"
 
 ## Verbosity
-alias ln='ln -v'
-alias cp='cp -v'
-alias mv='mv -v'
-alias rm='rm -v'
-alias rmdir='rmdir -v'
-alias mkdir='mkdir -v'
-alias chown='chown -v'
-alias chmod='chmod -v'
-alias mount='mount -v'
-alias umount='umount -v'
+alias ln='ln -v'; alias cp='cp -v'
+alias mv='mv -v'; alias rm='rm -v'
+alias rmdir='rmdir -v'; alias mkdir='mkdir -v'
+alias chown='chown -v'; alias chmod='chmod -v'
+alias mount='mount -v'; alias umount='umount -v'
 alias fstrim='fstrim -v'
 
 ## LUKS
@@ -45,6 +40,7 @@ alias looks="cd /share/$USER/" # `cd` to share directory
 alias mnt='cd /mnt' # `cd` to /mnt
 alias doas='doas ' # Require if you want aliases to work with doas
 alias htop="htop -t -u $USER" # It's so much cleaner
+alias xclip='xclip -selection clipboard' # Normal `xclip` doesn't work for me
 
 unset GitHub GistHub Auth
 

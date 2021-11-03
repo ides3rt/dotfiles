@@ -20,7 +20,7 @@ lxsession & # Session-Manager is unrequire if your GUI-PROGRAM doesn't need root
 
 xsetroot -cursor_name left_ptr # BSPWM doesn't set cursor by default
 
-# Unlike PULSEAUDIO you need to start pipewire manually
+# Unlike PULSEAUDIO you need to start PIPEWIRE manually
 pipewire &
 pipewire-pulse &
 pipewire-media-session &
@@ -33,5 +33,7 @@ else
 fi
 
 feh --bg-fill --randomize $HOME/Pictures/cWallpapers/ & # FEH is more minimal than NITROGEN
+
+sxhkd & # SXHKD is prefered hotkeys daemon
 
 exec bspwm # Your favorite WM/DE here!

@@ -18,10 +18,6 @@ mod1 + b
 # System hotkeys
 #
 
-# Restart `sxhkd`
-mod1 + shift + d
-	pkill -USR1 -x sxhkd
-
 # Take a screenshot
 Print
 	scrot -q 100 '%Y-%m-%d_%H:%M:%S.png' -e 'mv $f ~/Pictures/'
@@ -43,16 +39,20 @@ mod1 + minus
 	pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 # Change keyboard layouts
-mod1 + Tab
+mod4 + Escape
 	$HOME/Code/sxhkd/loadkey
 
 #
 # BSPWM hotkeys
 #
 
-# Quit/Restart BSPWM
-mod1 + shift + {q,r}
-	bspc {quit,wm -r}
+# Quit BSPWM
+mod1 + shift + q
+	bspc quit
+
+# Restart BSPWM
+mod1 + shift + r
+	pkill -USR1 -x sxhkd; bspc wm -r
 
 # Close focused window
 mod1 + q
@@ -67,12 +67,16 @@ mod1 + shift + Return
 	bspc node -s biggest.window
 
 # Change focused window's state
-mod1 + shift + {t,f,v}
+mod1 + {t,f,k}
 	bspc node -t {~tiled,~fullscreen,~floating}
 
+# Change focused window's node to sticky
+mod1 + s
+	bspc node -g sticky
+
 # Change focused window's node
-# mod1 + {m,x,y,z}
-#	bspc node -g {marked,locked,sticky,private}
+# mod1 + {m,x,z}
+# 	bspc node -g {marked,locked,private}
 
 # Focus the node in the given direction
 mod1 + {_,shift + }{n,e,i,o}
@@ -91,11 +95,11 @@ mod1 + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # Cancel the preselection for the focused node
-mod1 + ctrl + x
+mod1 + ctrl + r
 	bspc node -p cancel
 
 # Expand a window by moving one of its side outward
-mod4 + {n,e,i,o}
+mod4 + ctrl + {n,e,i,o}
 	bspc node -z {left -100 0,bottom 0 100,top 0 -100,right 100 0}
 
 # Contract a window by moving one of its side inward
@@ -103,5 +107,5 @@ mod4 + shift + {n,e,i,o}
 	bspc node -z {right -100 0,top 0 100,bottom 0 -100,left 100 0}
 
 # Move a floating window
-mod4 + ctrl + {n,e,i,o}
+mod4 + {n,e,i,o}
 	bspc node -v {-100 0,0 100,0 -100,100 0}
