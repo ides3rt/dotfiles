@@ -62,10 +62,6 @@ mod1 + q
 mod1 + m
 	bspc desktop -l next
 
-# Make focused window biggest
-mod1 + shift + Return
-	bspc node -s biggest.window
-
 # Change focused window's state
 mod1 + {t,f,k}
 	bspc node -t {~tiled,~fullscreen,~floating}
@@ -98,14 +94,22 @@ mod1 + ctrl + {1-9}
 mod1 + ctrl + r
 	bspc node -p cancel
 
-# Expand a window by moving one of its side outward
-mod4 + ctrl + {n,e,i,o}
-	bspc node -z {left -100 0,bottom 0 100,top 0 -100,right 100 0}
-
-# Contract a window by moving one of its side inward
-mod4 + shift + {n,e,i,o}
-	bspc node -z {right -100 0,top 0 100,bottom 0 -100,left 100 0}
-
 # Move a floating window
-mod4 + {n,e,i,o}
+mod4 + shift + {n,e,i,o}
 	bspc node -v {-100 0,0 100,0 -100,100 0}
+
+# Grow focused window's width
+mod4 + n
+	bspc node -z left -50 0; bspc node -z right 50 0
+
+# Grow focused window's height
+mod4 + e
+	bspc node -z bottom 0 50; bspc node -z top 0 -50
+
+# Shrink focused window's height
+mod4 + i
+	bspc node -z bottom 0 -50; bspc node -z top 0 50
+
+# Shrink focused window's width
+mod4 + o
+	bspc node -z left 50 0; bspc node -z right -50 0
