@@ -17,10 +17,6 @@ alias chown='chown -v'; alias chmod='chmod -v'
 alias mount='mount -v'; alias umount='umount -v'
 alias fstrim='fstrim -v'
 
-## LUKS
-alias cplo="$Auth cryptsetup luksOpen"
-alias cplc="$Auth cryptsetup luksClose"
-
 ## GitHub
 alias ghpcd="cd $GitHub"
 alias gshcd="cd $GistHub"
