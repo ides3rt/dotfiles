@@ -11,6 +11,8 @@ if [ -d $HOME/.config/X11/xinitrc.d ]; then
 	unset File
 fi
 
+lxsession &
+
 # My PP
 setxkbmap us -variant colemak # I use `colemak` LOL
 setxkbmap -option caps:backspace # Change Caps-Lock to Backspace (who use Caps-Lock anyways, lol)
@@ -32,6 +34,6 @@ fi
 
 feh --bg-fill --randomize $HOME/Pictures/cWallpapers/ & # FEH is more minimal than NITROGEN
 
-sxhkd & # SXHKD is prefered hotkeys daemon
+sxhkd & # SXHKD is my prefered hotkeys daemon
 
 exec bspwm # Your favorite WM/DE here!
