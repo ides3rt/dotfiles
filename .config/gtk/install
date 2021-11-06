@@ -1,0 +1,17 @@
+#!/bin/sh
+
+Dir="$HOME/.config/gtk"
+
+if type doas >/dev/null 2>&1; then
+	auth='doas'
+elif type sudo >/dev/null 2>&1; then
+	auth='sudo'
+else
+	auth='su -c'
+fi
+
+$auth ln -sv $Dir/gtk-2.0 /etc/gtk-2.0/gtkrc
+
+$auth ln -sv $Dir/gtk-3.0 /etc/gtk-3.0/settings.ini
+
+unset auth Dir
