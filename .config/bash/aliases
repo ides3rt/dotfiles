@@ -26,7 +26,6 @@ alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code"
 alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
 
 ## Independent commands
-alias yay='\mkdir -p /tmp/yay/abs; yay' # Require when set build-dir to /tmp
 alias ls='ls -hvFN --color=auto --group-directories-first' # Minimal `ls`
 alias pcc="$Auth pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful

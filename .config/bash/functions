@@ -79,3 +79,22 @@ lspkg(){ # Inspired by TFL/LL
 		ls /var/cache/pacman/pkg/ | sed '/.sig$/d' | grep -Ei "$1"
 	fi
 }
+
+build(){
+	# Check if AUR dir exist or not
+	[ -d "$1" ] || return 1
+
+	# Copy AUR to tmp dir, exit with status 1 if fails
+	cp -r $1 /tmp || return 1
+
+	# Get AUR dir
+	local Dir="${1#$(dirname $1)/}"
+
+	# Build AUR, exit with status 1 if fails
+	cd /tmp/$Dir && makepkg -si && local Fail=0 || local Fail=1
+
+	# Clean things
+	cd -
+	rm -rf /tmp/$Dir
+	return $Fail
+}
