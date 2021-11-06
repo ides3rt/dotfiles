@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export LESS='-R --use-color -Dd+r$Du+b'
+export LESSHISTFILE='/dev/null' # Same effect as LESSHISTFILE=''
+export LESSHISTSIZE=0
+export LESSSECURE=1 # Restricted `less`

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+## Prefered tool to exec as root
+[ $UID = 0 ] || Auth='doas'
+
+## My GitHub directories
+GitHub="$HOME/GitHub/ides3rt/projects"
+GistHub="$HOME/GitHub/ides3rt/gists"
+
+## Verbosity
+alias ln='ln -v'; alias cp='cp -v'
+alias mv='mv -v'; alias rm='rm -v'
+alias rmdir='rmdir -v'; alias mkdir='mkdir -v'
+alias chown='chown -v'; alias chmod='chmod -v'
+alias mount='mount -v'; alias umount='umount -v'
+alias fstrim='fstrim -v'
+
+## LUKS
+alias cplo="$Auth cryptsetup luksOpen"
+alias cplc="$Auth cryptsetup luksClose"
+
+## GitHub
+alias ghpcd="cd $GitHub"
+alias gshcd="cd $GistHub"
+alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code"
+alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
+
+## Independent commands
+alias yay='\mkdir -p /tmp/yay/abs; yay' # Require when set build-dir to /tmp
+alias ls='ls -hvFN --color=auto --group-directories-first' # Minimal `ls`
+alias pcc="$Auth pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
+alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
+alias fgrep='grep -F' # `grep -F` is a replacement for `fgrep`
+alias egrep='grep -E' # `grep -E` is a replacement for `egrep`
+alias diff='diff --color=auto' # `diff` with colors is alots easier to read
+alias media="cd /media/$USER/" # `cd` to /media
+alias mnt='cd /mnt' # `cd` to /mnt
+alias doas='doas ' # Require if you want aliases to work with doas
+alias htop="htop -t -u $USER" # It's so much cleaner
+alias xclip='xclip -selection clipboard' # Normal `xclip` doesn't work for me
+
+unset GitHub GistHub Auth

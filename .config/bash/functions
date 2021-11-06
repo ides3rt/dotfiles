@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+up(){
+	# Only `cd ..` if nothing provide
+	[ -z "$1" ] && cd .. && return 0
+
+	# Only `cd ..` if alphabet provide
+	! [[ "$1" =~ ^[0-9]+$ ]] && cd .. && return 0 # Will get errors if you port other shells (BASHISM)
+
+	# Remove start 0 to prevent errors
+	local Number="${1#*0}"
+
+	# ${VAR:-0} and ${VAR:-.} is require incase user provide 0
+	while [ ${Number:-0} -gt 0 ]; do
+		local Directories="../$Directories" && let Number--
+	done
+	cd ${Directories:-.}
+}
+
+share(){
+	# Exit if nothing provide
+	[ -z "$1" ] && return 1
+
+	# If match those options(see my notes for info) then exit
+	[ ! -e "$1" -o -h "$1" -o -c "$1" -o -b "$1" -o -S "$1" -o ! -O "$1" ] && return 1
+
+	# Gets realpath
+	local FullPath="$(realpath $1)"
+
+	# Only allow `share` in $HOME dir
+	[[ "$FullPath" =~ "$HOME" ]] || return 1 # This line is BASHISM
+
+	local File="${FullPath#$HOME/}" # Remove starting /home/$USER/
+	local File="/share/$USER/$File" # Gets path for share-dir
+
+	# Use \COMMAND to prevent problems with alias
+	[ -d "${File%/*}" ] || \mkdir -p ${File%/*} # Make dir if doesn't exist to simulate $HOME
+	\ln -sv $FullPath $File
+}
+
+unshare(){
+	# Exit if nothing provide
+	[ -z "$1" ] && return 1
+
+	# Only allows `unshare` when you are OWNER
+	[ -O "$1" ] || return 1
+
+	# Gets realpath
+	local File="$(realpath $1)"
+
+	# Only allow `unshare` in share-dir
+	[[ "$File" =~ "/share/$USER" ]] || return 1 # This line is BASHISM
+
+	local File="${File#$HOME/}" # Remove starting /home/$USER/
+	local File="/share/$USER/$File" # Gets path for share-dir
+
+	\unlink $File || return 1 # If `unlink` fails then exit
+
+	# Remove directories that `share` create
+	while [ "$File" != /share/$USER ]; do # Remove dir until nothing left
+		\rmdir ${File%/*} 2>/dev/null || return 0 # If unwritable/has file(s) in that directory then exit
+		local File="${File%/*}"
+	done
+}
+
+lq(){
+	# Currently you can't do search though URLs with `duckduckgo-lite`
+	links -http.do-not-track 1 \
+		-http.referer 0 \
+		-save-url-history 0 \
+		-save-cookies 0 https://lite.duckduckgo.com/lite/
+}
+
+lspkg(){ # Inspired by TFL/LL
+	# Only `ls /var/cache/pacman/pkg` if nothing provide
+	if [ -z "$1" ]; then
+		ls /var/cache/pacman/pkg/ | sed '/.sig$/d'
+	else
+		ls /var/cache/pacman/pkg/ | sed '/.sig$/d' | grep -Ei "$1"
+	fi
+}

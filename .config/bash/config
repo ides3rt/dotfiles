@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+### Remove everything that contain `vi` if you love `emacs`
+
+set -o interactive-comments -o vi -o braceexpand \
+    -o hashall -o histexpand +o monitor
+
+shopt -s autocd cdspell checkwinsize cmdhist \
+    dirspell expand_aliases extglob extquote \
+    force_fignore histappend hostcomplete \
+    interactive_comments lithist nocasematch progcomp \
+    progcomp_alias promptvars xpg_echo
+
+bind 'set bell-style none' 'set completion-ignore-case On' \
+    'set colored-stats On' 'set echo-control-characters Off' \
+    'set editing-mode vi' 'set keymap vi' 'set mark-symlinked-directories On' \
+    'set match-hidden-files Off' 'set page-completions Off' \
+    'set print-completions-horizontally On' 'set show-all-if-ambiguous On' \
+    'set show-all-if-unmodified On' 'set skip-completed-text On' \
+    'set visible-stats On'
+
+## Make `vi` better
+bind -m vi-insert "\C-l":clear-display # Use `clear-screen` instead for non-recursive clear
+
+## Remove OG vi's keymaps
+bind -m vi -r "h"
+bind -m vi -r "j"
+bind -m vi -r "k"
+bind -m vi -r "l"
+
+## `colemak` vi
+bind -m vi "n":backward-char
+bind -m vi "e":next-history
+bind -m vi "i":previous-history
+bind -m vi "o":forward-char
+
+## Use `h` for insert mode
+bind -m vi "h":vi-insertion-mode
+
+## Move fast
+bind -m vi "N":vi-backward-word
+bind -m vi "O":vi-forward-word

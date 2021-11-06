@@ -11,20 +11,21 @@ Check() {
 }
 
 # Source files
-SetUp() {
+Setup() {
 	for File in $HOME/.config/$1/?*; do
 		Check $File
 	done
 }
 
 # Source Environment Variables.
-Check $HOME/.env
+[ -d "$HOME/.config/env.d" ] &&
+	Setup env.d
 
 # Source config depend on shell.
 case `readlink /proc/$$/exe` in
 	*/bash)
 		# Just source BASH's config
-		SetUp bash
+		Setup bash
 
 		# Prop' in your distro's main repo
 		Check /usr/share/bash-completion/bash_completion
@@ -35,11 +36,11 @@ case `readlink /proc/$$/exe` in
 
 	*/zsh)
 		# I never use ZSH in my life I only set incase oneday I will use it
-		SetUp zsh ;;
+		Setup zsh ;;
 esac
 
 # Unless you edit my config you don't need this anymore so unset it
-unset File SetUp Check
+unset File Setup Check
 
 # My GitHub SSH.
 if [ -z "$SSH_AGENT_PID" -a $UID != 0 ]; then # Only spawn SSH-AGENT if it never spawn before

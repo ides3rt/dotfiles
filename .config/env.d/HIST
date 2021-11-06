@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# History Control.
+export HISTCONTROL='ignoredups:erasedups' # Who like dups anyway
+export HISTFILE='/dev/null' # Same effect as HISTFILE=''
+export HISTFILESIZE=0 # This make history session only
+export HISTSIZE=999
