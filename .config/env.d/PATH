@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 Port(){
 	[ -d "$1" -a -z $(grep -o "$1" <<< "$PATH") ] &&

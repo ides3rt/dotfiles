@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Prefered programs.
+# Prefered programs
 export EDITOR='vim'
 export VISUAL="$EDITOR"
 export TERMINAL='alacritty'
@@ -9,4 +9,3 @@ export PAGER='less'
 	export BROWSER='links' # Sometimes I walk around in tty
 
 export SUDO_EDITOR='/usr/bin/rvim' # I don't use `sudo`, but specify anyway
-export MANPAGER='less -R --use-color -Dd+r -Du+b' # Colorful manpage

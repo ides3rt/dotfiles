@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# Flags.
 export CFLAGS='-march=native -O3 -pipe' # Use '-O2' if compile fails (it's O not zero)
 export CXXFLAGS="$CFLAGS"
 export FCFLAGS="$CFLAGS"

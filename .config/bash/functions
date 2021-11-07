@@ -88,10 +88,10 @@ build(){
 	cp -r $1 /tmp || return 1
 
 	# Get AUR dir
-	local Dir="${1#$(dirname $1)/}"
+	local Dir="${1#`dirname $1`/}"
 
 	# Build AUR, exit with status 1 if fails
-	cd /tmp/$Dir && makepkg -si && local Fail=0 || local Fail=1
+	cd /tmp/$Dir && makepkg -sir && local Fail=0 || local Fail=1
 
 	# Clean things
 	cd -

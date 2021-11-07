@@ -4,9 +4,9 @@
 export TERM='xterm-256color'
 
 # GNUPG
-export GNUPGHOME="$HOME/.config/gnupg"
+export GNUPGHOME="$HOME/.local/share/gnupg"
 
-# `ps` in posix
+# `ps`
 export PS_PERSONALITY='posix'
 
 ## `ls`

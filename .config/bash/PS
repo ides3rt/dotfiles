@@ -8,7 +8,7 @@
 # \u = UserName
 # \$ = Show '#' If root, Otherwise '$'
 
-PROMPT() {
+PS() {
 
 # Reset
 local Reset='\[\e[0m\]'
@@ -51,4 +51,4 @@ PS2='   '
 
 }
 
-PROMPT && unset PROMPT
+PS && unset PS

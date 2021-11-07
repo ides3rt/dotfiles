@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# X11
+# XAUTHORITY
 export XAUTHORITY='/tmp/Xauthority'
 
 # Disable `Qt` logging.
