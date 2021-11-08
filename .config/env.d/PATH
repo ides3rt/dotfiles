@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 Port(){
-	[ -d "$1" -a -z $(grep -o "$1" <<< "$PATH") ] &&
+	[ -d "$1" -a -z $(echo "$PATH" | grep -o "$1") ] &&
 		export PATH+=":$1"
 }
 
