@@ -15,10 +15,6 @@ alias chown='chown -v'; alias chmod='chmod -v'
 alias mount='mount -v'; alias umount='umount -v'
 alias fstrim='fstrim -v'
 
-## LUKS
-alias cplo="$Auth cryptsetup luksOpen"
-alias cplc="$Auth cryptsetup luksClose"
-
 ## GitHub
 alias ghpcd="cd $GitHub"
 alias gshcd="cd $GistHub"
@@ -27,6 +23,8 @@ alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
 
 ## Independent commands
 alias ls='ls -hvFN --color=auto --group-directories-first' # Minimal `ls`
+alias ip='ip -color=auto' # Colorful `ip`
+alias dmesg='dmesg --color=always' # Colorful `dmesg`
 alias pcc="$Auth pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
 alias fgrep='grep -F' # `grep -F` is a replacement for `fgrep`

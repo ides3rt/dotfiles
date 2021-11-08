@@ -84,6 +84,9 @@ build(){
 	# Check if AUR dir exist or not
 	[ -d "$1" ] || return 1
 
+	# Chcek if AUR up to date or not
+	git --git-dir=$1/.git/ pull || return 1
+
 	# Copy AUR to tmp dir, exit with status 1 if fails
 	cp -r $1 /tmp || return 1
 
