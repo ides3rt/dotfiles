@@ -6,20 +6,21 @@
 umask 077 # Default is 022, less privacy, but more convenient
 
 # Check If file exist and readable or not
-Check() {
+Check(){
 	[ -f "$1" -a -r "$1" ] && . $1
 }
 
 # Source files
-Setup() {
-	for File in $HOME/.config/$1/?*; do
-		Check $File
-	done
+Setup(){
+	if [ -d "$HOME/.config/$1" ]; then
+		for File in $HOME/.config/$1/?*; do
+			Check $File
+		done
+	fi
 }
 
 # Source Environment Variables.
-[ -d "$HOME/.config/env.d" ] &&
-	Setup env.d
+Setup env.d
 
 # Source config depend on shell.
 case `readlink /proc/$$/exe` in
