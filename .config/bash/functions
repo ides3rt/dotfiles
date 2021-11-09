@@ -87,17 +87,23 @@ build(){
 	# Chcek if AUR up to date or not
 	git --git-dir=$1/.git/ pull || return 1
 
+	# Set tmpdir
+	local TMPDIR="${TMPDIR:-/tmp}"
+
 	# Copy AUR to tmp dir, exit with status 1 if fails
-	cp -r $1 /tmp || return 1
+	cp -r $1 $TMPDIR || return 1
 
 	# Get AUR dir
 	local Dir="${1#`dirname $1`/}"
 
 	# Build AUR, exit with status 1 if fails
-	cd /tmp/$Dir && makepkg -sir && local Fail=0 || local Fail=1
+	cd $TMPDIR/$Dir && makepkg -sir && local Fail=0 || local Fail=1
 
 	# Clean things
-	cd -
-	rm -rf /tmp/$Dir
+	cd - && rm -rf $TMPDIR/$Dir
 	return $Fail
+}
+
+fcd(){ # Create by BugsWriter
+	cd "$(find -type d | fzf)" || return 1
 }

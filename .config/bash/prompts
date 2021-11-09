@@ -8,7 +8,7 @@
 # \u = UserName
 # \$ = Show '#' If root, Otherwise '$'
 
-PS() {
+PROMPT_PARSER(){
 
 # Reset
 local Reset='\[\e[0m\]'
@@ -37,13 +37,22 @@ local BL_Green='\[\e[1;92m\]';  local BL_Yellow='\[\e[1;93m\]'
 local BL_Blue='\[\e[1;94m\]';   local BL_Magenta='\[\e[1;95m\]'
 local BL_Cyan='\[\e[1;96m\]';   local BL_White='\[\e[1;97m\]'
 
+local X=$1
+(( $X == 0 )) && X=
+
 ### PS1
 if [ $UID = 0 ]; then
-	PS1="${BL_Red}->"
-	PS1+="${Reset} "
+	if [ -z "$X" ]; then
+	 	PS1="${BL_Red}->${Reset} "
+	else
+		PS1="${BL_White}${X} ${BL_Red}->${Reset} "
+	fi
 else
-	PS1="${BL_White}->"
-	PS1+="${Reset} "
+	if [ -z "$X" ]; then
+		PS1="${BL_White}->${Reset} "
+	else
+		PS1="${BL_Red}${X} ${BL_White}->${Reset} "
+	fi
 fi
 
 ### PS2
@@ -51,4 +60,4 @@ PS2='   '
 
 }
 
-PS && unset PS
+PROMPT_COMMAND='PROMPT_PARSER $?'

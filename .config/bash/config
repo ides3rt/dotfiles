@@ -15,8 +15,7 @@ bind 'set bell-style none' 'set completion-ignore-case On' \
     'set colored-stats On' 'set echo-control-characters Off' \
     'set editing-mode vi' 'set keymap vi' 'set mark-symlinked-directories On' \
     'set match-hidden-files Off' 'set page-completions Off' \
-    'set print-completions-horizontally On' 'set show-all-if-ambiguous On' \
-    'set show-all-if-unmodified On' 'set skip-completed-text On' \
+    'set print-completions-horizontally On' 'set skip-completed-text On' \
     'set visible-stats On'
 
 ## Make `vi` better

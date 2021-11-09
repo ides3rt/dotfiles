@@ -9,3 +9,4 @@ export PAGER='less'
 	export BROWSER='links' # Sometimes I walk around in tty
 
 export SUDO_EDITOR='/usr/bin/rvim' # I don't use `sudo`, but specify anyway
+export DOAS_EDITOR="$SUDO_EDITOR" # This require by my `doasedit`
