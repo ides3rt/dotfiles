@@ -1,17 +1,3 @@
-"Source vim's plugins
-source /usr/share/vim/vim82/plugin/getscriptPlugin.vim
-source /usr/share/vim/vim82/plugin/gzip.vim
-source /usr/share/vim/vim82/plugin/logiPat.vim
-source /usr/share/vim/vim82/plugin/manpager.vim
-source /usr/share/vim/vim82/plugin/matchparen.vim
-source /usr/share/vim/vim82/plugin/netrwPlugin.vim
-source /usr/share/vim/vim82/plugin/rrhelper.vim
-source /usr/share/vim/vim82/plugin/spellfile.vim
-source /usr/share/vim/vim82/plugin/tarPlugin.vim
-source /usr/share/vim/vim82/plugin/tohtml.vim
-source /usr/share/vim/vim82/plugin/vimballPlugin.vim
-source /usr/share/vim/vim82/plugin/zipPlugin.vim
-
 "Disable arrow keys in normal mode
 noremap <up> <Nop>
 noremap <down> <Nop>
@@ -43,8 +29,8 @@ set hlsearch
 set magic
 
 "Make vim not annoying
-set noloadplugins
 set viminfo='0,:0,<0,@0,f0
+set noloadplugins
 set noerrorbells
 set novisualbell
 set noconfirm
@@ -145,7 +131,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 noremap <silent> <leader><space> :noh<CR>
 
 "Toogle relativenumber
-noremap <silent> <leader>nn :set relativenumber!<CR>
+noremap <silent> <leader>rn :set relativenumber!<CR>
 
 "Toggle wrap
 noremap <silent> <leader>ww :set wrap!<CR>
