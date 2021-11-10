@@ -7,33 +7,36 @@
 GitHub="$HOME/GitHub/ides3rt/projects"
 GistHub="$HOME/GitHub/ides3rt/gists"
 
-## Verbosity
-alias ln='ln -v'; alias cp='cp -v'
-alias mv='mv -v'; alias rm='rm -v'
-alias rmdir='rmdir -v'; alias mkdir='mkdir -v'
-alias chown='chown -v'; alias chmod='chmod -v'
-alias mount='mount -v'; alias umount='umount -v'
-alias fstrim='fstrim -v'
-
-## GitHub
-alias ghpcd="cd $GitHub"
-alias gshcd="cd $GistHub"
-alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code"
-alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
-
-## Independent commands
-alias ls='ls -hvFN --color=auto --group-directories-first' # Minimal `ls`
+## Aliases
+alias ghpcd="cd $GitHub" # `cd` to $GitHub
+alias gshcd="cd $GistHub" # `cd` to $GistHub
+alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code" # This is how I manage my "Code" repo
+alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures" # This is how I manage my "Pictures" repo
+alias cp='cp -vZ' # Use SELinux security context
+alias mv='mv -vZ' # Use SELinux security context
+alias rm='rm -v' # Verbose
+alias mkdir='mkdir -vZ' # Use SELinux security context
+alias rmdir='rmdir -v' # Verbose
+alias chown='chown -c' # Only verbose when change is made
+alias chmod='chmod -c' # Only verbose when change is made
+alias mount='mount -v' # Verbose
+alias umount='umount -v' # Verbose
+alias fstrim='fstrim -v' # Verbose
+alias ln='ln -v' # Verbose
+alias ls='ls -hvqFN -T0 --color=auto --group-directories-first --show-control-chars' # Minimal `ls`
 alias ip='ip -color=auto' # Colorful `ip`
-alias dmesg='dmesg --color=always' # Colorful `dmesg`
+alias dmesg='dmesg --color=always -H' # Colorful `dmesg`
 alias pcc="$Auth pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
 alias fgrep='grep -F' # `grep -F` is a replacement for `fgrep`
 alias egrep='grep -E' # `grep -E` is a replacement for `egrep`
-alias diff='diff --color=auto' # `diff` with colors is alots easier to read
+alias echo='echo -e' # More advance `echo`
+alias diff='diff --color=auto --tabsize=4 ' # `diff` with colors is alots easier to read also set tab size to 4
 alias media="cd /media/$USER/" # `cd` to /media
 alias mnt='cd /mnt' # `cd` to /mnt
 alias doas='doas ' # Require if you want aliases to work with doas
 alias htop="htop -t -u $USER" # It's so much cleaner
+alias top="top -e g -E g -s -H -u $USER" # Better `top`, but it still bad anyway
 alias xclip='xclip -selection clipboard' # Normal `xclip` doesn't work for me
 
 unset GitHub GistHub Auth
