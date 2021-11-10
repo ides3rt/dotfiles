@@ -1,5 +1,16 @@
-"Plugins
-set noloadplugins
+"Source vim's plugins
+source /usr/share/vim/vim82/plugin/getscriptPlugin.vim
+source /usr/share/vim/vim82/plugin/gzip.vim
+source /usr/share/vim/vim82/plugin/logiPat.vim
+source /usr/share/vim/vim82/plugin/manpager.vim
+source /usr/share/vim/vim82/plugin/matchparen.vim
+source /usr/share/vim/vim82/plugin/netrwPlugin.vim
+source /usr/share/vim/vim82/plugin/rrhelper.vim
+source /usr/share/vim/vim82/plugin/spellfile.vim
+source /usr/share/vim/vim82/plugin/tarPlugin.vim
+source /usr/share/vim/vim82/plugin/tohtml.vim
+source /usr/share/vim/vim82/plugin/vimballPlugin.vim
+source /usr/share/vim/vim82/plugin/zipPlugin.vim
 
 "Disable arrow keys in normal mode
 noremap <up> <Nop>
@@ -32,6 +43,7 @@ set hlsearch
 set magic
 
 "Make vim not annoying
+set noloadplugins
 set viminfo='0,:0,<0,@0,f0
 set noerrorbells
 set novisualbell
