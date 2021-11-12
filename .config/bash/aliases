@@ -30,7 +30,6 @@ alias pcc="$Auth pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Ar
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
 alias fgrep='grep -F' # `grep -F` is a replacement for `fgrep`
 alias egrep='grep -E' # `grep -E` is a replacement for `egrep`
-alias echo='echo -e' # More advance `echo`
 alias diff='diff --color=auto --tabsize=4 ' # `diff` with colors is alots easier to read also set tab size to 4
 alias media="cd /media/$USER/" # `cd` to /media
 alias mnt='cd /mnt' # `cd` to /mnt
