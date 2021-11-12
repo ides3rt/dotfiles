@@ -34,8 +34,8 @@ share(){
 	local File="/share/$USER/$File" # Gets path for share-dir
 
 	# Use \COMMAND to prevent problems with alias
-	[ -d "${File%/*}" ] || \mkdir -p ${File%/*} # Make dir if doesn't exist to simulate $HOME
-	\ln -sv $FullPath $File
+	[ -d "${File%/*}" ] || mkdir -p ${File%/*} &>/dev/null # Make dir if doesn't exist to simulate $HOME
+	ln -sv $FullPath $File
 }
 
 unshare(){
@@ -54,20 +54,18 @@ unshare(){
 	local File="${File#$HOME/}" # Remove starting /home/$USER/
 	local File="/share/$USER/$File" # Gets path for share-dir
 
-	\unlink $File || return 1 # If `unlink` fails then exit
+	unlink $File || return 1 # If `unlink` fails then exit
 
 	# Remove directories that `share` create
 	while [ "$File" != /share/$USER ]; do # Remove dir until nothing left
-		\rmdir ${File%/*} 2>/dev/null || return 0 # If unwritable/has file(s) in that directory then exit
+		rmdir ${File%/*} &>/dev/null || return 0 # If unwritable/has file(s) in that directory then exit
 		local File="${File%/*}"
 	done
 }
 
 lq(){
 	# Currently you can't do search though URLs with `duckduckgo-lite`
-	links -http.do-not-track 1 \
-		-http.referer 0 \
-		-save-url-history 0 \
+	links -save-url-history 0 \
 		-save-cookies 0 https://lite.duckduckgo.com/lite/
 }
 
@@ -76,7 +74,7 @@ lspkg(){ # Inspired by TFL/LL
 	if [ -z "$1" ]; then
 		ls /var/cache/pacman/pkg/ | sed '/.sig$/d'
 	else
-		ls /var/cache/pacman/pkg/ | sed '/.sig$/d' | grep -Ei "$1"
+		ls /var/cache/pacman/pkg/ | sed '/.sig$/d' | grep -Ei "$*"
 	fi
 }
 
@@ -84,26 +82,28 @@ build(){
 	# Check if AUR dir exist or not
 	[ -d "$1" ] || return 1
 
-	# Chcek if AUR up to date or not
+	## Chcek if AUR up to date or not
 	git --git-dir=$1/.git/ pull || return 1
 
-	# Set tmpdir
+	## Set tmpdir
 	local TMPDIR="${TMPDIR:-/tmp}"
 
-	# Copy AUR to tmp dir, exit with status 1 if fails
-	cp -r $1 $TMPDIR || return 1
+	## Copy AUR to tmp dir, exit with status 1 if fails
+	cp -r $1 $TMPDIR &>/dev/null || return 1
 
 	# Get AUR dir
 	local Dir="${1#`dirname $1`/}"
+
+	echo $Dir && return
 
 	# Build AUR, exit with status 1 if fails
 	cd $TMPDIR/$Dir && makepkg -sir && local Fail=0 || local Fail=1
 
 	# Clean things
-	cd - && rm -rf $TMPDIR/$Dir
+	{ cd - && rm -rf $TMPDIR/$Dir; } &>/dev/null
 	return $Fail
 }
 
 fcd(){ # Create by BugsWriter
-	cd "$(find -type d | fzf)" || return 1
+	cd "$(find -type d 2>/dev/null | fzf)"
 }
