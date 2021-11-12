@@ -23,7 +23,7 @@ Setup(){
 Setup env.d
 
 # Source config depend on shell.
-case `readlink /proc/$$/exe` in
+case "$(readlink /proc/$$/exe)" in
 	*/bash)
 		# Just source BASH's config
 		Setup bash
@@ -33,7 +33,7 @@ case `readlink /proc/$$/exe` in
 
 		# You can clone at https://github.com/hkbakke/bash-insulter
 		# Change /usr/share/bash.command-not-found to where you put it
-		Check /usr/share/bash.command-not-found ;;
+		Check /usr/local/share/bash.command-not-found ;;
 
 	*/zsh)
 		# I never use ZSH in my life I only set incase oneday I will use it
