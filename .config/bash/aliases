@@ -4,7 +4,7 @@
 [ $UID = 0 ] || Auth='doas'
 
 ## My GitHub directories
-GitHub="$HOME/GitHub/ides3rt/projects"
+GitHub="$HOME/GitHub/ides3rt/repositories"
 GistHub="$HOME/GitHub/ides3rt/gists"
 
 ## Aliases
