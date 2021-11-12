@@ -37,6 +37,6 @@ alias doas='doas ' # Require if you want aliases to work with doas
 alias htop="htop -t -u $USER" # It's so much cleaner
 alias top="top -e g -E g -s -H -u $USER" # Better `top`, but it still bad anyway
 alias xclip='xclip -selection clipboard' # Normal `xclip` doesn't work for me
-alias volume='pactl get-source-volume @DEFAULT_SOURCE@' # Get your volume
+alias volume='pactl get-sink-volume @DEFAULT_SINK@' # Get your volume
 
 unset GitHub GistHub Auth
