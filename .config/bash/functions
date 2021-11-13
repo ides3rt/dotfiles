@@ -72,9 +72,9 @@ lq(){
 lspkg(){ # Inspired by TFL/LL
 	# Only `ls /var/cache/pacman/pkg` if nothing provide
 	if [ -z "$1" ]; then
-		ls /var/cache/pacman/pkg/ | sed '/.sig$/d'
+		ls -1 -I '*.sig' /var/cache/pacman/pkg/
 	else
-		ls /var/cache/pacman/pkg/ | sed '/.sig$/d' | grep -Ei "$*"
+		ls -1 -I '*.sig' /var/cache/pacman/pkg/ | grep -Ei "$*"
 	fi
 }
 

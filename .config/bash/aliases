@@ -23,7 +23,7 @@ alias mount='mount -v' # Verbose
 alias umount='umount -v' # Verbose
 alias fstrim='fstrim -v' # Verbose
 alias ln='ln -v' # Verbose
-alias ls='ls -hvqFN -T0 --color=auto --group-directories-first --show-control-chars' # Minimal `ls`
+alias ls='ls -hFNX -T 0 --color=auto --group-directories-first --show-control-chars' # Minimal `ls`
 alias ip='ip -color=auto' # Colorful `ip`
 alias dmesg='dmesg --color=always -H' # Colorful `dmesg`
 alias pcc="$Auth pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
