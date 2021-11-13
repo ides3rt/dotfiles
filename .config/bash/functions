@@ -103,7 +103,3 @@ build(){
 	{ cd - && rm -rf $TMPDIR/$Dir; } &>/dev/null
 	return $Fail
 }
-
-fcd(){ # Create by BugsWriter
-	cd "$(find -type d 2>/dev/null | fzf)"
-}
