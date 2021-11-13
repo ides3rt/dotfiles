@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Prefered tool to exec as root
-[ $UID = 0 ] || Auth='doas'
+[ $UID = 0 ] || AUTH='doas'
 
 ## My GitHub directories
 GitHub="$HOME/GitHub/ides3rt/repositories"
@@ -26,23 +26,17 @@ alias ln='ln -v' # Verbose
 alias ls='ls -hFNX -T 0 --color=auto --group-directories-first --show-control-chars' # Minimal `ls`
 alias ip='ip -color=auto' # Colorful `ip`
 alias dmesg='dmesg --color=always -H' # Colorful `dmesg`
-alias pcc="$Auth pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
+alias pcc="$AUTH pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
 alias fgrep='grep -F' # `grep -F` is a replacement for `fgrep`
 alias egrep='grep -E' # `grep -E` is a replacement for `egrep`
 alias diff='diff --color=auto --tabsize=4 ' # `diff` with colors is alots easier to read also set tab size to 4
-alias media="cd /media/$USER" # `cd` to /media
-alias mnt='cd /mnt' # `cd` to /mnt
+alias media="cd /media/$USER"
+alias mnt='cd /mnt'
 alias doas='doas ' # Require if you want aliases to work with doas
 alias htop="htop -t -u $USER" # It's so much cleaner
 alias top="top -e g -E g -s -H -u $USER" # Better `top`, but it still bad anyway
 alias xclip='xclip -selection clipboard' # Normal `xclip` doesn't work for me
 alias vol='pactl get-sink-volume @DEFAULT_SINK@' # Get your volume
-alias dl="cd $HOME/Downloads" # `cd` to Downloads
-alias pic="cd $HOME/Pictures" # `cd` to Pictures
-alias vid="cd $HOME/Videos" # `cd` to Videos
-alias doc="cd $HOME/Documents" # `cd` to Documents
-alias sg="cd $HOME/Music" # `cd` to Music
-alias bin="cd $HOME/.local/bin" # `cd` to .local/bin
 
-unset GitHub GistHub Auth
+unset GitHub GistHub AUTH
