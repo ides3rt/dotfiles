@@ -17,52 +17,6 @@ up(){
 	cd ${Directories:-.}
 }
 
-share(){
-	# Exit if nothing provide
-	[ -z "$1" ] && return 1
-
-	# If match those options(see my notes for info) then exit
-	[ ! -e "$1" -o -h "$1" -o -c "$1" -o -b "$1" -o -S "$1" -o ! -O "$1" ] && return 1
-
-	# Gets realpath
-	local FullPath="$(realpath $1)"
-
-	# Only allow `share` in $HOME dir
-	[[ "$FullPath" =~ "$HOME" ]] || return 1 # This line is BASHISM
-
-	local File="${FullPath#$HOME/}" # Remove starting /home/$USER/
-	local File="/share/$USER/$File" # Gets path for share-dir
-
-	# Use \COMMAND to prevent problems with alias
-	[ -d "${File%/*}" ] || mkdir -p ${File%/*} &>/dev/null # Make dir if doesn't exist to simulate $HOME
-	ln -sv $FullPath $File
-}
-
-unshare(){
-	# Exit if nothing provide
-	[ -z "$1" ] && return 1
-
-	# Only allows `unshare` when you are OWNER
-	[ -O "$1" ] || return 1
-
-	# Gets realpath
-	local File="$(realpath $1)"
-
-	# Only allow `unshare` in share-dir
-	[[ "$File" =~ "/share/$USER" ]] || return 1 # This line is BASHISM
-
-	local File="${File#$HOME/}" # Remove starting /home/$USER/
-	local File="/share/$USER/$File" # Gets path for share-dir
-
-	unlink $File || return 1 # If `unlink` fails then exit
-
-	# Remove directories that `share` create
-	while [ "$File" != /share/$USER ]; do # Remove dir until nothing left
-		rmdir ${File%/*} &>/dev/null || return 0 # If unwritable/has file(s) in that directory then exit
-		local File="${File%/*}"
-	done
-}
-
 lq(){
 	# Currently you can't do search though URLs with `duckduckgo-lite`
 	links -save-url-history 0 \
@@ -102,23 +56,4 @@ build(){
 	# Clean things
 	{ cd - && rm -rf $TMPDIR/$Dir; } &>/dev/null
 	return $Fail
-}
-
-sve(){ # Simple bookmarks script
-	local File="$HOME/.config/bash/bookmarks"
-	alias $1="cd $PWD"
-	echo alias $1=\"cd \$HOME${PWD#$HOME}\" >> $File
-}
-
-fcd(){ # Create by BugsWriter
-	cd "$(find -type d 2>/dev/null | fzf)"
-}
-
-run(){ # Run executable
-	local Dir="$HOME/Code"
-	"$(find $Dir -type f -executable 2>/dev/null | fzf)"
-}
-
-cfg(){ # Edit config file
-	${EDITOR:-vi} "$(find $HOME/.config -type f 2>/dev/null | fzf)"
 }

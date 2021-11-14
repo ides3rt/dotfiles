@@ -5,3 +5,8 @@ export XAUTHORITY='/tmp/Xauthority'
 
 # Disable `Qt` logging.
 export QT_LOGGING_RULES='*=false' # See Arch-Wiki for more info
+
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"

@@ -2,11 +2,13 @@
 
 Port(){
 	[ -d "$1" -a -z $(echo "$PATH" | grep -o "$1") ] &&
-		export PATH+=":$1"
+		PATH+=":$1"
 }
 
 # PATH
 Port "$HOME/Applications"
 Port "$HOME/.local/bin"
+
+export PATH
 
 unset Port
