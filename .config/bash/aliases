@@ -25,7 +25,7 @@ alias fstrim='fstrim -v' # Verbose
 alias ln='ln -v' # Verbose
 alias ls='ls -hFNX -T 0 --color=auto --group-directories-first --show-control-chars' # Minimal `ls`
 alias ip='ip -color=auto' # Colorful `ip`
-alias dmesg='dmesg --color=always -H' # Colorful `dmesg`
+alias dmesg='dmesg --color=auto -H' # Colorful `dmesg`
 alias pcc="$AUTH pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove `orphans` in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
 alias fgrep='grep -F' # `grep -F` is a replacement for `fgrep`
@@ -35,7 +35,6 @@ alias media="cd /media/$USER"
 alias mnt='cd /mnt'
 alias doas='doas ' # Require if you want aliases to work with doas
 alias htop="htop -t -u $USER" # It's so much cleaner
-alias top="top -e g -E g -s -H -u $USER" # Better `top`, but it still bad anyway
 alias xclip='xclip -selection clipboard' # Normal `xclip` doesn't work for me
 alias vol='pactl get-sink-volume @DEFAULT_SINK@' # Get your volume
 

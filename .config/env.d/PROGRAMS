@@ -7,6 +7,6 @@ export TERMINAL='alacritty'
 export PAGER='less'
 [ -n "$DISPLAY" ] && export BROWSER='firefox' ||
 	export BROWSER='links' # Sometimes I walk around in tty
-
+export MANPAGER='less -R --use-color -Dd+r -Du+b' # Colorful man page
 export SUDO_EDITOR='/usr/bin/rvim' # I don't use `sudo`, but specify anyway
 export DOAS_EDITOR="$SUDO_EDITOR" # This require by my `doasedit`

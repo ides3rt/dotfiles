@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # History
 export HISTCONTROL='ignoredups:erasedups' # Who like dups anyway
