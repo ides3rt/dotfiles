@@ -25,14 +25,14 @@ pipewire &
 pipewire-pulse &
 pipewire-media-session &
 
-# Eventhough I don't have Screen-tearing issues I still love to have transpent
+# Even though I don't have Screen-tearing issues, I still love to have transpent
 if [ "$(cat /sys/class/dmi/id/product_name)" = 'VirtualBox' ]; then
 	picom --experimental-backends --no-vsync & # VSYNC in VM is unsupported
 else
 	picom --experimental-backends &
 fi
 
-feh --bg-fill --randomize $HOME/Pictures/cWallpapers/ & # FEH is more minimal than NITROGEN
+feh --no-fehbg --bg-fill --randomize $HOME/Pictures/cWallpapers/ & # FEH is more minimal than NITROGEN
 
 sxhkd & # SXHKD is my prefered hotkeys daemon
 
