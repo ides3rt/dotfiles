@@ -48,8 +48,6 @@ build(){
 	# Get AUR dir
 	local Dir="${1#`dirname $1`/}"
 
-	echo $Dir && return
-
 	# Build AUR, exit with status 1 if fails
 	cd $TMPDIR/$Dir && makepkg -sir && local Fail=0 || local Fail=1
 

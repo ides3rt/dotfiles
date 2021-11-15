@@ -23,7 +23,7 @@ Setup(){
 Setup env.d
 
 # Source config depend on shell.
-case "$(readlink /proc/$$/exe)" in
+case `readlink /proc/$$/exe` in
 	*/bash)
 		# Just source BASH's config
 		Setup bash
@@ -32,7 +32,7 @@ case "$(readlink /proc/$$/exe)" in
 		Check /usr/share/bash-completion/bash_completion
 
 		# You can clone at https://github.com/hkbakke/bash-insulter
-		# Change /usr/share/bash.command-not-found to where you put it
+		# Change /usr/local/share/bash.command-not-found to where you put it
 		Check /usr/local/share/bash.command-not-found ;;
 
 	*/zsh)
@@ -44,16 +44,18 @@ esac
 unset File Setup Check
 
 # Doesn't do anyting if '/' is mount as `ro`
-if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" -a $USER != root ]; then
+if [ -n `findmnt / | grep -Eo rw,` -a $USER != root ]; then
 
 	# My GitHub SSH.
 	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
+
 		case "$USER" in
-			ides3rt) # If me login then add my GitHub's SSH
+			ides3rt)
 				ssh-add $HOME/.ssh/GitHub ;;
 
 			*) ;;
 		esac
+
 		trap 'kill $SSH_AGENT_PID' EXIT
 	fi
 

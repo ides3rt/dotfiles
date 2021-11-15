@@ -30,9 +30,6 @@ font:
   # Point size
   size: 14.0
 
-# If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: false
-
 # iDes3rt's colors scheme
 colors:
   # Default colors

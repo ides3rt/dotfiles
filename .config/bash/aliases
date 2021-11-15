@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Prefered tool to exec as root
-[ $UID = 0 ] || AUTH=doas
+[ $UID -ne 0 ] && AUTH=doas
 
 ## My GitHub directories
 GitHub="$HOME/GitHub/ides3rt/repositories"
@@ -10,19 +10,19 @@ GistHub="$HOME/GitHub/ides3rt/gists"
 ## Aliases
 alias ghpcd="cd $GitHub" # `cd` to $GitHub
 alias gshcd="cd $GistHub" # `cd` to $GistHub
-alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code" # This is how I manage my "Code" repo
-alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures" # This is how I manage my "Pictures" repo
-alias cp='cp -vZ' # Use SELinux security context
-alias mv='mv -vZ' # Use SELinux security context
-alias rm='rm -v' # Verbose
-alias mkdir='mkdir -vZ' # Use SELinux security context
-alias rmdir='rmdir -v' # Verbose
-alias chown='chown -c' # Only verbose when change is made
-alias chmod='chmod -c' # Only verbose when change is made
-alias mount='mount -v' # Verbose
-alias umount='umount -v' # Verbose
-alias fstrim='fstrim -v' # Verbose
-alias ln='ln -v' # Verbose
+alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code"
+alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
+alias cp='cp -vZ'
+alias mv='mv -vZ'
+alias rm='rm -v'
+alias mkdir='mkdir -vZ'
+alias rmdir='rmdir -v'
+alias chown='chown -c'
+alias chmod='chmod -c'
+alias mount='mount -v'
+alias umount='umount -v'
+alias fstrim='fstrim -v'
+alias ln='ln -v'
 alias ls='ls -hFNX -T 0 --color=auto --group-directories-first --show-control-chars' # Minimal `ls`
 alias ip='ip -color=auto' # Colorful `ip`
 alias dmesg='dmesg --color=auto -H' # Colorful `dmesg`
