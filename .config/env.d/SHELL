@@ -12,4 +12,4 @@ export INPUTRC="$HOME/.config/inputrc"
 # cd: CharDevice        mi: NonExistSysLink         or: OrphanSysLink   ex: Executable
 # do: Door              su: SUID                    sg: SGID            st: StickyDir
 # ow: OtherWritableDir  tw: StickyOtherWritableDir  ca: Cap             mh: MultiHardLink
-export LS_COLORS='rs=0:no=0;37:pi=47;30:so=1;95:fi=1;97:di=1;91:st=41;1;97:tw=41;1;97:ln=1;96:or=4;1;96:mi=0:bd=4;32:cd=1;92:ex=1;93:su=4;1;97:sg=4;1;97'
+export LS_COLORS='rs=0:no=0;37:pi=0:so=1;95:fi=1;97:di=1;91:st=41;1;97:tw=41;1;97:ln=1;96:or=0:mi=0:bd=32:cd=1;92:ex=1;93:su=107;1;30:sg=107;1;30'

@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-## Notes
-# \n = New Line
+# \n = New line
 # \w = $PWD
 # \W = Current directory
-# \h = HostName
-# \u = UserName
-# \$ = Show '#' If root, Otherwise '$'
+# \h = $HOSTNAME
+# \u = $USER
+# \$ = Show `#` If root, otherwise `$`
 
 PROMPT_PARSER(){
 
@@ -37,21 +36,21 @@ local BL_Green='\[\e[1;92m\]';  local BL_Yellow='\[\e[1;93m\]'
 local BL_Blue='\[\e[1;94m\]';   local BL_Magenta='\[\e[1;95m\]'
 local BL_Cyan='\[\e[1;96m\]';   local BL_White='\[\e[1;97m\]'
 
-local X=$1
-(( $X == 0 )) && X=
+local Status=$1
+[ $Status -eq 0 ] && Status=''
 
 ### PS1
-if [ $UID = 0 ]; then
-	if [ -z "$X" ]; then
+if [ $UID -eq 0 ]; then
+	if [ -z "$Status" ]; then
 	 	PS1="${BL_Red}->${Reset} "
 	else
-		PS1="${BL_White}${X} ${BL_Red}->${Reset} "
+		PS1="${BL_White}${Status}${Reset} ${BL_Red}->${Reset} "
 	fi
 else
-	if [ -z "$X" ]; then
+	if [ -z "$Status" ]; then
 		PS1="${BL_White}->${Reset} "
 	else
-		PS1="${BL_Red}${X} ${BL_White}->${Reset} "
+		PS1="${BL_Red}${Status}${Reset} ${BL_White}->${Reset} "
 	fi
 fi
 
