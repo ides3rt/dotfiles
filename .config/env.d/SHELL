@@ -3,11 +3,8 @@
 # Colors
 export TERM='xterm-256color'
 
-# GNUPG
-export GNUPGHOME="$HOME/.local/share/gnupg"
-
-# `ps`
-export PS_PERSONALITY='posix'
+# INPUTRC
+export INPUTRC="$HOME/.config/inputrc"
 
 ## `ls`
 # rs: Reset             no: Normal                  fi: File            di: Dir

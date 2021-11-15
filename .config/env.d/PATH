@@ -1,14 +1,14 @@
 #!/bin/sh
 
-Port(){
+Make(){
 	[ -d "$1" -a -z $(echo "$PATH" | grep -o "$1") ] &&
 		PATH+=":$1"
 }
 
 # PATH
-Port "$HOME/Applications"
-Port "$HOME/.local/bin"
+Make "$HOME/Applications"
+Make "$HOME/.local/bin"
 
 export PATH
 
-unset Port
+unset Make

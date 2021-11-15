@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# GNUPG
+export GNUPGHOME="$HOME/.local/share/gnupg"
+
+# `ps`
+export PS_PERSONALITY='posix'
