@@ -91,7 +91,7 @@ mod1 + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # Cancel the preselection for the focused node
-mod1 + ctrl + r
+mod1 + ctrl + c
 	bspc node -p cancel
 
 # Move a floating window
@@ -102,12 +102,12 @@ mod4 + shift + {n,e,i,o}
 mod4 + n
 	bspc node -z left -50 0; bspc node -z right 50 0
 
-# Grow focused window's height
-mod4 + e
-	bspc node -z bottom 0 50; bspc node -z top 0 -50
-
 # Shrink focused window's height
 mod4 + i
+	bspc node -z bottom 0 50; bspc node -z top 0 -50
+
+# Grow focused window's height
+mod4 + e
 	bspc node -z bottom 0 -50; bspc node -z top 0 50
 
 # Shrink focused window's width
