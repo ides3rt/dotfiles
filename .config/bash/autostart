@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-[ -n "$DISPLAY" ] && sed '/^$/d' $HOME/.local/share/quotes | shuf -n 1 || clear
+if [ -n "$DISPLAY" ]; then
+	sed '/^$/d' $HOME/.local/share/quotes | shuf -n 1
+else
+	clear
+fi

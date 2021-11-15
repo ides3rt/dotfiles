@@ -26,11 +26,13 @@ pipewire-pulse &
 pipewire-media-session &
 
 # Even though I don't have Screen-tearing issues, I still love to have transpent
-if [ "$(cat /sys/class/dmi/id/product_name)" = 'VirtualBox' ]; then
+if read Type < /sys/class/dmi/id/product_name && [ "$Type" = VirtualBox ]; then
 	picom --experimental-backends --no-vsync & # VSYNC in VM is unsupported
 else
 	picom --experimental-backends &
 fi
+
+unset Type
 
 feh --no-fehbg --bg-fill --randomize $HOME/Pictures/cWallpapers/ & # FEH is more minimal than NITROGEN
 

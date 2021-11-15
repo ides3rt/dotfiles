@@ -44,7 +44,7 @@ esac
 unset File Setup Check
 
 # Doesn't do anyting if '/' is mount as `ro`
-if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" -a "$USER" != 'root' ]; then
+if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" -a $USER != root ]; then
 
 	# My GitHub SSH.
 	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
@@ -58,7 +58,7 @@ if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" -a "$USER" != 'root'
 	fi
 
 	# Automatic `startx` when in tty1
-	if [ -z "$DISPLAY" -a "$(tty)" = '/dev/tty1' ]; then
+	if [ -z "$DISPLAY" -a `tty` = /dev/tty1 ]; then
 		# `exec` is unrequire, but it's a good thing
 		exec startx $HOME/.config/X11/xinitrc
 	fi

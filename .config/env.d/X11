@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # XAUTHORITY
-export XAUTHORITY='/tmp/Xauthority'
+export XAUTHORITY=/tmp/Xauthority
 
 # Disable `Qt` logging.
 export QT_LOGGING_RULES='*=false' # See Arch-Wiki for more info

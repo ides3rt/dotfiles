@@ -8,7 +8,7 @@ up(){
 	! [[ "$1" =~ ^[0-9]+$ ]] && cd .. && return 0 # Will get errors if you port other shells (BASHISM)
 
 	# Remove start 0 to prevent errors
-	local Number="${1#*0}"
+	local Number=${1#*0}
 
 	# ${VAR:-0} and ${VAR:-.} is require incase user provide 0
 	while [ ${Number:-0} -gt 0 ]; do

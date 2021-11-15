@@ -37,17 +37,17 @@ local BL_Blue='\[\e[1;94m\]';   local BL_Magenta='\[\e[1;95m\]'
 local BL_Cyan='\[\e[1;96m\]';   local BL_White='\[\e[1;97m\]'
 
 local Status=$1
-[ $Status -eq 0 ] && Status=''
+[ $Status -eq 0 ] && Status=
 
 ### PS1
 if [ $UID -eq 0 ]; then
-	if [ -z "$Status" ]; then
+	if [ -z $Status ]; then
 	 	PS1="${BL_Red}->${Reset} "
 	else
 		PS1="${BL_White}${Status}${Reset} ${BL_Red}->${Reset} "
 	fi
 else
-	if [ -z "$Status" ]; then
+	if [ -z $Status ]; then
 		PS1="${BL_White}->${Reset} "
 	else
 		PS1="${BL_Red}${Status}${Reset} ${BL_White}->${Reset} "
