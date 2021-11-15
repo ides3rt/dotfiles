@@ -43,8 +43,9 @@ esac
 # Unless you edit my config you don't need this anymore so unset it
 unset File Setup Check
 
-# Don't do anyting if root is mount as ro
+# Doesn't do anyting if '/' is mount as `ro`
 if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" ]; then
+
 	# My GitHub SSH.
 	if [ -z "$SSH_AGENT_PID" -a $UID != 0 ]; then # Only spawn SSH-AGENT if it never spawn before
 		if eval `ssh-agent -s`; then # If `eval` success then do ssh-add
@@ -55,11 +56,12 @@ if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" ]; then
 				*) ;;
 			esac
 			trap 'kill $SSH_AGENT_PID' EXIT
-	fi	fi
+		fi
+	fi
 
 	# Automatic `startx` when in tty1. It's conflict with your favorite DM
 	if [ -z "$DISPLAY" -a "$(tty)" = '/dev/tty1' -a $UID != 0 ]; then
-		# You don't need to specify /path/to/xinitrc if you use default location
-		exec startx $HOME/.config/X11/xinitrc # `exec` is unrequire, but it's a good thing
+		# `exec` is unrequire, but it's a good thing
+		exec startx $HOME/.config/X11/xinitrc
 	fi
 fi
