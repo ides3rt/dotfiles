@@ -3,7 +3,7 @@
 ## NOTE: .profile is only for posix-shell
 
 # Set default permissions to 'drwx------' and '-rw-------'
-umask 077 # Default is 022, less privacy, but more convenient
+umask 077
 
 # Check If file exist and readable or not
 Check(){
@@ -28,7 +28,7 @@ case "$(readlink /proc/$$/exe)" in
 		# Just source BASH's config
 		Setup bash
 
-		# Prop' in your distro's main repo
+		# Likely going to be in your distro's main repo
 		Check /usr/share/bash-completion/bash_completion
 
 		# You can clone at https://github.com/hkbakke/bash-insulter
@@ -44,23 +44,21 @@ esac
 unset File Setup Check
 
 # Doesn't do anyting if '/' is mount as `ro`
-if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" ]; then
+if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" -a $UID -ne 0 ]; then
 
 	# My GitHub SSH.
-	if [ -z "$SSH_AGENT_PID" -a $UID != 0 ]; then # Only spawn SSH-AGENT if it never spawn before
-		if eval `ssh-agent -s`; then # If `eval` success then do ssh-add
-			case "$USER" in
-				ides3rt) # If me login then add my GitHub's SSH
-					ssh-add $HOME/.ssh/GitHub ;;
+	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
+		case "$USER" in
+			ides3rt) # If me login then add my GitHub's SSH
+				ssh-add $HOME/.ssh/GitHub ;;
 
-				*) ;;
-			esac
-			trap 'kill $SSH_AGENT_PID' EXIT
-		fi
+			*) ;;
+		esac
+		trap 'kill $SSH_AGENT_PID' EXIT
 	fi
 
-	# Automatic `startx` when in tty1. It's conflict with your favorite DM
-	if [ -z "$DISPLAY" -a "$(tty)" = '/dev/tty1' -a $UID != 0 ]; then
+	# Automatic `startx` when in tty1
+	if [ -z "$DISPLAY" -a "$(tty)" = '/dev/tty1' ]; then
 		# `exec` is unrequire, but it's a good thing
 		exec startx $HOME/.config/X11/xinitrc
 	fi
