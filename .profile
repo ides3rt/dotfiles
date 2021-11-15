@@ -44,7 +44,7 @@ esac
 unset File Setup Check
 
 # Doesn't do anyting if '/' is mount as `ro`
-if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" -a $UID -ne 0 ]; then
+if [ -n "$(findmnt / | awk '{print $4}' | grep -Eo '^rw,')" -a "$USER" != 'root' ]; then
 
 	# My GitHub SSH.
 	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
