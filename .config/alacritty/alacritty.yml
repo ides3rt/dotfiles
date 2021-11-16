@@ -137,7 +137,7 @@ cursor:
 
 # Shell
 shell:
-  program: /usr/bin/bash
+  program: bash
   args:
     - --login
 
