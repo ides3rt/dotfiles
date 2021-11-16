@@ -1,0 +1,12 @@
+#!/bin/sh
+
+## PATH
+Make(){
+	[ -d "$1" -a -z $(echo "$PATH" | grep -o "$1") ] &&
+		PATH+=":$1"
+}
+
+Make "$HOME/Applications"
+Make "$HOME/.local/bin"
+
+export PATH && unset Make

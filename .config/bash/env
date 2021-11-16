@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
 
-## PATH
-Make(){
-	[ -d "$1" -a -z $(grep -o "$1" <<< "$PATH") ] &&
-		PATH+=":$1"
-}
-
-Make "$HOME/Applications"
-Make "$HOME/.local/bin"
-
-export PATH && unset Make
-
 ## History
 export HISTCONTROL=ignoredups:erasedups # Who like dups anyway
 export HISTFILE=/dev/null # Same effect as HISTFILE=''
