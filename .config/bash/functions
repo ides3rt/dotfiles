@@ -4,8 +4,8 @@ up(){
 	# Only `cd ..` if nothing provide
 	[ -z "$1" ] && cd .. && return 0
 
-	# Only `cd ..` if alphabet provide
-	! [[ "$1" =~ ^[0-9]+$ ]] && cd .. && return 0 # Will get errors if you port other shells (BASHISM)
+	# ERR if alphabet provide (BASHISM)
+	[[ "$1" =~ ^[0-9]+$ ]] || return 1
 
 	# Remove start 0 to prevent errors
 	local Number=${1#*0}
