@@ -1,15 +1,28 @@
 "Syntax and Filetype
-syntax on
-filetype on
-filetype plugin on
-filetype indent on
+if has('syntax')
+	"Enable syntax highlight
+	syntax on
+	filetype on
+
+	if !has('gui_running')
+		source $HOME/.config/vim/colors/ides3rt.vim
+		set ttyfast
+	endif
+
+	"Only highlight number when `cursorline` is on
+	set cursorlineopt=number
+endif
 
 "Use <space> as my <leader>
 noremap <space> <Nop>
 let mapleader=" "
 
-"My colors scheme
-source $HOME/.config/vim/colors/ides3rt.vim
+"Plugins variables
+let g:hidden_all = 0
+
+"Plugins
+source $HOME/.config/vim/plugins/colemak.vim
+source $HOME/.config/vim/plugins/status.vim
 
 "Indent
 set autoindent
@@ -20,20 +33,27 @@ set autoread
 "Make <BACKSPACE> works
 set backspace=indent,eol,start
 
-"Only highlight number when `cursorline` is on
-set cursorlineopt=number
+"Copy existing indent
+set copyindent
 
-"I don't like history
+"Disable `:' history
 set history=0
 
-"Highlight when finished search
-set hlsearch
+if has('extra_search')
+	"Highlighted search
+	set hlsearch
+
+	"Highlight while search
+	if has('reltime')
+		set incsearch
+	endif
+
+	"Use <leader><space> to clear highlighting
+	noremap <silent> <leader><space> :noh<CR>
+endif
 
 "Ignorecase
 set ignorecase
-
-"Highlight while search
-set incsearch
 
 "Good performence boost
 set lazyredraw
@@ -51,7 +71,9 @@ set nomodeline
 set nomore
 
 "Set `numberwidth` to 2
-set numberwidth=2
+if has('linebreak')
+	set numberwidth=2
+endif
 
 "Don't allow :autocmd, shell and write commands
 set secure
@@ -80,12 +102,18 @@ set ttimeout
 set ttimeoutlen=0
 
 "Make data store in `viminfo` as least as possible
-set viminfo='0,:0,<0,@0,f0
+if has('viminfo')
+	set viminfo='0,:0,<0,@0,f0
+endif
 
 "Autocomplete
 set wildignorecase
-set wildmenu
 set wildmode=list
+
+"Use menu autocomplete
+if has('wildmenu')
+	set wildmenu
+endif
 
 "Don't wrap
 set nowrap
@@ -96,59 +124,18 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "Auto remove trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
 
-"Don't show status
-let s:hidden_all = 0
-function! ToggleHiddenAll()
-	if s:hidden_all == 0
-		let s:hidden_all = 1
-		set noruler
-		set laststatus=0
-		set nocursorline
-		set nonumber
-	else
-		let s:hidden_all = 0
-		set ruler
-		set laststatus=2
-		set cursorline
-		set number
-    endif
-endfunction
-call ToggleHiddenAll()
-
-"Toggle status
-noremap <silent> <leader>hh :call ToggleHiddenAll()<CR>
-
 "Disable arrow keys
 noremap <up> <Nop>
 noremap <down> <Nop>
 noremap <left> <Nop>
 noremap <right> <Nop>
 
-" `colemak` style movement
-noremap <silent> n h
-noremap <silent> e gj
-noremap <silent> i gk
-noremap <silent> o l
-noremap j <Nop>
-
-"Keys get overwrite by `colemak`
-noremap <silent> h i
-noremap <silent> l n
-noremap <silent> k o
-noremap <silent> H I
-noremap <silent> L N
-noremap <silent> K O
-
-"Move up and down
-noremap <silent> E 10gj
-noremap <silent> I 10gk
-
 "`EOL' and `SOL'
 noremap <silent> $ g$
 noremap <silent> 0 g0
 
-"Use <leader><space> to clear highlighting
-noremap <silent> <leader><space> :noh<CR>
+"Toggle `ignorecase`
+noremap <silent> <leader>ig :set ignorecase!<CR>
 
 "Toggle wrap
 noremap <silent> <leader>ww :set wrap!<CR>
