@@ -3,6 +3,9 @@
 # XAUTHORITY
 export XAUTHORITY=/tmp/Xauthority
 
+# XINITRC
+export XINITRC="$HOME/.config/X11/xinitrc"
+
 # Disable `Qt` logging.
 export QT_LOGGING_RULES='*=false' # See Arch-Wiki for more info
 
