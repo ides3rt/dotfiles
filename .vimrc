@@ -4,6 +4,9 @@ noremap <down> <Nop>
 noremap <left> <Nop>
 noremap <right> <Nop>
 
+"My colors scheme
+source $HOME/.config/vim/colors/ides3rt.vim
+
 "Disable <space> in visual and normal mode
 noremap <space> <Nop>
 
@@ -145,26 +148,27 @@ set ttimeout
 set ttimeoutlen=0
 set matchtime=0
 
-"Make vim show some status
+"Show status
 set showmode
 set ruler
+set laststatus=2
 set showcmd
+set cursorline
+set number
+
+"Just my OCD
 set prompt
 set noshortname
 set showfulltag
 set showmatch
-set nowriteany
 
 "Make things look a lots cleaner
 set nomodeline
 set history=0
-set laststatus=0
+set cursorlineopt=number
 set notitle
-set nocursorline
 set cmdheight=1
-set nonumber
-set norelativenumber
-set numberwidth=4
+set numberwidth=2
 set lazyredraw
 set showtabline=1
 set writedelay=0
