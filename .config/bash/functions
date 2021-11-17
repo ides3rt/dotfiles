@@ -17,12 +17,6 @@ up(){
 	cd ${Directories:-.}
 }
 
-lq(){
-	# Currently you can't do search though URLs with `duckduckgo-lite`
-	links -save-url-history 0 \
-		-save-cookies 0 https://lite.duckduckgo.com/lite/
-}
-
 lspkg(){ # Inspired by TFL/LL
 	# Only `ls /var/cache/pacman/pkg` if nothing provide
 	if [ -z "$1" ]; then
@@ -49,7 +43,8 @@ build(){
 	local Dir="${1#`dirname $1`/}"
 
 	# Build AUR, exit with status 1 if fails
-	cd $TMPDIR/$Dir && makepkg -sir && local Fail=0 || local Fail=1
+	cd $TMPDIR/$Dir && makepkg -sir &&
+		local Fail=0 || local Fail=1
 
 	# Clean things
 	{ cd - && rm -rf $TMPDIR/$Dir; } &>/dev/null
