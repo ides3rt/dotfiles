@@ -59,6 +59,6 @@ if [ $USER != root ] && findmnt / | grep -o 'rw,' >/dev/null 2>&1; then
 	if [ -z "$DISPLAY" -a "$XDG_VTNR" -eq 1 ]; then
 
 		# exec() is unrequire, but it's a good thing.
-		exec startx $HOME/.config/X11/xinitrc
+		exec xinit Xorg -nolisten tcp -- :0 vt$XDG_VTNR
 	fi
 fi
