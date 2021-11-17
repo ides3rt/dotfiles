@@ -1,112 +1,137 @@
-"Disable arrow keys in normal mode
-noremap <up> <Nop>
-noremap <down> <Nop>
-noremap <left> <Nop>
-noremap <right> <Nop>
+"Syntax and Filetype
+syntax on
+filetype on
+filetype plugin on
+filetype indent on
+
+"Use <space> as my <leader>
+noremap <space> <Nop>
+let mapleader=" "
 
 "My colors scheme
 source $HOME/.config/vim/colors/ides3rt.vim
 
-"Disable <space> in visual and normal mode
-noremap <space> <Nop>
-
-"I use `colemak` so this is useless
-noremap j <Nop>
-
-"Use <space> as my <leader>
-let mapleader=" "
-
-"Make Tab size to 4 spaces
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set nosmarttab
-set noexpandtab
-
-"Ignore case
-set ignorecase
-
-"Search
-set incsearch
-set hlsearch
-set magic
-
-"Make vim not annoying
-set viminfo='0,:0,<0,@0,f0
-set noloadplugins
-set noerrorbells
-set novisualbell
-set noconfirm
-set noautowrite
-set noautowriteall
-set autoread
-
-"Disable annoying file
-set nobackup
-set nowritebackup
-set noswapfile
-set noundofile
-
-"Syntax and Filetype
-syntax enable
-filetype on
-filetype plugin on
-filetype indent off
-
 "Indent
 set autoindent
-set nosmartindent
-set nobreakindent
-set nocopyindent
 
-"Disable wrap
-set nowrap
-set wrapmargin=0
-set wrapscan
+"Autoread when changes are from outside
+set autoread
 
-"Make screen always move
-set sidescrolloff=999
-set scrolloff=999
+"Make <BACKSPACE> works
+set backspace=indent,eol,start
+
+"Only highlight number when `cursorline` is on
+set cursorlineopt=number
+
+"I don't like history
+set history=0
+
+"Highlight when finished search
+set hlsearch
+
+"Ignorecase
+set ignorecase
+
+"Highlight while search
+set incsearch
+
+"Good performence boost
+set lazyredraw
+
+"Don't auto load plugins
+set noloadplugins
+
+"Show the matching parent
+set matchtime=0
+
+"Don't check set() command
+set nomodeline
+
+"Don't use more() format
 set nomore
 
-"Autocompletion
-set wildchar=<Tab>
+"Set `numberwidth` to 2
+set numberwidth=2
+
+"Don't allow :autocmd, shell and write commands
+set secure
+
+"Set <TAB> to 4 spaces
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+"When a bracket is inserted, briefly jump to the matching one
+set showmatch
+
+"Make cursor always at the middle of the screen
+set sidescrolloff=999
+set scrolloff=999
+
+"Always splitright
+set splitright
+
+"Don't create `swapfile`
+set noswapfile
+
+"Timeout
+set notimeout
+set ttimeout
+set ttimeoutlen=0
+
+"Make data store in `viminfo` as least as possible
+set viminfo='0,:0,<0,@0,f0
+
+"Autocomplete
 set wildignorecase
 set wildmenu
 set wildmode=list
 
-"Formating
-set fileformat=unix
-set encoding=utf-8
-set t_Co=256
+"Don't wrap
+set nowrap
 
-"Split
-set splitright
-set equalalways
+"Disable auto commenting on newline
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-"Make vim not weird
-set nocompatible
-set noedcompatible
-set secure
-set backspace=indent,eol,start
-set esckeys
-set nohidden
-set nospell
-set noopendevice
-set remap
-set norevins
-set norightleft
-set noscrollbind
-set scrolljump=1
-set noshiftround
+"Auto remove trailing whitespaces
+autocmd BufWritePre * :%s/\s\+$//e
+
+"Don't show status
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+	if s:hidden_all == 0
+		let s:hidden_all = 1
+		set noruler
+		set laststatus=0
+		set nocursorline
+		set nonumber
+	else
+		let s:hidden_all = 0
+		set ruler
+		set laststatus=2
+		set cursorline
+		set number
+    endif
+endfunction
+call ToggleHiddenAll()
+
+"Toggle status
+noremap <silent> <leader>hh :call ToggleHiddenAll()<CR>
+
+"Disable arrow keys
+noremap <up> <Nop>
+noremap <down> <Nop>
+noremap <left> <Nop>
+noremap <right> <Nop>
 
 " `colemak` style movement
 noremap <silent> n h
 noremap <silent> e gj
 noremap <silent> i gk
 noremap <silent> o l
+noremap j <Nop>
 
-"Important keys get overwrite by `colemak` so let's change them
+"Keys get overwrite by `colemak`
 noremap <silent> h i
 noremap <silent> l n
 noremap <silent> k o
@@ -114,61 +139,19 @@ noremap <silent> H I
 noremap <silent> L N
 noremap <silent> K O
 
-" EOL and SOL
-noremap <silent> $ g$
-noremap <silent> 0 g0
-
-"I move so much quicker
-noremap <silent> N 10h
+"Move up and down
 noremap <silent> E 10gj
 noremap <silent> I 10gk
-noremap <silent> O 10l
 
-"Disable automatic commenting on newline
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-"Automatic remove trailing whitespaces
-autocmd BufWritePre * :%s/\s\+$//e
+"`EOL' and `SOL'
+noremap <silent> $ g$
+noremap <silent> 0 g0
 
 "Use <leader><space> to clear highlighting
 noremap <silent> <leader><space> :noh<CR>
 
-"Toogle relativenumber
-noremap <silent> <leader>rn :set relativenumber!<CR>
-
 "Toggle wrap
 noremap <silent> <leader>ww :set wrap!<CR>
 
-"Source .vimrc
+"Source `.vimrc`
 noremap <silent> <leader>sc :source $HOME/.vimrc<CR>
-
-"Timing
-set notimeout
-set ttimeout
-set ttimeoutlen=0
-set matchtime=0
-
-"Show status
-set showmode
-set ruler
-set laststatus=2
-set showcmd
-set cursorline
-set number
-
-"Just my OCD
-set prompt
-set noshortname
-set showfulltag
-set showmatch
-
-"Make things look a lots cleaner
-set nomodeline
-set history=0
-set cursorlineopt=number
-set notitle
-set cmdheight=1
-set numberwidth=2
-set lazyredraw
-set showtabline=1
-set writedelay=0

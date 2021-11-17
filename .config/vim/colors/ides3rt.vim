@@ -3,6 +3,7 @@ highlight clear
 syntax reset
 
 hi Comment            ctermbg=None       ctermfg=245
+hi CursorColumn       ctermbg=234        ctermfg=None       cterm=None
 hi CursorLine         ctermbg=234        ctermfg=None       cterm=None
 hi CursorLineNR       ctermbg=None       ctermfg=247        cterm=None
 hi LineNr             ctermbg=None       ctermfg=239
