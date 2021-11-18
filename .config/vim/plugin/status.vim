@@ -1,11 +1,17 @@
 "Don't show status by default
-if !exists('g:hidden_all')
-	let g:hidden_all = 1
+if !exists('g:Status')
+	let g:Status = 0
 endif
 
-func! ToggleHiddenAll()
-	if g:hidden_all == 0
-		let g:hidden_all = 1
+func! ToggleStatus()
+	if g:Status == 0
+		let g:Status = 1
+
+		if has('syntax')
+			set nocursorline
+			set colorcolumn=0
+		endif
+
 		set nonumber
 
 		if has('cmdline_info')
@@ -13,23 +19,21 @@ func! ToggleHiddenAll()
 		endif
 
 		if has('statusline')
-			set laststatus=0
+			set laststatus=1
 		endif
+
+	elseif g:Status == 1
+		let g:Status = 0
 
 		if has('syntax')
-			set nocursorline
+			set cursorline
+			set colorcolumn=-1
 		endif
 
-	elseif g:hidden_all == 1
-		let g:hidden_all = 0
 		set number
 
 		if has('cmdline_info')
 			set ruler
-		endif
-
-		if has('syntax')
-			set cursorline
 		endif
 
 		if has('statusline')
@@ -38,7 +42,7 @@ func! ToggleHiddenAll()
 
     endif
 endfunction
-call ToggleHiddenAll()
+call ToggleStatus()
 
 "Toggle status
-noremap <silent> <leader>hh :call ToggleHiddenAll()<CR>
+noremap <silent> <leader>hh :call ToggleStatus()<CR>

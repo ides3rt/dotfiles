@@ -1,10 +1,10 @@
 set background=dark
 highlight clear
-syntax clear
+syntax reset
 
 hi Boolean            ctermbg=None       ctermfg=None
 hi Character          ctermbg=None       ctermfg=None
-hi ColorColumn        ctermbg=None       ctermfg=None       cterm=Bold
+hi ColorColumn        ctermbg=234        ctermfg=15
 hi Comment            ctermbg=None       ctermfg=240
 hi Condtional         ctermbg=None       ctermfg=None
 hi Constant           ctermbg=None       ctermfg=None
@@ -13,7 +13,7 @@ hi CursorLine         ctermbg=234        ctermfg=None       cterm=None
 hi CursorLineNR       ctermbg=None       ctermfg=247        cterm=None
 hi Debug              ctermbg=None       ctermfg=None
 hi Define             ctermbg=None       ctermfg=None
-hi Delimiter          ctermbg=None       ctermfg=250
+hi Delimiter          ctermbg=None       ctermfg=245
 hi DiffAdd            ctermbg=None       ctermfg=None
 hi DiffChange         ctermbg=None       ctermfg=None
 hi DiffDelete         ctermbg=None       ctermfg=None
@@ -39,7 +39,7 @@ hi MoreMsg            ctermbg=None       ctermfg=None
 hi NonText            ctermbg=None       ctermfg=0
 hi Normal             ctermbg=None       ctermfg=None
 hi Number             ctermbg=None       ctermfg=None
-hi Operator           ctermbg=None       ctermfg=250
+hi Operator           ctermbg=None       ctermfg=245
 hi Pmenu              ctermbg=None       ctermfg=None
 hi PmenuSbar          ctermbg=None       ctermfg=None
 hi PmenuSel           ctermbg=None       ctermfg=14         cterm=Bold

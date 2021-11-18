@@ -7,9 +7,6 @@ if has('syntax')
 	syntax on
 	filetype on
 
-	"Make vim() use 256 colors
-	set t_Co=256
-
 	if !has('gui_running')
 		colorscheme ides3rt
 		set ttyfast
@@ -24,11 +21,13 @@ noremap <space> <Nop>
 let mapleader=" "
 
 "Plugins variables
-let g:hidden_all = 0
+let g:Status = 0
+let g:Textwidth = 1
 
 "Plugins
 source $HOME/.config/vim/plugin/colemak.vim
 source $HOME/.config/vim/plugin/status.vim
+source $HOME/.config/vim/plugin/textwidth.vim
 
 "Indent
 set autoindent
@@ -112,9 +111,8 @@ if has('viminfo')
 	set viminfo='0,:0,<0,@0,f0
 endif
 
-"Autocomplete
+"Ignorecase when auto complete
 set wildignorecase
-set wildmode=list
 
 "Use menu autocomplete
 if has('wildmenu')
@@ -137,10 +135,23 @@ noremap <left> <Nop>
 noremap <right> <Nop>
 
 "Toggle `ignorecase`
-noremap <silent> <leader>ig :set ignorecase!<CR>
+noremap <silent> <leader>ii :set ignorecase!<CR>
 
 "Toggle wrap
 noremap <silent> <leader>ww :set wrap!<CR>
 
+"Move the current line up or down
+noremap <silent> <C-e> :move +1<CR>
+noremap <silent> <C-i> :move -2<CR>
+
+"Center-, right-, or left-align one or more lines
+noremap <silent> <leader>ac :center<CR>
+noremap <silent> <leader>ar :right<CR>
+noremap <silent> <leader>al :left<CR>
+
+"When you open multiple files
+noremap <silent> <leader>nn :next<CR>
+noremap <silent> <leader>pp :prev<CR>
+
 "Source `.vimrc`
-noremap <silent> <leader>sc :source $HOME/.vimrc<CR>
+noremap <silent> <leader>rc :source $HOME/.vimrc<CR>
