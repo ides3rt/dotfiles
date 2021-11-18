@@ -19,8 +19,8 @@ hi DiffChange         ctermbg=None       ctermfg=None
 hi DiffDelete         ctermbg=None       ctermfg=None
 hi DiffText           ctermbg=None       ctermfg=None
 hi Directory          ctermbg=None       ctermfg=None
-hi Error              ctermbg=9	         ctermfg=15
-hi ErrorMsg           ctermbg=9          ctermfg=15
+hi Error              ctermbg=None       ctermfg=None
+hi ErrorMsg           ctermbg=None       ctermfg=None
 hi Exception          ctermbg=None       ctermfg=None
 hi Float              ctermbg=None       ctermfg=None
 hi FoldColumn         ctermbg=None       ctermfg=None
