@@ -26,7 +26,7 @@ hi Float              ctermbg=None       ctermfg=None
 hi FoldColumn         ctermbg=None       ctermfg=None
 hi Folded             ctermbg=None       ctermfg=None
 hi Function           ctermbg=None       ctermfg=None
-hi Identifier         ctermbg=None       ctermfg=245        cterm=bold
+hi Identifier         ctermbg=None       ctermfg=243        cterm=bold
 hi Include            ctermbg=None       ctermfg=None
 hi IncSearch          ctermbg=None       ctermfg=None
 hi Keyword            ctermbg=None       ctermfg=None
