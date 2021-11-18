@@ -1,11 +1,17 @@
+"Change vim() PATH
+set runtimepath=$HOME/.config/vim,$VIM/vimfiles,$VIMRUNTIME
+
 "Syntax and Filetype
 if has('syntax')
 	"Enable syntax highlight
 	syntax on
 	filetype on
 
+	"Make vim() use 256 colors
+	set t_Co=256
+
 	if !has('gui_running')
-		source $HOME/.config/vim/colors/ides3rt.vim
+		colorscheme ides3rt
 		set ttyfast
 	endif
 
@@ -21,8 +27,8 @@ let mapleader=" "
 let g:hidden_all = 0
 
 "Plugins
-source $HOME/.config/vim/plugins/colemak.vim
-source $HOME/.config/vim/plugins/status.vim
+source $HOME/.config/vim/plugin/colemak.vim
+source $HOME/.config/vim/plugin/status.vim
 
 "Indent
 set autoindent
@@ -129,10 +135,6 @@ noremap <up> <Nop>
 noremap <down> <Nop>
 noremap <left> <Nop>
 noremap <right> <Nop>
-
-"`EOL' and `SOL'
-noremap <silent> $ g$
-noremap <silent> 0 g0
 
 "Toggle `ignorecase`
 noremap <silent> <leader>ig :set ignorecase!<CR>

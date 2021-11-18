@@ -47,6 +47,6 @@ build(){
 		local Fail=0 || local Fail=1
 
 	# Clean things
-	{ cd - && rm -rf $TMPDIR/$Dir; } &>/dev/null
+	{ cd - && rm -rf $TMPDIR/$Dir ;} &>/dev/null
 	return $Fail
 }
