@@ -4,7 +4,7 @@ syntax reset
 
 hi Boolean            ctermbg=None       ctermfg=None
 hi Character          ctermbg=None       ctermfg=None
-hi ColorColumn        ctermbg=234        ctermfg=15
+hi ColorColumn        ctermbg=234        ctermfg=15         cterm=Bold
 hi Comment            ctermbg=None       ctermfg=240
 hi Condtional         ctermbg=None       ctermfg=None
 hi Constant           ctermbg=None       ctermfg=None
