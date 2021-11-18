@@ -1,6 +1,6 @@
 set background=dark
 highlight clear
-syntax reset
+syntax clear
 
 hi Boolean            ctermbg=None       ctermfg=None
 hi Character          ctermbg=None       ctermfg=None
