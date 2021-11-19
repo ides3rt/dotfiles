@@ -4,8 +4,8 @@
 [ $UID -ne 0 ] && AUTH=doas
 
 ## My GitHub directories
-GitHub="$HOME/GitHub/ides3rt/repos"
-GistHub="$HOME/GitHub/ides3rt/gists"
+GitHub="$HOME/gh/ides3rt/repos"
+GistHub="$HOME/gh/ides3rt/gists"
 
 ## Aliases
 alias ghpcd="cd $GitHub" # `cd` to $GitHub
