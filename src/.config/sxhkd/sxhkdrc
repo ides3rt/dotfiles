@@ -20,15 +20,15 @@ mod1 + b
 
 # Take a screenshot
 Print
-	scrot -q 100 '%Y-%m-%d_%H:%M:%S.png' -e 'mv $f ~/Pictures/'
+	scrot -q 100 '%Y-%m-%d_%H:%M:%S.png' -e 'mv $f ~/pic/'
 
 # Advance screenshot options
 shift + Print
-	$HOME/Code/rofi/scrot
+	$HOME/ex/rofi/scrot
 
 # Open my dictionary script
 mod1 + d
-	$HOME/Code/rofi/dictionary
+	$HOME/ex/rofi/dictionary
 
 # Increase volume
 mod1 + equal
@@ -40,7 +40,7 @@ mod1 + minus
 
 # Change keyboard layouts
 mod4 + Escape
-	$HOME/Code/sxhkd/loadkey
+	$HOME/ex/sxhkd/loadkey
 
 #
 # BSPWM hotkeys
