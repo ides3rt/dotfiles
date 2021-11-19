@@ -1,12 +1,7 @@
 #!/bin/sh
 
 ## PATH
-Make(){
-	[ -d "$1" -a -z $(echo "$PATH" | grep -o "$1") ] &&
-		PATH+=":$1"
-}
+[ -d "$HOME/.local/bin" -a -z $(echo "$PATH" | grep -o "$HOME/.local/bin") ] &&
+		PATH+=":$HOME/.local/bin"
 
-Make "$HOME/Applications"
-Make "$HOME/.local/bin"
-
-export PATH && unset Make
+export PATH
