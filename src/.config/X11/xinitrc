@@ -35,7 +35,7 @@ fi
 unset Type
 
 # feh() is more minimal than nitrogen()
-feh --no-fehbg --bg-fill --randomize $HOME/pic/cWallpapers/ &
+feh --no-fehbg --bg-fill --randomize $HOME/pix/cWallpapers/ &
 
 sxhkd & # sxhkd() is my prefered hotkeys daemon
 

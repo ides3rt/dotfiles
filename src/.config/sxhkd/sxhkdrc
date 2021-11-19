@@ -20,7 +20,7 @@ mod1 + b
 
 # Take a screenshot
 Print
-	scrot -q 100 '%Y-%m-%d_%H:%M:%S.png' -e 'mv $f ~/pic/'
+	scrot -q 100 '%Y-%m-%d_%H:%M:%S.png' -e 'mv $f ~/pix/'
 
 # Advance screenshot options
 shift + Print
