@@ -4,14 +4,12 @@
 [ $UID -ne 0 ] && AUTH=doas
 
 ## My GitHub directories
-GitHub="$HOME/GitHub/ides3rt/repositories"
+GitHub="$HOME/GitHub/ides3rt/repos"
 GistHub="$HOME/GitHub/ides3rt/gists"
 
 ## Aliases
 alias ghpcd="cd $GitHub" # `cd` to $GitHub
 alias gshcd="cd $GistHub" # `cd` to $GistHub
-alias ghsc="git --git-dir=$GitHub/Code/ --work-tree=$HOME/Code"
-alias ghps="git --git-dir=$GitHub/Pictures/ --work-tree=$HOME/Pictures"
 alias cp='cp -vZ'
 alias mv='mv -vZ'
 alias rm='rm -v'
