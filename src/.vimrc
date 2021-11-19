@@ -140,10 +140,6 @@ noremap <silent> <leader>ii :set ignorecase!<CR>
 "Toggle wrap
 noremap <silent> <leader>ww :set wrap!<CR>
 
-"Move the current line up or down
-noremap <silent> <C-e> :move +1<CR>
-noremap <silent> <C-i> :move -2<CR>
-
 "Center-, right-, or left-align one or more lines
 noremap <silent> <leader>ac :center<CR>
 noremap <silent> <leader>ar :right<CR>

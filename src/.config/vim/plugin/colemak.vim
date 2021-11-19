@@ -18,3 +18,7 @@ noremap <silent> K O
 "Move up and down
 noremap <silent> E 10gj
 noremap <silent> I 10gk
+
+"Move the current line up or down
+noremap <silent> <C-e> :move +1<CR>
+noremap <silent> <C-i> :move -2<CR>
