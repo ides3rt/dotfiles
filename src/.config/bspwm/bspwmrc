@@ -15,5 +15,6 @@ bspc config split_ratio 0.55
 bspc config borderless_monocle true
 bspc config gapless_monocle true
 
-bspc rule -a 'Lxappearance' state=floating
-bspc rule -a 'mpv' state=floating
+bspc rule -a '*' state=floating
+bspc rule -a 'Alacritty' state=tiled
+bspc rule -a 'firefox:*:Mozilla Firefox' state=tiled
