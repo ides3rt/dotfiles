@@ -1,8 +1,16 @@
 #!/bin/sh
 
-export CFLAGS='-march=native -O3 -pipe' # Use '-O2' if compile fails (it's O not zero)
+# Number of processors +1
+PROCESSORS="$(($(nproc)+1))"
+
+# `-march=native` make binaries unportable
+export CFLAGS='-march=native -O2 -pipe'
 export CXXFLAGS="$CFLAGS"
-export FCFLAGS="$CFLAGS"
-export FFLAGS="$CFLAGS"
-export RUSTFLAGS='-C opt-level=3 --target-cpu=native' # Use 'opt-level=2' if complie fails
-export MAKEFLAGS="-j$(($(nproc)+1)) -l$(($(nproc)+1))"
+
+# `--target-cpu=native` make binaries unportable
+export RUSTFLAGS='-C opt-level=2 -C --target-cpu=native'
+
+# Flags for make()
+export MAKEFLAGS="-j$PROCESSORS -l$PROCESSORS"
+
+unset PROCESSORS

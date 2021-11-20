@@ -1,17 +1,15 @@
 #!/bin/sh
 
 ## PATH
-PATH(){
-	[ -d "$1" -a -z $(echo "$PATH" | grep -o "$1") ] &&
-		PATH+=":$1"
+Add(){
+	if [ -d "$1" ]; then
+		case ":$PATH:" in
+			*:"$1":*) ;;
+			*) PATH+=":$1" ;;
+		esac
+	fi
 }
 
-if [ `id -u` -eq 0 ]; then
-	PATH=/usr/sbin:/usr/local/sbin
-	PATH "$HOME/.local/sbin"
-else
-	PATH=/usr/bin:/usr/local/bin
-	PATH "$HOME/.local/bin"
-fi
+Add "$HOME/.local/bin"
 
-export PATH && unset -f PATH
+export PATH && unset -f Add
