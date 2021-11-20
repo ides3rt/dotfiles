@@ -1,7 +1,17 @@
 #!/bin/sh
 
 ## PATH
-[ -d "$HOME/.local/bin" -a -z $(echo "$PATH" | grep -o "$HOME/.local/bin") ] &&
-		PATH+=":$HOME/.local/bin"
+PATH(){
+	[ -d "$1" -a -z $(echo "$PATH" | grep -o "$1") ] &&
+		PATH+=":$1"
+}
 
-export PATH
+if [ `id -u` -eq 0 ]; then
+	PATH=/usr/sbin:/usr/local/sbin
+	PATH "$HOME/.local/sbin"
+else
+	PATH=/usr/bin:/usr/local/bin
+	PATH "$HOME/.local/bin"
+fi
+
+export PATH && unset -f PATH

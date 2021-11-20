@@ -30,9 +30,5 @@ bind -m vi "o":forward-char
 ## Use `h` for insert mode
 bind -m vi "h":vi-insertion-mode
 
-## Move fast
-bind -m vi "N":vi-backward-word
-bind -m vi "O":vi-forward-word
-
 ## ZSH like menu completion
 bind -m vi-insert "TAB":menu-complete
