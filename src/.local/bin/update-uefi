@@ -2,5 +2,5 @@
 
 efibootmgr --disk /dev/nvme0n1 --part 1 --create \
 	--label 'Arch Linux' \
-	--loader '\vmlinuz-linux' \
-	--unicode 'root=UUID=56e3f62b-2131-480b-bad3-29367d1adf66 rootflags=subvolid=256 ro initrd=\amd-ucode.img initrd=\initramfs-linux.img quiet nosplash kernel.yama.ptrace_scope=3 nvidia-drm.modeset=1'
+	--loader '\vmlinuz-linux-hardened' \
+	--unicode 'root=/dev/mapper/Arch rootflags=subvolid=256 cryptdevice=UUID=0d0b7e10-fd20-4a39-863d-43f249a64855:Arch initrd=\amd-ucode.img initrd=initramfs-linux-hardened.img quiet nosplash nowatchdog lsm=landlock,lockdown,yama,apparmor,bpf apparmor=1 security=apparmor audit=1 kernel.yama.ptrace_scope=3 nvidia-drm.modeset=1'

@@ -8,11 +8,11 @@ mod1 + Return
 
 # Programs launcher
 mod1 + p
-	rofi -show drun -show-icons
+	rofi -show run -show-icons
 
 # Spawn `firefox`
 mod1 + w
-	firefox
+	firejail firefox
 
 #
 # System hotkeys
@@ -20,15 +20,15 @@ mod1 + w
 
 # Take a screenshot
 Print
-	scrot -q 100 '%Y-%m-%d_%H:%M:%S.png' -e 'mv $f ~/pix/'
+	scrot -q 100 '%Y-%m-%d_%H:%M:%S.png' -e 'mv $f ~/Pictures/'
 
 # Advance screenshot options
 shift + Print
-	$HOME/ex/rofi/scrot
+	$HOME/Code/rofi/scrot
 
 # Open my dictionary script
 mod1 + d
-	$HOME/ex/rofi/dictionary
+	$HOME/Code/rofi/dictionary
 
 # Increase volume
 mod1 + equal
@@ -40,7 +40,7 @@ mod1 + minus
 
 # Change keyboard layouts
 mod4 + Escape
-	$HOME/ex/sxhkd/loadkey
+	$HOME/Code/sxhkd/loadkey
 
 #
 # BSPWM hotkeys
@@ -63,7 +63,7 @@ mod1 + m
 	bspc desktop -l next
 
 # Change focused window's state
-mod1 + {t,f,c}
+mod1 + {t,f,space}
 	bspc node -t {~tiled,~fullscreen,~floating}
 
 # Change focused window's node to sticky
@@ -91,7 +91,7 @@ mod1 + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # Cancel the preselection for the focused node
-mod1 + ctrl + w
+mod1 + ctrl + r
 	bspc node -p cancel
 
 # Move a floating window
