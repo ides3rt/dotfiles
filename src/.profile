@@ -10,7 +10,7 @@ check(){ [ -f "$1" -a -r "$1" ] && . $1 ;}
 setup(){
 	if [ -d "$HOME/.config/$1" ]; then
 		for File in $HOME/.config/$1/?*; do
-			Check $File
+			check $File
 		done
 	fi
 }
