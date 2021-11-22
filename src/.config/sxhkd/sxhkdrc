@@ -12,7 +12,7 @@ mod1 + p
 
 # Spawn `firefox`
 mod1 + w
-	firejail firefox
+	firefox
 
 #
 # System hotkeys
