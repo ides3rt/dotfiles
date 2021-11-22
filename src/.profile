@@ -13,6 +13,7 @@ setup(){
 			check $File
 		done
 	fi
+	unset File
 }
 
 # Source environment variables.
@@ -37,21 +38,22 @@ case `readlink /proc/$$/exe` in
 
 		# It alse works with ZSH
 		check /usr/local/share/bash.command-not-found ;;
-
 esac
-unset File Setup Check
+unset setup check
 
-# My GitHub SSH.
-if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
-	case "$USER" in
-		ides3rt)
-			ssh-add $HOME/.ssh/GitHub ;;
-	esac
-	trap 'kill $SSH_AGENT_PID' EXIT
-fi
+[ "$USER" = root ] || {
+	# My GitHub SSH.
+	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent`; then
+		case "$USER" in
+			ides3rt)
+				ssh-add $HOME/.ssh/GitHub ;;
+		esac
+		trap 'eval `ssh-agent -k`' EXIT
+	fi
 
-# Auto exec xinit() when in tty1.
-if [ -z "$DISPLAY" -a "$XDG_VTNR" -eq 1 ]; then
-	# exec() is unrequire, but it's a good thing.
-	exec xinit Xorg -- :0 vt$XDG_VTNR
-fi
+	# Auto exec xinit(1) when in tty1.
+	if [ -z "$DISPLAY" -a "$XDG_VTNR" -eq 1 ]; then
+		# exec() is unrequire, but it's a good thing.
+		exec xinit Xorg -- :0 vt$XDG_VTNR
+	fi
+}
