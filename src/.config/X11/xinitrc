@@ -4,13 +4,12 @@
 if [ -d $HOME/.config/X11/xinitrc.d ]; then
 
 	for File in $HOME/.config/X11/xinitrc.d/?*.sh; do
-
-		[ -x "$File" -a -r "$File" ] && . $File
+		[ -x "$File" ] && . $File
 	done
 	unset File
 fi
 
-# Sessions manager
+# X session manager
 lxsession &
 
 # I use `colemak`
@@ -24,18 +23,11 @@ pipewire &
 pipewire-pulse &
 pipewire-media-session &
 
-# Even though I don't have screen tearing issues, I still love to have transpent
-if read Type < /sys/class/dmi/id/product_name && [ "$Type" = VirtualBox ]; then
-	# VSYNC in VM is unsupported
-	picom --experimental-backends --no-vsync &
-else
-	picom --experimental-backends &
-fi
+# Compositor
+picom --experimental-backends &
 
-unset Type
-
-# feh() is more minimal than nitrogen()
-feh --no-fehbg --bg-fill --randomize $HOME/Pictures/cWallpapers/ &
+# Wallpaper
+feh --no-fehbg --bg-fill --randomize $HOME/Pictures/cWallpapers &
 
 sxhkd & # sxhkd() is my prefered hotkeys daemon
 
