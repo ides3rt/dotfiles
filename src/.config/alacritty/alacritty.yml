@@ -30,69 +30,50 @@ font:
   # Point size
   size: 14.0
 
-# iDes3rt's colors scheme
-colors:
-  # Default colors
-  primary:
-    background: '#0f0f0f'
-    foreground: '#eeeeee'
-
-  # Normal colors
-  normal:
-    black:   '#282828'
-    red:     '#cc241d'
-    green:   '#689d6a'
-    yellow:  '#d7d700'
-    blue:    '#0073e5'
-    magenta: '#b16286'
-    cyan:    '#5cc9ff'
-    white:   '#bbbbbb'
-
-  # Bright colors
-  bright:
-    black:   '#6c6c6c'
-    red:     '#fb4934'
-    green:   '#8ec07c'
-    yellow:  '#d7d787'
-    blue:    '#3584e4'
-    magenta: '#d3869b'
-    cyan:    '#87d7ff'
-    white:   '#ffffff'
-
-  # Search colors
-  #
-  # Colors used for the search bar and match highlighting.
-  search:
-    # Allowed values are CellForeground/CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
-    matches:
-      foreground: CellBackground
-      background: CellForeground
-    focused_match:
-      foreground: CellForeground
-      background: CellBackground
-
-    bar:
+schemes:
+  # ides3rt-v1 colors scheme
+  ides3rt-v1: &ides3rt-v1
+    # Default colors
+    primary:
       background: '#0f0f0f'
       foreground: '#eeeeee'
 
-  # Keyboard regex hints
-  hints:
-    # Fist character in the hint label
-    #
-    # Allowed values are CellForeground/CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
-    start:
-      foreground: CellBackground
-      background: CellForeground
+    # Normal colors
+    normal:
+      black:   '#282828'
+      red:     '#cc241d'
+      green:   '#689d6a'
+      yellow:  '#d7d700'
+      blue:    '#0073e5'
+      magenta: '#b16286'
+      cyan:    '#5cc9ff'
+      white:   '#bbbbbb'
 
-    # All characters after the first one in the hint label
-    #
-    # Allowed values are CellForeground/CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
-    end:
-      foreground: CellForeground
-      background: CellBackground
+    # Bright colors
+    bright:
+      black:   '#6c6c6c'
+      red:     '#fb4934'
+      green:   '#8ec07c'
+      yellow:  '#d7d787'
+      blue:    '#3584e4'
+      magenta: '#d3869b'
+      cyan:    '#87d7ff'
+      white:   '#ffffff'
+
+    # Search colors
+    search:
+      matches:
+        foreground: '#d7d787'
+        background: CellBackground
+      focused_match:
+        foreground: CellBackground
+        background: CellForeground
+
+      bar:
+        background: '#0f0f0f'
+        foreground: '#eeeeee'
+
+colors: *ides3rt-v1
 
 # Background opacity
 #
