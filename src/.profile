@@ -39,9 +39,9 @@ case `readlink /proc/$$/exe` in
 		# It alse works with ZSH
 		check /usr/local/share/bash.command-not-found ;;
 esac
-unset setup check
+unset -f setup check
 
-[ "$USER" = root ] || {
+if [ $UID -ne 0 ]; then
 	# My GitHub SSH.
 	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent`; then
 		case "$USER" in
@@ -56,4 +56,4 @@ unset setup check
 		# exec() is unrequire, but it's a good thing.
 		exec xinit Xorg -- :0 vt$XDG_VTNR
 	fi
-}
+fi

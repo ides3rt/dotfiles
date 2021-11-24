@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-up(){
+up() {
 	# Only `cd ..` if nothing provide
 	[ -z "$1" ] && cd .. && return 0
 
 	# ERR if alphabet provide (BASHISM)
-	[[ "$1" =~ ^[0-9]+$ ]] || return 1
+	[[ $1 =~ ^[0-9]+$ ]] || return 1
 
 	# Remove start 0 to prevent errors
 	local Number=${1#*0}
@@ -17,7 +17,7 @@ up(){
 	cd ${Directories:-.}
 }
 
-lspkg(){ # Inspired by TFL/LL
+lspkg() { # Inspired by TFL/LL
 	# Only `ls /var/cache/pacman/pkg` if nothing provide
 	if [ -z "$1" ]; then
 		ls -1 -I '*.sig' /var/cache/pacman/pkg/
@@ -26,27 +26,24 @@ lspkg(){ # Inspired by TFL/LL
 	fi
 }
 
-build(){
+build() {
 	# Check if AUR dir exist or not
 	[ -d "$1" ] || return 1
 
 	## Chcek if AUR up to date or not
 	git --git-dir=$1/.git/ pull || return 1
 
-	## Set tmpdir
-	local TMPDIR="${TMPDIR:-/tmp}"
+	## Set build dir
+	local BuildDir="${TMPDIR:-/tmp}/build-$SRANDOM"
 
-	## Copy AUR to tmp dir, exit with status 1 if fails
-	cp -r $1 $TMPDIR &>/dev/null || return 1
-
-	# Get AUR dir
-	local Dir="${1#`dirname $1`/}"
+	## Copy AUR to build dir, exit with status 1 if fails
+	cp -r $1 $BuildDir &>/dev/null || return 1
 
 	# Build AUR, exit with status 1 if fails
-	cd $TMPDIR/$Dir && makepkg -sir &&
+	cd $BuildDir && makepkg -sir &&
 		local Fail=0 || local Fail=1
 
-	# Clean things
-	{ cd - && rm -rf $TMPDIR/$Dir ;} &>/dev/null
+	# Clean
+	{ cd $OLDPWD && rm -rf $BuildDir ;} &>/dev/null
 	return $Fail
 }
