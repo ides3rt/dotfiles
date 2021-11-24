@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## History
-export HISTCONTROL=ignoredups:erasedups # Who like dups anyway
-export HISTFILE=/dev/null # Same effect as HISTFILE=
-export HISTFILESIZE=0 # This make history session only
-export HISTSIZE=999
+HISTCONTROL=ignoredups:erasedups # Who like dups anyway
+HISTFILE=/dev/null # Same effect as HISTFILE=
+HISTFILESIZE=0 # This make history session only
+HISTSIZE=999
