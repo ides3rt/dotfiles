@@ -6,32 +6,28 @@ umask 077
 # Source config.
 check() { [ -f "$1" -a -r "$1" ] && . $1 ;}
 setup() {
-	local Dir="${XDG_CONFIG_HOME:-$HOME/.config}"
-	[ -d "$Dir/$1" ] && for File in $Dir/$1/?*; do check $File; done
+	[ -d "$1" ] && for File in $1/?*; do check $File; done
 	unset -v File
 }
 
 # Source environment variables.
-setup env.d
+setup $HOME/.config/env.d
 
 # Detect current shell.
-case `readlink /proc/$$/exe` in
-	*/bash)
-		# Just source bash(1) config.
-		setup bash
-		check /usr/share/bash-completion/bash_completion ;;
-
-	*/zsh)
-		# Just source zsh(1) config.
-		setup zsh ;;
-
-esac
+if [ "$BASH" ]; then
+	# Just source bash(1) config.
+	setup $XDG_CONFIG_HOME/bash
+	check /usr/share/bash-completion/bash_completion
+fi
 unset -f setup check
+
+# Outdated stuff
+unset -v TERMCAP MANPATH
 
 if [ $UID -ne 0 ]; then
 	# My GitHub SSH.
 	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
-		ssh-add $HOME/.ssh/GitHub ;;
+		ssh-add $HOME/.ssh/GitHub
 		trap 'eval `ssh-agent -k`' EXIT
 	fi
 
