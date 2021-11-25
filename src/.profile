@@ -3,21 +3,42 @@
 # Set default permissions to `drwx------` and `-rw-------`.
 umask 077
 
+# 256-colors
+export TERM=xterm-256color
+
 # Source config.
 check() { [ -f "$1" -a -r "$1" ] && . $1 ;}
-setup() {
-	[ -d "$1" ] && for File in $1/?*; do check $File; done
-	unset -v File
-}
 
 # Source environment variables.
-setup $HOME/.config/env.d
+if [ -d "${ENV_DIR:=$HOME/.config/env.d}" ]; then
+	for File in $ENV_DIR/?*; do
+		check $File
+	done
+	unset -v File
+fi
+unset -v ENV_DIR
 
 # Detect current shell.
-if [ "$BASH" ]; then
+if [ "$BASH_VERSION" ]; then
+
+	# INPUTRC
+	INPUTRC="$XDG_CONFIG_HOME/bash/inputrc"
+
 	# Just source bash(1) config.
-	setup $XDG_CONFIG_HOME/bash
+	source $XDG_CONFIG_HOME/bash/config
+
+	# History
+	HISTCONTROL=ignoredups:erasedups # Who like dups anyway
+	HISTFILE=/dev/null # Same effect as HISTFILE=
+	HISTFILESIZE=0 # This make history session only
+	HISTSIZE=999
+
+	# User's bash(1) completion.
+	BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME/bash-completion/bash_completion"
+
+	# bash(1) completion.
 	check /usr/share/bash-completion/bash_completion
+
 fi
 unset -f setup check
 

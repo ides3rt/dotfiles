@@ -9,12 +9,3 @@ export BROWSER=firefox
 export MANPAGER='less -R --use-color -Dd+r -Du+b' # Colorful man page
 export SUDO_EDITOR=/usr/bin/rvim # I don't use sudo(1), but specify anyway
 export DOAS_EDITOR="$SUDO_EDITOR" # This require by my doasedit()
-
-# Use posix ps(1)
-export PS_PERSONALITY=posix
-
-# less(1)
-export LESS='-FI --incsearch --no-histdups'
-export LESSHISTFILE=/dev/null # Same effect as LESSHISTFILE=
-export LESSHISTSIZE=0
-export LESSSECURE=1 # Restricted less(1)

@@ -1,6 +1,10 @@
+"Prepare XDG
+if !exists('$XDG_CONFIG_HOME') | let $XDG_CONFIG_HOME="$HOME/.config" | endif
+if !exists('$XDG_CACHE_HOME') | let $XDG_CACHE_HOME="$HOME/.cache" | endif
+
 "XDG PATH
-set runtimepath=$XDG_CONFIG_HOME/vim,$VIM/vimfiles,$VIMRUNTIME
-if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 
 "Syntax and Filetype
 if has('syntax')
@@ -26,9 +30,9 @@ let g:Status = 0
 let g:Textwidth = 1
 
 "Plugins
-source $HOME/.config/vim/plugin/colemak.vim
-source $HOME/.config/vim/plugin/status.vim
-source $HOME/.config/vim/plugin/textwidth.vim
+source $XDG_CONFIG_HOME/vim/plugin/colemak.vim
+source $XDG_CONFIG_HOME/vim/plugin/status.vim
+source $XDG_CONFIG_HOME/vim/plugin/textwidth.vim
 
 "Indent
 set autoindent
@@ -150,5 +154,5 @@ noremap <silent> <leader>al :left<CR>
 noremap <silent> <leader>nn :next<CR>
 noremap <silent> <leader>pp :prev<CR>
 
-"Source `.vimrc`
-noremap <silent> <leader>rc :source $HOME/.vimrc<CR>
+"Source vimrc
+noremap <silent> <leader>rc :source $MYVIMRC<CR>

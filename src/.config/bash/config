@@ -1,34 +1,79 @@
 #!/usr/bin/env bash
 
-### Remove everything that contain `vi` if you love `emacs`
-### Also replace `vi-insert` with `emacs`
-
+# set()
 set -o interactive-comments -o vi -o braceexpand \
 	-o hashall -o histexpand +o monitor
 
+# shopt()
 shopt -s autocd cdspell checkwinsize cmdhist \
 	dirspell dotglob expand_aliases extglob extquote \
 	force_fignore histappend hostcomplete \
 	interactive_comments lithist no_empty_cmd_completion \
 	progcomp progcomp_alias promptvars xpg_echo
 
-## Make `vi` better
-bind -m vi-insert "\C-l":clear-display # Use `clear-screen` instead for non-recursive clear
+# Use `clear-screen` instead for non-recursive clear
+bind "\C-l":clear-display
 
-## Remove OG vi's keymaps
-bind -m vi -r "h"
-bind -m vi -r "j"
-bind -m vi -r "k"
-bind -m vi -r "l"
+# zsh(1) like menu completion
+bind "TAB":menu-complete
 
-## `colemak` vi
+# emacs(1) keys
+bind "\C-a":beginning-of-line
+bind "\C-e":end-of-line
+
+# `colemak` vi(1)
 bind -m vi "n":backward-char
 bind -m vi "e":next-history
 bind -m vi "i":previous-history
 bind -m vi "o":forward-char
 
-## Use `h` for insert mode
+# Use `h` for insert mode
 bind -m vi "h":vi-insertion-mode
 
-## ZSH like menu completion
-bind -m vi-insert "TAB":menu-complete
+PROMPT_PARSER() {
+
+# Reset
+local Reset='\[\e[0m\]'
+
+# Real Colors
+local Red='\[\e[1;91m\]'
+local White='\[\e[1;97m\]'
+
+local Status=$1
+(( $Status == 0 )) && unset Status
+
+# PS1
+if (( $UID == 0 )); then
+	if [ -z $Status ]; then
+	 	PS1="${Red}->${Reset} "
+	else
+		PS1="${White}${Status}${Reset} ${Red}->${Reset} "
+	fi
+else
+	if [ -z $Status ]; then
+		PS1="${White}->${Reset} "
+	else
+		PS1="${Red}${Status}${Reset} ${White}->${Reset} "
+	fi
+fi
+
+# PS2
+PS2='   '
+
+}
+
+PROMPT_COMMAND='PROMPT_PARSER $?'
+
+# Aliases
+File="$XDG_CONFIG_HOME/bash/aliases"
+[ -f $File -a -r $File ] && . $File
+
+# Functions
+File="$XDG_CONFIG_HOME/bash/functions"
+[ -f $File -a -r $File ] && . $File
+
+# Autostart
+File="$XDG_CONFIG_HOME/bash/autostart"
+[ -f $File -a -r $File ] && . $File
+
+unset -v File

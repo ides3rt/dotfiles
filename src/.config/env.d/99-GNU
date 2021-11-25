@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# ls(1)
+export LS_COLORS='rs=0:no=0;37:pi=0:so=1;95:fi=1;97:di=1;91:st=41;1;97:tw=41;1;97:ln=1;96:or=0:mi=0:bd=32:cd=1;92:ex=1;93:su=107;1;30:sg=107;1;30'
+
+# grep(1)
+export GREP_COLOR='1;91'
+
+# ps(1)
+export PS_PERSONALITY=posix
+
+# less(1)
+export LESS='-FI --incsearch --no-histdups'
+export LESSHISTFILE=/dev/null # Same effect as LESSHISTFILE=
+export LESSHISTSIZE=0
+export LESSSECURE=1 # Restricted less(1)
