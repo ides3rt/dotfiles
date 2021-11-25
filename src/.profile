@@ -3,57 +3,40 @@
 # Set default permissions to `drwx------` and `-rw-------`.
 umask 077
 
-# Check if file exist and readable or not.
-check(){ [ -f "$1" -a -r "$1" ] && . $1 ;}
-
-# Source files
-setup(){
-	if [ -d "$HOME/.config/$1" ]; then
-		for File in $HOME/.config/$1/?*; do
-			check $File
-		done
-	fi
-	unset File
+# Source config.
+check() { [ -f "$1" -a -r "$1" ] && . $1 ;}
+setup() {
+	local Dir="${XDG_CONFIG_HOME:-$HOME/.config}"
+	[ -d "$Dir/$1" ] && for File in $Dir/$1/?*; do check $File; done
+	unset -v File
 }
 
 # Source environment variables.
 setup env.d
 
-# Source config depend on shell.
+# Detect current shell.
 case `readlink /proc/$$/exe` in
 	*/bash)
-		# Just source BASH config.
+		# Just source bash(1) config.
 		setup bash
-
-		# Likely will be in your distro's main repo.
-		check /usr/share/bash-completion/bash_completion
-
-		# You can clone it at https://github.com/hkbakke/bash-insulter.
-		# Change /usr/local/share/bash.command-not-found to where you put it.
-		check /usr/local/share/bash.command-not-found ;;
+		check /usr/share/bash-completion/bash_completion ;;
 
 	*/zsh)
-		# I never use ZSH in my life, lol.
-		setup zsh
+		# Just source zsh(1) config.
+		setup zsh ;;
 
-		# It alse works with ZSH
-		check /usr/local/share/bash.command-not-found ;;
 esac
 unset -f setup check
 
 if [ $UID -ne 0 ]; then
 	# My GitHub SSH.
-	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent`; then
-		case "$USER" in
-			ides3rt)
-				ssh-add $HOME/.ssh/GitHub ;;
-		esac
+	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
+		ssh-add $HOME/.ssh/GitHub ;;
 		trap 'eval `ssh-agent -k`' EXIT
 	fi
 
-	# Auto exec xinit(1) when in tty1.
+	# Run xinit(1) when in tty1.
 	if [ -z "$DISPLAY" -a "$XDG_VTNR" -eq 1 ]; then
-		# exec() is unrequire, but it's a good thing.
 		exec xinit Xorg -- :0 vt$XDG_VTNR
 	fi
 fi

@@ -1,13 +1,20 @@
 #!/bin/sh
 
-# Source autostart scripts
-if [ -d $HOME/.config/X11/xinitrc.d ]; then
+# X11 config directory
+X11_DIR="$XDG_CONFIG_HOME/X11"
 
-	for File in $HOME/.config/X11/xinitrc.d/?*.sh; do
-		[ -x "$File" ] && . $File
+# Source autostart scripts
+if Dir="$X11_DIR/xinitrc.d" && [ -d "$Dir" ]; then
+	for File in $Dir/?*.sh; do
+		[ -f "$File" -a -x "$File" ] && . $File
 	done
-	unset File
 fi
+
+# Xresources
+if File="$X11_DIR/Xresources"; then
+	[ -f "$File" -a -r "$File" ] && xrdb -load $File
+fi
+unset -v X11_DIR File Dir
 
 # X session manager
 lxsession &
@@ -15,7 +22,7 @@ lxsession &
 # I use `colemak`
 setxkbmap us -variant colemak
 
-# bspwm() doesn't set cursor by default
+# bspwm(1) doesn't set cursor by default
 xsetroot -cursor_name left_ptr
 
 # Compositor
@@ -24,6 +31,6 @@ picom --experimental-backends &
 # Wallpaper
 feh --no-fehbg --bg-fill --randomize $HOME/Pictures/cWallpapers &
 
-sxhkd & # sxhkd() is my prefered hotkeys daemon
+sxhkd & # sxhkd(1) is my prefered hotkeys daemon
 
 exec bspwm # Your favorite WM/DE here!
