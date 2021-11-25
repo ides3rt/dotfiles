@@ -5,3 +5,6 @@ HISTCONTROL=ignoredups:erasedups # Who like dups anyway
 HISTFILE=/dev/null # Same effect as HISTFILE=
 HISTFILESIZE=0 # This make history session only
 HISTSIZE=999
+
+# BASH completion
+BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME/bash-completion/bash_completion"

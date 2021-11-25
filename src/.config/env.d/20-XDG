@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# FFmpeg
+export FFMPEG_DATADIR="$XDG_CONFIG_HOME/ffmpeg"
+
+# Wget
+export WGETRC="$XDG_CONFIG_HOME/wget/config"
+
+# XINIT
+export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
+export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
+
+# XAUTHORITY
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+
+# INPUTRC
+export INPUTRC="$XDG_CONFIG_HOME/inputrc"
+
+# LESS
+export LESSKEYIN="$XDG_CONFIG_HOME/less/config"
+
+# GNUPG
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+
+# GTK
+export GTK_RC_FILES="$XDG_CONFIG_HOME/gtk-1.0/gtkrc"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+
+# VIM
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'

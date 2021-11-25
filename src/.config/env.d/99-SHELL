@@ -3,10 +3,7 @@
 # Colors
 export TERM=xterm-256color
 
-# INPUTRC
-export INPUTRC="$HOME/.config/inputrc"
-
-## `ls`
+# ls(1)
 # rs: Reset             no: Normal                  fi: File            di: Dir
 # ln: SysLink           pi: Fifo                    so: Socket          bd: BlockDevice
 # cd: CharDevice        mi: NonExistSysLink         or: OrphanSysLink   ex: Executable

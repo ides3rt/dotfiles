@@ -10,7 +10,7 @@ export CXXFLAGS="$CFLAGS"
 # `--target-cpu=native` make binaries unportable
 export RUSTFLAGS='-C opt-level=2 -C --target-cpu=native'
 
-# Flags for make()
+# make(1)
 export MAKEFLAGS="-j $PROCESSORS -l $PROCESSORS"
 
-unset PROCESSORS
+unset -v PROCESSORS

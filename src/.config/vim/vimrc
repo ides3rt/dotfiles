@@ -1,5 +1,6 @@
-"Change vim() PATH
-set runtimepath=$HOME/.config/vim,$VIM/vimfiles,$VIMRUNTIME
+"XDG PATH
+set runtimepath=$XDG_CONFIG_HOME/vim,$VIM/vimfiles,$VIMRUNTIME
+if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
 
 "Syntax and Filetype
 if has('syntax')
