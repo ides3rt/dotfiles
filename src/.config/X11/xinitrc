@@ -18,11 +18,6 @@ setxkbmap us -variant colemak
 # bspwm() doesn't set cursor by default
 xsetroot -cursor_name left_ptr
 
-# Unlike pulseaudio() you need to start pipewire() manually
-pipewire &
-pipewire-pulse &
-pipewire-media-session &
-
 # Compositor
 picom --experimental-backends &
 
