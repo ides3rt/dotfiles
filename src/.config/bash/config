@@ -31,49 +31,46 @@ bind -m vi "o":forward-char
 bind -m vi "h":vi-insertion-mode
 
 PROMPT_PARSER() {
+	# Reset
+	local Reset='\[\e[0m\]'
 
-# Reset
-local Reset='\[\e[0m\]'
+	# Colors
+	local Red='\[\e[1;91m\]'
+	local White='\[\e[1;97m\]'
 
-# Real Colors
-local Red='\[\e[1;91m\]'
-local White='\[\e[1;97m\]'
+	local Status=$1
+	[ $Status -eq 0 ] && unset -v Status
 
-local Status=$1
-(( $Status == 0 )) && unset Status
-
-# PS1
-if (( $UID == 0 )); then
-	if [ -z $Status ]; then
-	 	PS1="${Red}->${Reset} "
+	# PS1
+	if [ $UID -eq 0 ]; then
+		if [ -z $Status ]; then
+		 	PS1="${Red}->${Reset} "
+		else
+			PS1="${White}${Status}${Reset} ${Red}->${Reset} "
+		fi
 	else
-		PS1="${White}${Status}${Reset} ${Red}->${Reset} "
+		if [ -z $Status ]; then
+			PS1="${White}->${Reset} "
+		else
+			PS1="${Red}${Status}${Reset} ${White}->${Reset} "
+		fi
 	fi
-else
-	if [ -z $Status ]; then
-		PS1="${White}->${Reset} "
-	else
-		PS1="${Red}${Status}${Reset} ${White}->${Reset} "
-	fi
-fi
 
-# PS2
-PS2='   '
-
+	# PS2
+	PS2='   '
 }
 
 PROMPT_COMMAND='PROMPT_PARSER $?'
 
+Make() { [ -f "$1" -a -r "$1" ] && . $1 ;}
+
 # Aliases
-File="$XDG_CONFIG_HOME/bash/aliases"
-[ -f $File -a -r $File ] && . $File
+Make "$XDG_CONFIG_HOME/bash/aliases"
 
 # Functions
-File="$XDG_CONFIG_HOME/bash/functions"
-[ -f $File -a -r $File ] && . $File
+Make "$XDG_CONFIG_HOME/bash/functions"
 
 # Autostart
-File="$XDG_CONFIG_HOME/bash/autostart"
-[ -f $File -a -r $File ] && . $File
+Make "$XDG_CONFIG_HOME/bash/autostart"
 
-unset -v File
+unset -f Make

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Prefered tool to exec as root
-(( $UID == 0 )) || AUTH=doas
+[ $UID -ne 0 ] && AUTH=doas
 
 ## My GitHub directories
 GitHub="$HOME/GitHub/repositories"
@@ -21,7 +21,7 @@ alias mount='mount -v'
 alias umount='umount -v'
 alias fstrim='fstrim -v'
 alias ln='ln -v'
-alias shred='shred -fv'
+alias shred='shred -v'
 alias ls='ls -hFNX -T 0 --color=auto --group-directories-first --show-control-chars' # Minimal ls(1)
 alias ip='ip -color=auto' # Colorful ip(1)
 alias dmesg='dmesg --color=auto -H' # Colorful dmesg(1)
@@ -36,4 +36,4 @@ alias htop="htop -t -u $USER" # It's so much cleaner
 alias xclip='xclip -selection clipboard' # Normal xclip(1) doesn't work for me
 alias vol='pactl get-sink-volume @DEFAULT_SINK@' # Get your volume
 
-unset GitHub GistHub AUTH
+unset -v GitHub GistHub AUTH

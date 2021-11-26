@@ -14,18 +14,19 @@ if [ -d "${ENV_DIR:=$HOME/.config/env.d}" ]; then
 	for File in $ENV_DIR/?*; do
 		check $File
 	done
-	unset -v File
 fi
-unset -v ENV_DIR
+unset -v File ENV_DIR
 
 # Detect current shell.
 if [ "$BASH_VERSION" ]; then
 
-	# INPUTRC
-	INPUTRC="$XDG_CONFIG_HOME/bash/inputrc"
+	BASH_DIR="$XDG_CONFIG_HOME/bash"
 
-	# Just source bash(1) config.
-	source $XDG_CONFIG_HOME/bash/config
+	# INPUTRC
+	INPUTRC="$BASH_DIR/inputrc"
+
+	# User's bash(1) completion.
+	BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME/bash-completion/bash_completion"
 
 	# History
 	HISTCONTROL=ignoredups:erasedups # Who like dups anyway
@@ -33,11 +34,12 @@ if [ "$BASH_VERSION" ]; then
 	HISTFILESIZE=0 # This make history session only
 	HISTSIZE=999
 
-	# User's bash(1) completion.
-	BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME/bash-completion/bash_completion"
+	# Just source bash(1) config.
+	check $HOME/.bashrc || check $BASH_DIR/config
 
 	# bash(1) completion.
 	check /usr/share/bash-completion/bash_completion
+	unset -v BASH_DIR
 
 fi
 unset -f setup check
@@ -45,7 +47,7 @@ unset -f setup check
 # Outdated stuff
 unset -v TERMCAP MANPATH
 
-if [ $UID -ne 0 ]; then
+if [ $UID -ne 0 -a -z "$SSH_TTY" ]; then
 	# My GitHub SSH.
 	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
 		ssh-add $HOME/.ssh/GitHub
