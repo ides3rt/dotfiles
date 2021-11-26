@@ -1,0 +1,55 @@
+# See dunst(5)
+[global]
+	# Prefered monitor
+	monitor = 0
+
+	# Position of notifications
+	origin = top-right
+	offset = 5x5
+
+	# Progress bar
+	progress_bar = false
+
+	# Padding
+	padding = 5
+	horizontal_padding = 5
+
+	# Notifications' frame
+	frame_width = 2
+	frame_color = "#262626"
+
+	# Sort messages by urgency
+	sort = false
+
+	# Font
+	font = Mononoki 9
+
+	# Notifications' format
+	markup = full
+	format = "<b>%s</b>\n%b"
+
+	# Alignment
+	alignment = center
+	vertical_alignment = center
+
+	# History
+	history_length = 0
+
+	# Prefered software
+	dmenu = rofi -dmenu -p 'dunst'
+	browser = firefox
+
+[urgency_low]
+	background = "#2f2f2f"
+	foreground = "#eeeeee"
+	timeout = 2
+
+[urgency_normal]
+	background = "#2f2f2f"
+	foreground = "#eeeeee"
+	timeout = 2
+
+[urgency_critical]
+	background = "#2f2f2f"
+	foreground = "#eeeeee"
+	timeout = 2

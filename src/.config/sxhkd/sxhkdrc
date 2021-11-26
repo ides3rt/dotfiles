@@ -4,15 +4,15 @@
 
 # Terminal
 mod1 + Return
-	alacritty
+	$TERMINAL
 
 # Programs launcher
 mod1 + p
 	rofi -show run -show-icons
 
-# Spawn `firefox`
+# Spawn web browser
 mod1 + w
-	firefox
+	$BROWSER
 
 #
 # System hotkeys
@@ -32,11 +32,11 @@ mod1 + d
 
 # Increase volume
 mod1 + equal
-	pactl set-sink-volume @DEFAULT_SINK@ +5%
+	$HOME/Code/sxhkd/vol +5%
 
 # Decrease volume
 mod1 + minus
-	pactl set-sink-volume @DEFAULT_SINK@ -5%
+	$HOME/Code/sxhkd/vol -5%
 
 # Change keyboard layouts
 mod4 + Escape

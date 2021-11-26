@@ -28,9 +28,14 @@ xsetroot -cursor_name left_ptr
 # Compositor
 picom --experimental-backends &
 
-# Wallpaper
+# Wallpapers
 feh --no-fehbg --bg-fill --randomize $HOME/Pictures/cWallpapers &
 
-sxhkd & # sxhkd(1) is my prefered hotkeys daemon
+# Notifications daemon
+dunst &
 
-exec bspwm # Your favorite WM/DE here!
+# Hotkeys daemon
+sxhkd &
+
+# Your favorite WM/DE here!
+exec bspwm
