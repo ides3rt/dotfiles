@@ -11,6 +11,6 @@ export CXXFLAGS="$CFLAGS"
 export RUSTFLAGS='-C opt-level=2 -C --target-cpu=native'
 
 # make(1)
-export MAKEFLAGS="-j $PROCESSORS -l $PROCESSORS"
+export MAKEFLAGS="-j$PROCESSORS -l$PROCESSORS"
 
 unset -v PROCESSORS
