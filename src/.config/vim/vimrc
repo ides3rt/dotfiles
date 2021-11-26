@@ -154,5 +154,8 @@ noremap <silent> <leader>al :left<CR>
 noremap <silent> <leader>nn :next<CR>
 noremap <silent> <leader>pp :prev<CR>
 
+"https://stackoverflow.com/questions/5240473/in-vim-with-xclip-yank-to-clipboard
+vnoremap <silent> <leader>y "yy <Bar> :call system('xclip -sel c', @y)<CR>
+
 "Source vimrc
 noremap <silent> <leader>rc :source $MYVIMRC<CR>
