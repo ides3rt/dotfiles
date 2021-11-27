@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-if [[ -n "$DISPLAY" ]]; then
-	sed '/^$/d' $HOME/.local/share/quotes | shuf -n 1
-else
-	clear
-fi

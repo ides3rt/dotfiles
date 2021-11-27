@@ -44,6 +44,15 @@ if test "$BASH_VERSION"; then
 fi
 unset -f setup check
 
+# Quotes staff
+if test -n "$DISPLAY"; then
+	while read CurLine; do
+		test -n "$CurLine" && printf '%s\n' "$CurLine"
+	done < $HOME/.local/share/quotes | shuf -n 1
+else
+	clear
+fi
+
 # Outdated stuff
 unset -v TERMCAP MANPATH
 

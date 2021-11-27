@@ -3,7 +3,8 @@
 up() {
 	local Count=${1:-1}
 	while ((Count > 0)); do
-		cd .. && ((Count--))
+		cd .. || return 1
+		((Count--))
 	done
 }
 
