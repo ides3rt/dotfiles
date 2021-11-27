@@ -10,19 +10,22 @@
 	# Progress bar
 	progress_bar = false
 
+	# Separator
+	separator_height = 0
+
 	# Padding
 	padding = 5
 	horizontal_padding = 5
 
 	# Notifications' frame
 	frame_width = 2
-	frame_color = "#262626"
+	frame_color = "#fff"
 
 	# Sort messages by urgency
 	sort = false
 
 	# Font
-	font = Mononoki 9
+	font = Roboto Mono 9
 
 	# Notifications' format
 	markup = full
@@ -32,6 +35,9 @@
 	alignment = center
 	vertical_alignment = center
 
+	# Hidden notifications
+	hide_duplicate_count = true
+
 	# History
 	history_length = 0
 
@@ -39,17 +45,20 @@
 	dmenu = rofi -dmenu -p 'dunst'
 	browser = firefox
 
+	# Rounded corners
+	corner_radius = 5
+
 [urgency_low]
-	background = "#2f2f2f"
-	foreground = "#eeeeee"
+	background = "#000"
+	foreground = "#fff"
 	timeout = 2
 
 [urgency_normal]
-	background = "#2f2f2f"
-	foreground = "#eeeeee"
+	background = "#000"
+	foreground = "#fff"
 	timeout = 2
 
 [urgency_critical]
-	background = "#2f2f2f"
-	foreground = "#eeeeee"
+	background = "#000"
+	foreground = "#fff"
 	timeout = 2

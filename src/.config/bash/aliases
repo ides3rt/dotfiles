@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Prefered tool to exec as root
-[ $UID -ne 0 ] && AUTH=doas
+((UID == 0)) || AUTH=doas
 
 ## My GitHub directories
 GitHub="$HOME/GitHub/repositories"
@@ -34,7 +34,7 @@ alias media="cd /media/$USER"
 alias doas='doas ' # Required, if you want aliases to work with doas(1)
 alias sudo='sudo ' # Required, if you want aliases to work with sudo(8)
 alias htop="htop -t -u $USER" # It's so much cleaner
-alias xclip='xclip -selection clipboard' # Normal xclip(1) doesn't work for me
+alias xclip='xclip -sel c' # Normal xclip(1) doesn't work for me
 alias vol='pactl get-sink-volume @DEFAULT_SINK@' # Get your volume
 
 unset -v GitHub GistHub AUTH

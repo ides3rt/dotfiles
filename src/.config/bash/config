@@ -31,25 +31,24 @@ bind -m vi "o":forward-char
 bind -m vi "h":vi-insertion-mode
 
 PROMPT_PARSER() {
-	# Reset
-	local Reset='\[\e[0m\]'
-
 	# Colors
 	local Red='\[\e[1;91m\]'
 	local White='\[\e[1;97m\]'
+	local Reset='\[\e[0m\]'
 
+	# Status
 	local Status=$1
-	[ $Status -eq 0 ] && unset -v Status
+	((Status == 0)) && unset -v Status
 
 	# PS1
-	if [ $UID -eq 0 ]; then
-		if [ -z $Status ]; then
+	if ((UID == 0)); then
+		if [[ -z $Status ]]; then
 		 	PS1="${Red}->${Reset} "
 		else
 			PS1="${White}${Status}${Reset} ${Red}->${Reset} "
 		fi
 	else
-		if [ -z $Status ]; then
+		if [[ -z $Status ]]; then
 			PS1="${White}->${Reset} "
 		else
 			PS1="${Red}${Status}${Reset} ${White}->${Reset} "
@@ -62,7 +61,7 @@ PROMPT_PARSER() {
 
 PROMPT_COMMAND='PROMPT_PARSER $?'
 
-Make() { [ -f "$1" -a -r "$1" ] && . $1 ;}
+Make() { [[ -f $1 && -r $1 ]] && . $1 ;}
 
 # Aliases
 Make "$XDG_CONFIG_HOME/bash/aliases"

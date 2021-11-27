@@ -1,42 +1,30 @@
 #!/usr/bin/env bash
 
 up() {
-	# Only `cd ..` if nothing provide
-	[ -z "$1" ] && cd .. && return 0
-
-	# ERR if alphabet provide (BASHISM)
-	[[ $1 =~ ^[0-9]+$ ]] || return 1
-
-	# Remove start 0 to prevent errors
-	local Number=${1#*0}
-
-	# ${VAR:-0} and ${VAR:-.} is require incase user provide 0
-	while [ ${Number:-0} -gt 0 ]; do
-		local Directories="../$Directories" && let Number--
+	local Count=${1:-1}
+	while ((Count > 0)); do
+		cd .. && ((Count--))
 	done
-	cd ${Directories:-.}
 }
 
-lspkg() { # Inspired by TFL/LL
-	# Only `ls /var/cache/pacman/pkg` if nothing provide
-	if [ -z "$1" ]; then
-		ls -1 -I '*.sig' /var/cache/pacman/pkg/
-	else
-		ls -1 -I '*.sig' /var/cache/pacman/pkg/ | grep -Ei "$*"
-	fi
+lspkg() { # (Name) Inspired by TFL/LL
+	for File in /var/cache/pacman/pkg/?*; do
+		[[ "$File" =~ '.sig'$ ]] ||
+			printf '%s\n' "${File#/var/cache/pacman/pkg/}"
+	done
 }
 
 build() {
 	# Check if AUR dir exist or not
-	[ -d "$1" ] || return 1
+	[[ -d "$1" ]] || return 1
 
-	## Chcek if AUR up to date or not
+	# Check if AUR up to date or not
 	git --git-dir=$1/.git/ pull || return 1
 
-	## Set build dir
+	# Set build dir
 	local BuildDir="${TMPDIR:-/tmp}/build-$SRANDOM"
 
-	## Copy AUR to build dir, exit with status 1 if fails
+	# Copy AUR to build dir, exit with status 1 if fails
 	cp -r $1 $BuildDir &>/dev/null || return 1
 
 	# Build AUR, exit with status 1 if fails

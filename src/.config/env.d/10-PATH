@@ -2,7 +2,7 @@
 
 ## PATH
 Add(){
-	if [ -d "$1" ]; then
+	if test -d "$1"; then
 		case ":$PATH:" in
 			*:"$1":*) ;;
 			*) PATH+=":$1" ;;

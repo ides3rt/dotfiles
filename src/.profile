@@ -7,10 +7,10 @@ umask 077
 export TERM=xterm-256color
 
 # Source config.
-check() { [ -f "$1" -a -r "$1" ] && . $1 ;}
+check() { test -f "$1" -a -r "$1" && . $1 ;}
 
 # Source environment variables.
-if [ -d "${ENV_DIR:=$HOME/.config/env.d}" ]; then
+if test -d "${ENV_DIR:=$HOME/.config/env.d}"; then
 	for File in $ENV_DIR/?*; do
 		check $File
 	done
@@ -18,7 +18,7 @@ fi
 unset -v File ENV_DIR
 
 # Detect current shell.
-if [ "$BASH_VERSION" ]; then
+if test "$BASH_VERSION"; then
 
 	BASH_DIR="$XDG_CONFIG_HOME/bash"
 
@@ -47,7 +47,7 @@ unset -f setup check
 # Outdated stuff
 unset -v TERMCAP MANPATH
 
-if [ $UID -ne 0 -a -z "$SSH_TTY" ]; then
+if test $UID -ne 0 -a -z "$SSH_TTY"; then
 	# My GitHub SSH.
 	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
 		ssh-add $HOME/.ssh/GitHub
@@ -55,7 +55,7 @@ if [ $UID -ne 0 -a -z "$SSH_TTY" ]; then
 	fi
 
 	# Run xinit(1) when in tty1.
-	if [ -z "$DISPLAY" -a "$XDG_VTNR" -eq 1 ]; then
+	if test -z "$DISPLAY" -a "$XDG_VTNR" -eq 1; then
 		exec xinit Xorg -- :0 vt$XDG_VTNR
 	fi
 fi

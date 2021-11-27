@@ -4,17 +4,18 @@
 X11_DIR="$XDG_CONFIG_HOME/X11"
 
 # Source autostart scripts
-if Dir="$X11_DIR/xinitrc.d" && [ -d "$Dir" ]; then
-	for File in $Dir/?*.sh; do
-		[ -f "$File" -a -x "$File" ] && . $File
+if test -d "$X11_DIR/xinitrc.d"; then
+	for File in $X11_DIR/xinitrc.d/?*.sh; do
+		test -f "$File" -a -x "$File" && . $File
 	done
 fi
 
 # Xresources
-if File="$X11_DIR/Xresources"; then
-	[ -f "$File" -a -r "$File" ] && xrdb -load $File
-fi
-unset -v X11_DIR File Dir
+File="$X11_DIR/Xresources"
+test -f "$File" -a -r "$File" && xrdb -load $File
+
+# Unset variables
+unset -v X11_DIR File
 
 # X session manager
 lxsession &

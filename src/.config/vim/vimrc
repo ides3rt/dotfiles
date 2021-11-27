@@ -4,7 +4,6 @@ if !exists('$XDG_CACHE_HOME') | let $XDG_CACHE_HOME="$HOME/.cache" | endif
 
 "XDG PATH
 set runtimepath^=$XDG_CONFIG_HOME/vim
-set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 
 "Syntax and Filetype
 if has('syntax')
@@ -114,6 +113,7 @@ set ttimeoutlen=0
 "Make data store in `viminfo` as least as possible
 if has('viminfo')
 	set viminfo='0,:0,<0,@0,f0
+	set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 endif
 
 "Ignorecase when auto complete
