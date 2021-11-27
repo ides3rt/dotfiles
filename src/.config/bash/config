@@ -37,8 +37,7 @@ PROMPT_PARSER() {
 	local Reset='\[\e[0m\]'
 
 	# Status
-	local Status=$1
-	((Status == 0)) && unset -v Status
+	(($1 == 0)) || local Status=$1
 
 	# PS1
 	if ((UID == 0)); then
