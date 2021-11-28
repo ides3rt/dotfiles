@@ -1,6 +1,5 @@
 configuration {
   modi: "drun,run,ssh,window,windowcd,combi,keys,filebrowser";
-  theme: "Arc-Dark";
   font: "Roboto Mono Medium 10";
   icon-theme: "Papirus";
   display-drun: "Run";
@@ -8,3 +7,4 @@ configuration {
   display-ssh: "SSH";
   display-window: "Windows";
 }
+@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
