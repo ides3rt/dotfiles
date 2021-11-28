@@ -112,7 +112,7 @@ set softtabstop=4
 set tabstop=4
 
 "Disable some verbosity
-set shortmess+=F
+set shortmess=filnxtToOFS
 
 "Don't show commands [vim(1) default]
 set noshowcmd
