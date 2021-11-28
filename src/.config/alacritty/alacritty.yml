@@ -35,23 +35,23 @@ schemes:
   ides3rt-v1: &ides3rt-v1
     # Default colors
     primary:
-      background: '#0f0f0f'
-      foreground: '#eeeeee'
+      background: '#060606'
+      foreground: '#dddddd'
 
     # Normal colors
     normal:
-      black:   '#282828'
+      black:   '#000000'
       red:     '#cc241d'
       green:   '#689d6a'
       yellow:  '#d7d700'
       blue:    '#0073e5'
       magenta: '#b16286'
       cyan:    '#5cc9ff'
-      white:   '#bbbbbb'
+      white:   '#dddddd'
 
     # Bright colors
     bright:
-      black:   '#6c6c6c'
+      black:   '#222222'
       red:     '#fb4934'
       green:   '#8ec07c'
       yellow:  '#d7d787'
@@ -70,8 +70,8 @@ schemes:
         background: CellForeground
 
       bar:
-        background: '#0f0f0f'
-        foreground: '#eeeeee'
+        background: '#060606'
+        foreground: '#dddddd'
 
 colors: *ides3rt-v1
 
@@ -79,7 +79,7 @@ colors: *ides3rt-v1
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.9
+background_opacity: 0.95
 
 cursor:
   # Cursor style
@@ -90,7 +90,7 @@ cursor:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Underline
+    shape: Block
 
     # Cursor blinking state
     #
@@ -99,7 +99,7 @@ cursor:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    blinking: Always
+    blinking: Never
 
   # Vi mode cursor style
   #
@@ -127,17 +127,19 @@ mouse:
   hide_when_typing: true
 
 key_bindings:
+  # Spawn alacritty(1) on current directory
+  - { key: Return, mods: Control, action: SpawnNewInstance }
+
   # Vi Mode
-  - { key: Escape, mods: Alt, mode: ~Search, action: ToggleViMode }
-  - { key: H, mode: Vi|~Search, action: ScrollToBottom }
-  - { key: H, mode: Vi|~Search, action: ToggleViMode }
-  - { key: N, mode: Vi|~Search, action: Left }
-  - { key: E, mode: Vi|~Search, action: Down }
-  - { key: I, mode: Vi|~Search, action: Up }
-  - { key: O, mode: Vi|~Search, action: Right }
-  - { key: L, mode: Vi|~Search, action: SearchNext }
-  - { key: L, mods: Shift, mode: Vi|~Search, action: SearchPrevious }
-  - { key: Return, mods: Super, action: SpawnNewInstance }
+  - { key: Space, mods: Control, mode: ~Search,    action: ToggleViMode }
+  - { key: H,                    mode: Vi|~Search, action: ScrollToBottom }
+  - { key: H,                    mode: Vi|~Search, action: ToggleViMode }
+  - { key: N,                    mode: Vi|~Search, action: Left }
+  - { key: E,                    mode: Vi|~Search, action: Down }
+  - { key: I,                    mode: Vi|~Search, action: Up }
+  - { key: O,                    mode: Vi|~Search, action: Right }
+  - { key: L,                    mode: Vi|~Search, action: SearchNext }
+  - { key: L,     mods: Shift,   mode: Vi|~Search, action: SearchPrevious }
 
 debug:
   # Keep the log file after quitting Alacritty.

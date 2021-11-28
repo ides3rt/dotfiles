@@ -19,6 +19,9 @@ export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
 # XAUTHORITY
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
+# BSPWM
+export BSPWM_SOCKET="$XDG_RUNTIME_DIR/bspwm${XDG_VTNR}-socket"
+
 # LESS
 export LESSKEYIN="$XDG_CONFIG_HOME/less/config"
 

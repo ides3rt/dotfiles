@@ -1,11 +1,10 @@
-" `colemak` style movement
+"`colemak' style movement
 noremap <silent> n h
 noremap <silent> e gj
 noremap <silent> i gk
 noremap <silent> o l
-noremap j <Nop>
 
-"Keys get overwrite by `colemak`
+"Keys get overwrite by `colemak'
 noremap <silent> h i
 noremap <silent> l n
 noremap <silent> k o
@@ -19,6 +18,8 @@ noremap <silent> K O
 noremap <silent> E 10gj
 noremap <silent> I 10gk
 
-"Move the current line up or down
-noremap <silent> <C-e> :move +1<CR>
-noremap <silent> <C-i> :move -2<CR>
+"Tabs
+noremap <silent> <C-n> <C-w>h
+noremap <silent> <C-e> <C-w>j
+noremap <silent> <C-i> <C-w>k
+noremap <silent> <C-o> <C-w>l

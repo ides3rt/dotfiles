@@ -12,7 +12,7 @@ if has('syntax')
 	filetype on
 
 	if !has('gui_running')
-		colorscheme ides3rt
+		colorscheme ides3rt-v2
 		set ttyfast
 	endif
 
@@ -21,7 +21,7 @@ if has('syntax')
 endif
 
 "Use <space> as my <leader>
-noremap <space> <Nop>
+noremap <space> <nop>
 let mapleader=" "
 
 "Plugins variables
@@ -41,6 +41,9 @@ set autoread
 
 "Make <BACKSPACE> works
 set backspace=indent,eol,start
+
+"Disable bell
+set belloff=all
 
 "Copy existing indent
 set copyindent
@@ -64,6 +67,12 @@ endif
 "Ignorecase
 set ignorecase
 
+"Disable `langnoremap' its on for bwcom [in nvim(1)]
+set nolangnoremap
+
+"Disable `langremap' its on for bwcom
+set nolangremap
+
 "Good performence boost
 set lazyredraw
 
@@ -79,6 +88,9 @@ set nomodeline
 "Don't use more() format
 set nomore
 
+"Set `nrformats' to recom' values
+set nrformats=bin,hex
+
 "Set `numberwidth` to 2
 if has('linebreak')
 	set numberwidth=2
@@ -87,20 +99,38 @@ endif
 "Don't allow :autocmd, shell and write commands
 set secure
 
+"Make DOS compatible with Unix [nvim(1) defaults]
+if has('mksession')
+	set sessionoptions=blank,buffers,curdir,folds,help,tabpages,slash,winsize,terminal,unix
+	set viewoptions=folds,cursor,slash,unix,curdir
+endif
+
 "Set <TAB> to 4 spaces
+set nosmarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
+
+"Disable some verbosity
+set shortmess+=F
+
+"Don't show commands [vim(1) default]
+set noshowcmd
 
 "When a bracket is inserted, briefly jump to the matching one
 set showmatch
 
 "Make cursor always at the middle of the screen
+set sidescroll=0
 set sidescrolloff=999
 set scrolloff=999
 
-"Always splitright
+"Always split using alternative side
+set splitbelow
 set splitright
+
+"Don't move cursor to sol [nvim(1) default]
+set nostartofline
 
 "Don't create `swapfile`
 set noswapfile
@@ -132,12 +162,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 "Auto remove trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
-
-"Disable arrow keys
-noremap <up> <Nop>
-noremap <down> <Nop>
-noremap <left> <Nop>
-noremap <right> <Nop>
 
 "Toggle `ignorecase`
 noremap <silent> <leader>ii :set ignorecase!<CR>

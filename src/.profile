@@ -58,7 +58,7 @@ if test $UID -ne 0 -a -z "$SSH_TTY"; then
 	fi
 
 	# My GitHub SSH
-	if [ -z "$SSH_AGENT_PID" ] && eval `ssh-agent -s`; then
+	if test -z "$SSH_AGENT_PID" && eval `ssh-agent -s`; then
 		ssh-add $HOME/.ssh/GitHub
 		trap 'eval `ssh-agent -k`' EXIT
 	fi

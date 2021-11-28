@@ -39,7 +39,7 @@ mod1 + minus
 	$HOME/Code/sxhkd/volume -5%
 
 # Change keyboard layouts
-mod4 + Escape
+ctrl + Tab
 	$HOME/Code/sxhkd/keymaps
 
 #
@@ -70,10 +70,6 @@ mod1 + {t,f,space}
 mod1 + s
 	bspc node -g sticky
 
-# Change focused window's node
-# mod1 + {m,x,z}
-# 	bspc node -g {marked,locked,private}
-
 # Focus the node in the given direction
 mod1 + {_,shift + }{n,e,i,o}
 	bspc node -{f,s} {west,south,north,east}
@@ -93,10 +89,6 @@ mod1 + ctrl + {1-9}
 # Cancel the preselection for the focused node
 mod1 + ctrl + r
 	bspc node -p cancel
-
-# Move a floating window
-mod4 + shift + {n,e,i,o}
-	bspc node -v {-100 0,0 100,0 -100,100 0}
 
 # Grow focused window's width
 mod4 + n
