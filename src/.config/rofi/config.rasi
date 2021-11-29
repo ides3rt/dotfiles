@@ -1,10 +1,8 @@
 configuration {
-  modi: "drun,run,ssh,window,windowcd,combi,keys,filebrowser";
-  font: "Roboto Mono Medium 10";
-  icon-theme: "Papirus";
-  display-drun: "Run";
-  display-run: "Run";
-  display-ssh: "SSH";
-  display-window: "Windows";
+	modi: "run,drun";
+	font: "Mononoki Nerd Font Regular 11";
+	icon-theme: "Papirus";
+	display-run: "Run: ";
+	display-drun: "dRun: ";
 }
-@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+@theme "/home/ides3rt/.config/rofi/themes/ides3rt-v1.rasi"

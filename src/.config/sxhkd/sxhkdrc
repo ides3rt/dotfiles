@@ -8,7 +8,7 @@ mod1 + Return
 
 # Programs launcher
 mod1 + p
-	rofi -show run -show-icons
+	rofi -show run
 
 # Spawn web browser
 mod1 + w
