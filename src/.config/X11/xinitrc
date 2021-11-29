@@ -11,7 +11,7 @@ if test -d "$X11_DIR/xinitrc.d"; then
 fi
 
 # Xresources
-File="$X11_DIR/Xresources"
+File="$X11_DIR/xresources"
 test -f "$File" -a -r "$File" && xrdb -load $File
 
 # Unset variables
