@@ -31,7 +31,7 @@ font:
   size: 14.0
 
 schemes:
-  # ides3rt-v1 colors scheme
+  # ides3rt-v1 colors scheme (base on "GruvBox-Dark")
   ides3rt-v1: &ides3rt-v1
     # Default colors
     primary:
@@ -45,18 +45,18 @@ schemes:
       green:   '#689d6a'
       yellow:  '#d7d700'
       blue:    '#0073e5'
-      magenta: '#b16286'
+      magenta: '#9051f7'
       cyan:    '#5cc9ff'
-      white:   '#dddddd'
+      white:   '#aaaaaa'
 
     # Bright colors
     bright:
-      black:   '#222222'
+      black:   '#555555'
       red:     '#fb4934'
       green:   '#8ec07c'
       yellow:  '#d7d787'
       blue:    '#3584e4'
-      magenta: '#d3869b'
+      magenta: '#a57de6'
       cyan:    '#87d7ff'
       white:   '#ffffff'
 
