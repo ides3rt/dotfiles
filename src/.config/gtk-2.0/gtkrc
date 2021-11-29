@@ -1,10 +1,7 @@
 gtk-theme-name="Arc-Dark-solid"
 gtk-icon-theme-name="Papirus"
-gtk-font-name="Noto Sans Mono Medium 11"
+gtk-font-name="Mononoki Nerd Font Mono 12"
 gtk-cursor-theme-name="Afterglow-cursors"
-gtk-cursor-theme-size=0
-gtk-enable-event-sounds=0
-gtk-enable-input-feedback-sounds=0
 gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintslight"
