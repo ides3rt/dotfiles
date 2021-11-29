@@ -3,15 +3,12 @@
 # Set default permissions to `drwx------` and `-rw-------`
 umask 077
 
-# 256-colors
-export TERM=xterm-256color
-
 # Source config
 check() { test -f "$1" -a -r "$1" && . $1 ;}
 
 # Source environment variables
 if test -d "${ENV_DIR:=$HOME/.config/env.d}"; then
-	for File in $ENV_DIR/?*; do
+	for File in $ENV_DIR/?*.conf; do
 		check $File
 	done
 fi
@@ -43,9 +40,6 @@ if test "$BASH_VERSION"; then
 
 fi
 unset -f setup check
-
-# Outdated stuff
-unset -v TERMCAP MANPATH
 
 if test $UID -ne 0 -a -z "$SSH_TTY"; then
 	# Quotes staff
