@@ -4,15 +4,15 @@
 umask 077
 
 # Source config
-check() { test -f "$1" -a -r "$1" && . $1 ;}
+function check { test -f "$1" -a -r "$1" && . $1 ;}
 
 # Source environment variables
-if test -d "${ENV_DIR:=$HOME/.config/env.d}"; then
-	for File in $ENV_DIR/?*.conf; do
+if test -d "$HOME/.config/env.d"; then
+	for File in $HOME/.config/env.d/*.conf; do
 		check $File
 	done
+	unset -v File
 fi
-unset -v File ENV_DIR
 
 # Detect current shell
 if test "$BASH_VERSION"; then
@@ -39,7 +39,7 @@ if test "$BASH_VERSION"; then
 	unset -v BASH_DIR
 
 fi
-unset -f setup check
+unset -f check
 
 if test $UID -ne 0 -a -z "$SSH_TTY"; then
 	# Quotes staff

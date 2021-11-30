@@ -5,13 +5,13 @@ X11_DIR="$XDG_CONFIG_HOME/X11"
 
 # Source autostart scripts
 if test -d "$X11_DIR/xinitrc.d"; then
-	for File in $X11_DIR/xinitrc.d/?*.sh; do
+	for File in $X11_DIR/xinitrc.d/*.sh; do
 		test -f "$File" -a -x "$File" && . $File
 	done
 fi
 
 # Xresources
-File="$X11_DIR/xresources"
+File="$X11_DIR/Xresources"
 test -f "$File" -a -r "$File" && xrdb -load $File
 
 # Unset variables
@@ -26,11 +26,11 @@ setxkbmap us -variant colemak
 # bspwm(1) doesn't set cursor by default
 xsetroot -cursor_name left_ptr
 
+# Wallpapers
+feh --no-fehbg --bg-fill $HOME/Pictures/cWallpapers/Wallpaper_002.png &
+
 # Compositor
 picom --experimental-backends &
-
-# Wallpapers
-feh --no-fehbg --bg-fill --randomize $HOME/Pictures/cWallpapers/Wallpaper_002.png &
 
 # Notifications daemon
 dunst &

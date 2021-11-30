@@ -24,23 +24,23 @@ Print
 
 # Advance screenshot options
 shift + Print
-	$HOME/Code/rofi/screenshot
+	bash $HOME/Code/rofi/screenshot
 
 # Open my dictionary script
 mod1 + d
-	$HOME/Code/rofi/dictionary
+	sh $HOME/Code/rofi/dictionary
 
 # Increase volume
 mod1 + equal
-	$HOME/Code/sxhkd/volume +5%
+	bash $HOME/Code/sxhkd/volume +5%
 
 # Decrease volume
 mod1 + minus
-	$HOME/Code/sxhkd/volume -5%
+	bash $HOME/Code/sxhkd/volume -5%
 
 # Change keyboard layouts
 ctrl + Tab
-	$HOME/Code/sxhkd/keymaps
+	bash $HOME/Code/sxhkd/keymaps
 
 #
 # BSPWM hotkeys
