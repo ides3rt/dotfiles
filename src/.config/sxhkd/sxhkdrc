@@ -32,11 +32,11 @@ mod1 + d
 
 # Increase volume
 mod1 + equal
-	bash $HOME/Code/sxhkd/volume +5%
+	sh $HOME/Code/sxhkd/volume +5%
 
 # Decrease volume
 mod1 + minus
-	bash $HOME/Code/sxhkd/volume -5%
+	sh $HOME/Code/sxhkd/volume -5%
 
 # Change keyboard layouts
 ctrl + Tab
