@@ -16,11 +16,8 @@ fi
 
 # Detect current shell
 if test "$BASH_VERSION"; then
-
-	BASH_DIR="$XDG_CONFIG_HOME/bash"
-
 	# INPUTRC
-	INPUTRC="$BASH_DIR/inputrc"
+	INPUTRC="$XDG_CONFIG_HOME/bash/inputrc"
 
 	# User's bash(1) completion
 	BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME/bash-completion/bash_completion"
@@ -32,12 +29,10 @@ if test "$BASH_VERSION"; then
 	HISTSIZE=999
 
 	# Just source bash(1) config
-	check $HOME/.bashrc || check $BASH_DIR/config
+	check $HOME/.bashrc || check $XDG_CONFIG_HOME/bash/config
 
 	# bash(1) completion
 	check /usr/share/bash-completion/bash_completion
-	unset -v BASH_DIR
-
 fi
 unset -f check
 

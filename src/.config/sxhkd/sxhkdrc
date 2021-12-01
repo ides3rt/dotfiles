@@ -39,7 +39,7 @@ mod1 + minus
 	sh $HOME/Code/sxhkd/volume -5%
 
 # Change keyboard layouts
-ctrl + Tab
+mod4 + Escape
 	bash $HOME/Code/sxhkd/keymaps
 
 #

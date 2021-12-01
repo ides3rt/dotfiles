@@ -40,7 +40,7 @@ func! ToggleStatus()
 			set laststatus=2
 		endif
 
-    endif
+	endif
 endfunction
 call ToggleStatus()
 

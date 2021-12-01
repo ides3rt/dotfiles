@@ -131,15 +131,15 @@ key_bindings:
   - { key: Return, mods: Control, action: SpawnNewInstance }
 
   # Vi Mode
-  - { key: Space, mods: Control, mode: ~Search,    action: ToggleViMode }
-  - { key: H,                    mode: Vi|~Search, action: ScrollToBottom }
-  - { key: H,                    mode: Vi|~Search, action: ToggleViMode }
-  - { key: N,                    mode: Vi|~Search, action: Left }
-  - { key: E,                    mode: Vi|~Search, action: Down }
-  - { key: I,                    mode: Vi|~Search, action: Up }
-  - { key: O,                    mode: Vi|~Search, action: Right }
-  - { key: L,                    mode: Vi|~Search, action: SearchNext }
-  - { key: L,     mods: Shift,   mode: Vi|~Search, action: SearchPrevious }
+  - { key: Escape, mods: Control, mode: ~Search,    action: ToggleViMode }
+  - { key: H,                     mode: Vi|~Search, action: ScrollToBottom }
+  - { key: H,                     mode: Vi|~Search, action: ToggleViMode }
+  - { key: N,                     mode: Vi|~Search, action: Left }
+  - { key: E,                     mode: Vi|~Search, action: Down }
+  - { key: I,                     mode: Vi|~Search, action: Up }
+  - { key: O,                     mode: Vi|~Search, action: Right }
+  - { key: L,                     mode: Vi|~Search, action: SearchNext }
+  - { key: L,     mods: Shift,    mode: Vi|~Search, action: SearchPrevious }
 
 debug:
   # Keep the log file after quitting Alacritty.

@@ -14,9 +14,11 @@ noremap <silent> H I
 noremap <silent> L N
 noremap <silent> K O
 
-"Move up and down
+"Move 10 times
+noremap <silent> N 10h
 noremap <silent> E 10gj
 noremap <silent> I 10gk
+noremap <silent> O 10l
 
 "Tabs
 noremap <silent> <C-n> <C-w>h
