@@ -131,7 +131,7 @@ key_bindings:
   - { key: Return, mods: Control, action: SpawnNewInstance }
 
   # Vi Mode
-  - { key: Escape, mods: Control, mode: ~Search,    action: ToggleViMode }
+  - { key: Space, mods: Control, mode: ~Search,    action: ToggleViMode }
   - { key: H,                     mode: Vi|~Search, action: ScrollToBottom }
   - { key: H,                     mode: Vi|~Search, action: ToggleViMode }
   - { key: N,                     mode: Vi|~Search, action: Left }

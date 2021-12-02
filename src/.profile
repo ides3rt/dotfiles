@@ -4,7 +4,7 @@
 umask 077
 
 # Source config
-function check { test -f "$1" -a -r "$1" && . $1 ;}
+check() { test -f "$1" -a -r "$1" && . $1 ;}
 
 # Source environment variables
 if test -d "$HOME/.config/env.d"; then

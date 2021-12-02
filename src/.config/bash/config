@@ -30,7 +30,7 @@ bind -m vi "o":forward-char
 # Use `h` for insert mode
 bind -m vi "h":vi-insertion-mode
 
-function PROMPT_PARSER {
+PROMPT_PARSER() {
 	# Colors
 	local Red='\e[1;91m'
 	local White='\e[1;97m'
@@ -72,7 +72,7 @@ function PROMPT_PARSER {
 
 PROMPT_COMMAND='PROMPT_PARSER $?'
 
-function Make { [[ -f $1 && -r $1 ]] && . $1 ;}
+Make() { [[ -f $1 && -r $1 ]] && . $1 ;}
 
 # Aliases
 Make "$XDG_CONFIG_HOME/bash/aliases"

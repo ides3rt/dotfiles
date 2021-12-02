@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ## Prefered tool to exec as root
-((UID == 0)) || AUTH=doas
+((UID)) && AUTH=doas
 
 ## My GitHub directories
 GitHub="$HOME/GitHub/repositories"

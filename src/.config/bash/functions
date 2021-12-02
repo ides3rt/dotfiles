@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function up {
+up() {
 	local Count=${1:-1}
 	while ((Count > 0)); do
 		cd .. || return 1
@@ -8,14 +8,14 @@ function up {
 	done
 }
 
-function lspkg { # (Name) Inspired by TFL/LL
+lspkg() { # [name] Inspired by TFL/LL
 	for File in /var/cache/pacman/pkg/?*; do
 		[[ "$File" =~ '.sig'$ ]] ||
 			printf '%s\n' "${File#/var/cache/pacman/pkg/}"
 	done
 }
 
-function build {
+build() {
 	# Check if AUR dir exist or not
 	[[ -d "$1" ]] || return 1
 
