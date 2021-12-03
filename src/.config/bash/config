@@ -16,6 +16,7 @@ bind "\C-l":clear-display
 
 # zsh(1) like menu completion
 bind "TAB":menu-complete
+bind '"\e[Z":menu-complete-backward'
 
 # emacs(1) keys
 bind "\C-a":beginning-of-line
