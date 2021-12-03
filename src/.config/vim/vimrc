@@ -76,6 +76,9 @@ set nolangremap
 "Good performence boost
 set lazyredraw
 
+"The characters shown when `<leader>list` (`set list`) is used
+set listchars=tab:»→,trail:␣
+
 "Don't auto load plugins
 set noloadplugins
 
@@ -177,6 +180,9 @@ noremap <silent> <leader>al :left<CR>
 "When you open multiple files
 noremap <silent> <leader>nn :next<CR>
 noremap <silent> <leader>pp :prev<CR>
+
+"Show the `list' characters
+noremap <silent> <leader>ls :set list!<CR>
 
 "https://stackoverflow.com/questions/5240473/in-vim-with-xclip-yank-to-clipboard
 vnoremap <silent> <leader>y "yy <Bar> :call system('xclip -sel c', @y)<CR>
