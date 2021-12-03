@@ -24,7 +24,7 @@ Print
 
 # Advance screenshot options
 shift + Print
-	bash $HOME/Code/rofi/screenshot
+	sh $HOME/Code/rofi/screenshot
 
 # Open my dictionary script
 mod1 + d
@@ -40,7 +40,7 @@ mod1 + minus
 
 # Change keyboard layouts
 mod4 + Escape
-	bash $HOME/Code/sxhkd/keymaps
+	sh $HOME/Code/sxhkd/keymaps
 
 #
 # BSPWM hotkeys
