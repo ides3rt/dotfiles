@@ -12,7 +12,7 @@ if has('syntax')
 	filetype on
 
 	if !has('gui_running')
-		colorscheme ides3rt-v2
+		colorscheme ides3rt-v3
 		set ttyfast
 	endif
 
