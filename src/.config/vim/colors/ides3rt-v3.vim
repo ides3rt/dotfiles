@@ -6,6 +6,7 @@ hi Boolean            ctermbg=none         ctermfg=254
 hi Character          ctermbg=none         ctermfg=254
 hi ColorColumn        ctermbg=233          ctermfg=15         cterm=bold
 hi Comment            ctermbg=none         ctermfg=59
+hi Conceal            ctermbg=none         ctermfg=254
 hi Condtional         ctermbg=none         ctermfg=254
 hi Constant           ctermbg=none         ctermfg=254
 hi CursorColumn       ctermbg=233          ctermfg=none
@@ -32,6 +33,8 @@ hi IncSearch          ctermbg=none         ctermfg=none
 hi Keyword            ctermbg=none         ctermfg=254
 hi Label              ctermbg=none         ctermfg=254
 hi LineNr             ctermbg=none         ctermfg=238
+hi LineNrAbove        ctermbg=none         ctermfg=238
+hi LineNrBelow        ctermbg=none         ctermfg=238
 hi Macro              ctermbg=none         ctermfg=254
 hi MatchParen         ctermbg=none         ctermfg=254
 hi ModeMsg            ctermbg=none         ctermfg=254
@@ -49,9 +52,9 @@ hi PreProc            ctermbg=none         ctermfg=254
 hi Question           ctermbg=none         ctermfg=254
 hi Repeat             ctermbg=none         ctermfg=254
 hi Search             ctermbg=none         ctermfg=186
+hi Special            ctermbg=none         ctermfg=254
 hi SpecialChar        ctermbg=none         ctermfg=254
 hi SpecialComment     ctermbg=none         ctermfg=254
-hi Special            ctermbg=none         ctermfg=254
 hi SpecialKey         ctermbg=none         ctermfg=254
 hi SpellBad           ctermbg=15           ctermfg=0
 hi SpellCap           ctermbg=none         ctermfg=254
@@ -68,6 +71,7 @@ hi Tag                ctermbg=none         ctermfg=254
 hi Title              ctermbg=none         ctermfg=254
 hi Todo               ctermbg=none         ctermfg=254
 hi Type               ctermbg=none         ctermfg=109
+hi Underlined         ctermbg=none         ctermfg=14         cterm=none
 hi Visual             ctermbg=none         ctermfg=186
 hi WarningMsg         ctermbg=none         ctermfg=254
 hi WildMenu           ctermbg=none         ctermfg=254
