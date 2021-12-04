@@ -70,7 +70,7 @@ hi TabLineFill        ctermbg=none         ctermfg=254
 hi Tag                ctermbg=none         ctermfg=254
 hi Title              ctermbg=none         ctermfg=254
 hi Todo               ctermbg=none         ctermfg=254
-hi Type               ctermbg=none         ctermfg=109
+hi Type               ctermbg=none         ctermfg=103
 hi Underlined         ctermbg=none         ctermfg=14         cterm=none
 hi Visual             ctermbg=none         ctermfg=186
 hi WarningMsg         ctermbg=none         ctermfg=254
