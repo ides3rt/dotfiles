@@ -8,7 +8,6 @@ hi Boolean            ctermbg=none         ctermfg=254
 hi Character          ctermbg=none         ctermfg=254
 hi ColorColumn        ctermbg=233          ctermfg=15         cterm=bold
 hi Comment            ctermbg=none         ctermfg=59
-hi Conceal            ctermbg=none         ctermfg=254
 hi Condtional         ctermbg=none         ctermfg=254
 hi Constant           ctermbg=none         ctermfg=254
 hi CursorColumn       ctermbg=233          ctermfg=none
@@ -71,9 +70,9 @@ hi Structure          ctermbg=none         ctermfg=254
 hi TabLineFill        ctermbg=none         ctermfg=254
 hi Tag                ctermbg=none         ctermfg=254
 hi Title              ctermbg=none         ctermfg=254
-hi Todo               ctermbg=none         ctermfg=254
+hi Todo               ctermbg=102          ctermfg=0          cterm=bold
 hi Type               ctermbg=none         ctermfg=103
 hi Underlined         ctermbg=none         ctermfg=14         cterm=none
 hi Visual             ctermbg=none         ctermfg=186
 hi WarningMsg         ctermbg=none         ctermfg=254
-hi WildMenu           ctermbg=none         ctermfg=254
+hi WildMenu           ctermbg=233          ctermfg=254        cterm=bold
