@@ -31,6 +31,7 @@ let g:Textwidth = 1
 "Plugins
 source $XDG_CONFIG_HOME/vim/plugin/colemak.vim
 source $XDG_CONFIG_HOME/vim/plugin/status.vim
+source $XDG_CONFIG_HOME/vim/plugin/syntax.vim
 source $XDG_CONFIG_HOME/vim/plugin/textwidth.vim
 
 "Indent
@@ -76,8 +77,11 @@ set nolangremap
 "Good performence boost
 set lazyredraw
 
-"The characters shown when `<leader>list` (`set list`) is used
-set listchars=tab:»→,trail:␣
+"When list characters
+if system('id -u') != 0
+	set listchars=tab:»→,trail:␣
+	noremap <silent> <leader>ls :set list!<CR>
+endif
 
 "Don't auto load plugins
 set noloadplugins
@@ -170,7 +174,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 noremap <silent> <leader>ii :set ignorecase!<CR>
 
 "Toggle wrap
-noremap <silent> <leader>ww :set wrap!<CR>
+noremap <silent> <leader>sw :set wrap! linebreak!<CR>
 
 "Center-, right-, or left-align one or more lines
 noremap <silent> <leader>ac :center<CR>
@@ -180,9 +184,6 @@ noremap <silent> <leader>al :left<CR>
 "When you open multiple files
 noremap <silent> <leader>nn :next<CR>
 noremap <silent> <leader>pp :prev<CR>
-
-"Show the `list' characters
-noremap <silent> <leader>ls :set list!<CR>
 
 "https://stackoverflow.com/questions/5240473/in-vim-with-xclip-yank-to-clipboard
 vnoremap <silent> <leader>y "yy <Bar> :call system('xclip -sel c', @y)<CR>
