@@ -1,8 +1,13 @@
+gtk-cursor-blink=0
 gtk-theme-name="Arc-Dark-solid"
 gtk-icon-theme-name="Papirus"
-gtk-font-name="Mononoki Nerd Font Mono 12"
-gtk-cursor-theme-name="Afterglow-cursors"
+gtk-font-name="Mononoki Nerd Font 12"
 gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintslight"
 gtk-xft-rgba="rgb"
+gtk-cursor-theme-name="Afterglow-cursors"
+gtk-error-bell=0
+gtk-enable-input-feedback-sounds=0
+gtk-enable-event-sounds=0
+gtk-can-change-accels=1
