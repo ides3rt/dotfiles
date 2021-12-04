@@ -1,8 +1,8 @@
-"Color scheme that grey
-
 set background=dark
 highlight clear
 syntax reset
+
+let g:colors_name='ides3rt-v2'
 
 hi Boolean            ctermbg=none         ctermfg=none        cterm=none
 hi Character          ctermbg=none         ctermfg=none        cterm=none

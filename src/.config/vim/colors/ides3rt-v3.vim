@@ -2,6 +2,8 @@ set background=dark
 highlight clear
 syntax reset
 
+let g:colors_name='ides3rt-v3'
+
 hi Boolean            ctermbg=none         ctermfg=254
 hi Character          ctermbg=none         ctermfg=254
 hi ColorColumn        ctermbg=233          ctermfg=15         cterm=bold
