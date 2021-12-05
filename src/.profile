@@ -52,8 +52,12 @@ if test $UID -ne 0 -a -z "$SSH_TTY"; then
 		trap 'eval `ssh-agent -k`' EXIT
 	fi
 
-	# Run xinit(1) when in tty1
-	if test -z "$DISPLAY" -a "$XDG_VTNR" -eq 1; then
-		exec xinit Xorg -- :0 vt$XDG_VTNR
+	if test -z "$DISPLAY"; then
+		# Start my searX instance
+		{ type -P searx-run && searx-run & } >/dev/null 2>&1
+
+		# Run xinit(1) when in tty1
+		test "$XDG_VTNR" -eq 1 &&
+			exec xinit Xorg -- :0 vt$XDG_VTNR
 	fi
 fi
