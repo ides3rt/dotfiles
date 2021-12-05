@@ -38,15 +38,12 @@ unset -f check
 
 if test $UID -ne 0 -a -z "$SSH_TTY"; then
 	# My GitHub SSH
-	if	test -z "$SSH_AGENT_PID" && \
-		! pgrep ssh-agent && \
-		eval `ssh-agent -s`
-	then
+	if test -z "$SSH_AGENT_PID" && eval `ssh-agent -s`; then
 		ssh-add $HOME/.ssh/GitHub
 		trap 'eval `ssh-agent -k`' EXIT
 	fi >/dev/null 2>&1
 
-	# TTY and DE/WM
+	# TTY and GUI
 	if test -n "$DISPLAY"; then
 		# Quotes
 		while read Curline; do
@@ -57,6 +54,7 @@ if test $UID -ne 0 -a -z "$SSH_TTY"; then
 		if ! pgrep searx-run; then
 			searx-run &
 		fi; clear
+
 		# Run xinit(1) when in tty1
 		if test "$XDG_VTNR" -eq 1; then
 			exec xinit Xorg -- :0 vt$XDG_VTNR
