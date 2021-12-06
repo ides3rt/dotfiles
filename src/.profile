@@ -43,21 +43,21 @@ if test $UID -ne 0 -a -z "$SSH_TTY"; then
 		trap 'eval `ssh-agent -k`' EXIT
 	fi >/dev/null 2>&1
 
-	# TTY and GUI
-	if test -n "$DISPLAY"; then
-		# Quotes
-		while read Curline; do
-			test -n "$Curline" && printf '%s\n' "$Curline"
-		done < $HOME/.local/share/quotes | shuf -n 1
-	else
+	# TTY
+	if test -z "$DISPLAY" && clear; then
 		# Start searX instance
 		if ! pgrep searx-run; then
 			searx-run &
-		fi; clear
+		fi >/dev/null 2>&1
 
 		# Run xinit(1) when in tty1
 		if test "$XDG_VTNR" -eq 1; then
 			exec xinit Xorg -- :0 vt$XDG_VTNR
-		fi
+		fi >/dev/null 2>&1
 	fi
+
+	# Quotes
+	while read Curline; do
+		test -n "$Curline" && printf '%s\n' "$Curline"
+	done < $HOME/.local/share/quotes | shuf -n 1
 fi
