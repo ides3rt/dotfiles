@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 up() {
-	local Count=${1:-1}
+	local Count=10#${1:-1}
 	while ((Count > 0)); do
 		cd .. || return 1
 		((Count--))
