@@ -20,7 +20,7 @@ mod1 + w
 
 # Take a screenshot
 Print
-	scrot -q 100 '%Y-%m-%d_%H:%M:%S.png' -e 'mv $f ~/Pictures/'
+	maim $HOME/Pictures/$(date +%Y-%m-%d_%H:%M:%S).png
 
 # Advance screenshot options
 shift + Print
