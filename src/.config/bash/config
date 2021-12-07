@@ -11,9 +11,6 @@ shopt -s autocd cdspell checkwinsize cmdhist \
 	interactive_comments lithist no_empty_cmd_completion \
 	progcomp progcomp_alias promptvars xpg_echo
 
-# VI-Mode
-bind -m vi "4":end-of-line
-
 # Use `clear-screen` instead for non-recursive clear
 bind "\C-l":clear-display
 
@@ -21,11 +18,9 @@ bind "\C-l":clear-display
 bind "TAB":menu-complete
 bind '"\e[Z":menu-complete-backward'
 
-# EMACS keys
-bind "\C-a":beginning-of-line
+# VI keys
+bind "\C-b":beginning-of-line
 bind "\C-e":end-of-line
-bind "\C-f":forward-char
-bind "\C-b":backward-char
 
 PROMPT_PARSER() {
 	# Colors
