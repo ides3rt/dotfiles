@@ -24,17 +24,12 @@ if has('syntax')
 	set cursorlineopt=number
 endif
 
-"Use <space> as my <leader>
-noremap <space> <nop>
-let mapleader=" "
-
 "Plugins variables
 let g:Status = 0
 let g:Textwidth = 1
 
 "Plugins
 source $XDG_CONFIG_HOME/vim/plugin/status.vim
-source $XDG_CONFIG_HOME/vim/plugin/better-default.vim
 source $XDG_CONFIG_HOME/vim/plugin/syntax.vim
 source $XDG_CONFIG_HOME/vim/plugin/textwidth.vim
 
@@ -188,6 +183,16 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 "Auto remove trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
+
+"For wrap users
+map j gj
+map k gk
+
+"Less percise
+map [[ ?{<CR>w99[{
+map ][ /}<CR>b99]}
+map ]] j0[[%/{<CR>
+map [] k$][%?}<CR>
 
 "Toggle `ignorecase`
 noremap <silent> <leader>ic :set ignorecase!<CR>
