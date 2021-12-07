@@ -5,11 +5,15 @@ if !exists('$XDG_CACHE_HOME') | let $XDG_CACHE_HOME="$HOME/.cache" | endif
 "XDG PATH
 set runtimepath^=$XDG_CONFIG_HOME/vim
 
-"Syntax and Filetype
+"Detecting file type
+filetype on
+filetype plugin on
+filetype indent on
+
+"Syntax
 if has('syntax')
 	"Enable syntax highlight
 	syntax on
-	filetype on
 
 	if !has('gui_running')
 		colorscheme ides3rt-v3
@@ -33,6 +37,9 @@ source $XDG_CONFIG_HOME/vim/plugin/colemak.vim
 source $XDG_CONFIG_HOME/vim/plugin/status.vim
 source $XDG_CONFIG_HOME/vim/plugin/syntax.vim
 source $XDG_CONFIG_HOME/vim/plugin/textwidth.vim
+
+"Change pwd to open file's dir
+set autochdir
 
 "Indent
 set autoindent
@@ -68,11 +75,11 @@ endif
 "Ignorecase
 set ignorecase
 
-"Disable `langnoremap' its on for bwcom [in nvim(1)]
-set nolangnoremap
-
-"Disable `langremap' its on for bwcom
-set nolangremap
+"It's only enable for backwards compatibility
+if has('langmap')
+	set nolangnoremap
+	set nolangremap
+endif
 
 "Good performence boost
 set lazyredraw
@@ -95,13 +102,22 @@ set nomodeline
 "Don't use more() format
 set nomore
 
+"Incase someone want to use mouse
+set mouse=a
+
 "Set `nrformats' to recom' values
 set nrformats=bin,hex
 
-"Set `numberwidth` to 2
 if has('linebreak')
+	"Set `numberwidth` to 2
 	set numberwidth=2
+
+	"When `linebreak' is set
+	set breakindent
 endif
+
+"I don't like to have `/usr/include`
+set path=.,,**
 
 "Don't allow :autocmd, shell and write commands
 set secure
