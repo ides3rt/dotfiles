@@ -6,6 +6,9 @@ noremap k gk
 noremap J 10j
 noremap K 10k
 
+"EOL with 4
+noremap 4 $
+
 "Tabs
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j

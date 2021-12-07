@@ -11,6 +11,9 @@ shopt -s autocd cdspell checkwinsize cmdhist \
 	interactive_comments lithist no_empty_cmd_completion \
 	progcomp progcomp_alias promptvars xpg_echo
 
+# VI-Mode
+bind -m vi "4":end-of-line
+
 # Use `clear-screen` instead for non-recursive clear
 bind "\C-l":clear-display
 

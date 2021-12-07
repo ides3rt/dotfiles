@@ -1,7 +1,0 @@
-# Movement
-e	forw-line
-i	back-line
-
-# Search
-l	repeat-search
-L	reverse-search
