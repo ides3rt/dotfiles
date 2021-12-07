@@ -14,22 +14,15 @@ shopt -s autocd cdspell checkwinsize cmdhist \
 # Use `clear-screen` instead for non-recursive clear
 bind "\C-l":clear-display
 
-# zsh(1) like menu completion
+# ZSH like menu completion
 bind "TAB":menu-complete
 bind '"\e[Z":menu-complete-backward'
 
-# emacs(1) keys
+# EMACS keys
 bind "\C-a":beginning-of-line
 bind "\C-e":end-of-line
-
-# `colemak` vi(1)
-bind -m vi "n":backward-char
-bind -m vi "e":next-history
-bind -m vi "i":previous-history
-bind -m vi "o":forward-char
-
-# Use `h` for insert mode
-bind -m vi "h":vi-insertion-mode
+bind "\C-f":forward-char
+bind "\C-b":backward-char
 
 PROMPT_PARSER() {
 	# Colors

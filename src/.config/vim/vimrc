@@ -33,8 +33,8 @@ let g:Status = 0
 let g:Textwidth = 1
 
 "Plugins
-source $XDG_CONFIG_HOME/vim/plugin/colemak.vim
 source $XDG_CONFIG_HOME/vim/plugin/status.vim
+source $XDG_CONFIG_HOME/vim/plugin/better-default.vim
 source $XDG_CONFIG_HOME/vim/plugin/syntax.vim
 source $XDG_CONFIG_HOME/vim/plugin/textwidth.vim
 
@@ -72,8 +72,11 @@ if has('extra_search')
 	noremap <silent> <leader><space> :noh<CR>
 endif
 
-"Ignorecase
+"Case insensitive
 set ignorecase
+
+"No double <SPACE> after period
+set nojoinspaces
 
 "It's only enable for backwards compatibility
 if has('langmap')
@@ -187,7 +190,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufWritePre * :%s/\s\+$//e
 
 "Toggle `ignorecase`
-noremap <silent> <leader>ii :set ignorecase!<CR>
+noremap <silent> <leader>ic :set ignorecase!<CR>
 
 "Toggle wrap
 noremap <silent> <leader>sw :set wrap! linebreak!<CR>
