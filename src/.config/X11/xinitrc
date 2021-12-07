@@ -20,8 +20,9 @@ unset -v X11_DIR File
 # X session manager
 lxsession &
 
-# I use `colemak`
+# Your keyboard layout
 setxkbmap us -variant colemak
+xmodmap -e 'clear Lock'
 
 # bspwm(1) doesn't set cursor by default
 xsetroot -cursor_name left_ptr
