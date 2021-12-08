@@ -24,14 +24,12 @@ unset -v X11_DIR Xresources
 lxsession &
 
 # Your keyboard layout
-setxkbmap us -variant colemak
-
-# Change CAPS_LOCK (BS as in colemak) to Control
-xmodmap -e 'clear Lock' \
-	-e 'keycode 0x42 = Control_L' \
-	-e 'add Control = Control_L'
+setxkbmap us -variant colemak \
+	-option ctrl:nocaps \
+	-option shift:both_capslock
 
 # Make Control become BS
+xmodmap -e 'clear Lock'
 xcape -e 'Control_L=Escape'
 
 # bspwm(1) doesn't set cursor by default
