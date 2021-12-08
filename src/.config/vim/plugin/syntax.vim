@@ -11,4 +11,4 @@ func! Syntax()
 	endif
 endfunc
 
-noremap <silent> <leader>sn :call Syntax()<CR>
+nnoremap <silent> <leader>sn :call Syntax()<CR>

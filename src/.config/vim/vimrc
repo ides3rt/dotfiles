@@ -68,7 +68,7 @@ if has('extra_search')
 	endif
 
 	"Use <leader><space> to clear highlighting
-	noremap <silent> <leader><space> :noh<CR>
+	nnoremap <silent> <leader><space> :noh<CR>
 endif
 
 "Case insensitive
@@ -189,32 +189,32 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufWritePre * :%s/\s\+$//e
 
 "For wrap users
-map j gj
-map k gk
+noremap j gj
+noremap k gk
 
-"Less percise
-map [[ ?{<CR>w99[{
-map ][ /}<CR>b99]}
-map ]] j0[[%/{<CR>
-map [] k$][%?}<CR>
+"Make it less percise
+nnoremap <silent> [[ ?{<CR>w99[{
+nnoremap <silent> ][ /}<CR>b99]}
+nnoremap <silent> ]] j0[[%/{<CR>
+nnoremap <silent> [] k$][%?}<CR>
 
 "Toggle `ignorecase`
-noremap <silent> <leader>ic :set ignorecase!<CR>
+nnoremap <silent> <leader>ic :set ignorecase!<CR>
 
 "Toggle wrap
-noremap <silent> <leader>sw :set wrap! linebreak!<CR>
+nnoremap <silent> <leader>sw :set wrap! linebreak!<CR>
 
 "Center-, right-, or left-align one or more lines
-noremap <silent> <leader>ac :center<CR>
-noremap <silent> <leader>ar :right<CR>
-noremap <silent> <leader>al :left<CR>
+nnoremap <silent> <leader>ac :center<CR>
+nnoremap <silent> <leader>ar :right<CR>
+nnoremap <silent> <leader>al :left<CR>
 
 "When you open multiple files
-noremap <silent> <leader>nn :next<CR>
-noremap <silent> <leader>pp :prev<CR>
+nnoremap <silent> <leader>nn :next<CR>
+nnoremap <silent> <leader>pp :prev<CR>
 
 "https://stackoverflow.com/questions/5240473/in-vim-with-xclip-yank-to-clipboard
 vnoremap <silent> <leader>y "yy <Bar> :call system('xclip -sel c', @y)<CR>
 
 "Source vimrc
-noremap <silent> <leader>rc :source $MYVIMRC<CR>
+nnoremap <silent> <leader>rc :source $MYVIMRC<CR>

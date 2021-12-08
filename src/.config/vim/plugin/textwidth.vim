@@ -15,4 +15,4 @@ func! Textwidth()
 endfunc
 call Textwidth()
 
-noremap <silent> <leader>tw :call Textwidth()<CR>
+nnoremap <silent> <leader>tw :call Textwidth()<CR>

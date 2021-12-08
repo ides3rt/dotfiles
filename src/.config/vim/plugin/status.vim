@@ -45,4 +45,4 @@ endfunction
 call ToggleStatus()
 
 "Toggle status
-noremap <silent> <leader>ts :call ToggleStatus()<CR>
+nnoremap <silent> <leader>ts :call ToggleStatus()<CR>
