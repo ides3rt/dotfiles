@@ -8,21 +8,31 @@ if test -d "$X11_DIR/xinitrc.d"; then
 	for File in $X11_DIR/xinitrc.d/*.sh; do
 		test -f "$File" -a -x "$File" && . $File
 	done
+	unset -v File
 fi
 
 # Xresources
-File="$X11_DIR/Xresources"
-test -f "$File" -a -r "$File" && xrdb -load $File
+Xresources="$X11_DIR/Xresources"
+if test -f "$Xresources" -a -r "$Xresources"; then
+	xrdb -load $Xresources
+fi
 
 # Unset variables
-unset -v X11_DIR File
+unset -v X11_DIR Xresources
 
 # X session manager
 lxsession &
 
 # Your keyboard layout
 setxkbmap us -variant colemak
-xmodmap -e 'clear Lock'
+
+# Change CAPS_LOCK (BS as in colemak) to Control
+xmodmap -e 'clear Lock' \
+	-e 'keycode 0x42 = Control_L' \
+	-e 'add Control = Control_L'
+
+# Make Control become BS
+xcape -e 'Control_L=Escape'
 
 # bspwm(1) doesn't set cursor by default
 xsetroot -cursor_name left_ptr
