@@ -24,6 +24,10 @@ if has('syntax')
 	set cursorlineopt=number
 endif
 
+"Your <leader>
+noremap <space> <Nop>
+let mapleader = " "
+
 "Plugins variables
 let g:Status = 0
 let g:Textwidth = 1
