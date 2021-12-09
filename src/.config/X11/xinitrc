@@ -24,7 +24,7 @@ unset -v X11_DIR Xresources
 lxsession &
 
 # Your keyboard layout
-setxkbmap us -variant colemak \
+setxkbmap us -variant colemak_dh \
 	-option ctrl:nocaps \
 	-option shift:both_capslock
 
