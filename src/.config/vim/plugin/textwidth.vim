@@ -1,16 +1,13 @@
 "Disable `textwidth` by default
-if !exists('g:Textwidth')
-	let g:Textwidth = 0
-endif
-
 func! Textwidth()
-	if g:Textwidth == 0
+	if !exists('g:Textwidth')
 		let g:Textwidth = 1
 		set textwidth=0
 
 	elseif g:Textwidth == 1
-		let g:Textwidth = 0
+		unlet g:Textwidth
 		set textwidth=80
+
 	endif
 endfunc
 call Textwidth()

@@ -4,11 +4,14 @@ func! Syntax()
 		let g:Colorscheme = g:colors_name
 		syntax off
 		highlight clear
+
 	elseif g:Syntax == 1
 		unlet g:Syntax
 		syntax on
-		exe "colorscheme ".g:Colorscheme
+		exec "colorscheme ".g:Colorscheme
+		unlet g:Colorscheme
+
 	endif
 endfunc
 
-nnoremap <silent> <leader>sn :call Syntax()<CR>
+nnoremap <silent> <leader>ns :call Syntax()<CR>

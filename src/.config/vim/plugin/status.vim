@@ -1,10 +1,6 @@
 "Don't show status by default
-if !exists('g:Status')
-	let g:Status = 0
-endif
-
 func! ToggleStatus()
-	if g:Status == 0
+	if !exists('g:Status')
 		let g:Status = 1
 
 		if has('syntax')
@@ -23,11 +19,11 @@ func! ToggleStatus()
 		endif
 
 	elseif g:Status == 1
-		let g:Status = 0
+		unlet g:Status
 
 		if has('syntax')
 			set cursorline
-			set colorcolumn=-1
+			set colorcolumn=80
 		endif
 
 		set number
