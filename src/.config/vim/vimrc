@@ -29,7 +29,6 @@ noremap <space> <Nop>
 let mapleader = " "
 
 "Plugins variables
-let g:Status = 0
 let g:Textwidth = 1
 
 "Plugins
@@ -103,9 +102,6 @@ set nomodeline
 
 "Don't use more() format
 set nomore
-
-"Incase someone want to use mouse
-set mouse=a
 
 "Set `nrformats' to recom' values
 set nrformats=bin,hex
