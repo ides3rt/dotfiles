@@ -17,22 +17,19 @@ if test -f "$Xresources" -a -r "$Xresources"; then
 	xrdb -load $Xresources
 fi
 
-# Unset variables
-unset -v X11_DIR Xresources
-
-# X session manager
+# Xsession manager
 lxsession &
 
 # Your keyboard layout
-setxkbmap us -variant colemak_dh \
-	-option ctrl:nocaps \
-	-option shift:both_capslock
-
-# Make Control become BS
-xmodmap -e 'clear Lock'
+setxkbmap -option shift:both_capslock
+xmodmap $X11_DIR/xmodmap/colemak-dhk.xmodmap
+xmodmap -e 'keycode 66 = Control_L' -e 'add Control = Control_L'
 xcape -e 'Control_L=Escape'
 
-# bspwm(1) doesn't set cursor by default
+# Unset variables
+unset -v X11_DIR Xresources
+
+# BSPWM(1) doesn't set cursor by default
 xsetroot -cursor_name left_ptr
 
 # Wallpapers
