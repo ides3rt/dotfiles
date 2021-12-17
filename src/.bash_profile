@@ -26,12 +26,6 @@ export HISTFILE=/dev/null # Same effect as HISTFILE=
 export HISTFILESIZE=0 # This make history session only
 export HISTSIZE=999
 
-# Just source bash(1) config
-check $HOME/.bashrc
-
-# Unset check()
-unset -f check
-
 if ((UID)) && [[ -z $SSH_TTY ]]; then
 	# My GitHub SSH
 	if	! ((SSH_AGENT_PID)) && \
@@ -48,3 +42,9 @@ if ((UID)) && [[ -z $SSH_TTY ]]; then
 		fi &>/dev/null
 	fi
 fi
+
+# Just source BASHRC
+check $HOME/.bashrc
+
+# Unset check()
+unset -f check

@@ -75,13 +75,13 @@ Make "$XDG_CONFIG_HOME/bash/functions"
 # BASH Completion
 Make /usr/share/bash-completion/bash_completion
 
-# Quotes
-QuotesFile="$HOME/.local/share/quotes"
-if [[ -f $QuotesFile ]]; then
+# Motivation
+Motivation="$HOME/.local/share/quotes"
+if [[ -f $Motivation ]]; then
 	while read; do
 		[[ -n $REPLY ]] && printf '%s\n' "$REPLY"
-	done < $QuotesFile | shuf -n 1
+	done < $Motivation | shuf -n 1
 fi
 
 # Unset
-unset Make QuotesFile
+unset Make Motivation
