@@ -9,10 +9,10 @@ up() {
 }
 
 lspkg() { # [name] Inspired by TFL/LL
-	for File in /var/cache/pacman/pkg/?*; do
+	for File in /var/cache/pacman/pkg/?*; {
 		[[ "$File" =~ '.sig'$ ]] ||
 			printf '%s\n' "${File#/var/cache/pacman/pkg/}"
-	done
+	}
 }
 
 build() {

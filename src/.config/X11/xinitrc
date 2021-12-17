@@ -21,7 +21,7 @@ fi
 lxsession &
 
 # Your keyboard layout
-setxkbmap -option shift:both_capslock
+setxkbmap us -option shift:both_capslock
 xmodmap $X11_DIR/xmodmap/colemak-dhk.xmodmap
 xmodmap -e 'keycode 66 = Control_L' -e 'add Control = Control_L'
 xcape -e 'Control_L=Escape'
@@ -43,6 +43,9 @@ dunst &
 
 # Hotkeys daemon
 sxhkd &
+
+# My searX instance
+searx-run &
 
 # Your favorite WM/DE here!
 exec bspwm
