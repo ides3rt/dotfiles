@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# If not running interactive, don't do anything
+[[ $- = *i* ]] || return
+
+# If running restricted, don't do anything
+shopt -q restricted_shell && return
+
 # set()
 set -o interactive-comments -o vi -o braceexpand \
 	-o hashall -o histexpand +o monitor
