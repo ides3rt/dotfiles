@@ -4,7 +4,7 @@
 umask 077
 
 # Source config
-check() { [[ -f "$1" && -r "$1" ]] && . $1 ;}
+check() { [[ -f $1 && -r $1 ]] && . $1 ;}
 
 # Source environment variables
 if [[ -d "$HOME/.config/env.d" ]]; then
@@ -34,7 +34,7 @@ unset -f check
 
 if ((UID)) && [[ -z $SSH_TTY ]]; then
 	# My GitHub SSH
-	if	((SSH_AGENT_PID)) && \
+	if	! ((SSH_AGENT_PID)) && \
 		eval `ssh-agent -s`
 	then
 		ssh-add $HOME/.ssh/GitHub
