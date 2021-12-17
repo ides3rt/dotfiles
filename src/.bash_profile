@@ -3,13 +3,10 @@
 # Set default permissions to `drwx------` and `-rw-------`
 umask 077
 
-# Source config
-check() { [[ -f $1 && -r $1 ]] && . $1 ;}
-
 # Source environment variables
 if [[ -d "$HOME/.config/env.d" ]]; then
 	for File in $HOME/.config/env.d/*.conf; {
-		check $File
+		[[ -f $File && -r $File ]] && . $File
 	}
 	unset -v File
 fi
@@ -28,8 +25,8 @@ export HISTSIZE=999
 
 if ((UID)) && [[ -z $SSH_TTY ]]; then
 	# My GitHub SSH
-	if	! ((SSH_AGENT_PID)) && \
-		eval `ssh-agent -s`
+	if ! ((SSH_AGENT_PID)) && \
+	   eval `ssh-agent -s`
 	then
 		ssh-add $HOME/.ssh/GitHub
 	fi &>/dev/null
@@ -44,7 +41,6 @@ if ((UID)) && [[ -z $SSH_TTY ]]; then
 fi
 
 # Just source BASHRC
-check $HOME/.bashrc
-
-# Unset check()
-unset -f check
+BASHRC="$HOME/.bashrc"
+[[ -f $BASHRC && -r $BASHRC ]] && . $BASHRC
+unset -v BASHRC
