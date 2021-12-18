@@ -1,5 +1,5 @@
 "Don't show status by default
-func! ToggleStatus()
+func! Status()
 	if !exists('g:Status')
 		let g:Status = 1
 
@@ -38,7 +38,7 @@ func! ToggleStatus()
 
 	endif
 endfunction
-call ToggleStatus()
+call Status()
 
 "Toggle status
-nnoremap <silent> <leader>ts :call ToggleStatus()<CR>
+nnoremap <silent> <leader>ts :call Status()<CR>
