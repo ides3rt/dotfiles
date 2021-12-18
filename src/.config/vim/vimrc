@@ -28,13 +28,9 @@ endif
 noremap <space> <Nop>
 let mapleader = " "
 
-"Plugins variables
-let g:Textwidth = 1
-
 "Plugins
 source $XDG_CONFIG_HOME/vim/plugin/status.vim
 source $XDG_CONFIG_HOME/vim/plugin/syntax.vim
-source $XDG_CONFIG_HOME/vim/plugin/textwidth.vim
 
 "Change pwd to open file's dir
 set autochdir
