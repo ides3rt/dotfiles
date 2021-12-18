@@ -43,7 +43,7 @@ PROMPT_PARSER() {
 
 	# Status
 	(($1 == 0)) || local Status="$1 "
-	((Status)) && printf "${Fail}${Status}${Reset}"
+	((Status)) && PS1+="\[$Fail\]$Status\[$Reset\]"
 
 	# Show current git branch
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
