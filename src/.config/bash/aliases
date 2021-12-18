@@ -17,7 +17,6 @@ alias mount='mount -v'
 alias umount='umount -v'
 alias ln='ln -v'
 alias ls='ls -hFNX -T 0 --hide=lost+found --color=auto --group-directories-first --show-control-chars' # Minimal ls(1)
-alias ip='ip -color=auto' # Colorful ip(1)
 alias dmesg='dmesg --color=auto -H' # Colorful dmesg(1)
 alias pcc="$AUTH pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove orphans in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful

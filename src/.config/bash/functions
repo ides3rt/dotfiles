@@ -8,16 +8,16 @@ up() {
 	done
 }
 
-lspkg() { # [name] Inspired by TFL/LL
+lspkg() { # [NAME] Inspired by TFL/LL
 	for File in /var/cache/pacman/pkg/?*; {
-		[[ "$File" =~ '.sig'$ ]] ||
+		[[ "$File" = *'.sig' ]] ||
 			printf '%s\n' "${File#/var/cache/pacman/pkg/}"
 	}
 }
 
 build() {
 	# Check if AUR dir exist or not
-	[[ -d "$1" ]] || return 1
+	[[ -d $1 ]] || return 1
 
 	# Check if AUR up to date or not
 	git --git-dir=${1%/}/.git/ pull || return 1

@@ -3,6 +3,9 @@
 # If running restricted or non interactive, don't do anything
 { [[ $- != *i* ]] || shopt -q restricted_shell ;} && return
 
+# Disable builtin
+enable -n let
+
 # set()
 set -o interactive-comments -o vi -o braceexpand \
 	-o hashall -o histexpand +o monitor
