@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-# If not running interactive, don't do anything
-[[ $- = *i* ]] || return
-
-# If running restricted, don't do anything
-shopt -q restricted_shell && return
+# If running restricted or non interactive, don't do anything
+{ [[ $- != *i* ]] || shopt -q restricted_shell ;} && return
 
 # set()
 set -o interactive-comments -o vi -o braceexpand \
@@ -41,12 +38,12 @@ PROMPT_PARSER() {
 		local Main="$Red"; local Fail="$White"
 	fi
 
-	# Standard
-	PS1= PS2='   '
+	# PS1
+	PS1="\[$Main\]->\[$Reset\] "
 
 	# Status
 	(($1 == 0)) || local Status="$1 "
-	((Status)) && PS1+="\[$Fail\]$Status\[$Reset\]"
+	((Status)) && printf "${Fail}${Status}${Reset}"
 
 	# Show current git branch
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
@@ -56,10 +53,8 @@ PROMPT_PARSER() {
 		unset -v Branch
 	fi
 
-	# PS1
-	PS1+="\[$Main\]->\[$Reset\] "
-
 	# PS2
+	PS2='   '
 	if ((Status)); then
 		local Count=0
 		while ((Count != ${#Status})); do
