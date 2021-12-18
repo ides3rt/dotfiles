@@ -38,8 +38,8 @@ PROMPT_PARSER() {
 		local Main="$Red"; local Fail="$White"
 	fi
 
-	# PS1
-	PS1="\[$Main\]->\[$Reset\] "
+	# Reset
+	PS1= PS2='   '
 
 	# Status
 	(($1 == 0)) || local Status="$1 "
@@ -53,8 +53,9 @@ PROMPT_PARSER() {
 		unset -v Branch
 	fi
 
+	PS1+="\[$Main\]->\[$Reset\] "
+
 	# PS2
-	PS2='   '
 	if ((Status)); then
 		local Count=0
 		while ((Count != ${#Status})); do
