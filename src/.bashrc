@@ -51,18 +51,30 @@ PROMPT_PARSER() {
 		PS1+="\[$Grey\]${Icons}Branch \\\`${Branch##*/}\\\` has"
 
 		if [[ -z $Status ]]; then
-			printf -v Commits "%'d" "$(git rev-list --count HEAD)"
-			PS1+=" $Commits commit(s) cleaned.\[$Reset\]"
-			unset -v Commits
+			while read Secondline; do
+				((Count++))
+				((Count == 2)) && break
+			done <<< "$(git status)"
+
+			case "$Secondline" in
+				*'up to date'*|'')
+					printf -v Commits "%'d" "$(git rev-list --count HEAD 2>/dev/null)"
+					PS1+=" $Commits commit(s) cleaned.\[$Reset\]" ;;
+				*)
+					read F1 F2 F3 Stat F5 UpBranch F7 Commits _ <<< "$Secondline"
+					printf -v Commits "%'d" "$Commits"
+					PS1+=" $Commits commit(s) $Stat of ${UpBranch//\'/\\\`}.\[$Reset\]" ;;
+			esac
+			unset -v F1 F2 F3 Stat F5 UpBranch F7 Commits Count
 		else
 			while read Curline; do
 				case "$Curline" in
 					'M  '*)
 						((CCount++))
 						if ((MCount)); then
-							local Commited=", $CCount commited file(s)"
+							local Changes=", $CCount change(s) to be committed"
 						else
-							local Commited=" $CCount commited file(s)"
+							local Changes=" $CCount change(s) to be committed"
 						fi ;;
 					M*)
 						((MCount++))
@@ -84,7 +96,7 @@ PROMPT_PARSER() {
 				esac
 			done <<< "$Status"
 
-			PS1+="${Modified}${Commited}${New}${Untracked}.\[$Reset\]"
+			PS1+="${Modified}${Changes}${New}${Untracked}.\[$Reset\]"
 			unset -v MCount UCount Curline NCount CCount Count
 		fi
 		PS1+='\n'
