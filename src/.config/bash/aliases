@@ -16,6 +16,7 @@ alias chmod='chmod -c --preserve-root'
 alias mount='mount -v'
 alias umount='umount -v'
 alias ln='ln -v'
+alias ip='ip --color=auto' # Colorful ip(1)
 alias ls='ls -hFNX -T 0 --hide=lost+found --color=auto --group-directories-first --show-control-chars' # Minimal ls(1)
 alias dmesg='dmesg --color=auto -H' # Colorful dmesg(1)
 alias pcc="$AUTH pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove orphans in Arch
@@ -30,6 +31,7 @@ alias xclip='xclip -sel c' # Normal xclip(1) doesn't work for me
 alias ccb='printf "" | xclip -sel c; printf "" | xclip' # Clear clipboard
 alias vol='pactl get-sink-volume @DEFAULT_SINK@' # Get your volume
 alias add='git add'
+alias reset='git reset'
 alias checkout='git checkout'
 alias pull='git pull'
 alias commit='git commit'
