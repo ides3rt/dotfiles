@@ -8,9 +8,9 @@ alias ghpcd="cd $HOME/GitHub/repositories"
 alias gshcd="cd $HOME/GitHub/gists"
 alias cp='cp -vZu'
 alias mv='mv -vZu'
-alias rm='rm -v --preserve-root'
+alias rm='rm -v --preserve-root=all'
 alias mkdir='mkdir -vZ'
-alias rmdir='rmdir -v'
+alias rmdir='rmdir -v --ignore-fail-on-non-empty'
 alias chown='chown -c --preserve-root'
 alias chmod='chmod -c --preserve-root'
 alias mount='mount -v'
@@ -22,12 +22,22 @@ alias pcc="$AUTH pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove orphans in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
 alias fgrep='grep -F' # `grep -F` is a replacement for fgrep(1)
 alias egrep='grep -E' # `grep -E` is a replacement for egrep(1)
-alias diff='diff --color=auto --tabsize=4 ' # diff(1) with colors is a lots easier to read, also set tab size to 4
-alias media="cd /media/$USER"
+alias diff='diff --color=auto --tabsize=4' # diff(1) with colors is a lots easier to read, also set tab size to 4
+alias sd="cd /media/$USER"
 alias doas='doas ' # Required, if you want aliases to work with doas(1)
 alias htop="htop -t -u $USER" # It's so much cleaner
 alias xclip='xclip -sel c' # Normal xclip(1) doesn't work for me
 alias ccb='printf "" | xclip -sel c; printf "" | xclip' # Clear clipboard
 alias vol='pactl get-sink-volume @DEFAULT_SINK@' # Get your volume
+alias add='git add'
+alias checkout='git checkout'
+alias pull='git pull'
+alias commit='git commit'
+alias merge='git merge'
+alias branch='git branch'
+alias push='git push'
+alias status='git status -s'
+alias top='cd "$(git rev-parse --show-toplevel)"'
+alias show='git --no-pager show --pretty --pretty=format:"%h: %s"'
 
 unset -v AUTH

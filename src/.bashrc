@@ -30,38 +30,62 @@ bind "\C-e":end-of-line
 
 PROMPT_PARSER() {
 	# Colors
-	local Red='\e[1;91m'
-	local White='\e[1;97m'
-	local Reset='\e[0m'
+	local White='\e[1;97m' Red='\e[1;91m' \
+		Grey='\e[1;37m' Reset='\e[0m'
 
 	# Define colors for root and normal user
 	if ((UID)); then
-		local Main="$White"; local Fail="$Red"
+		local Main="$White" Fail="$Red"
 	else
-		local Main="$Red"; local Fail="$White"
+		local Main="$Red" Fail="$White"
 	fi
 
 	# Reset
 	PS1= PS2='   '
 
-	# Status
-	(($1 == 0)) || local Status="$1 "
-	((Status)) && PS1+="\[$Fail\]$Status\[$Reset\]"
-
-	# Show current git branch
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		read Branch < "$(git rev-parse --show-toplevel)/.git/HEAD"
-		local Count=$((COLUMNS - ${#Status}))
-		PS1+="\[$(tput sc; printf '%*s' $Count "(${Branch##*/})"; tput rc)\]"
-		unset -v Branch
+		local Branch=$(< "$(git rev-parse --git-dir)/HEAD") \
+			Status=$(git status --short)
+
+		[[ -n $DISPLAY ]] && local Icons='  '
+		PS1+="\[$Grey\]${Icons}Branch \\\`${Branch##*/}\\\` has "
+
+		if [[ -z $Status ]]; then
+			printf -v Commits "%'d" "$(git rev-list --count HEAD)"
+			PS1+="$Commits commit(s) cleaned.\[$Reset\]"
+			unset -v Commits
+		else
+			while read Curline; do
+				case "$Curline" in
+					M*)
+						((MCount++))
+						local Modified="$MCount modified file(s)" ;;
+					'??'*)
+						((UCount++))
+						local Untracked=", $UCount untracked file(s)" ;;
+				esac
+			done <<< "$Status"
+
+			PS1+="${Modified}${Untracked}.\[$Reset\]"
+			unset -v MCount UCount Curline
+		fi
+		PS1+='\n'
+		alias diff='git diff'
+	else
+		alias diff='diff --color=auto --tabsize=4'
 	fi
 
+	# Status
+	(($1 == 0)) || local X="$1 "
+	((X)) && PS1+="\[$Fail\]$X\[$Reset\]"
+
+	# Typical PS1
 	PS1+="\[$Main\]->\[$Reset\] "
 
 	# PS2
-	if ((Status)); then
+	if ((X)); then
 		local Count=0
-		while ((Count != ${#Status})); do
+		while ((Count != ${#X})); do
 			PS2+=' '; ((Count++))
 		done
 	fi

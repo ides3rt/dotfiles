@@ -36,3 +36,8 @@ build() {
 	{ cd $OLDPWD && rm -rf $BuildDir ;} &>/dev/null
 	return $Fail
 }
+
+log() {
+	git --no-pager log --reverse --pretty=format:'%h: "%s"' "$@"
+	printf '\n'
+}

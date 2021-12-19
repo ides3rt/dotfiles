@@ -23,9 +23,6 @@ export HISTFILE=/dev/null # Same effect as HISTFILE=
 export HISTFILESIZE=0 # This make history session only
 export HISTSIZE=999
 
-# If running restricted or non interactive, don't do anything
-{ [[ $- != *i* ]] || shopt -q restricted_shell ;} && return
-
 if ((UID)) && [[ -z $SSH_TTY && $SHELL = *bash* ]]; then
 	# My GitHub SSH
 	if ! ((SSH_AGENT_PID)) && \
