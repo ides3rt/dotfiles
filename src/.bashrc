@@ -48,26 +48,44 @@ PROMPT_PARSER() {
 			Status=$(git status --short)
 
 		[[ -n $DISPLAY ]] && local Icons='  '
-		PS1+="\[$Grey\]${Icons}Branch \\\`${Branch##*/}\\\` has "
+		PS1+="\[$Grey\]${Icons}Branch \\\`${Branch##*/}\\\` has"
 
 		if [[ -z $Status ]]; then
 			printf -v Commits "%'d" "$(git rev-list --count HEAD)"
-			PS1+="$Commits commit(s) cleaned.\[$Reset\]"
+			PS1+=" $Commits commit(s) cleaned.\[$Reset\]"
 			unset -v Commits
 		else
 			while read Curline; do
 				case "$Curline" in
+					'M  '*)
+						((CCount++))
+						if ((MCount)); then
+							local Commited=", $CCount commited file(s)"
+						else
+							local Commited=" $CCount commited file(s)"
+						fi ;;
 					M*)
 						((MCount++))
-						local Modified="$MCount modified file(s)" ;;
+						local Modified=" $MCount modified file(s)" ;;
+					A*)
+						((NCount++))
+						if ((MCount || CCount)); then
+							local New=", $NCount new file(s)"
+						else
+							local New=" $NCount new file(s)"
+						fi ;;
 					'??'*)
 						((UCount++))
-						local Untracked=", $UCount untracked file(s)" ;;
+						if ((MCount || CCount || NCount)); then
+							local Untracked=", $UCount untracked file(s)"
+						else
+							local Untracked=" $UCount untracked file(s)"
+						fi ;;
 				esac
 			done <<< "$Status"
 
-			PS1+="${Modified}${Untracked}.\[$Reset\]"
-			unset -v MCount UCount Curline
+			PS1+="${Modified}${Commited}${New}${Untracked}.\[$Reset\]"
+			unset -v MCount UCount Curline NCount CCount Count
 		fi
 		PS1+='\n'
 		alias diff='git diff'
