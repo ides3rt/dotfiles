@@ -47,8 +47,8 @@ PROMPT_PARSER() {
 		local Branch=$(< "$(git rev-parse --git-dir)/HEAD") \
 			Status=$(git status --short)
 
-		[[ -n $DISPLAY ]] && local Icons='  '
-		PS1+="\[$Grey\]${Icons}Branch \\\`${Branch##*/}\\\` has"
+		[[ -n $DISPLAY ]] && local Symbol="\[$Grey\] "
+		PS1+="$Symbol\[$Grey\]Branch \\\`${Branch##*/}\\\` has"
 
 		if [[ -z $Status ]]; then
 			while read Secondline; do
@@ -59,36 +59,36 @@ PROMPT_PARSER() {
 			case "$Secondline" in
 				*'up to date'*|'')
 					printf -v Commits "%'d" "$(git rev-list --count HEAD 2>/dev/null)"
-					PS1+=" $Commits commit(s) cleaned.\[$Reset\]" ;;
+					PS1+=" $Commits commit(s) cleaned.\[$Reset\]\n" ;;
 				*)
-					read F1 F2 F3 Stat F5 UpBranch F7 Commits _ <<< "$Secondline"
+					read F1 F2 F3 Pace F5 Upsteam F7 Commits _ <<< "$Secondline"
 					printf -v Commits "%'d" "$Commits"
-					PS1+=" $Commits commit(s) $Stat of ${UpBranch//\'/\\\`}.\[$Reset\]" ;;
+					PS1+=" $Commits commit(s) $Pace of ${Upsteam//\'/\\\`}.\[$Reset\]\n" ;;
 			esac
-			unset -v F1 F2 F3 Stat F5 UpBranch F7 Commits Count
+			unset -v Secondline Count F1 F2 F3 Pace F5 Upsteam F7 Commits _
 		else
 			while read Curline; do
 				case "$Curline" in
 					'M  '*)
 						((CCount++))
-						if ((MCount)); then
-							local Changes=", $CCount change(s) to be committed"
-						else
-							local Changes=" $CCount change(s) to be committed"
-						fi ;;
+						local Changes=" $CCount change(s) to be committed" ;;
 					M*)
 						((MCount++))
-						local Modified=" $MCount modified file(s)" ;;
+						if ((CCount)); then
+							local Modified=", $MCount modified file(s)"
+						else
+							local Modified=" $MCount modified file(s)"
+						fi ;;
 					A*)
 						((NCount++))
-						if ((MCount || CCount)); then
-							local New=", $NCount new file(s)"
+						if ((CCount || MCount)); then
+							local Newfile=", $NCount new file(s)"
 						else
-							local New=" $NCount new file(s)"
+							local Newfile=" $NCount new file(s)"
 						fi ;;
 					'??'*)
 						((UCount++))
-						if ((MCount || CCount || NCount)); then
+						if ((CCount || MCount || NCount)); then
 							local Untracked=", $UCount untracked file(s)"
 						else
 							local Untracked=" $UCount untracked file(s)"
@@ -96,10 +96,9 @@ PROMPT_PARSER() {
 				esac
 			done <<< "$Status"
 
-			PS1+="${Modified}${Changes}${New}${Untracked}.\[$Reset\]"
-			unset -v MCount UCount Curline NCount CCount Count
+			PS1+="${Changes}${Modified}${Newfile}${Untracked}.\[$Reset\]\n"
+			unset -v Curline CCount MCount NCount UCount
 		fi
-		PS1+='\n'
 		alias diff='git diff'
 	else
 		alias diff='diff --color=auto --tabsize=4'
