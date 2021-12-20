@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
 up() {
-	local Count=10#${1:-1}
-	while ((Count > 0)); do
+	for ((Count = 10#${1:-1}; Count > 0; Count--)); {
 		cd .. || return 1
-		((Count--))
-	done
+	}
+	unset -v Count
 }
 
 lspkg() { # [NAME] Inspired by TFL/LL

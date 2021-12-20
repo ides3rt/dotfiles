@@ -113,10 +113,10 @@ PROMPT_PARSER() {
 
 	# PS2
 	if ((X)); then
-		local Count=0
-		while ((Count != ${#X})); do
-			PS2+=' '; ((Count++))
-		done
+		for ((Count = 0; Count != ${#X}; Count++)); {
+			PS2+=' '
+		}
+		unset -v Count
 	fi
 }
 
