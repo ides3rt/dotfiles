@@ -63,7 +63,7 @@ PROMPT_PARSER() {
 				*)
 					read F1 F2 F3 Pace F5 Upsteam F7 Commits _ <<< "$Secondline"
 					printf -v Commits "%'d" "$Commits"
-					PS1+=" $Commits commit(s) $Pace of '$Upsteam'.\[$Reset\]\n" ;;
+					PS1+=" $Commits commit(s) $Pace of $Upsteam.\[$Reset\]\n" ;;
 			esac
 			unset -v Secondline Count F1 F2 F3 Pace F5 Upsteam F7 Commits _
 		else
