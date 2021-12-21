@@ -7,7 +7,7 @@ font:
   # Normal (roman) font face
   normal:
     # Font family
-    family: Mononoki Nerd Font
+    family: Monofur for Powerline
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -28,7 +28,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 14.0
+  size: 16.0
 
 schemes:
   # ides3rt-v1 colors scheme (base on "GruvBox-Dark")
