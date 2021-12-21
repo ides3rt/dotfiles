@@ -41,14 +41,14 @@ PROMPT_PARSER() {
 	fi
 
 	# Reset
-	PS1= PS2='   '
+	PS1= PS2='  '
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		local Branch=$(< "$(git rev-parse --git-dir)/HEAD") \
 			Status=$(git status --short)
 
 		[[ -n $DISPLAY ]] && local Symbol="\[$Grey\] "
-		PS1+="$Symbol\[$Grey\]Branch \\\`${Branch##*/}\\\` has"
+		PS1+="$Symbol\[$Grey\]Branch '${Branch##*/}' has"
 
 		if [[ -z $Status ]]; then
 			while read Secondline; do
@@ -63,7 +63,7 @@ PROMPT_PARSER() {
 				*)
 					read F1 F2 F3 Pace F5 Upsteam F7 Commits _ <<< "$Secondline"
 					printf -v Commits "%'d" "$Commits"
-					PS1+=" $Commits commit(s) $Pace of ${Upsteam//\'/\\\`}.\[$Reset\]\n" ;;
+					PS1+=" $Commits commit(s) $Pace of '$Upsteam'.\[$Reset\]\n" ;;
 			esac
 			unset -v Secondline Count F1 F2 F3 Pace F5 Upsteam F7 Commits _
 		else
@@ -79,16 +79,30 @@ PROMPT_PARSER() {
 						else
 							local Modified=" $MCount modified file(s)"
 						fi ;;
+					'D  '*)
+						((RCount++))
+						if ((CCount || MCount)); then
+							local Removed=", $RCount removed file(s)"
+						else
+							local Removed=" $RCount removed file(s)"
+						fi ;;
+					D*)
+						((DCount++))
+						if ((CCount || MCount || RCount)); then
+							local Deleted=", $DCount deleted file(s)"
+						else
+							local Deleted=" $DCount deleted file(s)"
+						fi ;;
 					A*)
 						((NCount++))
-						if ((CCount || MCount)); then
+						if ((CCount || MCount || RCount || DCount)); then
 							local Newfile=", $NCount new file(s)"
 						else
 							local Newfile=" $NCount new file(s)"
 						fi ;;
 					'??'*)
 						((UCount++))
-						if ((CCount || MCount || NCount)); then
+						if ((CCount || MCount || RCount || DCount || NCount)); then
 							local Untracked=", $UCount untracked file(s)"
 						else
 							local Untracked=" $UCount untracked file(s)"
@@ -96,8 +110,8 @@ PROMPT_PARSER() {
 				esac
 			done <<< "$Status"
 
-			PS1+="${Changes}${Modified}${Newfile}${Untracked}.\[$Reset\]\n"
-			unset -v Curline CCount MCount NCount UCount
+			PS1+="${Changes}${Modified}${Removed}${Deleted}${Newfile}${Untracked}.\[$Reset\]\n"
+			unset -v Curline CCount MCount RCount DCount NCount UCount
 		fi
 		alias diff='git diff'
 	else
@@ -109,7 +123,7 @@ PROMPT_PARSER() {
 	((X)) && PS1+="\[$Fail\]$X\[$Reset\]"
 
 	# Typical PS1
-	PS1+="\[$Main\]->\[$Reset\] "
+	PS1+="\[$Main\]>\[$Reset\] "
 
 	# PS2
 	if ((X)); then
