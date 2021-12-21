@@ -25,10 +25,10 @@ font:
   # Bold italic font face
   bold_italic:
     # The `style` can be specified to pick a specific face.
-    style: Bold Italic
+    style: Italic
 
   # Point size
-  size: 16.0
+  size: 15
 
 schemes:
   # ides3rt-v1 colors scheme (base on "GruvBox-Dark")
@@ -87,7 +87,7 @@ schemes:
       green:   '#00aa00'
       yellow:  '#aa5500'
       blue:    '#0000aa'
-      magenta: '#b16286'
+      magenta: '#aa00aa'
       cyan:    '#00aaaa'
       white:   '#aaaaaa'
 
@@ -98,7 +98,7 @@ schemes:
       green:   '#55ff55'
       yellow:  '#ffff55'
       blue:    '#5555ff'
-      magenta: '#d3869b'
+      magenta: '#ff55ff'
       cyan:    '#55ffff'
       white:   '#ffffff'
 
@@ -168,8 +168,6 @@ key_bindings:
 
   # Vi Mode
   - { key: Space, mods: Control, mode: ~Search,    action: ToggleViMode }
-  - { key: A,     mods: Control, mode: Vi|~Search, action: First }
-  - { key: E,     mods: Control, mode: Vi|~Search, action: Last }
   - { key: Key4,                 mode: Vi|~Search, action: Last }
 
 debug:
