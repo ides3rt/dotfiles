@@ -35,9 +35,9 @@ PROMPT_PARSER() {
 
 	# Define colors for root and normal user
 	if ((UID)); then
-		local Main="$White" Fail="$Red"
+		local Main='\e[1;37m' Fail="$Red"
 	else
-		local Main="$Red" Fail="$White"
+		local Main='\e[1;31m' Fail="$White"
 	fi
 
 	# Reset
