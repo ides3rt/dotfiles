@@ -51,8 +51,7 @@ PROMPT_PARSER() {
 
 		if [[ -z $Status ]]; then
 			while read Secondline; do
-				((Count++))
-				((Count == 2)) && break
+				((Count++)) && break
 			done <<< "$(git status)"
 
 			case "$Secondline" in
@@ -112,14 +111,20 @@ PROMPT_PARSER() {
 			PS1+="${Changes}${Modified}${Removed}${Deleted}${Newfile}${Untracked}.\[$Reset\]\n"
 			unset -v Curline CCount MCount RCount DCount NCount UCount
 		fi
-		alias diff='git diff'
+
+		# Aliases that I only want when working on git
+		alias diff='git --no-pager diff'
+		alias reset='git reset'
+		alias top='cd "$(git rev-parse --show-toplevel)"'
 	else
+		# diff(1) with colors is a lots easier to read, also set tab size to 4
 		alias diff='diff --color=auto --tabsize=4'
+
+		unalias reset top &>/dev/null
 	fi
 
 	# Status
-	(($1 == 0)) || local X="$1 "
-	((X)) && PS1+="\[$Fail\]$X\[$Reset\]"
+	(($1 == 0)) || { local X="$1 "; PS1+="\[$Fail\]$X\[$Reset\]" ;}
 
 	# Typical PS1
 	PS1+="\[$Main\]>\[$Reset\] "
