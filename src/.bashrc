@@ -30,14 +30,13 @@ bind "\C-e":end-of-line
 
 PROMPT_PARSER() {
 	# Colors
-	local White='\e[1;97m' Red='\e[1;91m' \
-		Grey='\e[1;37m' Reset='\e[0m'
+	local Grey='\e[1;37m' Reset='\e[0m'
 
 	# Define colors for root and normal user
 	if ((UID)); then
-		local Main='\e[1;37m' Fail="$Red"
+		local Main='\e[97m' Fail='\e[31m'
 	else
-		local Main='\e[1;31m' Fail="$White"
+		local Main='\e[31m' Fail='\e[97m'
 	fi
 
 	# Reset
