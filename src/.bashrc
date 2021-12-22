@@ -9,9 +9,13 @@ enable -n let
 # TMUX
 if ! [[ $TMUX ]]; then
 	if [[ -z "$(tmux list-session 2>/dev/null)" ]]; then
-		tmux new-session -s default &>/dev/null
+		if [[ "$(tmux new-session -s default)" == *exited* ]]; then
+			exit
+		fi
 	else
-		tmux attach -t default &>/dev/null
+		if [[ "$(tmux attach -t default)" == *exited* ]]; then
+			exit
+		fi
 	fi
 fi
 
