@@ -17,6 +17,9 @@ if test -f "$Xresources" -a -r "$Xresources"; then
 	xrdb -load $Xresources
 fi
 
+# Turn screen saver off
+xset s off -dpms
+
 # Xsession manager
 lxsession &
 
