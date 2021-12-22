@@ -6,6 +6,15 @@
 # Disable builtin
 enable -n let
 
+# TMUX
+if ! [[ $TMUX ]]; then
+	if [[ -z "$(tmux list-session 2>/dev/null)" ]]; then
+		tmux new-session -s default &>/dev/null
+	else
+		tmux attach -t default &>/dev/null
+	fi
+fi
+
 # set()
 set -o interactive-comments -o vi -o braceexpand \
 	-o hashall -o histexpand +o monitor
