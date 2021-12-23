@@ -1,39 +1,45 @@
 #!/usr/bin/env bash
 
+Err() {
+	printf 'Err: %s\n' "$2"
+	(( $1 > 0 )) && return $1
+}
+
 up() {
 	for ((Count = 10#${1:-1}; Count > 0; Count--)); {
-		cd .. || return 1
+		cd .. || break
 	}
 	unset -v Count
 }
 
 lspkg() { # [NAME] Inspired by TFL/LL
-	for File in /var/cache/pacman/pkg/?*; {
-		[[ "$File" = *'.sig' ]] ||
+	for File in /var/cache/pacman/pkg/*; {
+		[[ "$File" == *'.sig' ]] ||
 			printf '%s\n' "${File#/var/cache/pacman/pkg/}"
 	}
 }
 
 build() {
 	# Check if AUR dir exist or not
-	[[ -d $1 ]] || return 1
+	[[ -d $1 ]] || Err 1 "'$1' isn't a directory"
 
 	# Check if AUR up to date or not
-	git --git-dir=${1%/}/.git/ pull || return 1
+	git --git-dir=${1%%/}/.git/ pull || Err 1 "'$1' isn't a git directory"
 
 	# Set build dir
 	local BuildDir="${TMPDIR:-/tmp}/build-$SRANDOM"
 
 	# Copy AUR to build dir, exit with status 1 if fails
-	cp -r $1 $BuildDir &>/dev/null || return 1
+	cp -r $1 $BuildDir ||
+		Err 1 "'$TMPDIR' isn't writable you may edit build() to change build directory"
 
-	# Build AUR, exit with status 1 if fails
-	cd $BuildDir && makepkg -sir &&
-		local Fail=0 || local Fail=1
+	# Build AUR
+	if ! { cd "$BuildDir" && makepkg -sir ;}; then
+		Err 0 "Build '$1' failed..."
+	fi
 
 	# Clean
-	{ cd $OLDPWD && rm -rf $BuildDir ;} &>/dev/null
-	return $Fail
+	cd "$OLDPWD" && rm -rf "$BuildDir"
 }
 
 log() {

@@ -8,10 +8,10 @@ enable -n let
 
 # TMUX
 if ! [[ $TMUX ]] && ((UID)); then
-	if [[ -z "$(tmux list-session 2>/dev/null)" ]]; then
-		[[ "$(tmux new-session -s default)" == *exited* ]] && exit 0
+	if [[ -z $(tmux list-session 2>/dev/null) ]]; then
+		[[ $(tmux new-session -s default) == *exited* ]] && exit 0
 	else
-		[[ "$(tmux attach -t default)" == *exited* ]] && exit 0
+		[[ $(tmux attach -t default) == *exited* ]] && exit 0
 	fi
 fi
 
