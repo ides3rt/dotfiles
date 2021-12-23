@@ -7,15 +7,11 @@
 enable -n let
 
 # TMUX
-if ! [[ $TMUX ]]; then
+if ! [[ $TMUX ]] && ((UID)); then
 	if [[ -z "$(tmux list-session 2>/dev/null)" ]]; then
-		if [[ "$(tmux new-session -s default)" == *exited* ]]; then
-			exit
-		fi
+		[[ "$(tmux new-session -s default)" == *exited* ]] && exit 0
 	else
-		if [[ "$(tmux attach -t default)" == *exited* ]]; then
-			exit
-		fi
+		[[ "$(tmux attach -t default)" == *exited* ]] && exit 0
 	fi
 fi
 
@@ -43,7 +39,7 @@ bind "\C-e":end-of-line
 
 PROMPT_PARSER() {
 	# Colors
-	local Grey='\e[1;37m' Reset='\e[0m'
+	local DarkGrey='\e[1;90m' Reset='\e[0m'
 
 	# Define colors for root and normal user
 	if ((UID)); then
@@ -59,8 +55,8 @@ PROMPT_PARSER() {
 		local Branch=$(< "$(git rev-parse --git-dir)/HEAD") \
 			Status=$(git status --short)
 
-		[[ -n $DISPLAY ]] && local Symbol="\[$Grey\] "
-		PS1+="$Symbol\[$Grey\]Branch '${Branch##*/}' has"
+		[[ -n $DISPLAY ]] && local Symbol="\[$DarkGrey\] "
+		PS1+="$Symbol\[$DarkGrey\]Branch '${Branch##*/}' has"
 
 		if [[ -z $Status ]]; then
 			while read Secondline; do
