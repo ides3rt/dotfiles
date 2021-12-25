@@ -82,10 +82,12 @@ endif
 set lazyredraw
 
 "When list characters
-if system('id -u') != 0
+if expand("$UID") == '0'
+	set listchars=tab:<->,trail:~
+else
 	set listchars=tab:»→,trail:␣
-	noremap <silent> <leader>ls :set list!<CR>
 endif
+nnoremap <silent> <leader>ls :set list!<CR>
 
 "Don't auto load plugins
 set noloadplugins
