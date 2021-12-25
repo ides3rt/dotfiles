@@ -47,8 +47,8 @@ dunst &
 # Hotkeys daemon
 sxhkd &
 
-# I'm URxvt(1) user
-urxvtd &
+# URxvt daemons
+urxvtd -q -o -f
 
 # My searX instance
 searx-run &

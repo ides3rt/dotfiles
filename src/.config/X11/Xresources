@@ -6,16 +6,21 @@ Xft.hintstyle: hintslight
 Xft.lcdfitter: lcddefault
 Xft.rgba: rgb
 
-! Urxvt
-URxvt*background: [95]#060606
-URxvt*depth: 32
-URxvt*font: xft:Monofur for Powerline:size=15.5, \
-			xft:Mononoki Nerd Font Mono:minspace=false
-URxvt*intensityStyles: false
-URxvt*jumpScroll: true
-URxvt*pointerBlank: true
-URxvt*pointerBlankDelay: 99999999
-URxvt*scrollBar: false
+! URxvt
+URxvt*.background: [95]#060606
+URxvt*.depth: 32
+URxvt*.font: xft:Monofur for Powerline:size=15.5, xft:Mononoki Nerd Font Mono
+URxvt*.intensityStyles: false
+URxvt*.iso14755: false
+URxvt*.iso14755_52: false
+URxvt*.jumpScroll: true
+URxvt*.perl-ext:
+URxvt*.perl-ext-common:
+URxvt*.pointerBlank: true
+URxvt*.pointerBlankDelay: 60
+URxvt*.print-pipe: cat > /dev/null
+URxvt*.saveLines: 0
+URxvt*.scrollBar: false
 
 ! Background/Foreground
 *.background: #060606
