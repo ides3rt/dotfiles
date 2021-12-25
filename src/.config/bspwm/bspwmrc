@@ -26,5 +26,6 @@ bspc config single_monocle true
 
 bspc rule -a '*' state=floating
 bspc rule -a 'Alacritty' state=tiled
+bspc rule -a 'URxvt' state=tiled
 bspc rule -a 'firefox:*:Mozilla Firefox' state=tiled
 bspc rule -a 'firefox:*:Mozilla Firefox (Private Browsing)' state=tiled

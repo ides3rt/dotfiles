@@ -1,5 +1,42 @@
-Xft.antialias: 1
-Xft.hinting: 1
-Xft.rgba: rgb
+! Fonts rendering
+Xft.antialias: true
+Xft.autohint: false
+Xft.hinting: true
 Xft.hintstyle: hintslight
 Xft.lcdfitter: lcddefault
+Xft.rgba: rgb
+
+! Urxvt
+URxvt*background: [95]#060606
+URxvt*depth: 32
+URxvt*font: xft:Monofur for Powerline:size=15.5, \
+			xft:Mononoki Nerd Font Mono:minspace=false
+URxvt*intensityStyles: false
+URxvt*jumpScroll: true
+URxvt*pointerBlank: true
+URxvt*pointerBlankDelay: 99999999
+URxvt*scrollBar: false
+
+! Background/Foreground
+*.background: #060606
+*.foreground: #dddddd
+
+! Normal colors
+*.color0: #000000
+*.color1: #cc241d
+*.color2: #689d6a
+*.color3: #d7d700
+*.color4: #0073e5
+*.color5: #b16286
+*.color6: #5cc9ff
+*.color7: #aaaaaa
+
+! Bright colors
+*.color8:  #555555
+*.color9:  #fb4934
+*.color10: #8ec07c
+*.color11: #d7d787
+*.color12: #3584e4
+*.color13: #d3869b
+*.color14: #87d7ff
+*.color15: #ffffff
