@@ -73,48 +73,6 @@ schemes:
         background: '#060606'
         foreground: '#dddddd'
 
-  # ides3rt-v2 colors scheme (base on "xfce-terminal")
-  ides3rt-v2: &ides3rt-v2
-    # Default colors
-    primary:
-      background: '#060606'
-      foreground: '#dddddd'
-
-    # Normal colors
-    normal:
-      black:   '#000000'
-      red:     '#aa0000'
-      green:   '#00aa00'
-      yellow:  '#aa5500'
-      blue:    '#0000aa'
-      magenta: '#aa00aa'
-      cyan:    '#00aaaa'
-      white:   '#aaaaaa'
-
-    # Bright colors
-    bright:
-      black:   '#555555'
-      red:     '#ff5555'
-      green:   '#55ff55'
-      yellow:  '#ffff55'
-      blue:    '#5555ff'
-      magenta: '#ff55ff'
-      cyan:    '#55ffff'
-      white:   '#ffffff'
-
-    # Search colors
-    search:
-      matches:
-        foreground: '#d7d787'
-        background: CellBackground
-      focused_match:
-        foreground: CellBackground
-        background: CellForeground
-
-      bar:
-        background: '#060606'
-        foreground: '#dddddd'
-
 colors: *ides3rt-v1
 
 # Background opacity
@@ -163,12 +121,8 @@ mouse:
   hide_when_typing: true
 
 key_bindings:
-  # Spawn alacritty(1) on current directory
-  - { key: Return, mods: Control, action: SpawnNewInstance }
-
   # Vi Mode
-  - { key: Space, mods: Control, mode: ~Search,    action: ToggleViMode }
-  - { key: Key4,                 mode: Vi|~Search, action: Last }
+  - { key: Key4, mode: Vi|~Search, action: Last }
 
 debug:
   # Keep the log file after quitting Alacritty.

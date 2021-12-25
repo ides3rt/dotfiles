@@ -6,14 +6,10 @@
 # Disable builtin
 enable -n let
 
-# TMUX
+# Tmux
 if ! [[ $TMUX ]] && ((UID)); then
-	if [[ -z $(tmux list-session 2>/dev/null) ]]; then
-		[[ $(tmux new-session -s default) == *exited* ]] && exit 0
-	else
-		[[ $(tmux attach -t default) == *exited* ]] && exit 0
-	fi
-fi
+	[[ $(tmux a -t default || tmux new -s default) == *exited* ]] && exit 0
+fi 2>/dev/null
 
 # set()
 set -o interactive-comments -o vi -o braceexpand \
