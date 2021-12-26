@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 Err() {
-	printf 'Err: %s\n' "$2"
+	printf '%s\n' "Err: $2"
 	(( $1 > 0 )) && return $1
 }
 
@@ -14,28 +14,27 @@ up() {
 
 lspkg() { # [NAME] Inspired by TFL/LL
 	for File in /var/cache/pacman/pkg/*; {
-		[[ "$File" == *'.sig' ]] ||
+		[[ $File == *'.sig' ]] ||
 			printf '%s\n' "${File#/var/cache/pacman/pkg/}"
 	}
 }
 
 build() {
 	# Check if AUR dir exist or not
-	[[ -d $1 ]] || Err 1 "'$1' isn't a directory"
+	[[ -d $1 ]] || Err 1 "'$1' isn't a directory..."
 
 	# Check if AUR up to date or not
-	git --git-dir=${1%%/}/.git/ pull || Err 1 "'$1' isn't a git directory"
+	git --git-dir="${1%%/}"/.git pull || Err 1 "'$1' isn't a git directory..."
 
 	# Set build dir
 	local BuildDir="${TMPDIR:-/tmp}/build-$SRANDOM"
 
-	# Copy AUR to build dir, exit with status 1 if fails
-	cp -r $1 $BuildDir ||
-		Err 1 "'$TMPDIR' isn't writable you may edit build() to change build directory"
-
-	# Build AUR
-	if ! { cd "$BuildDir" && makepkg -sir ;}; then
-		Err 0 "Build '$1' failed..."
+	# Copy AUR to build dir
+	if cp -r "$1" "$BuildDir"; then
+		# Build AUR
+		{ cd "$BuildDir" && makepkg -sir ;} || Err 0 "Build '$1' failed..."
+	else
+		Err 0 "Copy '$1' to '$TMPDIR' failed..."
 	fi
 
 	# Clean
