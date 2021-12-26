@@ -9,7 +9,7 @@ Xft.rgba: rgb
 ! URxvt
 URxvt*.background: [95]#060606
 URxvt*.depth: 32
-URxvt*.font: xft:Monofur:style=Regular:size=15.5, xft:Mononoki Nerd Font Mono
+URxvt*.font: xft:Monofur Nerd Font Mono:size=15.5
 URxvt*.intensityStyles: false
 URxvt*.iso14755: false
 URxvt*.iso14755_52: false
