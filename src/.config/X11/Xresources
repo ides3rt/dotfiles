@@ -21,6 +21,7 @@ URxvt*.pointerBlankDelay: 60
 URxvt*.print-pipe: cat > /dev/null
 URxvt*.saveLines: 0
 URxvt*.scrollBar: false
+URxvt*.secondaryScroll: false
 
 ! Background/Foreground
 *.background: #060606

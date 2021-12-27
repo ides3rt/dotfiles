@@ -14,7 +14,7 @@ fi
 # Xresources
 Xresources="$X11_DIR"/Xresources
 if test -f "$Xresources" -a -r "$Xresources"; then
-	xrdb -load "$Xresources"
+	xrdb "$Xresources"
 fi
 
 # Turn screen saver off
