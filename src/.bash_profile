@@ -23,7 +23,7 @@ export HISTFILE=/dev/null # Same effect as HISTFILE=
 export HISTFILESIZE=0 # This make history session only
 export HISTSIZE=999
 
-if ((UID)) && [[ -z $SSH_TTY && $SHELL == *bash* ]]; then
+if ((UID)) && [[ -z $SSH_TTY ]]; then
 	# My GitHub SSH
 	if eval `ssh-agent -s`; then
 		ssh-add "$HOME"/.ssh/GitHub
