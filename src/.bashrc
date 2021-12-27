@@ -45,7 +45,7 @@ PROMPT_PARSER() {
 	fi
 
 	# Reset
-	PS1= PS2='  '
+	PS1= PS2='\[\e[3m\]  '
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		local Branch=$(< "$(git rev-parse --git-dir)"/HEAD) \
@@ -146,6 +146,7 @@ PROMPT_PARSER() {
 }
 
 PROMPT_COMMAND='PROMPT_PARSER $?'
+PS0='\[\e[0m\]'
 
 Make() { [[ -f $1 && -r $1 ]] && . "$1" ;}
 
