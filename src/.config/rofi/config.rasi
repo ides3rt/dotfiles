@@ -1,6 +1,6 @@
 configuration {
 	modi: "run,drun";
-	font: "Mononoki Nerd Font Regular 11";
+	font: "Monofur Nerd Font 12";
 	icon-theme: "Papirus";
 	display-run: "Run";
 	display-drun: "dRun";
