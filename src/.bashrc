@@ -39,9 +39,9 @@ PROMPT_PARSER() {
 
 	# Define colors for root and normal user
 	if ((UID)); then
-		local Main='\e[97m' Fail='\e[31m'
+		local Main="$Reset" Fail='\e[31m'
 	else
-		local Main='\e[31m' Fail='\e[97m'
+		local Main='\e[3;31m' Fail='\e[97m'
 	fi
 
 	# Reset
@@ -132,7 +132,9 @@ PROMPT_PARSER() {
 	(($1 == 0)) || { local X="$1 "; PS1+="\[$Fail\]$X\[$Reset\]" ;}
 
 	# Typical PS1
-	PS1+="\[$Main\]>\[$Reset\] "
+	PS1+="\[$Main\]"
+	PS1+='\$'
+	PS1+="\[$Reset\] "
 
 	# PS2
 	if ((X)); then
