@@ -3,37 +3,36 @@
 _doas() {
 
 	local cur prev words cword split i
-	_init_completion -s || return
+	_init_completion -s || return 0
 
-	for ((i = 1; i <= cword; i++)); do
+	for ((i = 1; i <= cword; i++)); {
 		if [[ ${words[i]} != -* ]]; then
-			local PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin
-			local root_command=${words[i]}
-			_command_offset $i
+			local PATH="$PATH:/sbin:/usr/sbin:/usr/local/sbin"
+			local root_command="${words[i]}"
+			_command_offset "$i"
 			return
 		fi
-		[[ ${words[i]} == -@(!(-*)[LnsCu]) ]] &&
-			((i++))
-	done
+		[[ ${words[i]} == -@(!(-*)[LnsCu]) ]] && ((i++))
+	}
 
 	case "$prev" in
 		-!(-*)u)
 			COMPREPLY=( $(compgen -u -- "$cur") )
-			return ;;
+			return 0 ;;
 		-!(-*)C)
 			_filedir ;;
 		-!(-*)[Lns])
-			return ;;
+			return 0 ;;
 	esac
 
-	$split && return
+	$split && return 0
 
 	if [[ $cur == -* ]]; then
 		COMPREPLY=( $(compgen -W '$(_parse_usage "$1")' -- "$cur") )
 		[[ ${COMPREPLY-} == *= ]] && compopt -o nospace
-		return
+		return 0
 	fi
 
 } && complete -F _doas doas
 
-# ex: filetype=sh
+# ex: filetype=bash

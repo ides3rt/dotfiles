@@ -48,7 +48,7 @@ PROMPT_PARSER() {
 	PS1= PS2='  '
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		local Branch=$(< "$(git rev-parse --git-dir)/HEAD") \
+		local Branch=$(< "$(git rev-parse --git-dir)"/HEAD) \
 			Status=$(git status --short)
 
 		[[ -n $DISPLAY ]] && local Symbol="\[$DarkGrey\] "
@@ -145,23 +145,23 @@ PROMPT_PARSER() {
 
 PROMPT_COMMAND='PROMPT_PARSER $?'
 
-Make() { [[ -f $1 && -r $1 ]] && . $1 ;}
+Make() { [[ -f $1 && -r $1 ]] && . "$1" ;}
 
 # Aliases
-Make "$XDG_CONFIG_HOME/bash/aliases"
+Make "$XDG_CONFIG_HOME"/bash/aliases
 
 # Functions
-Make "$XDG_CONFIG_HOME/bash/functions"
+Make "$XDG_CONFIG_HOME"/bash/functions
 
 # BASH Completion
 Make /usr/share/bash-completion/bash_completion
 
 # Motivation
-Motivation="$HOME/.local/share/quotes"
+Motivation="$HOME"/.local/share/quotes
 if [[ -f $Motivation ]]; then
 	while read; do
 		[[ -n $REPLY ]] && printf '%s\n' "$REPLY"
-	done < $Motivation | shuf -n 1
+	done < "$Motivation" | shuf -n 1
 fi
 
 # Unset

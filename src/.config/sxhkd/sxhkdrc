@@ -20,27 +20,27 @@ mod1 + w
 
 # Take a screenshot
 Print
-	maim $HOME/Pictures/$(date +%Y-%m-%d_%H:%M:%S).png
+	maim "$HOME/Pictures/$(date +%Y-%m-%d_%H:%M:%S).png"
 
 # Advance screenshot options
 shift + Print
-	sh $HOME/Code/rofi/screenshot
+	sh "$HOME"/Code/rofi/screenshot
 
 # Open my dictionary script
 mod1 + d
-	sh $HOME/Code/rofi/dictionary
+	sh "$HOME"/Code/rofi/dictionary
 
 # Increase volume
 mod1 + equal
-	sh $HOME/Code/sxhkd/volume +5%
+	sh "$HOME"/Code/sxhkd/volume +5%
 
 # Decrease volume
 mod1 + minus
-	sh $HOME/Code/sxhkd/volume -5%
+	sh "$HOME"/Code/sxhkd/volume -5%
 
 # Change keyboard layouts
 mod4 + Escape
-	sh $HOME/Code/sxhkd/keymaps
+	sh "$HOME"/Code/sxhkd/keymaps
 
 #
 # BSPWM hotkeys

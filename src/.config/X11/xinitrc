@@ -1,20 +1,20 @@
 #!/bin/sh
 
 # X11 config directory
-X11_DIR="$XDG_CONFIG_HOME/X11"
+X11_DIR="$XDG_CONFIG_HOME"/X11
 
 # Source autostart scripts
-if test -d "$X11_DIR/xinitrc.d"; then
-	for File in $X11_DIR/xinitrc.d/*.sh; do
-		test -f "$File" -a -x "$File" && . $File
+if test -d "$X11_DIR"/xinitrc.d; then
+	for File in "$X11_DIR"/xinitrc.d/*.sh; do
+		test -f "$File" -a -x "$File" && . "$File"
 	done
 	unset -v File
 fi
 
 # Xresources
-Xresources="$X11_DIR/Xresources"
+Xresources="$X11_DIR"/Xresources
 if test -f "$Xresources" -a -r "$Xresources"; then
-	xrdb -load $Xresources
+	xrdb -load "$Xresources"
 fi
 
 # Turn screen saver off
@@ -25,8 +25,8 @@ lxsession &
 
 # Your keyboard layout
 setxkbmap us -option shift:both_capslock
-xmodmap $X11_DIR/xmodmap/colemak-dhk.xmodmap
-xmodmap -e 'keycode 66 = Control_L' -e 'add Control = Control_L'
+xmodmap "$X11_DIR"/xmodmap/colemak-dhk.xmodmap \
+	-e 'keycode 66 = Control_L' -e 'add Control = Control_L'
 xcape -e 'Control_L=Escape'
 
 # Unset variables
@@ -36,7 +36,7 @@ unset -v X11_DIR Xresources
 xsetroot -cursor_name left_ptr
 
 # Wallpapers
-feh --no-fehbg --bg-fill $HOME/Pictures/cWallpapers/Wallpaper_002.png &
+feh --no-fehbg --bg-fill "$HOME"/Pictures/cWallpapers/Wallpaper_002.png &
 
 # Compositor
 picom --experimental-backends &
