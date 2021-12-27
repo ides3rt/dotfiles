@@ -1,6 +1,6 @@
 "Prepare XDG
-if !exists('$XDG_CONFIG_HOME') | let $XDG_CONFIG_HOME="$HOME/.config" | endif
-if !exists('$XDG_CACHE_HOME') | let $XDG_CACHE_HOME="$HOME/.cache" | endif
+if !exists('$XDG_CONFIG_HOME') | let $XDG_CONFIG_HOME = "$HOME/.config" | endif
+if !exists('$XDG_CACHE_HOME') | let $XDG_CACHE_HOME = "$HOME/.cache"| endif
 
 "XDG PATH
 set runtimepath^=$XDG_CONFIG_HOME/vim
