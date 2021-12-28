@@ -6,9 +6,13 @@
 mod1 + Return
 	$TERMINAL
 
-# Programs launcher
+# Run launcher
 mod1 + p
 	rofi -show run
+
+# Programs launcher
+mod1 + d
+	rofi -show drun
 
 # Spawn web browser
 mod1 + w
@@ -25,10 +29,6 @@ Print
 # Advance screenshot options
 shift + Print
 	sh "$HOME"/Code/rofi/screenshot
-
-# Open my dictionary script
-mod1 + d
-	sh "$HOME"/Code/rofi/dictionary
 
 # Increase volume
 mod1 + equal
