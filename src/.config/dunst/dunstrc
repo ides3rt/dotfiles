@@ -19,13 +19,13 @@
 
 	# Notifications' frame
 	frame_width = 2
-	frame_color = "#fff"
+	frame_color = "#767676"
 
 	# Sort messages by urgency
 	sort = false
 
 	# Font
-	font = Roboto Mono 9
+	font = Monofur Nerd Font 10
 
 	# Notifications' format
 	markup = full
@@ -49,16 +49,16 @@
 	corner_radius = 5
 
 [urgency_low]
-	background = "#000"
-	foreground = "#fff"
+	background = "#121212"
+	foreground = "#ffffff"
 	timeout = 2
 
 [urgency_normal]
-	background = "#000"
-	foreground = "#fff"
+	background = "#121212"
+	foreground = "#ffffff"
 	timeout = 2
 
 [urgency_critical]
-	background = "#000"
-	foreground = "#fff"
+	background = "#121212"
+	foreground = "#ffffff"
 	timeout = 2
