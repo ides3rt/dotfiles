@@ -30,12 +30,16 @@ Print
 shift + Print
 	sh "$HOME"/Code/rofi/screenshot
 
+# Change URxvt(1) fonts size
+mod1 + v
+	sh "$HOME"/Code/urxvt/fonts
+
 # Increase volume
-mod1 + equal
+F3
 	sh "$HOME"/Code/sxhkd/volume +5%
 
 # Decrease volume
-mod1 + minus
+F2
 	sh "$HOME"/Code/sxhkd/volume -5%
 
 # Change keyboard layouts
