@@ -5,4 +5,4 @@ configuration {
 	display-run: "Run";
 	display-drun: "dRun";
 }
-@theme "/home/ides3rt/.config/rofi/themes/ides3rt-v2.rasi"
+@theme "/home/ides3rt/.config/rofi/themes/ides3rt-v1.rasi"
