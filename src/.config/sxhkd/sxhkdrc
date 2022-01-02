@@ -34,6 +34,10 @@ shift + Print
 mod1 + z
 	sh "$HOME"/Code/urxvt/fonts
 
+# Dictionary
+mod1 + shift + d
+	sh "$HOME"/Code/rofi/dictionary
+
 # Decrease volume
 F2
 	sh "$HOME"/Code/sxhkd/volume -5%
@@ -65,6 +69,10 @@ mod1 + shift + r
 # Close focused window
 mod1 + q
 	bspc node -c
+
+# Kill focused window
+mod4 + q
+	bspc node -k
 
 # Change between tiled and monocle layout
 mod1 + shift + m
