@@ -62,17 +62,13 @@ mod4 + Escape
 mod1 + shift + q
 	 bspc quit
 
-# Restart BSPWM
+# Restart BSPWM and SXHKD
 mod1 + shift + r
 	pkill -USR1 -x sxhkd; bspc wm -r
 
 # Close focused window
 mod1 + q
 	bspc node -c
-
-# Kill focused window
-mod4 + q
-	bspc node -k
 
 # Change between tiled and monocle layout
 mod1 + shift + m
@@ -86,40 +82,32 @@ mod1 + shift + {t,f,space}
 mod1 + shift + s
 	bspc node -g sticky
 
-# Focus the node in the given direction
-mod1 + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+# Focus/swap the next/previous window
+mod1 + {_,shift + }{j,k}
+	bspc node -{f,s} {next,prev}.local.window
 
 # Focus or send to the given desktop
 mod1 + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
-# Preselect the direction
-mod1 + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
-
-# Preselect the ratio
-mod1 + ctrl + {1-9}
-	bspc node -o 0.{1-9}
-
-# Cancel the preselection for the focused node
-mod1 + ctrl + space
-	bspc node -p cancel
+# Preselect window in vertical/horizontal
+mod1 + {v,h}
+	bspc node -p {south,east}
 
 # Shrink focused window's width
-mod4 + h
+mod1 + ctrl + h
 	bspc node -z left 50 0; bspc node -z right -50 0
 
 # Grow focused window's height
-mod4 + j
+mod1 + ctrl + j
 	bspc node -z bottom 0 -50; bspc node -z top 0 50
 
 # Shrink focused window's height
-mod4 + k
+mod1 + ctrl + k
 	bspc node -z bottom 0 50; bspc node -z top 0 -50
 
 # Grow focused window's width
-mod4 + l
+mod1 + ctrl + l
 	bspc node -z left -50 0; bspc node -z right 50 0
 
 # Move a floating window
