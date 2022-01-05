@@ -63,7 +63,11 @@ PROMPT_PARSER() {
 				*'up to date'*|'')
 					printf -v Commits "%'d" "$(git rev-list --count HEAD 2>/dev/null)"
 					PS1+=" $Commits commit(s) cleaned.\[$Reset\]\n" ;;
-				*)
+				*behind*)
+					read F1 F2 F3 Pace Upsteam F6 Commits _ <<< "$Secondline"
+					printf -v Commits "%'d" "$Commits"
+					PS1+=" $Commits commit(s) $Pace $Upsteam.\[$Reset\]\n" ;;
+				*ahead*)
 					read F1 F2 F3 Pace F5 Upsteam F7 Commits _ <<< "$Secondline"
 					printf -v Commits "%'d" "$Commits"
 					PS1+=" $Commits commit(s) $Pace of $Upsteam.\[$Reset\]\n" ;;
