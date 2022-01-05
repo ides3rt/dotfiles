@@ -71,7 +71,7 @@ mod1 + q
 	bspc node -c
 
 # Change between tiled and monocle layout
-mod1 + shift + m
+mod1 + space
 	bspc desktop -l next
 
 # Change focused window's state
