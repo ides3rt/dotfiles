@@ -35,7 +35,7 @@ bind "\C-e":end-of-line
 
 PROMPT_PARSER() {
 	# Colors
-	local DarkGrey='\e[1;90m' Reset='\e[0m'
+	local DarkGrey='\e[1;90m' Green='\e[0;32m' Reset='\e[0m'
 
 	# Define colors for root and normal user
 	if ((UID)); then
@@ -133,7 +133,12 @@ PROMPT_PARSER() {
 	fi
 
 	# Status
-	(($1 == 0)) || { local X="$1 "; PS1+="\[$Fail\]$X\[$Reset\]" ;}
+	if (($1 == 0)); then
+		[[ $SSH_TTY ]] && PS1+="\[$Green\][ssh]\[$Reset\] "
+	else
+		local X="$1 "
+		PS1+="\[$Fail\]$X\[$Reset\]"
+	fi
 
 	# Typical PS1
 	PS1+="\[$Main\]"
