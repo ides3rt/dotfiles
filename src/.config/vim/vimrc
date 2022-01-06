@@ -113,7 +113,7 @@ if has('linebreak')
 endif
 
 "I don't like to have `/usr/include`
-set path=.,,**
+set path=**
 
 "Don't allow :autocmd, shell and write commands
 set secure
@@ -154,6 +154,9 @@ set nostartofline
 "Don't create `swapfile`
 set noswapfile
 
+"Textwidth
+set textwidth=80
+
 "Timeout
 set notimeout
 set ttimeout
@@ -185,6 +188,10 @@ autocmd BufWritePre * :%s/\s\+$//e
 "For wrap users
 noremap j gj
 noremap k gk
+
+"Fast?
+noremap <C-e> 3<C-e>
+noremap <C-y> 3<C-y>
 
 "Make it less percise
 nnoremap <silent> [[ ?{<CR>w99[{
