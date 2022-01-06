@@ -20,9 +20,6 @@ fi
 # Turn screen saver off
 xset s off -dpms
 
-# Xsession manager
-lxsession &
-
 # Your keyboard layout
 setxkbmap us -variant colemak_dhk \
 	-option ctrl:nocaps \
