@@ -46,3 +46,5 @@ bspc rule -a 'Alacritty' state=tiled
 bspc rule -a 'URxvt' state=tiled
 bspc rule -a 'firefox:*:Mozilla Firefox' state=tiled
 bspc rule -a 'firefox:*:Mozilla Firefox (Private Browsing)' state=tiled
+bspc rule -a 'firefoxdeveloperedition:*:Firefox Developer Edition' state=tiled
+bspc rule -a 'firefoxdeveloperedition:*:Firefox Developer Edition (Private Browsing)' state=tiled
