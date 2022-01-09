@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-Err() {
-	printf '%s\n' "Err: $2"
-	(( $1 > 0 )) && return $1
-}
+Err() { ! printf '%s\n' "Err: $1" 1>&2 ;}
 
 up() {
 	for ((Count = 10#${1:-1}; Count > 0; Count--)); {
@@ -20,11 +17,8 @@ lspkg() { # [NAME] Inspired by TFL/LL
 }
 
 build() {
-	# Check if AUR dir exist or not
-	[[ -d $1 ]] || Err 1 "'$1' isn't a directory..."
-
 	# Check if AUR up to date or not
-	git --git-dir="${1%%/}"/.git pull || Err 1 "'$1' isn't a git directory..."
+	git --git-dir="${1%%/}"/.git pull || return 1
 
 	# Set build dir
 	local BuildDir="${TMPDIR:-/tmp}/build-$SRANDOM"
@@ -32,9 +26,9 @@ build() {
 	# Copy AUR to build dir
 	if cp -r "$1" "$BuildDir"; then
 		# Build AUR
-		{ cd "$BuildDir" && makepkg -sir ;} || Err 0 "Build '$1' failed..."
+		{ cd "$BuildDir" && makepkg -sir ;} || Err "Build '$1' failed..."
 	else
-		Err 0 "Copy '$1' to '$TMPDIR' failed..."
+		Err "Copy '$1' to '$TMPDIR' failed..."
 	fi
 
 	# Clean
@@ -44,4 +38,10 @@ build() {
 log() {
 	git --no-pager log --reverse --pretty=format:'%h: "%s"' "$@"
 	printf '\n'
+}
+
+
+check() {
+	for Dir in "${1:-.}"/*; { git --git-dir="$Dir"/.git pull 2>/dev/null ;}
+	return 0
 }
