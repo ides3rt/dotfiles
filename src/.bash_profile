@@ -18,7 +18,7 @@ export INPUTRC="$XDG_CONFIG_HOME"/bash/inputrc
 export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash-completion/bash_completion
 
 # History
-export HISTCONTROL=ignoredups:erasedups # Who like dups anyway
+export HISTCONTROL=ignoreboth:erasedups # Who like dups anyway
 export HISTFILE=/dev/null # Same effect as HISTFILE=
 export HISTFILESIZE=0 # This make history session only
 export HISTSIZE=999
