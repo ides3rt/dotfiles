@@ -45,3 +45,5 @@ check() {
 	for Dir in "${1:-.}"/*; { git --git-dir="$Dir"/.git pull 2>/dev/null ;}
 	return 0
 }
+
+lq() { links https://lite.duckduckgo.com/lite/?q="$*" ;}

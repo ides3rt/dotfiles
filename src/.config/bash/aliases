@@ -39,5 +39,5 @@ alias push='git push'
 alias status='git status -s'
 alias restore='git restore'
 alias show='git --no-pager show --pretty=format:"%h: %s"'
-
+alias links='links -ssl.certificates 2 -html-numbered-links 1'
 unset -v AUTH
