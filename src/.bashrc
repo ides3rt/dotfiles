@@ -35,7 +35,7 @@ bind "\C-e":end-of-line
 
 PROMPT_PARSER() {
 	# Colors
-	local DarkGrey='\e[1;90m' Green='\e[0;32m' Reset='\e[0m'
+	local DarkGrey='\e[0;1;90m' Green='\e[0;32m' Reset='\e[0m'
 
 	# Define colors for root and normal user
 	if ((UID)); then
