@@ -86,30 +86,37 @@ PROMPT_PARSER() {
 						else
 							local Modified=" $MCount modified file(s)"
 						fi ;;
+					'R  '*)
+						((RnCount++))
+						if ((CCount || MCount)); then
+							local Renamed=", $RnCount renamed file(s)"
+						else
+							local Renamed=" $RnCount renamed file(s)"
+						fi ;;
 					'D  '*)
 						((RCount++))
-						if ((CCount || MCount)); then
+						if ((CCount || MCount || RnCount)); then
 							local Removed=", $RCount removed file(s)"
 						else
 							local Removed=" $RCount removed file(s)"
 						fi ;;
 					D*)
 						((DCount++))
-						if ((CCount || MCount || RCount)); then
+						if ((CCount || MCount || RnCount || RCount)); then
 							local Deleted=", $DCount deleted file(s)"
 						else
 							local Deleted=" $DCount deleted file(s)"
 						fi ;;
 					A*)
 						((NCount++))
-						if ((CCount || MCount || RCount || DCount)); then
+						if ((CCount || MCount || RnCount || RCount || DCount)); then
 							local Newfile=", $NCount new file(s)"
 						else
 							local Newfile=" $NCount new file(s)"
 						fi ;;
 					'??'*)
 						((UCount++))
-						if ((CCount || MCount || RCount || DCount || NCount)); then
+						if ((CCount || MCount || RnCount || RCount || DCount || NCount)); then
 							local Untracked=", $UCount untracked file(s)"
 						else
 							local Untracked=" $UCount untracked file(s)"
@@ -117,8 +124,8 @@ PROMPT_PARSER() {
 				esac
 			done <<< "$Status"
 
-			PS1+="${Changes}${Modified}${Removed}${Deleted}${Newfile}${Untracked}.\[$Reset\]\n"
-			unset -v Curline CCount MCount RCount DCount NCount UCount
+			PS1+="${Changes}${Modified}${Renamed}${Removed}${Deleted}${Newfile}${Untracked}.\[$Reset\]\n"
+			unset -v Curline CCount MCount RnCount RCount DCount NCount UCount
 		fi
 
 		# Aliases that I only want when working on git
