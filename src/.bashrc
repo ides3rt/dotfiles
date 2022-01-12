@@ -60,7 +60,7 @@ PROMPT_PARSER() {
 			done <<< "$(git status)"
 
 			case "$Secondline" in
-				*'up to date'*|'')
+				*'up to date'*|*'nothing to commit'*|'')
 					printf -v Commits "%'d" "$(git rev-list --count HEAD 2>/dev/null)"
 					PS1+=" $Commits commit(s) cleaned.\[$Reset\]\n" ;;
 				*behind*)
