@@ -29,6 +29,7 @@ noremap <space> <Nop>
 let mapleader = " "
 
 "Plugins
+source $XDG_CONFIG_HOME/vim/plugin/textwidth.vim
 source $XDG_CONFIG_HOME/vim/plugin/status.vim
 source $XDG_CONFIG_HOME/vim/plugin/syntax.vim
 
@@ -198,6 +199,11 @@ nnoremap <silent> [[ ?{<CR>w99[{
 nnoremap <silent> ][ /}<CR>b99]}
 nnoremap <silent> ]] j0[[%/{<CR>
 nnoremap <silent> [] k$][%?}<CR>
+
+"Disable Ex mode
+nnoremap <silent> Q <Nop>
+nnoremap <silent> gQ <Nop>
+nnoremap <silent> q: <Nop>
 
 "Toggle `ignorecase`
 nnoremap <silent> <leader>ic :set ignorecase!<CR>

@@ -41,7 +41,7 @@ PROMPT_PARSER() {
 	if ((UID)); then
 		local Main="$Reset" Fail='\e[0;31m'
 	else
-		local Main='\e[3;31m' Fail='\e[0;97m'
+		local Main='\e[0;3;31m' Fail='\e[0;97m'
 	fi
 
 	# Reset

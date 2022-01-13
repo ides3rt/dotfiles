@@ -1,4 +1,4 @@
-"Disable `textwidth` by default
+"To toggle textwidth
 func! Textwidth()
 	if !exists('g:Textwidth')
 		let g:Textwidth = 1
@@ -10,6 +10,5 @@ func! Textwidth()
 
 	endif
 endfunc
-call Textwidth()
 
 nnoremap <silent> <leader>tw :call Textwidth()<CR>
