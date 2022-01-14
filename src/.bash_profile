@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Set default permissions to `drwx------` and `-rw-------`
+# Set default permissions to 'drwx------' and '-rw-------'
 umask 077
 
 # Source environment variables
@@ -11,15 +11,15 @@ if [[ -d "$HOME"/.config/env.d ]]; then
 	unset -v File
 fi
 
-# INPUTRC
+# Readline
 export INPUTRC="$XDG_CONFIG_HOME"/bash/inputrc
 
 # Users' bash(1) completion
 export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash-completion/bash_completion
 
 # History
-export HISTCONTROL=ignoreboth:erasedups # Who like dups anyway
-export HISTFILE=/dev/null # Same effect as HISTFILE=
+export HISTCONTROL=ignoreboth:erasedups
+export HISTFILE=/dev/null
 export HISTFILESIZE=0 # This make history session only
 export HISTSIZE=999
 
@@ -29,7 +29,7 @@ if ((UID)) && [[ -z $SSH_TTY ]]; then
 		ssh-add "$HOME"/.ssh/GitHub
 	fi &>/dev/null
 
-	# TTY
+	# Xorg
 	if [[ -z $DISPLAY ]] && clear; then
 		# Run xinit(1) when in tty1
 		if ((XDG_VTNR == 1)); then
