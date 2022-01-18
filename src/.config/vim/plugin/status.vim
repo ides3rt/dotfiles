@@ -1,4 +1,4 @@
-"Don't show status by default
+" Don't show status by default
 func! Status()
 	if !exists('g:Status')
 		let g:Status = 1
@@ -40,5 +40,5 @@ func! Status()
 endfunction
 call Status()
 
-"Toggle status
+" Toggle status
 nnoremap <silent> <leader>ts :call Status()<CR>

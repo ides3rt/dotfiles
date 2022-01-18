@@ -5,7 +5,7 @@
 
 # Aliases
 alias ghpcd="cd $HOME/GitHub/repositories"
-alias gshcd="cd $HOME/GitHub/gists"
+alias ghscd="cd $HOME/GitHub/gists"
 alias cp='cp -vZu'
 alias mv='mv -vZu'
 alias rm='rm -v --preserve-root=all'
@@ -28,7 +28,6 @@ alias doas='doas ' # Required, if you want aliases to work with doas(1)
 alias htop="htop -t -u $USER" # It's so much cleaner
 alias xclip='xclip -sel c' # Normal xclip(1) doesn't work for me
 alias ccb='printf "" | xclip -sel c; printf "" | xclip -sel p' # Clear clipboard
-alias vol='pactl get-sink-volume @DEFAULT_SINK@' # Get your volume
 alias add='git add'
 alias checkout='git checkout'
 alias pull='git pull'
@@ -40,4 +39,5 @@ alias status='git status -s'
 alias restore='git restore'
 alias show='git --no-pager show --pretty=format:"%h: %s"'
 alias links='links -http.fake-firefox 1 -http.do-not-track 1 -html-numbered-links 1' # Better links(1). Remove 'http.fake-firefox' to enable JS
+
 unset -v AUTH

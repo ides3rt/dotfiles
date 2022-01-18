@@ -1,16 +1,17 @@
-"Prepare XDG
+" Prepare XDG
 if !exists('$XDG_CONFIG_HOME') | let $XDG_CONFIG_HOME = "$HOME/.config" | endif
 if !exists('$XDG_CACHE_HOME') | let $XDG_CACHE_HOME = "$HOME/.cache" | endif
+if !exists('$MYVIMRC') | let $MYVIMRC = "$HOME/.vimrc" | endif
 
-"XDG PATH
+" XDG PATH
 set runtimepath^=$XDG_CONFIG_HOME/vim
 
-"Detecting file type
+" Detecting file type
 filetype on
 filetype plugin on
 filetype indent on
 
-"Syntax
+" Syntax
 if has('syntax')
 	"Enable syntax highlight
 	syntax on
@@ -24,41 +25,41 @@ if has('syntax')
 	set cursorlineopt=number
 endif
 
-"Your <leader>
+" Your <leader>
 noremap <space> <Nop>
 let mapleader = " "
 
-"Plugins
+" Plugins
 source $XDG_CONFIG_HOME/vim/plugin/textwidth.vim
 source $XDG_CONFIG_HOME/vim/plugin/status.vim
 source $XDG_CONFIG_HOME/vim/plugin/syntax.vim
 
-"Change pwd to open file's dir
+" Change pwd to open file's dir
 set autochdir
 
-"Indent
+" Indent
 set autoindent
 
-"Autoread when changes are from outside
+" Autoread when changes are from outside
 set autoread
 
-"Make <BACKSPACE> works
+" Make <BACKSPACE> works
 set backspace=indent,eol,start
 
-"Disable bell
+" Disable bell
 set belloff=all
 
-"Copy existing indent
+" Copy existing indent
 set copyindent
 
-"Disable `:' history
+" Disable ':' history
 set history=0
 
 if has('extra_search')
-	"Highlighted search
+	" Highlight search
 	set hlsearch
 
-	"Highlight while search
+	" Highlight while search
 	if has('reltime')
 		set incsearch
 	endif
@@ -67,22 +68,22 @@ if has('extra_search')
 	nnoremap <silent> <leader><space> :noh<CR>
 endif
 
-"Case insensitive
+" Case insensitive
 set ignorecase
 
-"No double <SPACE> after period
+" No double <SPACE> after period
 set nojoinspaces
 
-"It's only enable for backwards compatibility
+" It's only enable for backwards compatibility
 if has('langmap')
 	set nolangnoremap
 	set nolangremap
 endif
 
-"Good performence boost
+" Good performence boost
 set lazyredraw
 
-"When list characters
+" When 'list' characters
 if expand("$UID") == '0'
     set listchars=tab:<->,trail:~
 else
@@ -90,138 +91,128 @@ else
 endif
 nnoremap <silent> <leader>ls :set list!<CR>
 
-"Don't auto load plugins
+" Don't auto load plugins
 set noloadplugins
 
-"Show the matching parent
+" Show the matching parent
 set matchtime=0
 
-"Don't check set() command
+" Don't check `set` command
 set nomodeline
 
-"Don't use more() format
+" Don't use `more` format
 set nomore
 
-"Set `nrformats' to recom' values
+" Set 'nrformats' to recommended values
 set nrformats=bin,hex
 
 if has('linebreak')
-	"Set `numberwidth` to 2
+	" Set 'numberwidth' to 2
 	set numberwidth=2
 
-	"When `linebreak' is set
+	" When 'linebreak' is set
 	set breakindent
 endif
 
-"I don't like to have `/usr/include`
+" I don't like to have '/usr/include'
 set path=**
 
-"Don't allow :autocmd, shell and write commands
+" Don't allow :autocmd, shell, and write commands
 set secure
 
-"Make DOS compatible with Unix [nvim(1) defaults]
+" Make DOS compatible with Unix [nvim(1) defaults]
 if has('mksession')
 	set sessionoptions=blank,buffers,curdir,folds,help,tabpages,slash,winsize,terminal,unix
 	set viewoptions=folds,cursor,slash,unix,curdir
 endif
 
-"Set <TAB> to 4 spaces
+" Set <TAB> to 4 spaces
 set nosmarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 
-"Disable some verbosity
+" Disable some verbosity
 set shortmess=filnxtToOFS
 
-"Don't show commands [vim(1) default]
+" Don't show commands [vim(1) default]
 set noshowcmd
 
-"When a bracket is inserted, briefly jump to the matching one
+" When a bracket is inserted, briefly jump to the matching one
 set showmatch
 
-"Make cursor always at the middle of the screen
+" Make cursor always at the middle of the screen
 set sidescroll=0
 set sidescrolloff=999
 set scrolloff=999
 
-"Always split using alternative side
+" Always split using alternative side
 set splitbelow
 set splitright
 
-"Don't move cursor to sol [nvim(1) default]
+" Don't move cursor to sol [nvim(1) default]
 set nostartofline
 
-"Don't create `swapfile`
+" Don't create 'swapfile'
 set noswapfile
 
-"Textwidth
+" Textwidth
 set textwidth=80
 
-"Timeout
+" Timeout
 set notimeout
 set ttimeout
 set ttimeoutlen=0
 
-"Make data store in `viminfo` as least as possible
+" Make data store in 'viminfo' as least as possible
 if has('viminfo')
 	set viminfo='0,:0,<0,@0,f0
 	set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 endif
 
-"Ignorecase when auto complete
+" Ignore case when auto complete
 set wildignorecase
 
-"Use menu autocomplete
+" Use menu auto-complete
 if has('wildmenu')
 	set wildmenu
 endif
 
-"Don't wrap
+" Don't wrap
 set nowrap
 
-"Disable auto commenting on newline
+" Disable auto-comment on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-"Auto remove trailing whitespaces
+" Auto remove trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
 
-"For wrap users
-noremap j gj
-noremap k gk
+" For 'wrap' users
+noremap <silent> j gj
+noremap <silent> k gk
 
-"Fast?
-noremap <C-e> 3<C-e>
-noremap <C-y> 3<C-y>
-
-"Make it less percise
-nnoremap <silent> [[ ?{<CR>w99[{
-nnoremap <silent> ][ /}<CR>b99]}
-nnoremap <silent> ]] j0[[%/{<CR>
-nnoremap <silent> [] k$][%?}<CR>
-
-"Disable Ex mode
+" Disable Ex mode
 nnoremap <silent> Q <Nop>
 nnoremap <silent> gQ <Nop>
 nnoremap <silent> q: <Nop>
 
-"Toggle `ignorecase`
+" Toggle 'ignorecase'
 nnoremap <silent> <leader>ic :set ignorecase!<CR>
 
-"Toggle wrap
+" Toggle 'wrap'
 nnoremap <silent> <leader>sw :set wrap! linebreak!<CR>
 
-"Center-, right-, or left-align one or more lines
-nnoremap <silent> <leader>ac :center<CR>
-nnoremap <silent> <leader>ar :right<CR>
-nnoremap <silent> <leader>al :left<CR>
+" Center-, right-, or left-align one or more lines
+noremap <silent> <leader>ac :center<CR>
+noremap <silent> <leader>ar :right<CR>
+noremap <silent> <leader>al :left<CR>
 
-"When you open multiple files
+" When you open multiple files
 nnoremap <silent> <leader>nn :next<CR>
 nnoremap <silent> <leader>pp :prev<CR>
 
-"https://stackoverflow.com/questions/5240473/in-vim-with-xclip-yank-to-clipboard
+" https://stackoverflow.com/questions/5240473/in-vim-with-xclip-yank-to-clipboard
 vnoremap <silent> <leader>y "yy <Bar> :call system('xclip -sel c', @y)<CR>
 
-"Source vimrc
+" Source vimrc
 nnoremap <silent> <leader>rc :source $MYVIMRC<CR>
