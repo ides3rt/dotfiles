@@ -3,4 +3,4 @@
 efibootmgr --disk /dev/nvme0n1 --part 1 --create \
 	--label 'Arch Linux' \
 	--loader '\vmlinuz-linux' \
-	--unicode 'root=UUID=b8799cd3-87a8-4d05-86ae-b18d980265fa rootflags=subvolid=256 ro initrd=\amd-ucode.img initrd=\initramfs-linux.img quiet nosplash nowatchdog nvidia-drm.modeset=1'
+	--unicode 'root=UUID=b8799cd3-87a8-4d05-86ae-b18d980265fa rootflags=subvolid=256 ro initrd=\amd-ucode.img initrd=\initramfs-linux.img quiet nvidia-drm.modeset=1'
