@@ -60,7 +60,7 @@ mod4 + Escape
 
 # Quit BSPWM
 mod1 + shift + q
-	 bspc quit
+	 eval `ssh-agent -k`; bspc quit
 
 # Restart BSPWM and SXHKD
 mod1 + shift + r
