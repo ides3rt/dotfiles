@@ -91,7 +91,7 @@ mod1 + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 # Preselect window in vertical/horizontal
-mod1 + {v,h}
+mod1 + {v,s}
 	bspc node -p {south,east}
 
 # Shrink focused window's width
