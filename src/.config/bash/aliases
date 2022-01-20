@@ -39,5 +39,6 @@ alias status='git status -s'
 alias restore='git restore'
 alias show='git --no-pager show --pretty=format:"%h: %s"'
 alias links='links -http.fake-firefox 1 -http.do-not-track 1 -html-numbered-links 1' # Better links(1). Remove 'http.fake-firefox' to enable JS
+alias yt-dlp='yt-dlp -qo "%(title)s.%(ext)s" --progress' # Only show download-speed
 
 unset -v AUTH
