@@ -49,6 +49,11 @@ set backspace=indent,eol,start
 " Disable bell
 set belloff=all
 
+" Use X-server clipboard
+if has('clipboard')
+	set clipboard=unnamedplus,unnamed
+endif
+
 " Copy existing indent
 set copyindent
 
@@ -210,9 +215,6 @@ noremap <silent> <leader>al :left<CR>
 " When you open multiple files
 nnoremap <silent> <leader>nn :next<CR>
 nnoremap <silent> <leader>pp :prev<CR>
-
-" https://stackoverflow.com/questions/5240473/in-vim-with-xclip-yank-to-clipboard
-vnoremap <silent> <leader>y "yy <Bar> :call system('xclip -sel c', @y)<CR>
 
 " Source vimrc
 nnoremap <silent> <leader>rc :source $MYVIMRC<CR>

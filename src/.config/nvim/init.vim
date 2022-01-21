@@ -1,8 +1,7 @@
 " Prepare XDG
-if !exists('$XDG_CACHE_HOME') | let $XDG_CACHE_HOME = "$HOME/.cache" | endif
-if !exists('$XDG_CONFIG_HOME') | let $XDG_CONFIG_HOME = "$HOME/.config" | endif
-if !exists('$XDG_DATA_HOME') | let $XDG_DATA_HOME = "$HOME/.local/share" | endif
-if !exists('$XDG_STATE_HOME') | let $XDG_STATE_HOME= "$HOME/.local/state" | endif
+if !exists('$XDG_CONFIG_HOME')
+	let $XDG_CONFIG_HOME = "$HOME/.config"
+endif
 
 " Detecting file type
 filetype on
