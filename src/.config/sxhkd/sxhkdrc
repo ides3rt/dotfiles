@@ -51,7 +51,7 @@ F4
 	sh "$HOME"/Code/sxhkd/volume
 
 # Change keyboard layouts
-mod4 + Escape
+mod4 + space
 	sh "$HOME"/Code/sxhkd/keymaps
 
 #
