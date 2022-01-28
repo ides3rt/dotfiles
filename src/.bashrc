@@ -38,7 +38,7 @@ PROMPT_PARSER() {
 	local DarkGrey='\e[0;1;90m' Green='\e[0;32m' Reset='\e[0m'
 
 	# Define colors for root and normal user
-	if ((UID)); then
+	if (( UID )); then
 		local Main="$Reset" Fail='\e[0;31m'
 	else
 		local Main='\e[0;3;31m' Fail='\e[0;97m'
@@ -55,6 +55,8 @@ PROMPT_PARSER() {
 		PS1+="$Symbol\[$DarkGrey\]Branch '${Branch##*/}' has"
 
 		if [[ -z $Status ]]; then
+			local Secondline Count F1 F2 F3 Pace F5 Upsteam F7 Commits
+
 			while read Secondline; do
 				((Count++)) && break
 			done <<< "$(git status)"
@@ -63,69 +65,90 @@ PROMPT_PARSER() {
 				*'up to date'*|*'nothing to commit'*|'')
 					printf -v Commits "%'d" "$(git rev-list --count HEAD 2>/dev/null)"
 					PS1+=" $Commits commit(s) cleaned.\[$Reset\]\n" ;;
+
 				*behind*)
 					read F1 F2 F3 Pace Upsteam F6 Commits _ <<< "$Secondline"
 					printf -v Commits "%'d" "$Commits"
 					PS1+=" $Commits commit(s) $Pace $Upsteam.\[$Reset\]\n" ;;
+
 				*ahead*)
 					read F1 F2 F3 Pace F5 Upsteam F7 Commits _ <<< "$Secondline"
 					printf -v Commits "%'d" "$Commits"
 					PS1+=" $Commits commit(s) $Pace of $Upsteam.\[$Reset\]\n" ;;
 			esac
-			unset -v Secondline Count F1 F2 F3 Pace F5 Upsteam F7 Commits _
 		else
+			local Curline CCount MCount RnCount RCount DCount NCount UCount
+
 			while read Curline; do
 				case "$Curline" in
 					'M  '*)
-						((CCount++))
-						local Changes=" $CCount change(s) to be committed" ;;
+						((CCount++)) ;;
 					M*)
-						((MCount++))
-						if ((CCount)); then
-							local Modified=", $MCount modified file(s)"
-						else
-							local Modified=" $MCount modified file(s)"
-						fi ;;
+						((MCount++)) ;;
 					'R  '*)
-						((RnCount++))
-						if ((CCount || MCount)); then
-							local Renamed=", $RnCount renamed file(s)"
-						else
-							local Renamed=" $RnCount renamed file(s)"
-						fi ;;
+						((RnCount++)) ;;
 					'D  '*)
-						((RCount++))
-						if ((CCount || MCount || RnCount)); then
-							local Removed=", $RCount removed file(s)"
-						else
-							local Removed=" $RCount removed file(s)"
-						fi ;;
+						((RCount++)) ;;
 					D*)
-						((DCount++))
-						if ((CCount || MCount || RnCount || RCount)); then
-							local Deleted=", $DCount deleted file(s)"
-						else
-							local Deleted=" $DCount deleted file(s)"
-						fi ;;
+						((DCount++)) ;;
 					A*)
-						((NCount++))
-						if ((CCount || MCount || RnCount || RCount || DCount)); then
-							local Newfile=", $NCount new file(s)"
-						else
-							local Newfile=" $NCount new file(s)"
-						fi ;;
+						((NCount++)) ;;
 					'??'*)
-						((UCount++))
-						if ((CCount || MCount || RnCount || RCount || DCount || NCount)); then
-							local Untracked=", $UCount untracked file(s)"
-						else
-							local Untracked=" $UCount untracked file(s)"
-						fi ;;
+						((UCount++)) ;;
 				esac
 			done <<< "$Status"
 
+			((CCount)) && local Changes=" $CCount change(s) to be committed"
+
+			if ((MCount)); then
+				if ((CCount)); then
+					local Modified=", $MCount modified file(s)"
+				else
+					local Modified=" $MCount modified file(s)"
+				fi
+			fi
+
+			if ((RnCount)); then
+				if (( CCount || MCount )); then
+					local Renamed=", $RnCount renamed file(s)"
+				else
+					local Renamed=" $RnCount renamed file(s)"
+				fi
+			fi
+
+			if ((RCount)); then
+				if (( CCount || MCount || RnCount )); then
+					local Removed=", $RCount removed file(s)"
+				else
+					local Removed=" $RCount removed file(s)"
+				fi
+			fi
+
+			if ((DCount)); then
+				if (( CCount || MCount || RnCount || RCount )); then
+					local Deleted=", $DCount deleted file(s)"
+				else
+					local Deleted=" $DCount deleted file(s)"
+				fi
+			fi
+
+			if ((NCount)); then
+				if (( CCount || MCount || RnCount || RCount || DCount )); then
+					local Newfile=", $NCount new file(s)"
+				else
+					local Newfile=" $NCount new file(s)"
+				fi
+			fi
+
+			if ((UCount)); then
+				if (( CCount || MCount || RnCount || RCount || DCount || NCount )); then
+					local Untracked=", $UCount untracked file(s)"
+				else
+					local Untracked=" $UCount untracked file(s)"
+				fi
+			fi
+
 			PS1+="${Changes}${Modified}${Renamed}${Removed}${Deleted}${Newfile}${Untracked}.\[$Reset\]\n"
-			unset -v Curline CCount MCount RnCount RCount DCount NCount UCount
 		fi
 
 		# Aliases that I only want when working on git
@@ -133,14 +156,14 @@ PROMPT_PARSER() {
 		alias reset='git reset'
 		alias top='cd "$(git rev-parse --show-toplevel)"'
 	else
-		# diff(1) with colors is a lots easier to read, also set tab size to 4
+		# diff(1) with colors is a lots easier to read. Also, set tab size to 4
 		alias diff='diff --color=auto --tabsize=4'
 
 		unalias reset top &>/dev/null
 	fi
 
 	# Status
-	if (($1 == 0)); then
+	if (( $1 == 0 )); then
 		[[ $SSH_TTY ]] && PS1+="\[$Green\][ssh]\[$Reset\] "
 	else
 		local X="$1 "
@@ -154,10 +177,10 @@ PROMPT_PARSER() {
 
 	# PS2
 	if ((X)); then
+		local Count
 		for ((Count = 0; Count != ${#X}; Count++)); {
 			PS2+=' '
 		}
-		unset -v Count
 	fi
 }
 

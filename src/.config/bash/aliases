@@ -6,22 +6,18 @@
 # Aliases
 alias ghpcd="cd $HOME/GitHub/repositories"
 alias ghscd="cd $HOME/GitHub/gists"
-alias cp='cp -vZu'
-alias mv='mv -vZu'
+alias cp='cp -vu'
+alias mv='mv -vu'
 alias rm='rm -v --preserve-root=all'
-alias mkdir='mkdir -vZ'
+alias mkdir='mkdir -v'
 alias rmdir='rmdir -v --ignore-fail-on-non-empty'
 alias chown='chown -c --preserve-root'
 alias chmod='chmod -c --preserve-root'
 alias mount='mount -v'
 alias umount='umount -v'
 alias ln='ln -v'
-alias ip='ip --color=auto' # Colorful ip(1)
 alias ls='ls -hFNX -T 0 --hide=lost+found --color=auto --group-directories-first --show-control-chars' # Minimal ls(1)
-alias pcc="$AUTH pacman -Rnsc \$(pacman -Qtdq) && sync" # Remove orphans in Arch
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
-alias fgrep='grep -F' # `grep -F` is a replacement for fgrep(1)
-alias egrep='grep -E' # `grep -E` is a replacement for egrep(1)
 alias sd="cd /media/$USER"
 alias doas='doas ' # Required, if you want aliases to work with doas(1)
 alias htop="htop -t -u $USER" # It's so much cleaner

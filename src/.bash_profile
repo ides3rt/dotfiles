@@ -32,7 +32,7 @@ if ((UID)) && [[ -z $SSH_TTY ]]; then
 	# Xorg
 	if [[ -z $DISPLAY ]] && clear; then
 		# Run xinit(1) when in tty1
-		if ((XDG_VTNR == 1)); then
+		if (( XDG_VTNR == 1 )); then
 			exec xinit Xorg -- :0 vt$XDG_VTNR
 		fi &>/dev/null
 	fi

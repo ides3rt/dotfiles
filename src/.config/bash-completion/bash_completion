@@ -1,16 +1,16 @@
-# bash completion for doas(1)
+#!/usr/bin/env bash
 
+# bash completion for doas(1)
 _doas() {
 
 	local cur prev words cword split i
 	_init_completion -s || return 0
 
-	for ((i = 1; i <= cword; i++)); {
+	for (( i = 1; i <= cword; i++ )); {
 		if [[ ${words[i]} != -* ]]; then
-			local PATH="$PATH:/sbin:/usr/sbin:/usr/local/sbin"
 			local root_command="${words[i]}"
 			_command_offset "$i"
-			return
+			return 0
 		fi
 		[[ ${words[i]} == -@(!(-*)[LnsCu]) ]] && ((i++))
 	}
@@ -19,8 +19,10 @@ _doas() {
 		-!(-*)u)
 			COMPREPLY=( $(compgen -u -- "$cur") )
 			return 0 ;;
+
 		-!(-*)C)
 			_filedir ;;
+
 		-!(-*)[Lns])
 			return 0 ;;
 	esac
@@ -34,5 +36,3 @@ _doas() {
 	fi
 
 } && complete -F _doas doas
-
-# ex: filetype=bash

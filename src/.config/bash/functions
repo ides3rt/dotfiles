@@ -6,10 +6,10 @@ Err() {
 }
 
 up() {
-	for ((Count = 10#${1:-1}; Count > 0; Count--)); {
+	local Count
+	for (( Count = 10#${1:-1}; Count > 0; Count-- )); {
 		cd .. || break
 	}
-	unset -v Count
 }
 
 lspkg() { # [NAME] Inspired by TFL/LL
