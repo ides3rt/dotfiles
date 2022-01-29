@@ -38,7 +38,7 @@ PROMPT_PARSER() {
 	local DarkGrey='\e[0;1;90m' Green='\e[0;32m' Reset='\e[0m'
 
 	# Define colors for root and normal user
-	if (( UID )); then
+	if ((UID)); then
 		local Main="$Reset" Fail='\e[0;31m'
 	else
 		local Main='\e[0;3;31m' Fail='\e[0;97m'
@@ -100,55 +100,20 @@ PROMPT_PARSER() {
 
 			((CCount)) && local Changes=" $CCount change(s) to be committed"
 
-			if ((MCount)); then
-				if ((CCount)); then
-					local Modified=", $MCount modified file(s)"
-				else
-					local Modified=" $MCount modified file(s)"
-				fi
-			fi
+			((MCount)) && local Modified=", $MCount modified file(s)"
 
-			if ((RnCount)); then
-				if (( CCount || MCount )); then
-					local Renamed=", $RnCount renamed file(s)"
-				else
-					local Renamed=" $RnCount renamed file(s)"
-				fi
-			fi
+			((RnCount)) && local Renamed=", $RnCount renamed file(s)"
 
-			if ((RCount)); then
-				if (( CCount || MCount || RnCount )); then
-					local Removed=", $RCount removed file(s)"
-				else
-					local Removed=" $RCount removed file(s)"
-				fi
-			fi
+			((RCount)) && local Removed=", $RCount removed file(s)"
 
-			if ((DCount)); then
-				if (( CCount || MCount || RnCount || RCount )); then
-					local Deleted=", $DCount deleted file(s)"
-				else
-					local Deleted=" $DCount deleted file(s)"
-				fi
-			fi
+			((DCount)) && local Deleted=", $DCount deleted file(s)"
 
-			if ((NCount)); then
-				if (( CCount || MCount || RnCount || RCount || DCount )); then
-					local Newfile=", $NCount new file(s)"
-				else
-					local Newfile=" $NCount new file(s)"
-				fi
-			fi
+			((NCount)) && local Newfile=", $NCount new file(s)"
 
-			if ((UCount)); then
-				if (( CCount || MCount || RnCount || RCount || DCount || NCount )); then
-					local Untracked=", $UCount untracked file(s)"
-				else
-					local Untracked=" $UCount untracked file(s)"
-				fi
-			fi
+			((UCount)) && local Untracked=", $UCount untracked file(s)"
 
-			PS1+="${Changes}${Modified}${Renamed}${Removed}${Deleted}${Newfile}${Untracked}.\[$Reset\]\n"
+			PS1+="$Changes$Modified$Renamed$Removed$Deleted$Newfile$Untracked.\[$Reset\]\n"
+			PS1="${PS1/has,/has}"
 		fi
 
 		# Aliases that I only want when working on git
