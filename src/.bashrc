@@ -35,27 +35,26 @@ bind "\C-e":end-of-line
 
 PROMPT_PARSER() {
 	# Colors
-	local DarkGrey='\e[0;1;90m' Green='\e[0;32m' Reset='\e[0m'
+	local DarkGrey='\e[1;90m' Green='\e[32m' Reset='\e[0m'
 
 	# Define colors for root and normal user
 	if ((UID)); then
-		local Main="$Reset" Fail='\e[0;31m'
+		local Main="$Reset" Fail='\e[31m'
 	else
-		local Main='\e[0;3;31m' Fail='\e[0;97m'
+		local Main='\e[3;31m' Fail='\e[97m'
 	fi
 
 	# Reset
-	PS1= PS2='\[\e[3m\]  '
+	PS1="\[$Reset\]" PS2='\[\e[3m\]  '
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		local Branch=$(< "$(git rev-parse --git-dir)"/HEAD) \
-			Status=$(git status --short)
+		local Branch=$(< "$(git rev-parse --git-dir)"/HEAD) Status=$(git status -s)
 
 		[[ -n $DISPLAY ]] && local Symbol="\[$DarkGrey\] "
 		PS1+="$Symbol\[$DarkGrey\]Branch '${Branch##*/}' has"
 
 		if [[ -z $Status ]]; then
-			local Secondline Count F1 F2 F3 Pace F5 Upsteam F7 Commits
+			local Secondline Count F1 F2 F3 Pace F5 Upsteam F6 F7 Commits
 
 			while read Secondline; do
 				((Count++)) && break
@@ -77,42 +76,28 @@ PROMPT_PARSER() {
 					PS1+=" $Commits commit(s) $Pace of $Upsteam.\[$Reset\]\n" ;;
 			esac
 		else
-			local Curline CCount MCount RnCount RCount DCount NCount UCount
+			local Curline CCount MCount NCount RCount DCount ACount UCount
 
 			while read Curline; do
 				case "$Curline" in
 					'M  '*)
-						((CCount++)) ;;
-					M*)
-						((MCount++)) ;;
+						local Changes=" $(( CCount + 1 )) change(s) to be committed" ;;
+					'M '*)
+						local Modified=", $(( MCount + 1 )) modified file(s)" ;;
 					'R  '*)
-						((RnCount++)) ;;
+						local Renamed=", $(( NCount + 1 )) renamed file(s)" ;;
 					'D  '*)
-						((RCount++)) ;;
-					D*)
-						((DCount++)) ;;
-					A*)
-						((NCount++)) ;;
-					'??'*)
-						((UCount++)) ;;
+						local Removed=", $(( RCount + 1 )) removed file(s)" ;;
+					'D '*)
+						local Deleted=", $(( DCount + 1 )) deleted file(s)" ;;
+					'A  '*)
+						local Added=", $(( ACount + 1 )) new file(s)" ;;
+					'?? '*)
+						local Untracked=", $(( UCount + 1 )) untracked file(s)" ;;
 				esac
 			done <<< "$Status"
 
-			((CCount)) && local Changes=" $CCount change(s) to be committed"
-
-			((MCount)) && local Modified=", $MCount modified file(s)"
-
-			((RnCount)) && local Renamed=", $RnCount renamed file(s)"
-
-			((RCount)) && local Removed=", $RCount removed file(s)"
-
-			((DCount)) && local Deleted=", $DCount deleted file(s)"
-
-			((NCount)) && local Newfile=", $NCount new file(s)"
-
-			((UCount)) && local Untracked=", $UCount untracked file(s)"
-
-			PS1+="$Changes$Modified$Renamed$Removed$Deleted$Newfile$Untracked.\[$Reset\]\n"
+			PS1+="$Changes$Modified$Renamed$Removed$Deleted$Added$Untracked.\[$Reset\]\n"
 			PS1="${PS1/has,/has}"
 		fi
 
@@ -128,25 +113,19 @@ PROMPT_PARSER() {
 	fi
 
 	# Status
-	if (( $1 == 0 )); then
-		[[ $SSH_TTY ]] && PS1+="\[$Green\][ssh]\[$Reset\] "
-	else
-		local X="$1 "
+	if (( $1 != 0 )); then
+		local Count X="$1 "
+
 		PS1+="\[$Fail\]$X\[$Reset\]"
+		for (( Count = 0; Count != ${#X}; Count++ )); {
+			PS2+=' '
+		}
 	fi
 
 	# Typical PS1
 	PS1+="\[$Main\]"
 	PS1+='\$'
 	PS1+="\[$Reset\] "
-
-	# PS2
-	if ((X)); then
-		local Count
-		for ((Count = 0; Count != ${#X}; Count++)); {
-			PS2+=' '
-		}
-	fi
 }
 
 PROMPT_COMMAND='PROMPT_PARSER $?'
@@ -163,13 +142,5 @@ Make "$XDG_CONFIG_HOME"/bash/functions
 # BASH Completion
 Make /usr/share/bash-completion/bash_completion
 
-# Motivation
-Motivation="$HOME"/.local/share/quotes
-if [[ -f $Motivation ]]; then
-	while read; do
-		[[ -n $REPLY ]] && printf '%s\n' "$REPLY"
-	done < "$Motivation" | shuf -n 1
-fi
-
 # Unset
-unset Make Motivation
+unset -f Make
