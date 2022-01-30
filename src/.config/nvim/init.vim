@@ -82,10 +82,10 @@ endif
 " Case insensitive
 set ignorecase
 
-" No double <SPACE> after period
+" No double <space> after period
 set nojoinspaces
 
-" It's only enable for backwards compatibility
+" It's only enable for backward compatibility
 if has('langmap')
 	set nolangnoremap
 	set nolangremap
@@ -105,7 +105,7 @@ nnoremap <silent> <leader>ls :set list!<CR>
 " Don't auto load plugins
 set noloadplugins
 
-" Show the matching parent
+" Tenths of a second to show the matching paren
 set matchtime=0
 
 " Don't check `set` command
@@ -113,9 +113,6 @@ set nomodeline
 
 " Don't use `more` format
 set nomore
-
-" Enables mouse support
-set mouse=a
 
 " Set 'nrformats' to recommended values
 set nrformats=bin,hex
@@ -128,17 +125,11 @@ if has('linebreak')
 	set breakindent
 endif
 
-" I don't like to have '/usr/include'
+" Fuzzy finder
 set path=**
 
-" Don't allow :autocmd, shell, and write commands
-set secure
-
-" Make DOS compatible with Unix [nvim(1) defaults]
-if has('mksession')
-	set sessionoptions=blank,buffers,curdir,folds,help,tabpages,slash,winsize,terminal,unix
-	set viewoptions=folds,cursor,slash,unix,curdir
-endif
+" Preserve indent structure
+set preserveindent
 
 " Set <TAB> to 4 spaces
 set nosmarttab
@@ -146,10 +137,10 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 
-" Disable some verbosity
-set shortmess=filnxtToOFS
+" Don't give 'ins-completion-menu' messages
+set shortmess+=cS
 
-" Don't show commands [vim(1) default]
+" Don't partial show commands
 set noshowcmd
 
 " When a bracket is inserted, briefly jump to the matching one
@@ -164,7 +155,7 @@ set scrolloff=999
 set splitbelow
 set splitright
 
-" Don't move cursor to sol [nvim(1) default]
+" Don't move cursor to SOL, when possible
 set nostartofline
 
 " Don't create 'swapfile'
@@ -184,7 +175,7 @@ set virtualedit=block
 " Disallow cursor to wrap between lines
 set whichwrap=
 
-" Ignore case when auto complete
+" Case insensitive when auto-complete
 set wildignorecase
 
 " Use menu auto-complete
@@ -192,14 +183,11 @@ if has('wildmenu')
 	set wildmenu
 endif
 
-" Allow mapping ALT (Meta) key shortcuts
-set winaltkeys=no
-
 " Don't wrap
 set nowrap
 
 " Disable auto-comment on newline
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * setlocal formatoptions-=ro
 
 " Auto remove trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
@@ -208,7 +196,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 noremap <silent> j gj
 noremap <silent> k gk
 
-" Disable Ex mode
+" Disable EX mode
 nnoremap <silent> Q <Nop>
 nnoremap <silent> gQ <Nop>
 nnoremap <silent> q: <Nop>
@@ -230,3 +218,438 @@ nnoremap <silent> <leader>pp :prev<CR>
 
 " Source vimrc
 nnoremap <silent> <leader>rc :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
+
+" Don't allow :autocmd, shell, and write commands
+set mouse=ni
+
+" Set 'nrformats' to recommended values
+set nrformats=bin,hex
+
+if has('linebreak')
+	" Set 'numberwidth' to 2
+	set numberwidth=2
+
+	" When 'linebreak' is set
+	set breakindent
+endif
+
+" Fuzzy finder
+set path=**
+
+" Preserve indent structure
+set preserveindent
+
+" Set <TAB> to 4 spaces
+set nosmarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+" Don't give 'ins-completion-menu' messages
+set shortmess+=cS
+
+" Don't partial show commands
+set noshowcmd
+
+" When a bracket is inserted, briefly jump to the matching one
+set showmatch
+
+" Make cursor always at the middle of the screen
+set sidescroll=0
+set sidescrolloff=999
+set scrolloff=999
+
+" Always split using alternative side
+set splitbelow
+set splitright
+
+" Don't move cursor to SOL, when possible
+set nostartofline
+
+" Don't create 'swapfile'
+set noswapfile
+
+" Textwidth
+set textwidth=80
+
+" Timeout
+set notimeout
+set ttimeout
+set ttimeoutlen=0
+
+" Cursor can be positioned everywhere, when on Visual-Mode
+set virtualedit=block
+
+" Disallow cursor to wrap between lines
+set whichwrap=
+
+" Case insensitive when auto-complete
+set wildignorecase
+
+" Use menu auto-complete
+if has('wildmenu')
+	set wildmenu
+endif
+
+" Don't wrap
+set nowrap
+
+" Disable auto-comment on newline
+autocmd FileType * setlocal formatoptions-=ro
+
+" Auto remove trailing whitespaces
+autocmd BufWritePre * :%s/\s\+$//e
+
+" For 'wrap' users
+noremap <silent> j gj
+noremap <silent> k gk
+
+" Disable EX mode
+nnoremap <silent> Q <Nop>
+nnoremap <silent> gQ <Nop>
+nnoremap <silent> q: <Nop>
+
+" Toggle 'ignorecase'
+nnoremap <silent> <leader>ic :set ignorecase!<CR>
+
+" Toggle 'wrap'
+nnoremap <silent> <leader>sw :set wrap! linebreak!<CR>
+
+" Center-, right-, or left-align one or more lines
+noremap <silent> <leader>ac :center<CR>
+noremap <silent> <leader>ar :right<CR>
+noremap <silent> <leader>al :left<CR>
+
+" When you open multiple files
+nnoremap <silent> <leader>nn :next<CR>
+nnoremap <silent> <leader>pp :prev<CR>
+
+" Source vimrc
+nnoremap <silent> <leader>rc :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
+
+" Don't allow :autocmd, shell, and write commands
+set mouse=ni
+
+" Set 'nrformats' to recommended values
+set nrformats=bin,hex
+
+if has('linebreak')
+	" Set 'numberwidth' to 2
+	set numberwidth=2
+
+	" When 'linebreak' is set
+	set breakindent
+endif
+
+" Fuzzy finder
+set path=**
+
+" Preserve indent structure
+set preserveindent
+
+" Set <TAB> to 4 spaces
+set nosmarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+" Don't give 'ins-completion-menu' messages
+set shortmess+=cS
+
+" Don't partial show commands
+set noshowcmd
+
+" When a bracket is inserted, briefly jump to the matching one
+set showmatch
+
+" Make cursor always at the middle of the screen
+set sidescroll=0
+set sidescrolloff=999
+set scrolloff=999
+
+" Always split using alternative side
+set splitbelow
+set splitright
+
+" Don't move cursor to SOL, when possible
+set nostartofline
+
+" Don't create 'swapfile'
+set noswapfile
+
+" Textwidth
+set textwidth=80
+
+" Timeout
+set notimeout
+set ttimeout
+set ttimeoutlen=0
+
+" Cursor can be positioned everywhere, when on Visual-Mode
+set virtualedit=block
+
+" Disallow cursor to wrap between lines
+set whichwrap=
+
+" Case insensitive when auto-complete
+set wildignorecase
+
+" Use menu auto-complete
+if has('wildmenu')
+	set wildmenu
+endif
+
+" Don't wrap
+set nowrap
+
+" Disable auto-comment on newline
+autocmd FileType * setlocal formatoptions-=ro
+
+" Auto remove trailing whitespaces
+autocmd BufWritePre * :%s/\s\+$//e
+
+" For 'wrap' users
+noremap <silent> j gj
+noremap <silent> k gk
+
+" Disable EX mode
+nnoremap <silent> Q <Nop>
+nnoremap <silent> gQ <Nop>
+nnoremap <silent> q: <Nop>
+
+" Toggle 'ignorecase'
+nnoremap <silent> <leader>ic :set ignorecase!<CR>
+
+" Toggle 'wrap'
+nnoremap <silent> <leader>sw :set wrap! linebreak!<CR>
+
+" Center-, right-, or left-align one or more lines
+noremap <silent> <leader>ac :center<CR>
+noremap <silent> <leader>ar :right<CR>
+noremap <silent> <leader>al :left<CR>
+
+" When you open multiple files
+nnoremap <silent> <leader>nn :next<CR>
+nnoremap <silent> <leader>pp :prev<CR>
+
+" Source vimrc
+nnoremap <silent> <leader>rc :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
+
+" Don't allow :autocmd, shell, and write commands
+set mouse=ni
+
+" Set 'nrformats' to recommended values
+set nrformats=bin,hex
+
+if has('linebreak')
+	" Set 'numberwidth' to 2
+	set numberwidth=2
+
+	" When 'linebreak' is set
+	set breakindent
+endif
+
+" Fuzzy finder
+set path=**
+
+" Preserve indent structure
+set preserveindent
+
+" Set <TAB> to 4 spaces
+set nosmarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+" Don't give 'ins-completion-menu' messages
+set shortmess+=cS
+
+" Don't partial show commands
+set noshowcmd
+
+" When a bracket is inserted, briefly jump to the matching one
+set showmatch
+
+" Make cursor always at the middle of the screen
+set sidescroll=0
+set sidescrolloff=999
+set scrolloff=999
+
+" Always split using alternative side
+set splitbelow
+set splitright
+
+" Don't move cursor to SOL, when possible
+set nostartofline
+
+" Don't create 'swapfile'
+set noswapfile
+
+" Textwidth
+set textwidth=80
+
+" Timeout
+set notimeout
+set ttimeout
+set ttimeoutlen=0
+
+" Cursor can be positioned everywhere, when on Visual-Mode
+set virtualedit=block
+
+" Disallow cursor to wrap between lines
+set whichwrap=
+
+" Case insensitive when auto-complete
+set wildignorecase
+
+" Use menu auto-complete
+if has('wildmenu')
+	set wildmenu
+endif
+
+" Don't wrap
+set nowrap
+
+" Disable auto-comment on newline
+autocmd FileType * setlocal formatoptions-=ro
+
+" Auto remove trailing whitespaces
+autocmd BufWritePre * :%s/\s\+$//e
+
+" For 'wrap' users
+noremap <silent> j gj
+noremap <silent> k gk
+
+" Disable EX mode
+nnoremap <silent> Q <Nop>
+nnoremap <silent> gQ <Nop>
+nnoremap <silent> q: <Nop>
+
+" Toggle 'ignorecase'
+nnoremap <silent> <leader>ic :set ignorecase!<CR>
+
+" Toggle 'wrap'
+nnoremap <silent> <leader>sw :set wrap! linebreak!<CR>
+
+" Center-, right-, or left-align one or more lines
+noremap <silent> <leader>ac :center<CR>
+noremap <silent> <leader>ar :right<CR>
+noremap <silent> <leader>al :left<CR>
+
+" When you open multiple files
+nnoremap <silent> <leader>nn :next<CR>
+nnoremap <silent> <leader>pp :prev<CR>
+
+" Source vimrc
+nnoremap <silent> <leader>rc :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
+
+" Don't allow :autocmd, shell, and write commands
+set secure
+
+" Set 'nrformats' to recommended values
+set nrformats=bin,hex
+
+if has('linebreak')
+	" Set 'numberwidth' to 2
+	set numberwidth=2
+
+	" When 'linebreak' is set
+	set breakindent
+endif
+
+" Fuzzy finder
+set path=**
+
+" Preserve indent structure
+set preserveindent
+
+" Set <TAB> to 4 spaces
+set nosmarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+" Don't give 'ins-completion-menu' messages
+set shortmess+=cS
+
+" Don't partial show commands
+set noshowcmd
+
+" When a bracket is inserted, briefly jump to the matching one
+set showmatch
+
+" Make cursor always at the middle of the screen
+set sidescroll=0
+set sidescrolloff=999
+set scrolloff=999
+
+" Always split using alternative side
+set splitbelow
+set splitright
+
+" Don't move cursor to SOL, when possible
+set nostartofline
+
+" Don't create 'swapfile'
+set noswapfile
+
+" Textwidth
+set textwidth=80
+
+" Timeout
+set notimeout
+set ttimeout
+set ttimeoutlen=0
+
+" Cursor can be positioned everywhere, when on Visual-Mode
+set virtualedit=block
+
+" Disallow cursor to wrap between lines
+set whichwrap=
+
+" Case insensitive when auto-complete
+set wildignorecase
+
+" Use menu auto-complete
+if has('wildmenu')
+	set wildmenu
+endif
+
+" Don't wrap
+set nowrap
+
+" Disable auto-comment on newline
+autocmd FileType * setlocal formatoptions-=ro
+
+" Auto remove trailing whitespaces
+autocmd BufWritePre * :%s/\s\+$//e
+
+" For 'wrap' users
+noremap <silent> j gj
+noremap <silent> k gk
+
+" Disable EX mode
+nnoremap <silent> Q <Nop>
+nnoremap <silent> gQ <Nop>
+nnoremap <silent> q: <Nop>
+
+" Toggle 'ignorecase'
+nnoremap <silent> <leader>ic :set ignorecase!<CR>
+
+" Toggle 'wrap'
+nnoremap <silent> <leader>sw :set wrap! linebreak!<CR>
+
+" Center-, right-, or left-align one or more lines
+noremap <silent> <leader>ac :center<CR>
+noremap <silent> <leader>ar :right<CR>
+noremap <silent> <leader>al :left<CR>
+
+" When you open multiple files
+nnoremap <silent> <leader>nn :next<CR>
+nnoremap <silent> <leader>pp :prev<CR>
+
+" Source vimrc
+nnoremap <silent> <leader>rc :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
+
+" Don't allow :autocmd, shell, and write commands
+set secure

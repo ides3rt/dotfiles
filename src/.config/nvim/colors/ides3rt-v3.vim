@@ -69,7 +69,7 @@ hi String          ctermbg=none  ctermfg=102
 hi Structure       ctermbg=none  ctermfg=254
 hi TabLine         ctermbg=233   ctermfg=243   cterm=bold
 hi TabLineFill     ctermbg=233   ctermfg=243   cterm=bold
-hi TabLineSel      ctermbg=235   ctermfg=none  cterm=bold
+hi TabLineSel      ctermbg=235   ctermfg=243   cterm=bold
 hi Tag             ctermbg=none  ctermfg=254
 hi Title           ctermbg=none  ctermfg=254
 hi Todo            ctermbg=102   ctermfg=0     cterm=bold
