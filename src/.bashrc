@@ -22,6 +22,9 @@ shopt -s autocd cdspell checkwinsize cmdhist \
 	interactive_comments lithist no_empty_cmd_completion \
 	progcomp progcomp_alias promptvars xpg_echo
 
+# Make Ctrl+S and Ctrl+Q work correctly
+stty -ixon -ixoff
+
 # Use `clear-screen` instead for non-recursive clear
 bind "\C-l":clear-display
 
@@ -57,7 +60,7 @@ PROMPT_PARSER() {
 			local Secondline Count F1 F2 F3 Pace F5 Upsteam F6 F7 Commits
 
 			while read Secondline; do
-				((Count++)) && break
+				(( Count++ )) && break
 			done <<< "$(git status)"
 
 			case "$Secondline" in
@@ -76,28 +79,41 @@ PROMPT_PARSER() {
 					PS1+=" $Commits commit(s) $Pace of $Upsteam.\[$Reset\]\n" ;;
 			esac
 		else
-			local Curline CCount MCount NCount RCount DCount ACount UCount
+			local Curline CCount MCount RCount DCount NCount ACount UCount
 
 			while read Curline; do
 				case "$Curline" in
 					'M  '*)
-						local Changes=" $(( CCount + 1 )) change(s) to be committed" ;;
+						(( CCount++ ))
+						local Changes=", $CCount change(s) to be committed" ;;
+
 					'M '*)
-						local Modified=", $(( MCount + 1 )) modified file(s)" ;;
-					'R  '*)
-						local Renamed=", $(( NCount + 1 )) renamed file(s)" ;;
+						(( MCount++ ))
+						local Modified=", $MCount modified file(s)" ;;
+
 					'D  '*)
-						local Removed=", $(( RCount + 1 )) removed file(s)" ;;
+						(( RCount++ ))
+						local Removed=", $RCount removed file(s)" ;;
+
 					'D '*)
-						local Deleted=", $(( DCount + 1 )) deleted file(s)" ;;
+						(( DCount++ ))
+						local Deleted=", $DCount deleted file(s)" ;;
+
+					'R  '*)
+						(( NCount++ ))
+						local Renamed=", $NCount renamed file(s)" ;;
+
 					'A  '*)
-						local Added=", $(( ACount + 1 )) new file(s)" ;;
+						(( ACount++ ))
+						local Added=", $ACount new file(s)" ;;
+
 					'?? '*)
-						local Untracked=", $(( UCount + 1 )) untracked file(s)" ;;
+						(( UCount++ ))
+						local Untracked=", $UCount untracked file(s)" ;;
 				esac
 			done <<< "$Status"
 
-			PS1+="$Changes$Modified$Renamed$Removed$Deleted$Added$Untracked.\[$Reset\]\n"
+			PS1+="$Changes$Modified$Removed$Deleted$Renamed$Added$Untracked.\[$Reset\]\n"
 			PS1="${PS1/has,/has}"
 		fi
 

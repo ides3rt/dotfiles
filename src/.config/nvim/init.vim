@@ -60,6 +60,9 @@ set fsync
 " Don't change my cursor
 set guicursor=
 
+" When off a buffer is unloaded
+set hidden
+
 " Disable ':' history
 set history=0
 
@@ -110,6 +113,9 @@ set nomodeline
 
 " Don't use `more` format
 set nomore
+
+" Enables mouse support
+set mouse=a
 
 " Set 'nrformats' to recommended values
 set nrformats=bin,hex
@@ -172,6 +178,12 @@ set notimeout
 set ttimeout
 set ttimeoutlen=0
 
+" Cursor can be positioned everywhere, when on Visual-Mode
+set virtualedit=block
+
+" Disallow cursor to wrap between lines
+set whichwrap=
+
 " Ignore case when auto complete
 set wildignorecase
 
@@ -179,6 +191,9 @@ set wildignorecase
 if has('wildmenu')
 	set wildmenu
 endif
+
+" Allow mapping ALT (Meta) key shortcuts
+set winaltkeys=no
 
 " Don't wrap
 set nowrap
