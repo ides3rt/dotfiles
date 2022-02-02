@@ -18,13 +18,10 @@ if test -f "$Xresources" -a -r "$Xresources"; then
 fi
 
 # Turn screen saver off
-xset s off -dpms
+xset -dpms s off
 
 # Your keyboard layout
-setxkbmap us -variant colemak_dhk \
-	-option ctrl:nocaps \
-	-option shift:both_capslock
-xcape -e 'Control_L=Escape'
+setxkbmap us -variant grammak_iso
 
 # Unset variables
 unset -v X11_DIR Xresources

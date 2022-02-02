@@ -39,15 +39,15 @@ mod1 + shift + d
 	sh "$HOME"/Code/rofi/dictionary
 
 # Decrease volume
-F2
+XF86AudioLowerVolume
 	sh "$HOME"/Code/sxhkd/volume -5%
 
 # Increase volume
-F3
+XF86AudioRaiseVolume
 	sh "$HOME"/Code/sxhkd/volume +5%
 
 # Toggle volume
-F4
+XF86AudioMute
 	sh "$HOME"/Code/sxhkd/volume
 
 # Change keyboard layouts
