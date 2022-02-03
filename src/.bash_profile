@@ -24,17 +24,18 @@ export HISTFILESIZE=0 # This make history session only
 export HISTSIZE=999
 
 if ((UID)) && [[ -z $SSH_TTY ]]; then
+
 	# My GitHub SSH
-	if eval `ssh-agent -s`; then
-		ssh-add "$HOME"/.ssh/GitHub
-	fi &>/dev/null
+	{ eval `ssh-agent -s` && ssh-add "$HOME"/.ssh/GitHub ;} &>/dev/null
 
 	# Xorg
 	if [[ -z $DISPLAY ]] && clear; then
+
 		# Run xinit(1) when in tty1
 		if (( XDG_VTNR == 1 )); then
-			exec xinit Xorg -- :0 vt$XDG_VTNR
-		fi &>/dev/null
+			exec xinit X -- vt$XDG_VTNR &>/dev/null
+		fi
+
 	fi
 fi
 
