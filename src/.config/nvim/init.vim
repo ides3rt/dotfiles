@@ -47,7 +47,7 @@ set backspace=indent,eol,start
 set belloff=all
 
 " Use X-server clipboard
-if has('clipboard')
+if has('clipboard') && exists(expand("$DISPLAY"))
 	set clipboard=unnamedplus,unnamed
 endif
 
