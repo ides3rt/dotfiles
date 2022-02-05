@@ -33,7 +33,7 @@ xsetroot -cursor_name left_ptr
 feh --no-fehbg --bg-fill "$HOME"/Pictures/cWallpapers/Wallpaper_002.png &
 
 # Compositor
-picom --experimental-backends &
+picom &
 
 # Notifications daemon
 dunst &
@@ -43,9 +43,6 @@ sxhkd &
 
 # URxvt daemons
 urxvtd -q -o -f
-
-# My searX instance
-searx-run &
 
 # Your favorite WM/DE here!
 exec bspwm
