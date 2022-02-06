@@ -423,9 +423,6 @@ nnoremap <silent> <leader>pp :prev<CR>
 " Source vimrc
 nnoremap <silent> <leader>rc :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
 
-" Don't allow :autocmd, shell, and write commands
-set mouse=ni
-
 " Set 'nrformats' to recommended values
 set nrformats=bin,hex
 
