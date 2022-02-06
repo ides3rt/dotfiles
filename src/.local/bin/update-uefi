@@ -1,6 +1,36 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-efibootmgr --disk /dev/nvme0n1 --part 1 --create \
+# Detect CPU
+while read VendorID; do
+	[[ "$VendorID" == *vendor_id* ]] && break
+done < /proc/cpuinfo
+case "$VendorID" in
+	*AMD*)
+		CPU=amd ;;
+	*Intel*)
+		CPU=intel ;;
+esac
+unset -v VendorID
+
+Disk=$(findmnt / -o SOURCE --noheadings)
+
+if [[ $Disk == *nvme* ]]; then
+	Disk="${Disk/p*/}"
+else
+	Disk="${Disk/[1-9]*/}"
+fi
+
+# Find rootfs UUID
+System=$(findmnt / -o UUID --noheadings)
+
+# Required Kernel Parameter
+KP="root=UUID=$System ro initrd=\\$CPU-ucode.img initrd=\\initramfs-linux.img"
+
+# Speed improvement
+KP+=' quiet libahci.ignore_sss=1 zswap.enabled=0'
+
+# Install bootloader to UEFI
+efibootmgr --disk "$Disk" --part 1 --create \
 	--label 'Arch Linux' \
 	--loader '\vmlinuz-linux' \
-	--unicode 'root=UUID=b8799cd3-87a8-4d05-86ae-b18d980265fa rootflags=subvolid=256 ro initrd=\amd-ucode.img initrd=\initramfs-linux.img quiet libahci.ignore_sss=1 zswap.enabled=0'
+	--unicode "$KP"
