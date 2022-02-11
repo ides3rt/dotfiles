@@ -38,10 +38,17 @@ bind "\C-e":end-of-line
 
 PROMPT_PARSER() {
 	# Colors
-	local DarkGrey='\e[1;90m' Reset='\e[0m'
+	local DarkGrey='\e[1;90m' Red='\e[31m' Reset='\e[0m'
+
+	# Define colors for norm and root
+	if ((UID)); then
+		local Main="$Reset" Fail="$Red"
+	else
+		local Main="$Red" Fail="$Reset"
+	fi
 
 	# Reset
-	PS1="\[$Reset\]" PS2='\[\e[3m\]  '
+	PS1="\[$Reset\]" PS2="\[$Reset\]  "
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
 		local Branch=$(< "$(git rev-parse --git-dir)"/HEAD) Status=$(git status -s)
@@ -125,14 +132,16 @@ PROMPT_PARSER() {
 	if (( $1 != 0 )); then
 		local Count X="$1 "
 
-		PS1+="\[\e[31m\]$X\[$Reset\]"
+		PS1+="\[$Fail\]$X\[$Reset\]"
 		for (( Count = 0; Count != ${#X}; Count++ )); {
 			PS2+=' '
 		}
 	fi
 
 	# Typical PS1
-	PS1+='\[\e[0m\]\$ '
+	PS1+="\[$Main\]"
+	PS1+='\$'
+	PS1+="\[$Reset\] "
 }
 
 PROMPT_COMMAND='PROMPT_PARSER $?'
