@@ -24,13 +24,17 @@ fi
 System=$(findmnt / -o UUID --noheadings)
 
 # Required Kernel Parameter
-KP="root=UUID=$System ro initrd=\\$CPU-ucode.img initrd=\\initramfs-linux.img"
+Kernel="root=UUID=$System ro initrd=\\$CPU-ucode.img"
+Kernel+=' initrd=\initramfs-linux-hardened.img'
 
 # Speed improvement
-KP+=' quiet libahci.ignore_sss=1 zswap.enabled=0'
+Kernel+=' quiet libahci.ignore_sss=1 zswap.enabled=0'
+
+# Enable apparmor
+Kernel+=' lsm=landlock,lockdown,yama,apparmor,bpf'
 
 # Install bootloader to UEFI
 efibootmgr --disk "$Disk" --part 1 --create \
 	--label 'Arch Linux' \
-	--loader '\vmlinuz-linux' \
-	--unicode "$KP"
+	--loader '\vmlinuz-linux-hardened' \
+	--unicode "$Kernel"

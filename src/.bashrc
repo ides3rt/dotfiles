@@ -38,14 +38,7 @@ bind "\C-e":end-of-line
 
 PROMPT_PARSER() {
 	# Colors
-	local DarkGrey='\e[1;90m' Green='\e[32m' Reset='\e[0m'
-
-	# Define colors for root and normal user
-	if ((UID)); then
-		local Main="$Reset" Fail='\e[31m'
-	else
-		local Main='\e[3;31m' Fail='\e[97m'
-	fi
+	local DarkGrey='\e[1;90m' Reset='\e[0m'
 
 	# Reset
 	PS1="\[$Reset\]" PS2='\[\e[3m\]  '
@@ -132,16 +125,14 @@ PROMPT_PARSER() {
 	if (( $1 != 0 )); then
 		local Count X="$1 "
 
-		PS1+="\[$Fail\]$X\[$Reset\]"
+		PS1+="\[\e[31m\]$X\[$Reset\]"
 		for (( Count = 0; Count != ${#X}; Count++ )); {
 			PS2+=' '
 		}
 	fi
 
 	# Typical PS1
-	PS1+="\[$Main\]"
-	PS1+='\$'
-	PS1+="\[$Reset\] "
+	PS1+='\[\e[0m\]\$ '
 }
 
 PROMPT_COMMAND='PROMPT_PARSER $?'
