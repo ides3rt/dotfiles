@@ -6,16 +6,19 @@
 # Disable builtin
 enable -n let
 
+# Security muture
+readonly USER
+
 # Tmux
 if ! [[ $TMUX ]] && ((UID)); then
 	[[ $(tmux a -t default || tmux new -s default) == *exited* ]] && exit 0
 fi 2>/dev/null
 
-# set()
+# `set`
 set -o interactive-comments -o vi -o braceexpand \
 	-o hashall -o histexpand +o monitor
 
-# shopt()
+# `shopt`
 shopt -s autocd cdspell checkwinsize cmdhist \
 	dirspell dotglob expand_aliases extglob extquote \
 	force_fignore histappend hostcomplete \
