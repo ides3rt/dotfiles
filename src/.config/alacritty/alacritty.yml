@@ -1,6 +1,34 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty itself.
+env:
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  TERM: alacritty
+
 window:
+  # Background opacity
+  #
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  opacity: 0.95
+
   # Allow terminal applications to change Alacritty's window title.
   dynamic_title: false
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 1000
+
+  # Scrolling distance multiplier.
+  multiplier: 5
 
 # Font configuration
 font:
@@ -30,68 +58,66 @@ font:
   # Point size
   size: 15
 
-schemes:
-  # ides3rt-v1 colors scheme (base on "GruvBox-Dark")
-  ides3rt-v1: &ides3rt-v1
-    # Default colors
-    primary:
+# Colors
+colors:
+  # Default colors
+  primary:
+    background: '#060606'
+    foreground: '#dddddd'
+
+  # Search colors
+  #
+  # Colors used for the search bar and match highlighting.
+  search:
+    # Allowed values are CellForeground/CellBackground, which reference the
+    # affected cell, or hexadecimal colors like #ff00ff.
+    matches:
+      foreground: '#d7d787'
+      background: '#060606'
+    focused_match:
+      foreground: CellBackground
+      background: CellForeground
+
+    bar:
       background: '#060606'
       foreground: '#dddddd'
 
-    # Normal colors
-    normal:
-      black:   '#000000'
-      red:     '#cc241d'
-      green:   '#689d6a'
-      yellow:  '#d7d700'
-      blue:    '#0073e5'
-      magenta: '#b16286'
-      cyan:    '#5cc9ff'
-      white:   '#aaaaaa'
+  # Normal colors
+  normal:
+    black:   '#000000'
+    red:     '#cc241d'
+    green:   '#689d6a'
+    yellow:  '#d7d700'
+    blue:    '#0073e5'
+    magenta: '#b16286'
+    cyan:    '#5cc9ff'
+    white:   '#aaaaaa'
 
-    # Bright colors
-    bright:
-      black:   '#555555'
-      red:     '#fb4934'
-      green:   '#8ec07c'
-      yellow:  '#d7d787'
-      blue:    '#3584e4'
-      magenta: '#d3869b'
-      cyan:    '#87d7ff'
-      white:   '#ffffff'
+  # Bright colors
+  bright:
+    black:   '#555555'
+    red:     '#fb4934'
+    green:   '#8ec07c'
+    yellow:  '#d7d787'
+    blue:    '#3584e4'
+    magenta: '#d3869b'
+    cyan:    '#87d7ff'
+    white:   '#ffffff'
 
-    # Search colors
-    search:
-      matches:
-        foreground: '#d7d787'
-        background: CellBackground
-      focused_match:
-        foreground: CellBackground
-        background: CellForeground
+  # Transparent cell backgrounds
+  #
+  # Whether or not `window.opacity` applies to all cell backgrounds or only to
+  # the default background. When set to `true` all cells will be transparent
+  # regardless of their background color.
+  transparent_background_colors: true
 
-      bar:
-        background: '#060606'
-        foreground: '#dddddd'
-
-colors: *ides3rt-v1
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.95
+selection:
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: false
 
 cursor:
   # Cursor style
   style:
-    # Cursor shape
-    #
-    # Values for `shape`:
-    #   - ▇ Block
-    #   - _ Underline
-    #   - | Beam
-    shape: Block
-
     # Cursor blinking state
     #
     # Values for `blinking`:
@@ -101,28 +127,20 @@ cursor:
     #   - Always: Force the cursor to always blink
     blinking: Never
 
-  # Vi mode cursor style
-  #
-  # If the vi mode cursor style is `None` or not specified, it will fall back to
-  # the style of the active value of the normal cursor.
-  #
-  # See `cursor.style` for available options.
-  vi_mode_style: Block
-
-  # Cursor blinking interval in milliseconds.
-  blink_interval: 550
-
   # Thickness of the cursor relative to the cell width as floating point number
   # from `0.0` to `1.0`.
-  thickness: 0.125
+  thickness: 0
 
 mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: true
 
 key_bindings:
+  - { key: Return, mods: Control,                   action: SpawnNewInstance }
+
   # Vi Mode
-  - { key: Key4, mode: Vi|~Search, action: Last }
+  - { key: Space,  mods: Control, mode: ~Search,    action: ToggleViMode }
+  - { key: Key4,                  mode: Vi|~Search, action: Last }
 
 debug:
   # Keep the log file after quitting Alacritty.
