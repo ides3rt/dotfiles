@@ -12,20 +12,29 @@ case "$VendorID" in
 esac
 unset -v VendorID
 
-Disk=$(findmnt / -o SOURCE --noheadings)
+Disk=$(findmnt -o SOURCE --noheadings /boot)
 
 if [[ $Disk == *nvme* ]]; then
+	Modules='nvme nvme_core'
 	Disk="${Disk/p*/}"
+	P=p
 else
+	Modules='ahci sd_mod'
 	Disk="${Disk/[1-9]*/}"
 fi
 
 # Find rootfs UUID
-System=$(findmnt / -o UUID --noheadings)
+System=$(lsblk -o UUID --noheadings "$Disk$P"2 | tail -n 1)
+Mapper=$(findmnt -o UUID --noheadings /)
 
-# Required Kernel Parameter
-Kernel="root=UUID=$System ro initrd=\\$CPU-ucode.img"
-Kernel+=' initrd=\initramfs-linux-hardened.img'
+# Options for LUKS
+Kernel="rd.luks.name=$System=luks2 rd.luks.options=discard"
+
+# Specify the rootfs
+Kernel+=" root=UUID=$Mapper"
+
+# Specify the initrd files
+Kernel+=" ro initrd=\\$CPU-ucode.img initrd=\\initramfs-linux-hardened.img"
 
 # Speed improvement
 Kernel+=' quiet libahci.ignore_sss=1 zswap.enabled=0'
