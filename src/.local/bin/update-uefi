@@ -28,13 +28,13 @@ System=$(lsblk -o UUID --noheadings "$Disk$P"2 | tail -n 1)
 Mapper=$(findmnt -o UUID --noheadings /)
 
 # Options for LUKS
-Kernel="rd.luks.name=$System=luks2 rd.luks.options=discard"
+Kernel="rd.luks.name=$System=luks2"
 
 # Specify the rootfs
-Kernel+=" root=UUID=$Mapper"
+Kernel+=" root=UUID=$Mapper ro"
 
 # Specify the initrd files
-Kernel+=" ro initrd=\\$CPU-ucode.img initrd=\\initramfs-linux-hardened.img"
+Kernel+=" initrd=\\$CPU-ucode.img initrd=\\initramfs-linux-hardened.img"
 
 # Speed improvement
 Kernel+=' quiet libahci.ignore_sss=1 zswap.enabled=0'
