@@ -28,7 +28,7 @@ System=$(lsblk -o UUID --noheadings "$Disk$P"2 | tail -n 1)
 Mapper=$(findmnt -o UUID --noheadings /)
 
 # Options for LUKS
-Kernel="rd.luks.name=$System=luks2"
+Kernel="rd.luks.name=$System=luks0"
 
 # Specify the rootfs
 Kernel+=" root=UUID=$Mapper ro"
