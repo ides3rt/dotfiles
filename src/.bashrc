@@ -10,7 +10,7 @@ enable -n let
 readonly USER
 
 # Tmux
-if ! [[ $TMUX ]] && ((UID)); then
+if [[ $DISPLAY && ! $TMUX ]] && ((UID)); then
 	[[ $(tmux a -t default || tmux new -s default) == *exited* ]] && exit 0
 fi 2>/dev/null
 
