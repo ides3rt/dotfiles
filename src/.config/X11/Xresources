@@ -7,7 +7,7 @@ Xft.lcdfitter: lcddefault
 Xft.rgba: rgb
 
 ! URxvt
-URxvt*.background: [95]#060606
+URxvt*.background: [95]#000000
 URxvt*.depth: 32
 URxvt*.font: xft:Monofur Nerd Font Mono:size=15.5
 URxvt*.intensityStyles: false
@@ -24,7 +24,7 @@ URxvt*.scrollBar: false
 URxvt*.secondaryScroll: false
 
 ! Background/Foreground
-*.background: #060606
+*.background: #000000
 *.foreground: #dddddd
 
 ! Normal colors
