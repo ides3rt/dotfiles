@@ -17,6 +17,7 @@ alias mount='mount -v'
 alias umount='umount -v'
 alias ln='ln -v'
 alias ls='ls -hFNX -T 0 --hide=lost+found --color=auto --group-directories-first --show-control-chars' # Minimal ls(1)
+alias sl='sl -edF' # ls(1), but it lists a train, instead of directory contents
 alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
 alias sd="cd /media/$USER"
 alias doas='doas ' # Required, if you want aliases to work with doas(1)
