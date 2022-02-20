@@ -62,7 +62,7 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#060606'
+    background: '#000000'
     foreground: '#dddddd'
 
   # Search colors
@@ -73,13 +73,13 @@ colors:
     # affected cell, or hexadecimal colors like #ff00ff.
     matches:
       foreground: '#d7d787'
-      background: '#060606'
+      background: '#000000'
     focused_match:
       foreground: CellBackground
       background: CellForeground
 
     bar:
-      background: '#060606'
+      background: '#000000'
       foreground: '#dddddd'
 
   # Normal colors
