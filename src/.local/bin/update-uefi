@@ -24,7 +24,7 @@ else
 fi
 
 # Find rootfs UUID
-System=$(lsblk -o UUID --noheadings "$Disk$P"2 | tail -n 1)
+System=$(lsblk -o UUID --noheadings --nodeps "$Disk$P"2)
 Mapper=$(findmnt -o UUID --noheadings /)
 
 # Options for LUKS
@@ -36,8 +36,11 @@ Kernel+=" root=UUID=$Mapper ro"
 # Specify the initrd files
 Kernel+=" initrd=\\$CPU-ucode.img initrd=\\initramfs-linux-hardened.img"
 
+# Quiet
+Kernel+=' quiet loglevel=0'
+
 # Speed improvement
-Kernel+=' quiet libahci.ignore_sss=1 zswap.enabled=0'
+Kernel+=' libahci.ignore_sss=1 zswap.enabled=0'
 
 # Enable apparmor
 Kernel+=' lsm=landlock,lockdown,yama,apparmor,bpf'
