@@ -32,7 +32,7 @@ shift + Print
 
 # Change URxvt(1) fonts size
 mod1 + z
-	sh "$HOME"/Code/urxvt/fonts
+	bash "$HOME"/Code/urxvt/fonts
 
 # Dictionary
 mod1 + shift + d
