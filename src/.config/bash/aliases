@@ -1,27 +1,23 @@
 #!/usr/bin/env bash
 
-# Prefered tool to exec as root
-((UID)) && AUTH=doas
-
-# Aliases
 alias ghpcd="cd $HOME/GitHub/repositories"
 alias ghscd="cd $HOME/GitHub/gists"
-alias cp='cp -vu'
-alias mv='mv -vu'
+alias cp='cp -vnu'
+alias mv='mv -vnu'
 alias rm='rm -v --preserve-root=all'
 alias mkdir='mkdir -v'
-alias rmdir='rmdir -v --ignore-fail-on-non-empty'
+alias rmdir='rmdir -v'
 alias chown='chown -c --preserve-root'
 alias chmod='chmod -c --preserve-root'
 alias mount='mount -v'
 alias umount='umount -v'
 alias ln='ln -v'
-alias ls='ls -hFNX -T 0 --hide=lost+found --color=auto --group-directories-first --show-control-chars' # Minimal ls(1)
+alias ls='ls -hFNXT 0 --color=auto --group-directories-first --hide=lost+found' # Minimal ls(1)
 alias sl='sl -edF' # ls(1), but it lists a train, instead of directory contents
-alias grep='grep -sI --color=auto' # No errors when unreadable and colorful
+alias grep='grep -I --color=auto' # No errors when unreadable and colorful
 alias sd="cd /media/$USER"
-alias doas='doas ' # Required, if you want aliases to work with doas(1)
-alias htop="htop -t -u $USER" # It's so much cleaner
+alias doas='doas ' # Required if you want aliases to work with doas(1)
+alias htop="htop -tu $USER" # It's so much cleaner
 alias xclip='xclip -sel c' # Normal xclip(1) doesn't work for me
 alias ccb='printf "" | xclip -sel c; printf "" | xclip -sel p' # Clear clipboard
 alias add='git add'
@@ -34,8 +30,6 @@ alias push='git push'
 alias status='git status -s'
 alias restore='git restore'
 alias show='git --no-pager show --pretty=format:"%h: %s"'
-alias links='links -http.fake-firefox 1 -http.do-not-track 1 -html-numbered-links 1' # Better links(1). Remove 'http.fake-firefox' to enable JS
+alias links='links -http.fake-firefox 1 -http.do-not-track 1 -html-numbered-links 1' # Remove 'http.fake-firefox' to enable JS
 alias yt-dlp='yt-dlp -qwo "%(title)s.%(ext)s" --downloader aria2c --progress' # Faster yt-dlp(1)
 alias mpv='mpv --ytdl-raw-options=downloader=aria2c' # Faster yt-dlp(1)
-
-unset -v AUTH
