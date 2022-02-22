@@ -12,20 +12,18 @@ case "$VendorID" in
 esac
 unset -v VendorID
 
-Disk=$(findmnt -o SOURCE --noheadings /boot)
+Disk=$(lsblk -nso PATH "$(findmnt -nvo SOURCE /)" | tail -n 1)
 
 if [[ $Disk == *nvme* ]]; then
-	Modules='nvme nvme_core'
 	Disk="${Disk/p*/}"
 	P=p
 else
-	Modules='ahci sd_mod'
 	Disk="${Disk/[1-9]*/}"
 fi
 
 # Find rootfs UUID
-System=$(lsblk -o UUID --noheadings --nodeps "$Disk$P"2)
-Mapper=$(findmnt -o UUID --noheadings /)
+System=$(lsblk -dno UUID "$Disk$P"2)
+Mapper=$(findmnt -no UUID /)
 
 # Options for LUKS
 Kernel="rd.luks.name=$System=luks0"
