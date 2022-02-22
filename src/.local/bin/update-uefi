@@ -111,6 +111,9 @@ Kernel+=' extra_latent_entropy'
 # Restrict access to debugfs
 Kernel+=' debugfs=off'
 
+# Disable Intel P-State
+Kernel+=' intel_pstate=disable'
+
 # Speed improvement
 Kernel+=' libahci.ignore_sss=1 zswap.enabled=0'
 
