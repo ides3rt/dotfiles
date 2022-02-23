@@ -13,10 +13,75 @@ up() {
 }
 
 lspkg() { # [NAME] Inspired by TFL/LL
-	for File in /var/cache/pacman/pkg/*; {
-		if [[ $File != *'.sig' ]]; then
-			printf '%s\n' "${File#/var/cache/pacman/pkg/}"
+	local Count=1 File SFile Old_File Old_SFile Msg
+
+	while [[ -n "$1" ]]; do
+		case "$1" in
+			-h|--help)
+				while read; do
+					printf '%s\n' "$REPLY"
+				done <<-EOF
+					Usage: lspkg [OPTIONS] [GLOB]
+
+					  -h, --help        - Display this help infomation.
+					  -r, --raw         - Show tarball's full name.
+					  -d, --dups        - Only show duplicate tarball(s).
+
+				EOF
+				return 0 ;;
+
+			-r|--raw)
+				local Raw=1 ;;
+
+			-d|--dups)
+				local Dups=1 ;;
+
+			--)
+				shift
+				break ;;
+
+			-*)
+				Err "$1: invaild option..."
+				return 1 ;;
+
+			*)
+				break ;;
+		esac
+		shift
+	done
+
+	for File in /var/cache/pacman/pkg/$1*.tar.zst; {
+		[[ -f $File ]] || return 1
+
+		SFile="${File#/var/cache/pacman/pkg/}"
+		SFile="${SFile/-[0-9]*}"
+
+		if [[ $SFile == $Old_SFile ]]; then
+
+			(( Count++ ))
+			if (( Dups == 1 && Raw == 1 )); then
+				Msg="${Old_File:-$File}"
+				(( Count > 1 )) && printf '%s\n' "$Msg"
+			fi
+
+		else
+			if (( Raw == 1 )); then
+				Msg="${Old_File:-$File}"
+			else
+				Msg="${Old_SFile:-$SFile} - has $Count tarball(s)."
+			fi
+
+			if (( Dups == 1 )); then
+				(( Count > 1 )) && printf '%s\n' "$Msg"
+			else
+				printf '%s\n' "$Msg"
+			fi
+
+			Count=1
 		fi
+
+		Old_SFile="$SFile"
+		Old_File="$File"
 	}
 }
 
