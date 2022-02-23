@@ -2,8 +2,8 @@
 
 alias ghpcd="cd $HOME/GitHub/repositories"
 alias ghscd="cd $HOME/GitHub/gists"
-alias cp='cp -vnu'
-alias mv='mv -vnu'
+alias cp='cp -vu'
+alias mv='mv -vu'
 alias rm='rm -v --preserve-root=all'
 alias mkdir='mkdir -v'
 alias rmdir='rmdir -v'
