@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-alias ghpcd="cd $HOME/GitHub/repositories"
-alias ghscd="cd $HOME/GitHub/gists"
+alias ghpcd="cd $HOME/GitHub/ides3rt/projects"
+alias ghscd="cd $HOME/GitHub/ides3rt/gists"
 alias cp='cp -vu'
 alias mv='mv -vu'
 alias rm='rm -v --preserve-root=all'
