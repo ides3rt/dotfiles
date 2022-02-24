@@ -145,6 +145,9 @@ set sidescroll=0
 set sidescrolloff=999
 set scrolloff=999
 
+" Disable 'shada'
+set shada=
+
 " Always split using alternative side
 set splitbelow
 set splitright
