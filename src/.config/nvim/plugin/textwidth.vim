@@ -1,4 +1,4 @@
-" To toggle textwidth
+" To toggle textwidth.
 func! Textwidth()
 	if !exists('g:Textwidth')
 		let g:Textwidth = 1

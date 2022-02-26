@@ -1,4 +1,4 @@
-! Fonts rendering
+! Fonts rendering.
 Xft.antialias: true
 Xft.autohint: false
 Xft.hinting: true
@@ -6,7 +6,7 @@ Xft.hintstyle: hintslight
 Xft.lcdfitter: lcddefault
 Xft.rgba: rgb
 
-! URxvt
+! URxvt.
 URxvt*.background: [95]#000000
 URxvt*.depth: 32
 URxvt*.font: xft:Monofur Nerd Font Mono:size=15.5
@@ -23,11 +23,11 @@ URxvt*.saveLines: 0
 URxvt*.scrollBar: false
 URxvt*.secondaryScroll: false
 
-! Background/Foreground
+! Background/Foreground.
 *.background: #000000
 *.foreground: #dddddd
 
-! Normal colors
+! Normal colors.
 *.color0: #000000
 *.color1: #cc241d
 *.color2: #689d6a
@@ -37,7 +37,7 @@ URxvt*.secondaryScroll: false
 *.color6: #5cc9ff
 *.color7: #aaaaaa
 
-! Bright colors
+! Bright colors.
 *.color8:  #555555
 *.color9:  #fb4934
 *.color10: #8ec07c

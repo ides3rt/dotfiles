@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# X11 config directory
+# X11 config directory.
 X11_DIR="$XDG_CONFIG_HOME"/X11
 
-# Source autostart scripts
+# Source autostart scripts.
 if test -d "$X11_DIR"/xinitrc.d; then
 	for File in "$X11_DIR"/xinitrc.d/*.sh; do
 		test -f "$File" -a -x "$File" && . "$File"
@@ -11,37 +11,37 @@ if test -d "$X11_DIR"/xinitrc.d; then
 	unset -v File
 fi
 
-# Xresources
+# Xresources.
 Xresources="$X11_DIR"/Xresources
 if test -f "$Xresources" -a -r "$Xresources"; then
 	xrdb "$Xresources"
 fi
 
-# Turn screen saver off
+# Turn screen saver off.
 xset -dpms s off
 
-# Your keyboard layout
+# Your keyboard layout.
 setxkbmap us -variant grammak_iso
 
-# Unset variables
+# Unset variables.
 unset -v X11_DIR Xresources
 
-# BSPWM(1) doesn't set cursor by default
+# BSPWM(1) doesn't set cursor by default.
 xsetroot -cursor_name left_ptr
 
-# Wallpapers
+# Wallpapers.
 feh --no-fehbg --bg-fill "$HOME"/Pictures/cWallpapers/Wallpaper_002.png &
 
-# Compositor
+# Compositor.
 picom &
 
-# Notifications daemon
+# Notifications daemon.
 dunst &
 
-# Hotkeys daemon
+# Hotkeys daemon.
 sxhkd &
 
-# URxvt daemons
+# URxvt daemons.
 urxvtd -q -o -f
 
 # Your favorite WM/DE here!

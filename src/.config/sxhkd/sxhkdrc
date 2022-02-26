@@ -1,115 +1,115 @@
 #
-# Applications hotkeys
+# Applications hotkeys.
 #
 
-# Terminal
+# Terminal.
 mod1 + Return
 	$TERMINAL
 
-# Run launcher
+# Run launcher.
 mod1 + p
 	rofi -show run
 
-# Programs launcher
+# Programs launcher.
 mod1 + d
 	rofi -show drun
 
-# Spawn web browser
+# Spawn web browser.
 mod1 + w
 	$BROWSER
 
 #
-# System hotkeys
+# System hotkeys.
 #
 
-# Take a screenshot
+# Take a screenshot.
 Print
 	maim "$HOME/Pictures/$(date +%Y-%m-%d_%H:%M:%S).png"
 
-# Advance screenshot options
+# Advance screenshot options.
 shift + Print
 	sh "$HOME"/Code/rofi/screenshot
 
-# Change URxvt(1) fonts size
+# Change URxvt(1) fonts size.
 mod1 + z
 	bash "$HOME"/Code/urxvt/fonts
 
-# Dictionary
+# Dictionary.
 mod1 + shift + d
 	sh "$HOME"/Code/rofi/dictionary
 
-# Decrease volume
+# Decrease volume.
 XF86AudioLowerVolume
 	sh "$HOME"/Code/sxhkd/volume -5%
 
-# Increase volume
+# Increase volume.
 XF86AudioRaiseVolume
 	sh "$HOME"/Code/sxhkd/volume +5%
 
-# Toggle volume
+# Toggle volume.
 XF86AudioMute
 	sh "$HOME"/Code/sxhkd/volume
 
-# Change keyboard layouts
+# Change keyboard layouts.
 mod4 + space
 	sh "$HOME"/Code/sxhkd/keymaps
 
 #
-# BSPWM hotkeys
+# BSPWM hotkeys.
 #
 
-# Quit BSPWM
+# Quit BSPWM.
 mod1 + shift + q
 	 eval `ssh-agent -k`; bspc quit
 
-# Restart BSPWM and SXHKD
+# Restart BSPWM and SXHKD.
 mod1 + shift + r
 	pkill -USR1 -x sxhkd; bspc wm -r
 
-# Close focused window
+# Close focused window.
 mod1 + q
 	bspc node -c
 
-# Change between tiled and monocle layout
+# Change between tiled and monocle layout.
 mod1 + m
 	bspc desktop -l next
 
-# Change focused window's state
+# Change focused window's state.
 mod1 + shift + {t,f,space}
 	bspc node -t {~tiled,~fullscreen,~floating}
 
-# Change focused window's node to sticky
+# Change focused window's node to sticky.
 mod1 + shift + s
 	bspc node -g sticky
 
-# Focus/swap the next/previous window
+# Focus/swap the next/previous window.
 mod1 + {_,shift + }{j,k}
 	bspc node -{f,s} {next,prev}.local.window
 
-# Focus or send to the given desktop
+# Focus or send to the given desktop.
 mod1 + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
-# Preselect window in vertical/horizontal
+# Preselect window in vertical/horizontal.
 mod1 + {v,s}
 	bspc node -p {south,east}
 
-# Shrink focused window's width
+# Shrink focused window's width.
 mod1 + ctrl + h
 	bspc node -z left 50 0; bspc node -z right -50 0
 
-# Grow focused window's height
+# Grow focused window's height.
 mod1 + ctrl + j
 	bspc node -z bottom 0 -50; bspc node -z top 0 50
 
-# Shrink focused window's height
+# Shrink focused window's height.
 mod1 + ctrl + k
 	bspc node -z bottom 0 50; bspc node -z top 0 -50
 
-# Grow focused window's width
+# Grow focused window's width.
 mod1 + ctrl + l
 	bspc node -z left -50 0; bspc node -z right 50 0
 
-# Move a floating window
+# Move a floating window.
 mod1 + {Left,Down,Up,Right}
 	bspc node -v {-100 0,0 100,0 -100,100 0}
