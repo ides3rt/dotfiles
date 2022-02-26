@@ -1,56 +1,56 @@
 #!/usr/bin/env bash
 
-# If running restricted or non interactive, don't do anything
+# If running restricted or non interactive, don't do anything.
 { [[ $- != *i* ]] || shopt -q restricted_shell ;} && return
 
-# Disable `let` builtin
+# Disable `let` builtin.
 enable -n let
 
-# Security muture
+# Security muture.
 readonly USER
 
-# Auto launch tmux(1)
+# Auto launch tmux(1).
 if [[ $DISPLAY && ! $TMUX ]] && ((UID)); then
 	[[ $(tmux a -t default || tmux new -s default) == *exited* ]] && exit 0
 fi 2>/dev/null
 
-# Set values for shell options
+# Set values for shell options.
 set -o interactive-comments -o vi -o braceexpand \
 	-o hashall -o histexpand +o monitor
 
-# (Sh)ell (opt)ions
+# (Sh)ell (opt)ions.
 shopt -s autocd cdspell checkwinsize cmdhist \
 	dirspell dotglob expand_aliases extglob extquote \
 	force_fignore histappend hostcomplete \
 	interactive_comments lithist no_empty_cmd_completion \
 	progcomp progcomp_alias promptvars xpg_echo
 
-# Make Ctrl+S and Ctrl+Q work correctly
+# Make Ctrl+S and Ctrl+Q work correctly.
 stty -ixon -ixoff
 
-# Use 'clear-screen' instead for non-recursive clear
+# Use 'clear-screen' instead for non-recursive clear.
 bind "\C-l":clear-display
 
-# zsh(1) like menu completion
+# zsh(1) like menu completion.
 bind "TAB":menu-complete
 bind '"\e[Z":menu-complete-backward'
 
-# vi(1) keys
+# vi(1) keys.
 bind "\C-b":beginning-of-line
 bind "\C-e":end-of-line
 
 PROMPT_PARSER() {
-	# Colors
+	# Colors.
 	local DarkGrey='\e[1;90m' Red='\e[31m' Reset='\e[0m'
 
-	# Define colors for normal user and root
+	# Define colors for normal user and root.
 	if ((UID)); then
 		local Main="$Reset" Fail="$Red"
 	else
 		local Main="$Red" Fail="$Reset"
 	fi
 
-	# Reset
+	# Reset.
 	PS1="\[$Reset\]" PS2="\[$Reset\]  "
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
@@ -120,18 +120,18 @@ PROMPT_PARSER() {
 			PS1="${PS1/has,/has}"
 		fi
 
-		# Aliases that I only want when working on git
+		# Aliases that I only want when working on git.
 		alias diff='git --no-pager diff'
 		alias reset='git reset'
 		alias top='cd "$(git rev-parse --show-toplevel)"'
 	else
-		# diff(1) with colors is a lot easier to read. Also, set tab size to 4
+		# diff(1) with colors is a lot easier to read. Also, set tab size to 4.
 		alias diff='diff --color=auto --tabsize=4'
 
 		unalias reset top &>/dev/null
 	fi
 
-	# Status
+	# Status.
 	if (( $1 != 0 )); then
 		local Count X="$1 "
 
@@ -141,7 +141,7 @@ PROMPT_PARSER() {
 		}
 	fi
 
-	# Typical PS1
+	# Typical PS1.
 	PS1+="\[$Main\]"
 	PS1+='\$'
 	PS1+="\[$Reset\] "
@@ -152,14 +152,14 @@ PS0='\[\e[0m\]'
 
 Make() { [[ -f $1 && -r $1 ]] && . "$1" ;}
 
-# Aliases
+# Aliases.
 Make "$XDG_CONFIG_HOME"/bash/aliases
 
-# Functions
+# Functions.
 Make "$XDG_CONFIG_HOME"/bash/functions
 
-# bash(1) completions
+# bash(1) completions.
 Make /usr/share/bash-completion/bash_completion
 
-# Unset
+# Unset.
 unset -f Make

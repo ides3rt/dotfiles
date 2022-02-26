@@ -86,21 +86,21 @@ lspkg() { # [NAME] Inspired by TFL/LL
 }
 
 build() {
-	# Errors checking
+	# Errors checking.
 	(( $# == 1 )) || { Err 'Need to specified a AUR...'; return 1 ;}
 
-	# Set build dir
+	# Set build dir.
 	local BuildDir="${TMPDIR:-/tmp}/build-$SRANDOM"
 
-	# Copy AUR to build dir
+	# Copy AUR to build dir.
 	if cp -r "$1" "$BuildDir"; then
-		# Build AUR
+		# Build AUR.
 		{ cd "$BuildDir" && makepkg -sir ;} || Err "Build '$1' failed..."
 	else
 		Err "failed to copy '$1' to '$TMPDIR'..."
 	fi
 
-	# Clean
+	# Clean.
 	cd "$OLDPWD" && rm -rf "$BuildDir"
 }
 

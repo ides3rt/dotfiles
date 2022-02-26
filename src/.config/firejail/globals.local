@@ -1,9 +1,0 @@
-blacklist /sbin
-blacklist /usr/sbin
-netfilter
-nonewprivs
-noroot
-apparmor
-disable-mnt
-seccomp
-protocol unix,inet,inet6

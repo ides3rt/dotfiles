@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# bash completion for doas(1)
+# bash(1) completion for doas(1).
 _doas() {
 
 	local cur prev words cword split i

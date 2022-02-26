@@ -1,51 +1,51 @@
-# See dunst(5)
+# See dunst(5).
 [global]
-	# Prefered monitor
+	# Prefered monitor.
 	monitor = 0
 
-	# Position of notifications
+	# Position of notifications.
 	origin = top-right
 	offset = 5x5
 
-	# Progress bar
+	# Progress bar.
 	progress_bar = false
 
-	# Separator
+	# Separator.
 	separator_height = 0
 
-	# Padding
+	# Padding.
 	padding = 5
 	horizontal_padding = 5
 
-	# Notifications' frame
+	# Notifications' frame.
 	frame_width = 2
 	frame_color = "#767676"
 
-	# Sort messages by urgency
+	# Sort messages by urgency.
 	sort = false
 
-	# Font
+	# Font.
 	font = Monofur Nerd Font 10
 
-	# Notifications' format
+	# Notifications' format.
 	markup = full
 	format = "<b>%s</b>\n%b"
 
-	# Alignment
+	# Alignment.
 	alignment = center
 	vertical_alignment = center
 
-	# Hidden notifications
+	# Hidden notifications.
 	hide_duplicate_count = true
 
-	# History
+	# History.
 	history_length = 0
 
-	# Prefered software
+	# Prefered software.
 	dmenu = rofi -dmenu -p 'dunst'
 	browser = firefox
 
-	# Rounded corners
+	# Rounded corners.
 	corner_radius = 5
 
 [urgency_low]

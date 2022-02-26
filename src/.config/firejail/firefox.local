@@ -1,3 +1,0 @@
-private-bin bash,dbus-launch,dbus-send,env,firefox,sh,which
-
-private-etc firefox
