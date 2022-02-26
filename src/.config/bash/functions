@@ -18,9 +18,7 @@ lspkg() { # [NAME] Inspired by TFL/LL
 	while [[ -n "$1" ]]; do
 		case "$1" in
 			-h|--help)
-				while read; do
-					printf '%s\n' "$REPLY"
-				done <<-EOF
+				read -d '' <<-EOF
 					Usage: lspkg [OPTIONS] [GLOB]
 
 					  -h, --help        - Display this help infomation.
@@ -28,6 +26,8 @@ lspkg() { # [NAME] Inspired by TFL/LL
 					  -d, --dups        - Only show duplicate tarball(s).
 
 				EOF
+
+				printf '%s' "$REPLY"
 				return 0 ;;
 
 			-r|--raw)
@@ -97,7 +97,7 @@ build() {
 		# Build AUR
 		{ cd "$BuildDir" && makepkg -sir ;} || Err "Build '$1' failed..."
 	else
-		Err "Copy '$1' to '$TMPDIR' failed..."
+		Err "failed to copy '$1' to '$TMPDIR'..."
 	fi
 
 	# Clean

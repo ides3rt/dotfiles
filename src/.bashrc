@@ -3,22 +3,22 @@
 # If running restricted or non interactive, don't do anything
 { [[ $- != *i* ]] || shopt -q restricted_shell ;} && return
 
-# Disable builtin
+# Disable `let` builtin
 enable -n let
 
 # Security muture
 readonly USER
 
-# Tmux
+# Auto launch tmux(1)
 if [[ $DISPLAY && ! $TMUX ]] && ((UID)); then
 	[[ $(tmux a -t default || tmux new -s default) == *exited* ]] && exit 0
 fi 2>/dev/null
 
-# `set`
+# Set values for shell options
 set -o interactive-comments -o vi -o braceexpand \
 	-o hashall -o histexpand +o monitor
 
-# `shopt`
+# (Sh)ell (opt)ions
 shopt -s autocd cdspell checkwinsize cmdhist \
 	dirspell dotglob expand_aliases extglob extquote \
 	force_fignore histappend hostcomplete \
@@ -28,14 +28,14 @@ shopt -s autocd cdspell checkwinsize cmdhist \
 # Make Ctrl+S and Ctrl+Q work correctly
 stty -ixon -ixoff
 
-# Use `clear-screen` instead for non-recursive clear
+# Use 'clear-screen' instead for non-recursive clear
 bind "\C-l":clear-display
 
-# ZSH like menu completion
+# zsh(1) like menu completion
 bind "TAB":menu-complete
 bind '"\e[Z":menu-complete-backward'
 
-# VI keys
+# vi(1) keys
 bind "\C-b":beginning-of-line
 bind "\C-e":end-of-line
 
@@ -43,7 +43,7 @@ PROMPT_PARSER() {
 	# Colors
 	local DarkGrey='\e[1;90m' Red='\e[31m' Reset='\e[0m'
 
-	# Define colors for norm and root
+	# Define colors for normal user and root
 	if ((UID)); then
 		local Main="$Reset" Fail="$Red"
 	else
@@ -125,7 +125,7 @@ PROMPT_PARSER() {
 		alias reset='git reset'
 		alias top='cd "$(git rev-parse --show-toplevel)"'
 	else
-		# diff(1) with colors is a lots easier to read. Also, set tab size to 4
+		# diff(1) with colors is a lot easier to read. Also, set tab size to 4
 		alias diff='diff --color=auto --tabsize=4'
 
 		unalias reset top &>/dev/null
@@ -158,7 +158,7 @@ Make "$XDG_CONFIG_HOME"/bash/aliases
 # Functions
 Make "$XDG_CONFIG_HOME"/bash/functions
 
-# BASH Completion
+# bash(1) completions
 Make /usr/share/bash-completion/bash_completion
 
 # Unset
