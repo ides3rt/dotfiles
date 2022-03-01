@@ -44,5 +44,8 @@ sxhkd &
 # URxvt daemons.
 urxvtd -q -o -f
 
+# Redshift.
+redshift -P -r -O 4500
+
 # Your favorite WM/DE here!
 exec bspwm
