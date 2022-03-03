@@ -15,15 +15,12 @@ if [[ $DISPLAY && ! $TMUX ]] && ((UID)); then
 fi 2>/dev/null
 
 # Set values for shell options.
-set -o interactive-comments -o vi -o braceexpand \
-	-o hashall -o histexpand +o monitor
+set +o monitor -o noclobber -o vi
 
 # (Sh)ell (opt)ions.
-shopt -s autocd cdspell checkwinsize cmdhist \
-	dirspell dotglob expand_aliases extglob extquote \
-	force_fignore histappend hostcomplete \
-	interactive_comments lithist no_empty_cmd_completion \
-	progcomp progcomp_alias promptvars xpg_echo
+shopt -s autocd cdspell checkhash direxpand dirspell \
+	dotglob extglob globasciiranges globstar histappend \
+	lithist no_empty_cmd_completion progcomp_alias xpg_echo
 
 # Make Ctrl+S and Ctrl+Q work correctly.
 stty -ixon -ixoff
@@ -150,7 +147,7 @@ PROMPT_PARSER() {
 PROMPT_COMMAND='PROMPT_PARSER $?'
 PS0='\[\e[0m\]'
 
-Make() { [[ -f $1 && -r $1 ]] && . "$1" ;}
+Make() { [[ -f $1 && -r $1 ]] && . "$1"; }
 
 # Aliases.
 Make "$XDG_CONFIG_HOME"/bash/aliases

@@ -17,6 +17,9 @@ export INPUTRC="$XDG_CONFIG_HOME"/bash/inputrc
 # User's bash(1) completions.
 export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash-completion/bash_completion
 
+# Ignore '.' and '..' on tab-completion.
+export FIGNORE=.:..
+
 # History.
 export HISTCONTROL=ignoreboth:erasedups
 export HISTFILE=/dev/null

@@ -87,7 +87,7 @@ lspkg() { # [NAME] Inspired by TFL/LL
 
 build() {
 	# Errors checking.
-	(( $# == 1 )) || { Err 'Need to specified a AUR...'; return 1 ;}
+	(( $# == 1 )) || { Err 'Need to specified a AUR...'; return 1; }
 
 	# Set build dir.
 	local BuildDir="${TMPDIR:-/tmp}/build-$SRANDOM"
@@ -109,4 +109,4 @@ log() {
 	printf '\n'
 }
 
-lq() { links https://lite.duckduckgo.com/lite/?q="$*" ;}
+lq() { links https://lite.duckduckgo.com/lite/?q="$*"; }
