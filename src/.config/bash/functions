@@ -5,6 +5,93 @@ Err() {
 	return 1
 }
 
+cp() { command cp -vn "$@"; }
+mv() { command mv -vn "$@"; }
+rm() { command rm -v --preserve-root=all "$@"; }
+
+mkdir() { command mkdir -v "$@"; }
+rmdir() { command rmdir -v "$@"; }
+
+chmod() { command chmod -c --preserve-root "$@"; }
+chown() { command chown -c --preserve-root "$@"; }
+
+mount() { command mount -v "$@"; }
+umount() { command umount -v "$@"; }
+
+ln() { command ln -v "$@"; }
+
+ls() {
+	command ls -hFNXT 0 --color=auto \
+		--group-directories-first \
+		--hide=lost+found "$@"
+}
+
+grep() { command grep -I --color=auto "$@"; }
+
+sd() { cd /media/"$USER"; }
+
+if type -P htop &>/dev/null; then
+	htop() { htop -tu "$USER" "$@"; }
+fi
+
+if type -P git &>/dev/null; then
+	add() { git add "$@"; }
+	branch() { git branch "$@"; }
+	checkout() { git checkout "$@"; }
+	commit() { git commit "$@"; }
+	merge() { git merge "$@"; }
+	pull() { git pull "$@"; }
+	push() { git push "$@"; }
+	restore() { git restore "$@"; }
+	status() { git status -s "$@"; }
+	show() { git --no-pager show --pretty=format:'%h: %s' "$@"; }
+
+	log() {
+		git --no-pager log --reverse --pretty=format:'%h: "%s"' "$@"
+		printf '\n'
+	}
+
+	ghpcd() { cd "$HOME"/GitHub/ides3rt/projects; }
+	ghscd() { cd "$HOME"/GitHub/ides3rt/gists; }
+fi
+
+if type -P xclip &>/dev/null; then
+	xclip() { command xclip -sel c "$@"; }
+
+	ccb() {
+		printf '' | xclip -sel c
+		printf '' | xclip -sel p
+	}
+fi
+
+if type -P yt-dlp &>/dev/null; then
+	yt-dlp() {
+		command yt-dlp -qwo "%(title)s.%(ext)s" \
+			--downloader aria2c --progress "$@"
+	}
+fi
+
+if type -P mpv &>/dev/null; then
+	mpv() {
+		command mpv --ytdl-raw-options=downloader=aria2c "$@"
+	}
+fi
+
+
+if type -P links &>/dev/null; then
+	links() {
+		command links -http.fake-firefox 1 \
+			-http.do-not-track 1 \
+			-html-numbered-links 1 "$@"
+	}
+
+	lq() { links https://lite.duckduckgo.com/lite/?q="$*"; }
+fi
+
+if type -P sl &>/dev/null; then
+	sl() { command sl -edF "$@"; }
+fi
+
 up() {
 	local Count
 	for (( Count = 10#${1:-1}; Count > 0; Count-- )); {
@@ -12,101 +99,3 @@ up() {
 	}
 }
 
-lspkg() { # [NAME] Inspired by TFL/LL
-	local Count=1 File SFile Old_File Old_SFile Msg
-
-	while [[ -n "$1" ]]; do
-		case "$1" in
-			-h|--help)
-				read -d '' <<-EOF
-					Usage: lspkg [OPTIONS] [GLOB]
-
-					  -h, --help        - Display this help infomation.
-					  -r, --raw         - Show tarball's full name.
-					  -d, --dups        - Only show duplicate tarball(s).
-
-				EOF
-
-				printf '%s' "$REPLY"
-				return 0 ;;
-
-			-r|--raw)
-				local Raw=1 ;;
-
-			-d|--dups)
-				local Dups=1 ;;
-
-			--)
-				shift
-				break ;;
-
-			-*)
-				Err "$1: invaild option..."
-				return 1 ;;
-
-			*)
-				break ;;
-		esac
-		shift
-	done
-
-	for File in /var/cache/pacman/pkg/$1*.tar.zst; {
-		[[ -f $File ]] || return 1
-
-		SFile="${File#/var/cache/pacman/pkg/}"
-		SFile="${SFile/-[0-9]*}"
-
-		if [[ $SFile == $Old_SFile ]]; then
-
-			(( Count++ ))
-			if (( Dups == 1 && Raw == 1 )); then
-				Msg="${Old_File:-$File}"
-				(( Count > 1 )) && printf '%s\n' "$Msg"
-			fi
-
-		else
-			if (( Raw == 1 )); then
-				Msg="${Old_File:-$File}"
-			else
-				Msg="${Old_SFile:-$SFile} - has $Count tarball(s)."
-			fi
-
-			if (( Dups == 1 )); then
-				(( Count > 1 )) && printf '%s\n' "$Msg"
-			else
-				printf '%s\n' "$Msg"
-			fi
-
-			Count=1
-		fi
-
-		Old_SFile="$SFile"
-		Old_File="$File"
-	}
-}
-
-build() {
-	# Errors checking.
-	(( $# == 1 )) || { Err 'Need to specified a AUR...'; return 1; }
-
-	# Set build dir.
-	local BuildDir="${TMPDIR:-/tmp}/build-$SRANDOM"
-
-	# Copy AUR to build dir.
-	if cp -r "$1" "$BuildDir"; then
-		# Build AUR.
-		{ cd "$BuildDir" && makepkg -sir ;} || Err "Build '$1' failed..."
-	else
-		Err "failed to copy '$1' to '$TMPDIR'..."
-	fi
-
-	# Clean.
-	cd "$OLDPWD" && rm -rf "$BuildDir"
-}
-
-log() {
-	git --no-pager log --reverse --pretty=format:'%h: "%s"' "$@"
-	printf '\n'
-}
-
-lq() { links https://lite.duckduckgo.com/lite/?q="$*"; }

@@ -3,11 +3,9 @@
 # If running restricted or non interactive, don't do anything.
 { [[ $- != *i* ]] || shopt -q restricted_shell ;} && return
 
-# Disable `let` builtin.
-enable -n let
-
-# Security muture.
-readonly USER
+# Disable builtins.
+enable -n let alias
+shopt -u expand_aliases
 
 # Auto launch tmux(1).
 if [[ $DISPLAY && ! $TMUX ]] && ((UID)); then
@@ -117,15 +115,15 @@ PROMPT_PARSER() {
 			PS1="${PS1/has,/has}"
 		fi
 
-		# Aliases that I only want when working on git.
-		alias diff='git --no-pager diff'
-		alias reset='git reset'
-		alias top='cd "$(git rev-parse --show-toplevel)"'
-	else
-		# diff(1) with colors is a lot easier to read. Also, set tab size to 4.
-		alias diff='diff --color=auto --tabsize=4'
+		diff() { git --no-pager diff "$@"; }
+		reset() { git reset "$@"; }
+		top() { cd "$(git rev-parse --show-toplevel)"; }
 
-		unalias reset top &>/dev/null
+	else
+
+		diff() { command diff --color=auto --tabsize=4 "$@"; }
+		unset -f reset top
+
 	fi
 
 	# Status.
@@ -148,9 +146,6 @@ PROMPT_COMMAND='PROMPT_PARSER $?'
 PS0='\[\e[0m\]'
 
 Make() { [[ -f $1 && -r $1 ]] && . "$1"; }
-
-# Aliases.
-Make "$XDG_CONFIG_HOME"/bash/aliases
 
 # Functions.
 Make "$XDG_CONFIG_HOME"/bash/functions
