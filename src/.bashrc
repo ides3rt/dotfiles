@@ -4,7 +4,7 @@
 { [[ $- != *i* ]] || shopt -q restricted_shell ;} && return
 
 # Disable builtins.
-enable -n let alias
+enable -n let unalias alias
 shopt -u expand_aliases
 
 # Auto launch tmux(1).
