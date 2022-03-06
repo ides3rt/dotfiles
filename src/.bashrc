@@ -23,6 +23,13 @@ shopt -s autocd cdspell checkhash direxpand dirspell \
 # Make Ctrl+S and Ctrl+Q work correctly.
 stty -ixon -ixoff
 
+# Enable menu completion.
+bind "TAB":menu-complete
+bind '"\e[Z"':menu-complete-backward
+
+# Use 'clear-screen' instead for non-recursive clear.
+bind "\C-l":clear-display
+
 PROMPT_PARSER() {
 	# Colors.
 	local DarkGrey='\e[1;90m' Red='\e[31m' Reset='\e[0m'

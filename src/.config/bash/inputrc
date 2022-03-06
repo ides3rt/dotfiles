@@ -22,10 +22,3 @@ set show-all-if-ambiguous On
 set show-all-if-unmodified On
 set skip-completed-text On
 set visible-stats On
-
-# Enable menu completion.
-"TAB": menu-complete
-"\e[Z": menu-complete-backward
-
-# Use 'clear-screen' instead for non-recursive clear.
-"\C-l": clear-display
