@@ -35,9 +35,11 @@ sxhkd &
 # Notification daemon.
 dunst &
 
-# Notify updates.
-while sleep 60m; do
-	pacman -Qqu && dunstify -u critical -r 86 "There's an update(s)..."
+# Notify about update(s).
+while :; do
+	pacman -Qqu &&
+	dunstify -u critical -r 86 "There's an update(s)..."
+	sleep 60m
 done &
 
 # URxvt daemon.
