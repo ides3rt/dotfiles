@@ -1,9 +1,9 @@
-# See dunst(5).
+# See dunst(5) for details.
 [global]
 	# Prefered monitor.
 	monitor = 0
 
-	# Position of notifications.
+	# Position of notification.
 	origin = top-right
 	offset = 5x5
 
@@ -17,7 +17,7 @@
 	padding = 5
 	horizontal_padding = 5
 
-	# Notifications' frame.
+	# Notification's frame.
 	frame_width = 2
 	frame_color = "#767676"
 
@@ -27,7 +27,7 @@
 	# Font.
 	font = Monofur Nerd Font 10
 
-	# Notifications' format.
+	# Notification's format.
 	markup = full
 	format = "<b>%s</b>\n%b"
 
@@ -35,15 +35,15 @@
 	alignment = center
 	vertical_alignment = center
 
-	# Hidden notifications.
+	# Hidden notification.
 	hide_duplicate_count = true
 
 	# History.
 	history_length = 0
 
 	# Prefered software.
-	dmenu = rofi -dmenu -p 'dunst'
-	browser = firefox
+	dmenu = rofi -dmenu -p 'Dunst'
+	browser = firefox-developer-edition
 
 	# Rounded corners.
 	corner_radius = 5
@@ -56,9 +56,9 @@
 [urgency_normal]
 	background = "#121212"
 	foreground = "#ffffff"
-	timeout = 2
+	timeout = 4
 
 [urgency_critical]
 	background = "#121212"
 	foreground = "#ffffff"
-	timeout = 2
+	timeout = 0

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# X11 config directory.
-X11_DIR="$XDG_CONFIG_HOME"/X11
+# X11 configuration directory.
+X11_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"/X11
 
-# Source autostart scripts.
+# Source autostart script(s).
 if test -d "$X11_DIR"/xinitrc.d; then
 	for File in "$X11_DIR"/xinitrc.d/*.sh; do
 		test -f "$File" -a -x "$File" && . "$File"
@@ -17,35 +17,40 @@ if test -f "$Xresources" -a -r "$Xresources"; then
 	xrdb "$Xresources"
 fi
 
-# Turn screen saver off.
-xset -dpms s off
-
-# Your keyboard layout.
-setxkbmap us -variant grammak_iso
-
 # Unset variables.
 unset -v X11_DIR Xresources
 
-# BSPWM(1) doesn't set cursor by default.
+# Turn off screen-saver.
+xset -dpms s off
+
+# Keyboard layout.
+setxkbmap us grammak_iso
+
+# Set the cursor.
 xsetroot -cursor_name left_ptr
 
-# Wallpapers.
-feh --no-fehbg --bg-fill "$HOME"/Pictures/cWallpapers/Wallpaper_002.png &
-
-# Compositor.
-picom &
-
-# Notifications daemon.
-dunst &
-
-# Hotkeys daemon.
+# Hotkey daemon.
 sxhkd &
 
-# URxvt daemons.
+# Notification daemon.
+dunst &
+
+# Notify updates.
+while sleep 60m; do
+	pacman -Qqu && dunstify -u critical "There's an update(s)..."
+done &
+
+# URxvt daemon.
 urxvtd -q -o -f
 
-# Redshift.
-redshift -P -r -O 4500
+# Eyes-saver.
+redshift -PrO 4500
 
-# Your favorite WM/DE here!
+# Wallpaper.
+feh --bg-fill --no-fehbg "$HOME"/Pictures/cWallpapers/Wallpaper_002.png &
+
+# Compositor.
+picom -b
+
+# X11 session.
 exec bspwm
