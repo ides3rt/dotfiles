@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-Err() {
-	printf '%s\n' "Err: $1" 1>&2
-	return 1
-}
-
 cp() { command cp -vn "$@"; }
 mv() { command mv -vn "$@"; }
 rm() { command rm -v --preserve-root=all "$@"; }
@@ -30,8 +25,15 @@ grep() { command grep -I --color=auto "$@"; }
 
 sd() { cd /media/"$USER"; }
 
+up() {
+	local Count
+	for (( Count = 10#${1:-1}; Count > 0; Count-- )); {
+		cd .. || break
+	}
+}
+
 if type -P htop &>/dev/null; then
-	htop() { htop -tu "$USER" "$@"; }
+	htop() { command htop -t "$@"; }
 fi
 
 if type -P git &>/dev/null; then
@@ -44,11 +46,13 @@ if type -P git &>/dev/null; then
 	push() { git push "$@"; }
 	restore() { git restore "$@"; }
 	status() { git status -s "$@"; }
-	show() { git --no-pager show --pretty=format:'%h: %s' "$@"; }
+
+	show() {
+		git --no-pager show --format='%h: %s' "$@"
+	}
 
 	log() {
-		git --no-pager log --reverse --pretty=format:'%h: "%s"' "$@"
-		printf '\n'
+		git --no-pager log --reverse --format='%h: "%s"' "$@"
 	}
 
 	ghpcd() { cd "$HOME"/GitHub/ides3rt/projects; }
@@ -59,14 +63,14 @@ if type -P xclip &>/dev/null; then
 	xclip() { command xclip -sel c "$@"; }
 
 	ccb() {
-		printf '' | xclip -sel c
-		printf '' | xclip -sel p
+		printf '' | command xclip -sel c
+		printf '' | command xclip -sel p
 	}
 fi
 
 if type -P yt-dlp &>/dev/null; then
 	yt-dlp() {
-		command yt-dlp -qwo "%(title)s.%(ext)s" \
+		command yt-dlp -qwo '%(title)s.%(ext)s' \
 			--downloader aria2c --progress "$@"
 	}
 fi
@@ -91,11 +95,3 @@ fi
 if type -P sl &>/dev/null; then
 	sl() { command sl -edF "$@"; }
 fi
-
-up() {
-	local Count
-	for (( Count = 10#${1:-1}; Count > 0; Count-- )); {
-		cd .. || break
-	}
-}
-
