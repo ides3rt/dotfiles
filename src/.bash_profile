@@ -24,20 +24,17 @@ export FIGNORE=.:..
 export HISTCONTROL=ignoreboth:erasedups
 export HISTFILE=/dev/null
 export HISTFILESIZE=0
-export HISTSIZE=999
+export HISTSIZE=1000
 
 if ((UID)) && [[ -z $SSH_TTY ]]; then
-	# My GitHub SSH.
-	{ eval `ssh-agent -s` && ssh-add "$HOME"/.ssh/GitHub ;} &>/dev/null
+	# GitHub SSH.
+	eval `ssh-agent -s` && ssh-add "$HOME"/.ssh/GitHub
 
-	# X.org.
-	if [[ -z $DISPLAY ]] && clear; then
-		# Run xinit(1) when in tty1.
-		if (( XDG_VTNR == 1 )); then
-			exec xinit X -- vt$XDG_VTNR &>/dev/null
-		fi
+	# Start xinit(1) when in TTY1.
+	if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+		exec xinit X -- vt$XDG_VTNR
 	fi
-fi
+fi &>/dev/null
 
 # Source ~/.bashrc.
 BASHRC="$HOME"/.bashrc
