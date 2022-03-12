@@ -24,23 +24,27 @@ mod1 + w
 
 # Take a screenshot.
 Print
-	maim "$HOME/Pictures/$(date +%Y-%m-%d_%H:%M:%S).png"
+	maim "$HOME/Pictures/$(date +%F_%T).png"
 
 # Advance screenshot options.
 shift + Print
 	sh "$HOME"/Code/rofi/screenshot
 
-# Change URxvt(1) fonts size.
-mod1 + z
-	bash "$HOME"/Code/urxvt/fonts
+# Upload a file to 0x0.
+mod1 + u
+	bash "$HOME"/Code/rofi/upload
 
 # Dictionary.
 mod1 + shift + d
 	sh "$HOME"/Code/rofi/dictionary
 
-# Decrease volume.
-XF86AudioLowerVolume
-	sh "$HOME"/Code/sxhkd/volume -5%
+# Change URxvt(1) fonts size.
+mod1 + z
+	bash "$HOME"/Code/urxvt/fonts
+
+# Change keyboard layout.
+mod4 + space
+	sh "$HOME"/Code/sxhkd/keymaps
 
 # Increase volume.
 XF86AudioRaiseVolume
@@ -50,9 +54,9 @@ XF86AudioRaiseVolume
 XF86AudioMute
 	sh "$HOME"/Code/sxhkd/volume
 
-# Change keyboard layouts.
-mod4 + space
-	sh "$HOME"/Code/sxhkd/keymaps
+# Decrease volume.
+XF86AudioLowerVolume
+	sh "$HOME"/Code/sxhkd/volume -5%
 
 #
 # BSPWM hotkeys.
