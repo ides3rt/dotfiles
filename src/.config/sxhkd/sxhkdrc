@@ -28,7 +28,7 @@ Print
 
 # Advance screenshot options.
 shift + Print
-	sh "$HOME"/Code/rofi/screenshot
+	bash "$HOME"/Code/rofi/screenshot
 
 # Upload a file to 0x0.
 mod1 + u
