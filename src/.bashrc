@@ -51,7 +51,7 @@ PROMPT_PARSER() {
 		PS1+="$Symbol\[$DarkGrey\]Branch '${Branch##*/}' has"
 
 		if [[ -z $Status ]]; then
-			local Secondline Count F1 F2 F3 Pace F5 Upsteam F6 F7 Commits
+			local Secondline Count Pace Upsteam Commits
 
 			while read Secondline; do
 				(( Count++ )) && break
@@ -63,12 +63,12 @@ PROMPT_PARSER() {
 					PS1+=" $Commits commit(s) cleaned.\[$Reset\]\n" ;;
 
 				*behind*)
-					read F1 F2 F3 Pace Upsteam F6 Commits _ <<< "$Secondline"
+					read _ _ _ Pace Upsteam _ Commits _ <<< "$Secondline"
 					printf -v Commits "%'d" "$Commits"
 					PS1+=" $Commits commit(s) $Pace $Upsteam.\[$Reset\]\n" ;;
 
 				*ahead*)
-					read F1 F2 F3 Pace F5 Upsteam F7 Commits _ <<< "$Secondline"
+					read _ _ _ Pace _ Upsteam _ Commits _ <<< "$Secondline"
 					printf -v Commits "%'d" "$Commits"
 					PS1+=" $Commits commit(s) $Pace of $Upsteam.\[$Reset\]\n" ;;
 			esac
