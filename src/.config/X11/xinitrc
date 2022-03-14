@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Set session type.
-export XDG_SESSION_TYPE=x11
+# Define session type.
+export XDG_SESSION_TYPE=x11 GDK_BACKEND=x11
 
 # X11 configuration directory.
 X11_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"/X11

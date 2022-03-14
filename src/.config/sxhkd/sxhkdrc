@@ -64,7 +64,7 @@ XF86AudioLowerVolume
 
 # Quit BSPWM.
 mod1 + shift + q
-	 eval `ssh-agent -k`; bspc quit
+	 bash "$HOME"/.bash_logout; bspc quit
 
 # Restart BSPWM and SXHKD.
 mod1 + shift + r
