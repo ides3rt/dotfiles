@@ -58,62 +58,113 @@ font:
   # Point size
   size: 15
 
-# Colors
-colors:
-  # Default colors
-  primary:
-    background: '#000000'
-    foreground: '#dddddd'
-
-  # Search colors
-  #
-  # Colors used for the search bar and match highlighting.
-  search:
-    # Allowed values are CellForeground/CellBackground, which reference the
-    # affected cell, or hexadecimal colors like #ff00ff.
-    matches:
-      foreground: '#d7d787'
-      background: '#000000'
-    focused_match:
-      foreground: CellBackground
-      background: CellForeground
-
-    bar:
+schemes:
+  linux: &linux
+    # Default colors
+    primary:
       background: '#000000'
       foreground: '#dddddd'
 
-  # Normal colors
-  normal:
-    black:   '#000000'
-    red:     '#cc241d'
-    green:   '#689d6a'
-    yellow:  '#d7d700'
-    blue:    '#0073e5'
-    magenta: '#b16286'
-    cyan:    '#5cc9ff'
-    white:   '#aaaaaa'
+    # Search colors
+    #
+    # Colors used for the search bar and match highlighting.
+    search:
+      # Allowed values are CellForeground/CellBackground, which reference the
+      # affected cell, or hexadecimal colors like #ff00ff.
+      matches:
+        foreground: '#ffff55'
+        background: '#000000'
+      focused_match:
+        foreground: '#ffff55'
+        background: '#000000'
 
-  # Bright colors
-  bright:
-    black:   '#555555'
-    red:     '#fb4934'
-    green:   '#8ec07c'
-    yellow:  '#d7d787'
-    blue:    '#3584e4'
-    magenta: '#d3869b'
-    cyan:    '#87d7ff'
-    white:   '#ffffff'
+      bar:
+        background: '#000000'
+        foreground: '#dddddd'
 
-  # Transparent cell backgrounds
-  #
-  # Whether or not `window.opacity` applies to all cell backgrounds or only to
-  # the default background. When set to `true` all cells will be transparent
-  # regardless of their background color.
-  transparent_background_colors: true
+    # Normal colors
+    normal:
+      black:   '#000000'
+      red:     '#aa0000'
+      green:   '#00aa00'
+      yellow:  '#aa5500'
+      blue:    '#0000aa'
+      magenta: '#aa00aa'
+      cyan:    '#00aaaa'
+      white:   '#aaaaaa'
 
-selection:
-  # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: false
+    # Bright colors
+    bright:
+      black:   '#555555'
+      red:     '#ff5555'
+      green:   '#55ff55'
+      yellow:  '#ffff55'
+      blue:    '#5555ff'
+      magenta: '#ff55ff'
+      cyan:    '#55ffff'
+      white:   '#ffffff'
+
+    # Transparent cell backgrounds
+    #
+    # Whether or not `window.opacity` applies to all cell backgrounds or only to
+    # the default background. When set to `true` all cells will be transparent
+    # regardless of their background color.
+    transparent_background_colors: true
+
+  ides3rt: &ides3rt
+    # Default colors
+    primary:
+      background: '#000000'
+      foreground: '#dddddd'
+
+    # Search colors
+    #
+    # Colors used for the search bar and match highlighting.
+    search:
+      # Allowed values are CellForeground/CellBackground, which reference the
+      # affected cell, or hexadecimal colors like #ff00ff.
+      matches:
+        foreground: '#d7d787'
+        background: '#000000'
+      focused_match:
+        foreground: '#d7d787'
+        background: '#000000'
+
+      bar:
+        background: '#000000'
+        foreground: '#dddddd'
+
+    # Normal colors
+    normal:
+      black:   '#000000'
+      red:     '#cc241d'
+      green:   '#689d6a'
+      yellow:  '#d7d700'
+      blue:    '#0073e5'
+      magenta: '#b16286'
+      cyan:    '#5cc9ff'
+      white:   '#aaaaaa'
+
+    # Bright colors
+    bright:
+      black:   '#555555'
+      red:     '#fb4934'
+      green:   '#8ec07c'
+      yellow:  '#d7d787'
+      blue:    '#3584e4'
+      magenta: '#d3869b'
+      cyan:    '#87d7ff'
+      white:   '#ffffff'
+
+    # Transparent cell backgrounds
+    #
+    # Whether or not `window.opacity` applies to all cell backgrounds or only to
+    # the default background. When set to `true` all cells will be transparent
+    # regardless of their background color.
+    transparent_background_colors: true
+
+# Colors scheme.
+colors: *ides3rt
 
 cursor:
   # Cursor style
@@ -136,11 +187,13 @@ mouse:
   hide_when_typing: true
 
 key_bindings:
-  - { key: Return, mods: Control,                   action: SpawnNewInstance }
+  - { key: Return, mods: Control, action: SpawnNewInstance }
 
-  # Vi Mode
-  - { key: Space,  mods: Control, mode: ~Search,    action: ToggleViMode }
-  - { key: Key4,                  mode: Vi|~Search, action: Last }
+  - { key: Up, mods: Shift, mode: ~Search, action: ScrollLineUp }
+  - { key: Down, mods: Shift, mode: ~Search, action: ScrollLineDown }
+
+  - { key: Space, mods: Control, mode: ~Search, action: ToggleViMode }
+  - { key: Key4, mode: Vi|~Search, action: Last }
 
 debug:
   # Keep the log file after quitting Alacritty.
