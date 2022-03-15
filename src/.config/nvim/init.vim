@@ -4,9 +4,7 @@ if !exists('$XDG_CONFIG_HOME')
 endif
 
 " Detecting file type.
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 " Syntax.
 if has('syntax')
@@ -56,6 +54,12 @@ set belloff=all
 if has('clipboard') && exists("$DISPLAY")
 	set clipboard=unnamedplus,unnamed
 endif
+
+" Spell checking in completion.
+set complete+=kspell
+
+" Always use vertical diff.
+set diffopt+=vertical
 
 " Call fsync() when write.
 set fsync
@@ -107,6 +111,7 @@ set noloadplugins
 set matchtime=0
 
 " Don't check `set` command.
+set modelines=0
 set nomodeline
 
 " Don't use `more` format.
