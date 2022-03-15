@@ -22,7 +22,6 @@ URxvt*.pointerBlankDelay: 60
 URxvt*.print-pipe: cat > /dev/null
 URxvt*.saveLines: 0
 URxvt*.scrollBar: false
-URxvt*.termName: rxvt-unicode-256color
 
 ! Background/Foreground
 *.background: #000000
