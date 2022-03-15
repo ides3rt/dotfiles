@@ -8,9 +8,9 @@ enable -n let unalias alias
 shopt -u expand_aliases
 
 # Auto launch tmux(1).
-if [[ $DISPLAY && ! $TMUX ]] && ((UID)); then
-	[[ $(tmux a -t default || tmux new -s default) == *exited* ]] && exit 0
-fi 2>/dev/null
+if [[ $UID -ne 0 && -n $DISPLAY && -z $TMUX ]]; then
+	[[ $(tmux a -t default || tmux new -s default) == '[exited]' ]] && exit 0
+fi &>/dev/null
 
 # Set values for shell options.
 set +o monitor -o noclobber -o vi
