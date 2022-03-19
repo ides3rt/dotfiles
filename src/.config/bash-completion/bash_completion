@@ -8,14 +8,14 @@ _doas() {
 
 	for (( i = 1; i <= cword; i++ )); {
 		if [[ ${words[i]} != -* ]]; then
-			local root_command="${words[i]}"
+			local root_command=${words[i]}
 			_command_offset "$i"
 			return 0
 		fi
-		[[ ${words[i]} == -@(!(-*)[LnsCu]) ]] && ((i++))
+		[[ ${words[i]} == -@(!(-*)[LnsCu]) ]] && (( i++ ))
 	}
 
-	case "$prev" in
+	case $prev in
 		-!(-*)u)
 			COMPREPLY=( $(compgen -u -- "$cur") )
 			return 0 ;;

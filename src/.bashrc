@@ -8,8 +8,8 @@ enable -n let unalias alias
 shopt -u expand_aliases
 
 # Auto launch tmux(1).
-if [[ $UID -ne 0 && -n $DISPLAY && -z $TMUX ]]; then
-	[[ $(tmux a -t default || tmux new -s default) == '[exited]' ]] && exit 0
+if [[ $UID -ne 0 && -z $TMUX ]]; then
+	[[ $(tmux a || tmux new) == '[exited]' ]] && exit 0
 fi &>/dev/null
 
 # Set values for shell options.
@@ -32,122 +32,120 @@ bind "\C-l":clear-display
 
 PROMPT_PARSER() {
 	# Colors.
-	local DarkGrey='\e[1;90m' Red='\e[31m' Reset='\e[0m'
+	local darkgrey='\e[1;90m' red='\e[31m' reset='\e[0m'
 
 	# Define colors for normal user and root.
 	if ((UID)); then
-		local Main="$Reset" Fail="$Red"
+		local main=$reset fail=$red
 	else
-		local Main="$Red" Fail="$Reset"
+		local main=$red fail=$reset
 	fi
 
 	# Reset.
-	PS1="\[$Reset\]" PS2="\[$Reset\]  "
+	PS1="\[$reset\]" PS2="\[$reset\]  "
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		local Branch=$(< "$(git rev-parse --git-dir)"/HEAD) Status=$(git status -s)
+		local branch=$(< "$(git rev-parse --git-dir)"/HEAD) \
+			status=$(git status -s 2>/dev/null)
 
-		[[ -n $DISPLAY ]] && local Symbol="\[$DarkGrey\] "
-		PS1+="$Symbol\[$DarkGrey\]Branch '${Branch##*/}' has"
+		[[ -n $DISPLAY ]] && local symbol=" "
+		PS1+="\[$darkgrey\]${symbol}Branch '${branch##*/}' has"
 
-		if [[ -z $Status ]]; then
-			local Secondline Count Pace Upsteam Commits
+		if [[ -z $status ]]; then
+			local count pace upsteam commits
 
-			while read Secondline; do
-				(( Count++ )) && break
-			done <<< "$(git status)"
+			while read; do
+				(( count++ )) && break
+			done <<< "$(git status 2>/dev/null)"
 
-			case "$Secondline" in
+			case $REPLY in
 				*'up to date'*|*'nothing to commit'*|'')
-					printf -v Commits "%'d" "$(git rev-list --count HEAD 2>/dev/null)"
-					PS1+=" $Commits commit(s) cleaned.\[$Reset\]\n" ;;
+					printf -v commits "%'d" "$(git rev-list --count HEAD 2>/dev/null)"
+					PS1+=" $commits commit(s) cleaned.\[$reset\]\n" ;;
 
 				*behind*)
-					read _ _ _ Pace Upsteam _ Commits _ <<< "$Secondline"
-					printf -v Commits "%'d" "$Commits"
-					PS1+=" $Commits commit(s) $Pace $Upsteam.\[$Reset\]\n" ;;
+					read _ _ _ pace upsteam _ commits _ <<< "$REFLY"
+					printf -v commits "%'d" "$commits"
+					PS1+=" $commits commit(s) $pace $upsteam.\[$reset\]\n" ;;
 
 				*ahead*)
-					read _ _ _ Pace _ Upsteam _ Commits _ <<< "$Secondline"
-					printf -v Commits "%'d" "$Commits"
-					PS1+=" $Commits commit(s) $Pace of $Upsteam.\[$Reset\]\n" ;;
+					read _ _ _ pace _ upsteam _ commits _ <<< "$REFLY"
+					printf -v commits "%'d" "$commits"
+					PS1+=" $commits commit(s) $pace of $upsteam.\[$reset\]\n" ;;
 			esac
 		else
-			local Curline CCount MCount RCount DCount NCount ACount UCount
+			local ccount mcount rcount dcount ncount acount ucount
 
-			while read Curline; do
-				case "$Curline" in
+			while read; do
+				case $REPLY in
 					'M  '*)
-						(( CCount++ ))
-						local Changes=", $CCount change(s) to be committed" ;;
+						(( ccount++ ))
+						local changes=", $ccount change(s) to be committed" ;;
 
 					'M '*)
-						(( MCount++ ))
-						local Modified=", $MCount modified file(s)" ;;
+						(( mcount++ ))
+						local modified=", $mcount modified file(s)" ;;
 
 					'D  '*)
-						(( RCount++ ))
-						local Removed=", $RCount removed file(s)" ;;
+						(( rcount++ ))
+						local removed=", $rcount removed file(s)" ;;
 
 					'D '*)
-						(( DCount++ ))
-						local Deleted=", $DCount deleted file(s)" ;;
+						(( dcount++ ))
+						local deleted=", $dcount deleted file(s)" ;;
 
 					'R  '*)
-						(( NCount++ ))
-						local Renamed=", $NCount renamed file(s)" ;;
+						(( ncount++ ))
+						local renamed=", $ncount renamed file(s)" ;;
 
 					'A  '*)
-						(( ACount++ ))
-						local Added=", $ACount new file(s)" ;;
+						(( acount++ ))
+						local added=", $acount new file(s)" ;;
 
 					'?? '*)
-						(( UCount++ ))
-						local Untracked=", $UCount untracked file(s)" ;;
+						(( ucount++ ))
+						local untracked=", $ucount untracked file(s)" ;;
 				esac
-			done <<< "$Status"
+			done <<< "$status"
 
-			PS1+="$Changes$Modified$Removed$Deleted$Renamed$Added$Untracked.\[$Reset\]\n"
-			PS1="${PS1/has,/has}"
+			PS1+="$changes$modified$removed$deleted$renamed$added$untracked.\[$reset\]\n"
+			PS1=${PS1/has,/has}
 		fi
 
 		diff() { git --no-pager diff "$@"; }
 		reset() { git reset "$@"; }
 		top() { cd "$(git rev-parse --show-toplevel)"; }
-
 	else
-
 		diff() { command diff --color=auto --tabsize=4 "$@"; }
 		unset -f reset top
-
 	fi
 
 	# Status.
 	if (( $1 != 0 )); then
-		local Count X="$1 "
+		local count exit="$1 "
 
-		PS1+="\[$Fail\]$X\[$Reset\]"
-		for (( Count = 0; Count != ${#X}; Count++ )); {
+		PS1+="\[$fail\]$exit\[$reset\]"
+		for (( count = 0; count != ${#exit}; count++ )); {
 			PS2+=' '
 		}
 	fi
 
 	# Typical PS1.
-	PS1+="\[$Main\]"
+	PS1+="\[$main\]"
 	PS1+='\$'
-	PS1+="\[$Reset\] "
+	PS1+="\[$reset\] "
 }
 
 PROMPT_COMMAND='PROMPT_PARSER $?'
 PS0='\[\e[0m\]'
 
-Make() { [[ -f $1 && -r $1 ]] && . "$1"; }
+check() { [[ -f $1 && -r $1 ]] && . "$1"; }
 
 # Functions.
-Make "$XDG_CONFIG_HOME"/bash/functions
+check "$XDG_CONFIG_HOME"/bash/functions
 
 # bash(1) completions.
-Make /usr/share/bash-completion/bash_completion
+check /usr/share/bash-completion/bash_completion
 
 # Unset.
-unset -f Make
+unset -f check

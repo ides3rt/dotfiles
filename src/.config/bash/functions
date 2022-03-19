@@ -16,9 +16,8 @@ umount() { command umount -v "$@"; }
 ln() { command ln -v "$@"; }
 
 ls() {
-	command ls -hFNXT 0 --color=auto \
-		--group-directories-first \
-		--hide=lost+found "$@"
+	command ls -hFNXT 0 --group-directories-first \
+		--color=auto --hide=lost+found "$@"
 }
 
 grep() { command grep -I --color=auto "$@"; }
@@ -26,8 +25,8 @@ grep() { command grep -I --color=auto "$@"; }
 sd() { cd /media/"$USER"; }
 
 up() {
-	local Count
-	for (( Count = 10#${1:-1}; Count > 0; Count-- )); {
+	local count
+	for (( count = 10#${1:-1}; count > 0; count-- )); {
 		cd .. || break
 	}
 }
@@ -85,8 +84,7 @@ fi
 if type -P links &>/dev/null; then
 	links() {
 		command links -http.fake-firefox 1 \
-			-http.do-not-track 1 \
-			-html-numbered-links 1 "$@"
+			-http.do-not-track 1 -html-numbered-links 1 "$@"
 	}
 
 	lq() { links https://lite.duckduckgo.com/lite/?q="$*"; }

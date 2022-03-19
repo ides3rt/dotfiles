@@ -4,18 +4,18 @@
 umask 077
 
 # Source environment variables.
-if [[ -d "$HOME"/.config/env.d ]]; then
-	for File in "$HOME"/.config/env.d/*.conf; {
-		[[ -f $File && -r $File ]] && . "$File"
+if [[ -d $HOME/.config/env.d ]]; then
+	for file in "$HOME"/.config/env.d/*.conf; {
+		[[ -f $file && -r $file ]] && . "$file"
 	}
-	unset -v File
+	unset -v file
 fi
 
 # Readline.
-export INPUTRC="$XDG_CONFIG_HOME"/bash/inputrc
+export INPUTRC=$XDG_CONFIG_HOME/bash/inputrc
 
 # User's bash(1) completions.
-export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash-completion/bash_completion
+export BASH_COMPLETION_USER_FILE=$XDG_CONFIG_HOME/bash-completion/bash_completion
 
 # Ignore '.' and '..' on tab-completion.
 export FIGNORE=.:..
@@ -26,7 +26,7 @@ export HISTFILE=/dev/null
 export HISTFILESIZE=0
 export HISTSIZE=1000
 
-if ((UID)) && [[ -z $SSH_TTY ]]; then
+if [[ $UID -ne 0 && -z $SSH_TTY ]]; then
 	# GitHub SSH.
 	eval `ssh-agent -s` && ssh-add "$HOME"/.ssh/GitHub
 
@@ -37,6 +37,6 @@ if ((UID)) && [[ -z $SSH_TTY ]]; then
 fi &>/dev/null
 
 # Source ~/.bashrc.
-BASHRC="$HOME"/.bashrc
-[[ -f $BASHRC && -r $BASHRC ]] && . "$BASHRC"
-unset -v BASHRC
+bashrc=$HOME/.bashrc
+[[ -f $bashrc && -r $bashrc ]] && . "$bashrc"
+unset -v bashrc

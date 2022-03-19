@@ -4,24 +4,24 @@
 export XDG_SESSION_TYPE=x11 GDK_BACKEND=x11
 
 # X11 configuration directory.
-X11_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"/X11
+x11_dir=$XDG_CONFIG_HOME/X11
 
 # Source autostart script(s).
-if test -d "$X11_DIR"/xinitrc.d; then
-	for File in "$X11_DIR"/xinitrc.d/*.sh; do
-		test -f "$File" -a -x "$File" && . "$File"
+if test -d "$x11_dir"/xinitrc.d; then
+	for file in "$x11_dir"/xinitrc.d/*.sh; do
+		test -f "$file" -a -x "$file" && . "$file"
 	done
-	unset -v File
+	unset -v file
 fi
 
 # Xresources.
-Xresources="$X11_DIR"/Xresources
-if test -f "$Xresources" -a -r "$Xresources"; then
-	xrdb "$Xresources"
+xresources=$x11_dir/Xresources
+if test -f "$xresources" -a -r "$xresources"; then
+	xrdb "$xresources"
 fi
 
 # Unset variables.
-unset -v X11_DIR Xresources
+unset -v x11_dir xresources
 
 # Turn off screen-saver.
 xset -dpms s off
@@ -38,7 +38,7 @@ sxhkd &
 # Notification daemon.
 dunst &
 
-# Notify about update(s).
+# Notify about update.
 while :; do
 	pacman -Qqu &&
 	dunstify -u critical -r 86 "There's an update(s)..."
