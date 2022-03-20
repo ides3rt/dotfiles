@@ -64,20 +64,20 @@ PROMPT_PARSER() {
 					PS1+=" $commits commit(s) cleaned.\[$reset\]\n" ;;
 
 				*behind*)
-					read _ _ _ pace upsteam _ commits _ <<< "$REFLY"
+					read _ _ _ pace upsteam _ commits _ <<< "$REPLY"
 					printf -v commits "%'d" "$commits"
 					PS1+=" $commits commit(s) $pace $upsteam.\[$reset\]\n" ;;
 
 				*ahead*)
-					read _ _ _ pace _ upsteam _ commits _ <<< "$REFLY"
+					read _ _ _ pace _ upsteam _ commits _ <<< "$REPLY"
 					printf -v commits "%'d" "$commits"
 					PS1+=" $commits commit(s) $pace of $upsteam.\[$reset\]\n" ;;
 			esac
 		else
-			local ccount mcount rcount dcount ncount acount ucount
+			local line ccount mcount rcount dcount ncount acount ucount
 
-			while read; do
-				case $REPLY in
+			while read line; do
+				case $line in
 					'M  '*)
 						(( ccount++ ))
 						local changes=", $ccount change(s) to be committed" ;;
