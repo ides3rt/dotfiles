@@ -1,21 +1,18 @@
 #!/usr/bin/env bash
 
-# If running restricted or non interactive, don't do anything.
+# If running restricted or non-interactive, don't do anything.
 { [[ $- != *i* ]] || shopt -q restricted_shell ;} && return
 
-# Disable builtins.
+# Disable alias.
 enable -n let unalias alias
 shopt -u expand_aliases
 
-# Auto launch tmux(1).
 if [[ $UID -ne 0 && -z $TMUX ]]; then
 	[[ $(tmux a || tmux new) == '[exited]' ]] && exit 0
 fi &>/dev/null
 
-# Set values for shell options.
 set +o monitor -o noclobber -o vi
 
-# (Sh)ell (opt)ions.
 shopt -s autocd cdspell checkhash direxpand dirspell \
 	dotglob extglob globasciiranges globstar histappend \
 	lithist no_empty_cmd_completion progcomp_alias xpg_echo
@@ -23,7 +20,7 @@ shopt -s autocd cdspell checkhash direxpand dirspell \
 # Make Ctrl+S and Ctrl+Q work correctly.
 stty -ixon -ixoff
 
-# Enable menu completion.
+# Enable menu-completion.
 bind "TAB":menu-complete
 bind '"\e[Z"':menu-complete-backward
 
@@ -31,7 +28,6 @@ bind '"\e[Z"':menu-complete-backward
 bind "\C-l":clear-display
 
 PROMPT_PARSER() {
-	# Colors.
 	local darkgrey='\e[1;90m' red='\e[31m' reset='\e[0m'
 
 	# Define colors for normal user and root.
@@ -41,7 +37,6 @@ PROMPT_PARSER() {
 		local main=$red fail=$reset
 	fi
 
-	# Reset.
 	PS1="\[$reset\]" PS2="\[$reset\]  "
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
@@ -120,7 +115,7 @@ PROMPT_PARSER() {
 		unset -f reset top
 	fi
 
-	# Status.
+	# Make $PS2 lenght equal to $PS1 length.
 	if (( $1 != 0 )); then
 		local count exit="$1 "
 
@@ -130,7 +125,6 @@ PROMPT_PARSER() {
 		}
 	fi
 
-	# Typical PS1.
 	PS1+="\[$main\]"
 	PS1+='\$'
 	PS1+="\[$reset\] "
@@ -141,11 +135,7 @@ PS0='\[\e[0m\]'
 
 check() { [[ -f $1 && -r $1 ]] && . "$1"; }
 
-# Functions.
 check "$XDG_CONFIG_HOME"/bash/functions
-
-# bash(1) completions.
 check /usr/share/bash-completion/bash_completion
 
-# Unset.
 unset -f check

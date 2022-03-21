@@ -6,20 +6,17 @@ endif
 " Detecting file type.
 filetype plugin indent on
 
-" Syntax.
 if has('syntax')
 	" Enable syntax highlight.
 	syntax on
 
 	if !has('gui_running')
-
 		" These only work when in TTY.
 		colorscheme ides3rt-v3
 		set ttyfast
 
 		" Don't change my cursor.
 		set guicursor=
-
 	endif
 
 	" Only highlight number when 'cursorline' is on.
@@ -61,7 +58,7 @@ set complete+=kspell
 " Always use vertical diff.
 set diffopt+=vertical
 
-" Call fsync() when write.
+" Call fsync() when :w.
 set fsync
 
 " Allow to change buffer w/o write.
@@ -87,7 +84,7 @@ set ignorecase
 " No double <space> after period.
 set nojoinspaces
 
-" It's only enable for backward compatibility.
+" These only enable for backward compatibility.
 if has('langmap')
 	set nolangnoremap
 	set nolangremap
@@ -202,6 +199,9 @@ noremap <silent> k gk
 nnoremap <silent> Q <Nop>
 nnoremap <silent> gQ <Nop>
 nnoremap <silent> q: <Nop>
+
+" Use Y to copy to EOL.
+nnoremap <silent> Y y$
 
 " Toggle 'ignorecase'.
 nnoremap <silent> <leader>ic :set ignorecase!<CR>
