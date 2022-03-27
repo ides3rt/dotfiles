@@ -1,61 +1,36 @@
 #!/bin/sh
 
-# Define session type.
 export XDG_SESSION_TYPE=x11 GDK_BACKEND=x11
 
-# X11 configuration directory.
-x11_dir=$XDG_CONFIG_HOME/X11
-
-# Source autostart script(s).
-if test -d "$x11_dir"/xinitrc.d; then
-	for file in "$x11_dir"/xinitrc.d/*.sh; do
+if test -d /etc/X11/xinit/xinitrc.d; then
+	for file in /etc/X11/xinit/xinitrc.d/*.sh; do
 		test -f "$file" -a -x "$file" && . "$file"
 	done
 	unset -v file
 fi
 
-# Xresources.
-xresources=$x11_dir/Xresources
-if test -f "$xresources" -a -r "$xresources"; then
-	xrdb "$xresources"
+xres=$XDG_CONFIG_HOME/X11/Xresources
+if test -f "$xres" -a -r "$xres"; then
+	xrdb "$xres"
 fi
+unset -v xres
 
-# Unset variables.
-unset -v x11_dir xresources
-
-# Turn off screen-saver.
-xset -dpms s off
-
-# Keyboard layout.
 setxkbmap us grammak_iso
-
-# Set the cursor.
 xsetroot -cursor_name left_ptr
 
-# Hotkey daemon.
+xset -dpms s off
+redshift -PrO 4500
 sxhkd &
-
-# Notification daemon.
 dunst &
+urxvtd -q -o -f
 
-# Notify about update.
 while :; do
 	pacman -Qqu &&
 	dunstify -u critical -r 86 "There's an update(s)..."
 	sleep 60m
 done &
 
-# URxvt daemon.
-urxvtd -q -o -f
-
-# Eyes-saver.
-redshift -PrO 4500
-
-# Wallpaper.
 feh --bg-fill --no-fehbg "$HOME"/Pictures/cWallpapers/Wallpaper_002.png &
-
-# Compositor.
 picom -b
 
-# X11 session.
 exec bspwm
