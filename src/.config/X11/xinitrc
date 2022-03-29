@@ -23,13 +23,6 @@ redshift -PrO 4500
 sxhkd &
 dunst &
 urxvtd -q -o -f
-
-while :; do
-	pacman -Qqu &&
-	dunstify -u critical -r 86 "There's an update(s)..."
-	sleep 60m
-done &
-
 feh --bg-fill --no-fehbg "$HOME"/Pictures/cWallpapers/Wallpaper_002.png &
 picom -b
 
