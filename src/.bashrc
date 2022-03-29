@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-# If running restricted or non-interactive, don't do anything.
-{ [[ $- != *i* ]] || shopt -q restricted_shell ;} && return
+{ [[ -z $PS1 ]] || shopt -q restricted_shell ;} && return
 
-# Disable alias.
 enable -n let unalias alias
 shopt -u expand_aliases
 
@@ -12,20 +10,15 @@ if [[ $UID -ne 0 && -z $TMUX ]]; then
 fi &>/dev/null
 
 set +o monitor -o noclobber -o vi
-
 shopt -s autocd cdspell checkhash direxpand dirspell \
 	dotglob extglob globasciiranges globstar histappend \
 	lithist no_empty_cmd_completion progcomp_alias xpg_echo
 
-# Make Ctrl+S and Ctrl+Q work correctly.
 stty -ixon -ixoff
+bind "\C-l":clear-display
 
-# Enable menu-completion.
 bind "TAB":menu-complete
 bind '"\e[Z"':menu-complete-backward
-
-# Use 'clear-screen' instead for non-recursive clear.
-bind "\C-l":clear-display
 
 PROMPT_PARSER() {
 	local darkgrey='\e[1;90m' red='\e[31m' reset='\e[0m'
@@ -47,10 +40,10 @@ PROMPT_PARSER() {
 		PS1+="\[$darkgrey\]${symbol}Branch '${branch##*/}' has"
 
 		if [[ -z $status ]]; then
-			local count pace upsteam commits
+			local i pace upsteam commits
 
 			while read; do
-				(( count++ )) && break
+				(( i++ )) && break
 			done <<< "$(git status 2>/dev/null)"
 
 			case $REPLY in
@@ -69,37 +62,31 @@ PROMPT_PARSER() {
 					PS1+=" $commits commit(s) $pace of $upsteam.\[$reset\]\n" ;;
 			esac
 		else
-			local line ccount mcount rcount dcount ncount acount ucount
+			local line changes modified removed deleted renamed added \
+				untracked ccount mcount rcount dcount ncount acount ucount
 
 			while read line; do
 				case $line in
 					'M  '*)
-						(( ccount++ ))
-						local changes=", $ccount change(s) to be committed" ;;
+						changes=", $(( ++ccount )) change(s) to be committed" ;;
 
 					'M '*)
-						(( mcount++ ))
-						local modified=", $mcount modified file(s)" ;;
+						modified=", $(( ++mcount )) modified file(s)" ;;
 
 					'D  '*)
-						(( rcount++ ))
-						local removed=", $rcount removed file(s)" ;;
+						removed=", $(( ++rcount )) removed file(s)" ;;
 
 					'D '*)
-						(( dcount++ ))
-						local deleted=", $dcount deleted file(s)" ;;
+						deleted=", $(( ++dcount )) deleted file(s)" ;;
 
 					'R  '*)
-						(( ncount++ ))
-						local renamed=", $ncount renamed file(s)" ;;
+						renamed=", $(( ++ncount )) renamed file(s)" ;;
 
 					'A  '*)
-						(( acount++ ))
-						local added=", $acount new file(s)" ;;
+						added=", $(( ++acount )) new file(s)" ;;
 
 					'?? '*)
-						(( ucount++ ))
-						local untracked=", $ucount untracked file(s)" ;;
+						untracked=", $(( ++ucount )) untracked file(s)" ;;
 				esac
 			done <<< "$status"
 
@@ -115,12 +102,10 @@ PROMPT_PARSER() {
 		unset -f reset top
 	fi
 
-	# Make $PS2 lenght equal to $PS1 length.
 	if (( $1 != 0 )); then
-		local count exit="$1 "
-
+		local i exit="$1 "
 		PS1+="\[$fail\]$exit\[$reset\]"
-		for (( count = 0; count != ${#exit}; count++ )); {
+		for (( i = 0; i != ${#exit}; i++ )); {
 			PS2+=' '
 		}
 	fi
@@ -133,9 +118,9 @@ PROMPT_PARSER() {
 PROMPT_COMMAND='PROMPT_PARSER $?'
 PS0='\[\e[0m\]'
 
-check() { [[ -f $1 && -r $1 ]] && . "$1"; }
+check_n_src() { [[ -f $1 && -r $1 ]] && . "$1"; }
 
-check "$XDG_CONFIG_HOME"/bash/functions
-check /usr/share/bash-completion/bash_completion
+check_n_src "$XDG_CONFIG_HOME"/bash/functions
+check_n_src /usr/share/bash-completion/bash_completion
 
-unset -f check
+unset -f check_n_src
