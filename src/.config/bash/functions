@@ -16,7 +16,7 @@ umount() { command umount -v "$@"; }
 ln() { command ln -v "$@"; }
 
 ls() {
-	command ls -hFNXT 0 --group-directories-first \
+	command ls -hFNT 0 --group-directories-first \
 		--color=auto --hide=lost+found "$@"
 }
 
