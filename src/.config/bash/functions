@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-cp() { command cp -vn "$@"; }
-mv() { command mv -vn "$@"; }
+cp() { command cp -vu "$@"; }
+mv() { command mv -vu "$@"; }
 rm() { command rm -v --preserve-root=all "$@"; }
 
 mkdir() { command mkdir -v "$@"; }
@@ -15,10 +15,7 @@ umount() { command umount -v "$@"; }
 
 ln() { command ln -v "$@"; }
 
-ls() {
-	command ls -hFNT 0 --group-directories-first \
-		--color=auto --hide=lost+found "$@"
-}
+ls() { dir -hFT 0 --group-directories-first --color=auto "$@"; }
 
 grep() { command grep -I --color=auto "$@"; }
 
@@ -37,7 +34,7 @@ fi
 
 if type -P git &>/dev/null; then
 	add() { git add "$@"; }
-	branch() { git branch "$@"; }
+	branch() { git --no-pager branch "$@"; }
 	checkout() { git checkout "$@"; }
 	commit() { git commit "$@"; }
 	merge() { git merge "$@"; }
@@ -46,13 +43,9 @@ if type -P git &>/dev/null; then
 	restore() { git restore "$@"; }
 	status() { git status -s "$@"; }
 
-	show() {
-		git --no-pager show --format='%h: %s' "$@"
-	}
-
-	log() {
-		git --no-pager log --reverse --format='%h: "%s"' "$@"
-	}
+	show() { git --no-pager show --format='%h: %s' "$@"; }
+	log() { git --no-pager log --reverse --format='%h: "%s"' "$@"; }
+	toplevel() { cd "$(git rev-parse --show-toplevel)"; }
 
 	ghpcd() { cd "$HOME"/GitHub/ides3rt/projects; }
 	ghscd() { cd "$HOME"/GitHub/ides3rt/gists; }

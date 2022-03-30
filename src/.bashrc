@@ -21,13 +21,12 @@ bind "TAB":menu-complete
 bind '"\e[Z"':menu-complete-backward
 
 PROMPT_PARSER() {
-	local darkgrey='\e[1;90m' red='\e[31m' reset='\e[0m'
+	local main fail darkgrey='\e[1;90m' red='\e[31m' reset='\e[0m'
 
-	# Define colors for normal user and root.
 	if ((UID)); then
-		local main=$reset fail=$red
+		main=$reset fail=$red
 	else
-		local main=$red fail=$reset
+		main=$red fail=$reset
 	fi
 
 	PS1="\[$reset\]" PS2="\[$reset\]  "
@@ -47,7 +46,7 @@ PROMPT_PARSER() {
 			done <<< "$(git status 2>/dev/null)"
 
 			case $REPLY in
-				*'up to date'*|*'nothing to commit'*|'')
+				*up\ to\ date*|*nothing\ to\ commit*|'')
 					printf -v commits "%'d" "$(git rev-list --count HEAD 2>/dev/null)"
 					PS1+=" $commits commit(s) cleaned.\[$reset\]\n" ;;
 
@@ -96,14 +95,14 @@ PROMPT_PARSER() {
 
 		diff() { git --no-pager diff "$@"; }
 		reset() { git reset "$@"; }
-		top() { cd "$(git rev-parse --show-toplevel)"; }
 	else
 		diff() { command diff --color=auto --tabsize=4 "$@"; }
-		unset -f reset top
+		unset -f reset
 	fi
 
 	if (( $1 != 0 )); then
 		local i exit="$1 "
+
 		PS1+="\[$fail\]$exit\[$reset\]"
 		for (( i = 0; i != ${#exit}; i++ )); {
 			PS2+=' '
@@ -118,9 +117,8 @@ PROMPT_PARSER() {
 PROMPT_COMMAND='PROMPT_PARSER $?'
 PS0='\[\e[0m\]'
 
-check_n_src() { [[ -f $1 && -r $1 ]] && . "$1"; }
-
-check_n_src "$XDG_CONFIG_HOME"/bash/functions
-check_n_src /usr/share/bash-completion/bash_completion
-
-unset -f check_n_src
+for file in "$XDG_CONFIG_HOME"/bash/functions \
+	/usr/share/bash-completion/bash_completion
+{
+	[[ -f $file && -r $file ]] && . "$file"
+}
