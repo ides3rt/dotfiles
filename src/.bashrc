@@ -20,7 +20,7 @@ bind "\C-l":clear-display
 bind "TAB":menu-complete
 bind '"\e[Z"':menu-complete-backward
 
-PROMPT_PARSER() {
+_prompt_parser() {
 	local main fail darkgrey='\e[1;90m' red='\e[31m' reset='\e[0m'
 
 	if ((UID)); then
@@ -114,7 +114,7 @@ PROMPT_PARSER() {
 	PS1+="\[$reset\] "
 }
 
-PROMPT_COMMAND='PROMPT_PARSER $?'
+PROMPT_COMMAND='_prompt_parser $?'
 PS0='\[\e[0m\]'
 
 for file in "$XDG_CONFIG_HOME"/bash/functions \
