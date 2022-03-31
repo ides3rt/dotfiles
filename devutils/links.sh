@@ -24,13 +24,13 @@ for file in "$base"/.bash* "$base"/.config/* \
 	dest=$HOME/${file#$base/}
 
 	if [[ ! -e $file ]]; then
-		panic 0 "$file: doesn't exist..."
+		panic 0 "${file/$HOME/\~}: doesn't exist..."
 
 	elif [[ -e $dest ]]; then
 		panic 0 "${dest/$HOME/\~}: already existed..."
 
 	else
-		find "$dest" -xtype l -delete
+		find "$dest" -xtype l -delete &>/dev/null
 		ln -sv "$file" "$dest"
 	fi
 }
