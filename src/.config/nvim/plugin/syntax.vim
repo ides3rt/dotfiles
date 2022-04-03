@@ -1,16 +1,16 @@
-func! Syntax()
-	if !exists('g:Syntax')
-		let g:Syntax = 1
-		let g:Colorscheme = g:colors_name
+function! Toggle_Syntax()
+	if !exists('g:use_syntax')
+		let g:use_syntax = 1
+		let g:old_colors = g:colors_name
 		syntax off | highlight clear
 		hi Normal ctermbg=none ctermfg=none cterm=none
 
-	elseif g:Syntax == 1
-		unlet g:Syntax | syntax on
-		exec "colorscheme " . g:Colorscheme
-		unlet g:Colorscheme
+	elseif g:use_syntax == 1
+		unlet g:use_syntax | syntax on
+		exec "colorscheme " . g:old_colors
+		unlet g:old_colors
 
 	endif
-endfunc
+endfunction
 
-nnoremap <silent> <leader>ns :call Syntax()<CR>
+nnoremap <silent> <leader>ns :call Toggle_Syntax()<CR>

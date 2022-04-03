@@ -1,7 +1,6 @@
-" Don't show status by default.
-func! Status()
-	if !exists('g:Status')
-		let g:Status = 1
+function! Toggle_Status()
+	if !exists('g:show_status')
+		let g:show_status = 1
 
 		if has('syntax')
 			set nocursorline
@@ -18,8 +17,8 @@ func! Status()
 			set laststatus=1
 		endif
 
-	elseif g:Status == 1
-		unlet g:Status
+	elseif g:show_status == 1
+		unlet g:show_status
 
 		if has('syntax')
 			set cursorline
@@ -38,7 +37,6 @@ func! Status()
 
 	endif
 endfunction
-call Status()
+call Toggle_Status()
 
-" Toggle status.
-nnoremap <silent> <leader>ts :call Status()<CR>
+nnoremap <silent> <leader>ts :call Toggle_Status()<CR>

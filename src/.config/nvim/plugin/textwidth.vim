@@ -1,14 +1,13 @@
-" To toggle textwidth.
-func! Textwidth()
-	if !exists('g:Textwidth')
-		let g:Textwidth = 1
+function! Toggle_Textwidth()
+	if !exists('g:use_textwidth')
+		let g:use_textwidth = 1
 		set textwidth=0
 
-	elseif g:Textwidth == 1
-		unlet g:Textwidth
+	elseif g:use_textwidth == 1
+		unlet g:use_textwidth
 		set textwidth=80
 
 	endif
-endfunc
+endfunction
 
-nnoremap <silent> <leader>tw :call Textwidth()<CR>
+nnoremap <silent> <leader>tw :call Toggle_Textwidth()<CR>

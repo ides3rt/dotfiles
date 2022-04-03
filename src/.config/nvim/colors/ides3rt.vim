@@ -2,7 +2,7 @@ set background=dark
 highlight clear
 syntax reset
 
-let g:colors_name = 'ides3rt-v3'
+let g:colors_name = 'ides3rt'
 
 hi Boolean         ctermbg=none  ctermfg=254
 hi Character       ctermbg=none  ctermfg=254
