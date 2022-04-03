@@ -1,13 +1,10 @@
-if !exists('$XDG_CONFIG_HOME')
-	let $XDG_CONFIG_HOME = "$HOME/.config"
-endif
-
 filetype plugin indent on
+
 if has('syntax')
 	syntax on
 
 	if !has('gui_running')
-		colorscheme ides3rt-v3
+		colorscheme ides3rt
 		set ttyfast
 		set guicursor=
 	endif
@@ -17,10 +14,6 @@ endif
 
 noremap <space> <Nop>
 let mapleader = " "
-
-source $XDG_CONFIG_HOME/nvim/plugin/textwidth.vim
-source $XDG_CONFIG_HOME/nvim/plugin/status.vim
-source $XDG_CONFIG_HOME/nvim/plugin/syntax.vim
 
 if exists('+autochdir')
 	set autochdir
@@ -39,7 +32,7 @@ set complete+=kspell
 set diffopt+=vertical
 set fsync
 set hidden
-set history=200
+set history=10000
 
 if has('extra_search')
 	set hlsearch
@@ -68,9 +61,7 @@ else
 endif
 nnoremap <silent> <leader>ls :set list!<CR>
 
-set noloadplugins
 set matchtime=0
-
 set modelines=0
 set nomodeline
 
@@ -159,5 +150,4 @@ noremap <silent> <leader>al :left<CR>
 nnoremap <silent> <leader>nn :next<CR>
 nnoremap <silent> <leader>pp :prev<CR>
 
-nnoremap <silent> <leader>rc :source $XDG_CONFIG_HOME/nvim/init.vim<CR>
 set secure
