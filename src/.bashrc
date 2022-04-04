@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-{ [[ -z $PS1 ]] || shopt -q restricted_shell ;} && return
+{ [[ ! $PS1 ]] || shopt -q restricted_shell; } && return
 
 enable -n let unalias alias
 shopt -u expand_aliases
 
-if [[ $UID -ne 0 && -z $TMUX ]]; then
+if [[ $UID -ne 0 && ! $TMUX ]]; then
 	[[ $(tmux a || tmux new) == '[exited]' ]] && exit 0
 fi &>/dev/null
 
@@ -32,11 +32,11 @@ _prompt_parser() {
 	PS1="\[$reset\]" PS2="\[$reset\]  "
 
 	if git rev-parse --is-inside-work-tree &>/dev/null; then
-		local branch=$(< "$(git rev-parse --git-dir)"/HEAD) \
-			status=$(git status -s 2>/dev/null)
+		local branch=$(< "$(git rev-parse --git-dir)"/HEAD)
+		local status=$(git status -s 2>/dev/null)
 
-		[[ -n $DISPLAY ]] && local symbol=" "
-		PS1+="\[$darkgrey\]${symbol}Branch '${branch##*/}' has"
+		[[ $DISPLAY ]] && local git_symbol=" "
+		PS1+="\[$darkgrey\]${git_symbol}Branch '${branch##*/}' has"
 
 		if [[ -z $status ]]; then
 			local i pace upsteam commits
@@ -61,35 +61,34 @@ _prompt_parser() {
 					PS1+=" $commits commit(s) $pace of $upsteam.\[$reset\]\n" ;;
 			esac
 		else
-			local line changes modified removed deleted renamed added \
-				untracked ccount mcount rcount dcount ncount acount ucount
+			local line cg a mod b rm c de d mv e new f un g
 
 			while read line; do
 				case $line in
-					'M  '*)
-						changes=", $(( ++ccount )) change(s) to be committed" ;;
+					M?\ *)
+						cg=", $(( ++a )) change(s) to be committed" ;;
 
-					'M '*)
-						modified=", $(( ++mcount )) modified file(s)" ;;
+					M\ *)
+						mod=", $(( ++b )) modified file(s)" ;;
 
-					'D  '*)
-						removed=", $(( ++rcount )) removed file(s)" ;;
+					D?\ *)
+						rm=", $(( ++c )) removed file(s)" ;;
 
-					'D '*)
-						deleted=", $(( ++dcount )) deleted file(s)" ;;
+					D\ *)
+						de=", $(( ++d )) deleted file(s)" ;;
 
-					'R  '*)
-						renamed=", $(( ++ncount )) renamed file(s)" ;;
+					R?\ *)
+						mv=", $(( ++e )) renamed file(s)" ;;
 
-					'A  '*)
-						added=", $(( ++acount )) new file(s)" ;;
+					A\ *)
+						new=", $(( ++f )) new file(s)" ;;
 
-					'?? '*)
-						untracked=", $(( ++ucount )) untracked file(s)" ;;
+					\?\?\ *)
+						un=", $(( ++g )) untracked file(s)" ;;
 				esac
 			done <<< "$status"
 
-			PS1+="$changes$modified$removed$deleted$renamed$added$untracked.\[$reset\]\n"
+			PS1+="$cg$mod$rm$de$mv$new$un.\[$reset\]\n"
 			PS1=${PS1/has,/has}
 		fi
 
@@ -100,7 +99,7 @@ _prompt_parser() {
 		unset -f reset
 	fi
 
-	if (( $1 != 0 )); then
+	if (( $1 )); then
 		local i exit="$1 "
 
 		PS1+="\[$fail\]$exit\[$reset\]"
@@ -109,9 +108,7 @@ _prompt_parser() {
 		}
 	fi
 
-	PS1+="\[$main\]"
-	PS1+='\$'
-	PS1+="\[$reset\] "
+	PS1+="\[$main\]\\\$\[$reset\] "
 }
 
 PROMPT_COMMAND='_prompt_parser $?'

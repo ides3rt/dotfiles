@@ -1,4 +1,4 @@
-function! Toggle_Status()
+function! ToggleStatus()
 	if !exists('g:show_status')
 		let g:show_status = 1
 
@@ -37,6 +37,6 @@ function! Toggle_Status()
 
 	endif
 endfunction
-call Toggle_Status()
+call ToggleStatus()
 
-nnoremap <silent> <leader>ts :call Toggle_Status()<CR>
+nnoremap <silent> <leader>ts :call ToggleStatus()<CR>

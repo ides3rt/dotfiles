@@ -1,4 +1,4 @@
-function! Toggle_Textwidth()
+function! ToggleTextwidth()
 	if !exists('g:use_textwidth')
 		let g:use_textwidth = 1
 		set textwidth=0
@@ -10,4 +10,4 @@ function! Toggle_Textwidth()
 	endif
 endfunction
 
-nnoremap <silent> <leader>tw :call Toggle_Textwidth()<CR>
+nnoremap <silent> <leader>tw :call ToggleTextwidth()<CR>

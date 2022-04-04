@@ -5,24 +5,24 @@ vim.cmd [[
 	autocmd BufWritePre * :%s/\s\+$//e
 ]]
 
-if os.getenv('DISPLAY') ~= nil then
-	set.clipboard = 'unnamedplus,unnamed'
+if os.getenv("DISPLAY") ~= nil then
+	set.clipboard = { "unnamedplus", "unnamed" }
 end
 
-if os.getenv('UID') == 0 then
-	set.listchars = 'tab:<->,trail:~'
+if os.getenv("UID") == 0 then
+	set.listchars = "tab:<->,trail:~"
 else
-	set.listchars = 'tab:<─>,trail:~'
+	set.listchars = "tab:<─>,trail:~"
 end
 
-set.complete:append 'kspell'
-set.diffopt:append 'vertical'
-set.shortmess:append 'cS'
+set.complete:append { "kspell" }
+set.diffopt:append { "vertical" }
+set.shortmess:append "cS"
 
 set.autochdir = true
-set.path = '**'
+set.path = { "**" }
 
-set.shada = ''
+set.shada = { "" }
 set.swapfile = false
 
 set.fsync = true
@@ -31,7 +31,7 @@ set.lazyredraw = true
 set.breakindent = true
 set.textwidth = 80
 set.wrap = false
-set.virtualedit = 'block'
+set.virtualedit = { "block" }
 
 set.timeout = false
 set.ttimeout = true
@@ -48,7 +48,7 @@ set.shiftwidth = 4
 set.softtabstop = 4
 set.tabstop = 4
 
-set.cursorlineopt = 'number'
+set.cursorlineopt = { "number" }
 set.numberwidth = 2
 
 set.showcmd = false

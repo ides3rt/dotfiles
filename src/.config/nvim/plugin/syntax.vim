@@ -1,4 +1,4 @@
-function! Toggle_Syntax()
+function! ToggleSyntax()
 	if !exists('g:use_syntax')
 		let g:use_syntax = 1
 		let g:old_colors = g:colors_name
@@ -13,4 +13,4 @@ function! Toggle_Syntax()
 	endif
 endfunction
 
-nnoremap <silent> <leader>ns :call Toggle_Syntax()<CR>
+nnoremap <silent> <leader>ns :call ToggleSyntax()<CR>
