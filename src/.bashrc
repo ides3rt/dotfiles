@@ -61,12 +61,12 @@ _prompt_parser() {
 					PS1+=" $commits commit(s) $pace of $upsteam.\[$reset\]\n" ;;
 			esac
 		else
-			local line cg a mod b rm c de d mv e new f un g
+			local line com a mod b rm c de d mv e new f un g
 
 			while read line; do
 				case $line in
 					M?\ *)
-						cg=", $(( ++a )) change(s) to be committed" ;;
+						com=", $(( ++a )) change(s) to be committed" ;;
 
 					M\ *)
 						mod=", $(( ++b )) modified file(s)" ;;
@@ -88,7 +88,7 @@ _prompt_parser() {
 				esac
 			done <<< "$status"
 
-			PS1+="$cg$mod$rm$de$mv$new$un.\[$reset\]\n"
+			PS1+="$com$mod$rm$de$mv$new$un.\[$reset\]\n"
 			PS1=${PS1/has,/has}
 		fi
 
@@ -119,3 +119,4 @@ for file in "$XDG_CONFIG_HOME"/bash/functions \
 {
 	[[ -f $file && -r $file ]] && . "$file"
 }
+unset -v file

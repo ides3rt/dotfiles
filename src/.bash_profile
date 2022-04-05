@@ -19,10 +19,10 @@ export HISTFILE=/dev/null
 export HISTFILESIZE=0
 export HISTSIZE=1000
 
-if [[ $UID -ne 0 && -z $SSH_TTY ]]; then
+if [[ $UID -ne 0 && ! $SSH_TTY ]]; then
 	eval `ssh-agent -s` && ssh-add "$HOME"/.ssh/GitHub
 
-	if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+	if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
 		exec xinit X -- vt$XDG_VTNR
 	fi
 fi &>/dev/null

@@ -119,7 +119,6 @@ if has('viminfo')
 endif
 
 set virtualedit=block
-set whichwrap=
 set wildignorecase
 
 if has('wildmenu')
