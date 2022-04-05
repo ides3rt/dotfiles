@@ -29,7 +29,7 @@ set.fsync = true
 set.lazyredraw = true
 
 set.breakindent = true
-set.textwidth = 80
+set.textwidth = 100
 set.wrap = false
 set.virtualedit = { "block" }
 
@@ -44,6 +44,7 @@ set.sidescroll = 0
 set.sidescrolloff = 999
 set.scrolloff = 999
 
+set.expandtab = true
 set.shiftwidth = 4
 set.softtabstop = 4
 set.tabstop = 4

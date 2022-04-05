@@ -1,4 +1,4 @@
-function! ToggleStatus()
+func! ToggleStatus()
 	if !exists('g:show_status')
 		let g:show_status = 1
 
@@ -22,7 +22,7 @@ function! ToggleStatus()
 
 		if has('syntax')
 			set cursorline
-			set colorcolumn=80
+			exec "set colorcolumn=" . &textwidth
 		endif
 
 		set number
@@ -36,7 +36,12 @@ function! ToggleStatus()
 		endif
 
 	endif
-endfunction
-call ToggleStatus()
+endfunc
+
+if !exists('g:loaded_status_plugin')
+    call ToggleStatus()
+else
+    let g:loaded_status_plugin = 1
+endif
 
 nnoremap <silent> <leader>ts :call ToggleStatus()<CR>

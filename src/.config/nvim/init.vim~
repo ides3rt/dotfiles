@@ -54,7 +54,7 @@ endif
 
 set lazyredraw
 
-if expand("$UID") == '0'
+if expand("$UID") == 0
     set listchars=tab:<->,trail:~
 else
     set listchars=tab:<─>,trail:~
@@ -75,6 +75,7 @@ endif
 
 set path=**
 
+set expandtab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
@@ -107,7 +108,7 @@ set splitright
 
 set nostartofline
 set noswapfile
-set textwidth=80
+set textwidth=100
 
 set notimeout
 set ttimeout
